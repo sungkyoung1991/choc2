@@ -14,3 +14,5 @@ package com.sample.choc2.common.aspect;
 
 
 //git test ------parksujin
+
+//git test ------seohyeon
