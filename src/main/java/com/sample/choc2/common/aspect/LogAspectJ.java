@@ -31,5 +31,9 @@ package com.sample.choc2.common.aspect;
 //test hahaha
 
 //test kkkkkkk
+<<<<<<< HEAD
 
 //This is test 
+=======
+///test 1
+>>>>>>> branch 'master' of git@gitlab.com:nainfox/server/choc2_server.git
