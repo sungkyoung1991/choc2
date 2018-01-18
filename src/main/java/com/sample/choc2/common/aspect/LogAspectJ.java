@@ -13,6 +13,13 @@ package com.sample.choc2.common.aspect;
 //git test ---------ys
 
 
-//git testing 2
+
 //git test ------parksujin
+<<<<<<< HEAD
 //git tt -sk
+=======
+//git testest ------sujin
+
+//git testing 2
+//testestestestestest sujin
+>>>>>>> branch 'master' of git@gitlab.com:nainfox/server/choc2_server.git
