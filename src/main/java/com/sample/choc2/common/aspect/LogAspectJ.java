@@ -27,3 +27,5 @@ package com.sample.choc2.common.aspect;
 
 //git test -seohyeon
 //git -testtest
+
+//test hahaha
