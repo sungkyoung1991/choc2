@@ -26,3 +26,4 @@ package com.sample.choc2.common.aspect;
 //testestestestestest sujin
 
 //git test -seohyeon
+//git -testtest
