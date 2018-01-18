@@ -16,3 +16,13 @@ package com.sample.choc2.common.aspect;
 //git test ------parksujin
 
 //git test ------seohyeon
+
+
+//git test ------parksujin
+//git tt -sk
+//git testest ------sujin
+
+//git testing 2
+//testestestestestest sujin
+
+//git test -seohyeon
