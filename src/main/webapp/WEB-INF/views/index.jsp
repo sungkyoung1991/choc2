@@ -10,7 +10,7 @@
 </h1>
 
 <c:if test="${sessionScope.user.userId!=null }">
-	로그인 되었습니다.
+	login success
 </c:if>
 
 
