@@ -8,10 +8,15 @@
 	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
             <list>
-                <value>classpath:/common/jdbc.properties</value>
+                <value>classpath:/common/mysql.properties</value>
             </list>
         </property>
     </bean>
+    
+   <!--  	<bean	id="propertyConfigurer"
+				class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location" value="classpath:/common/jdbc.properties" />
+	</bean> -->
 	
     <bean id="dataSource-mysql" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
         <property name="driverClassName" value="${MYSQL.DRIVERCLASS}"/>

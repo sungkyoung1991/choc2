@@ -28,8 +28,9 @@
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
-			classpath*:/common/context/context-*.xml
-			classpath*:/skeletone/context/context-*.xml
+			classpath:config/context-common.xml,
+			classpath:config/context-mybatis.xml,
+			classpath:config/context-datasource.xml
 		</param-value>
 	</context-param>
 	
@@ -55,5 +56,11 @@
 		<servlet-name>appServlet</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
+	
+	
+	<welcome-file-list>
+	    <welcome-file>views/user/login.jsp</welcome-file>
+	</welcome-file-list>
+	
 	
 </web-app>
