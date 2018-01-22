@@ -283,7 +283,7 @@
                     	<configuration>
                         	<sources>
                         		<!-- src/main/skeletone/java도 함께빌드를 하자 -->
-                            	<source>src/main/skeletone/java</source>
+                            	<source>src/main/java</source>
                         	</sources>
                     	</configuration>
                 	</execution>
@@ -297,11 +297,11 @@
               				<resources>
                 				<resource>
                 					<!-- src/main/skeletone/resources도 함께빌드를 하자. 이곳이 비지니스로직이 설정이 전부있다.-->
-                  					<directory>src/main/skeletone/resources</directory>
+                  					<directory>src/main/resources</directory>
 								</resource>
 								<resource>
 									<!-- 추가로, 위의 소스레벨에 SQL xml이 함께있으므로, 소스레벨의 패키지를 적어주고 모든 SQL.xml을 검색해서 같이 resources로인식한다 -->
-                  					<directory>src/main/skeletone/java</directory>
+                  					<directory>src/main/java</directory>
                  					<includes>
                  						<include>**/*SQL.xml</include>
                  					</includes>
@@ -328,7 +328,7 @@
 			            <configuration>
 			              	<sources>
 			              		<!-- 해당경로의 unit test를 수행하자 -->
-			                	<source>src/test/skeletone/java</source>
+			                	<source>src/test/java</source>
 			              	</sources>
 			            </configuration>
 					</execution>
@@ -348,17 +348,17 @@
 						<encoding>${project.build.sourceEncoding}</encoding>
 					</configuration>
 			</plugin>
-		
-			<!-- <plugin>
+				<!-- Jenkins 배포를 위한 plugin -->
+			 <!-- <plugin>
 		    <groupId>org.apache.tomcat.maven</groupId>
 		    <artifactId>tomcat7-maven-plugin</artifactId>
 		    <version>2.2</version>
 		    <configuration>
 		        <path>/</path>
-		        <url>http://210.221.219.131:85/manager/text</url>
+		        <url>http://210.221.220.71:22/manager/text</url>
 		        <url>http://localhost:8080/manager/text</url>
 		        <username>admin</username>
-		        <password>test</password>
+		        <password>0308</password>
 		        <update>true</update>
 		    </configuration>
 		</plugin> -->
