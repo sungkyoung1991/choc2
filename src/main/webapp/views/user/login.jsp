@@ -46,15 +46,12 @@ $( function() {
 <form>
 
 login page
-
-
-
+ 
 <input type="text" name="userId" id="userId" />
 <input type="password" name="password" id="password" />
 
 <input type="button" id="loginButton" value="로그인"/>
 </form>
 </body>
-
 
 </html>
