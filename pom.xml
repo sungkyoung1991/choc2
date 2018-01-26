@@ -349,19 +349,28 @@
 					</configuration>
 			</plugin>
 				<!-- Jenkins 배포를 위한 plugin -->
-			 <!-- <plugin>
+				
+				
+				
+		<plugin>
 		    <groupId>org.apache.tomcat.maven</groupId>
 		    <artifactId>tomcat7-maven-plugin</artifactId>
 		    <version>2.2</version>
 		    <configuration>
 		        <path>/</path>
-		        <url>http://210.221.220.71:22/manager/text</url>
-		        <url>http://localhost:8080/manager/text</url>
+		        <url>http://210.221.220.71:3030/manager/text</url>
+		        <!-- <url>http://localhost:8080/manager/text</url> -->
 		        <username>admin</username>
 		        <password>0308</password>
 		        <update>true</update>
 		    </configuration>
-		</plugin> -->
+		</plugin>
+		
+		
+		
+		
+		
+		
             <plugin>
                 <artifactId>maven-eclipse-plugin</artifactId>
                 <version>2.9</version>
