@@ -8,6 +8,7 @@
 <h1>
 	Hello world!  
 </h1>
+<h2>test</h2>
 
 <c:if test="${sessionScope.user.userId!=null }">
 	login..
@@ -16,5 +17,7 @@
 
 
 <P>  The time on the server is ${serverTime}. </P>
+
+<!-- <input type="button" value="logout" onclick="location.replace('/user/logout');"/> -->
 </body>
 </html>
