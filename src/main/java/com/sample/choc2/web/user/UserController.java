@@ -47,8 +47,7 @@ public class UserController {
 	public String logout(HttpSession session) {
 		
 		session.invalidate();
-		
-		return "login";
+		return "index";
 		
 	}//로그아웃 처리 
 

@@ -1,5 +1,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 	<title>Home</title>
@@ -39,28 +42,25 @@ $( function() {
 	
 </head>
 <body>
-<h1>
-	Hello world!  
-</h1>
-<h2>test</h2>
 
 <c:choose>
+<!--로그인 했을때-->
 <c:when test="${sessionScope.user.userId!=null }">
-	<strong>${sessionScope.user.userId}</strong>님 반갑습니다.
-	<input type="button" value="logout" onclick="location.replace('/user/logout');"/>
-	<a href="/user/logout" >logout</a>
+	<h2>You have been successfully logged in</h2>
+	<strong>${sessionScope.user.userId}</strong>님, you are very welcome 반가워요!!
+	 <input type="button" value="logout" onclick="location.replace('/user/logout');"/>
+	<!-- <a href="/user/logout" >logout</a> -->
 </c:when>
+<!--로그아웃 했을때-->
 <c:otherwise>
-	<form action="/user/login" method="post">
+ 	<h2>You have been successfully logged out..</h2>
+	 <form>
 		<input type="text" name="userId" id="userId" />
 		<input type="password" name="password" id="password" />
 		<input type="button" id="loginButton" value="login"/>
 	</form>
 </c:otherwise>
-
-
-<%-- <P>  The time on the server is ${serverTime}. </P> --%>
-
 </c:choose>
+
 </body>
 </html>
