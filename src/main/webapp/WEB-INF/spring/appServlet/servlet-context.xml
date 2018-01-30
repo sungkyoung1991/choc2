@@ -21,6 +21,17 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
+	<interceptors>
+		
+   		<interceptor>
+			<mapping path="/user/**"/>
+			<!-- 로그인안한 회원이어도 접근 가능 -->
+<!-- 			<exclude-mapping path="/user/addUser"/> -->
+			<beans:bean class="com.sample.choc2.common.web.LogonCheckInterceptor" />
+   		</interceptor>
+   		
+   	</interceptors>
+	
 	<context:component-scan base-package="com.sample.choc2" />
 	
 	
