@@ -107,7 +107,7 @@ public class LogonCheckInterceptor extends HandlerInterceptorAdapter {
 			
 			System.out.println("비로그인 else문");
 
-			request.getRequestDispatcher("index").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/views/index.jsp").forward(request, response);
 			// 비로그인시 login.jsp로 돌린다.
 
 			return false;
