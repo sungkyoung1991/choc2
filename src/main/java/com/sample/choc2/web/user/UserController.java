@@ -41,9 +41,15 @@ public class UserController {
 		}
 		
 		return "index";
-	}
+	}//로그인 처리
 		
-	
+	@RequestMapping(value="logout", method=RequestMethod.GET)
+	public String logout(HttpSession session) {
+		
+		session.invalidate();
+		return "index";
+		
+	}//로그아웃 처리 
 
 	
 }

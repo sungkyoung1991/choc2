@@ -59,15 +59,15 @@ $(function(){
 <body>
 <form>
 
-login page
+This is login page..
 
-
+<br>
 
 <input type="text" name="userId" id="userId" />
 <input type="password" name="password" id="password" />
-
 <input type="button" id="loginButton" value="로그인"/>
 
+<<<<<<< HEAD
 <br/><br/><br/><br/>
 
 1.deploy test...
@@ -78,6 +78,8 @@ login page
 <br/>
 
 
+=======
+>>>>>>> refs/heads/sh
 </form>
 </body>
 
