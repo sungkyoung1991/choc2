@@ -2,7 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"> -->
+<!DOCTYPE html>
 <html>
 <head>
 	<title>Home</title>
@@ -38,21 +39,19 @@ $( function() {
 });	
 
 </script>
-
 	
 </head>
 <body>
-
 <c:choose>
-<!--로그인 했을때-->
 <c:when test="${sessionScope.user.userId!=null }">
+<!-- 로그인 했을때 -->
 	<h2>You have been successfully logged in</h2>
 	<strong>${sessionScope.user.userId}</strong>님, you are very welcome 반가워요!!
 	 <input type="button" value="logout" onclick="location.replace('/user/logout');"/>
 	<!-- <a href="/user/logout" >logout</a> -->
 </c:when>
-<!--로그아웃 했을때-->
 <c:otherwise>
+<!-- 로그아웃 했을때 -->
  	<h2>You have been successfully logged out..</h2>
 	 <form>
 		<input type="text" name="userId" id="userId" />
@@ -61,6 +60,8 @@ $( function() {
 	</form>
 </c:otherwise>
 </c:choose>
+
+
 
 </body>
 </html>
