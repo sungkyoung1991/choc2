@@ -14,6 +14,7 @@ public class User {
 	private int age; //나이
 	private int jumin; //주민
 	private String uuid;//기기 고유값
+	private String role; //사용자, 관리자, 슈퍼유
 	
 	///Constructor
 	public User(){
@@ -35,11 +36,94 @@ public class User {
 		this.password = password;
 	}
 
-	@Override
-	public String toString() {
-		return "User [userId=" + userId + ", password=" + password + "]";
+	public String getNickName() {
+		return nickName;
+	}
+
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public int getPhoneNo() {
+		return phoneNo;
+	}
+
+	public void setPhoneNo(int phoneNo) {
+		this.phoneNo = phoneNo;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+
+	public int getJumin() {
+		return jumin;
+	}
+
+	public void setJumin(int jumin) {
+		this.jumin = jumin;
+	}
+
+	public String getUuid() {
+		return uuid;
+	}
+
+	public void setUuid(String uuid) {
+		this.uuid = uuid;
 	}
 	
+	
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+	@Override
+	public String toString() {
+		return "User [userId=" + userId + ", password=" + password + ", nickName=" + nickName + ", name=" + name
+				+ ", email=" + email + ", address=" + address + ", phoneNo=" + phoneNo + ", gender=" + gender + ", age="
+				+ age + ", jumin=" + jumin + ", uuid=" + uuid + ", role=" + role + "]";
+	}
+
 	
 	
 }

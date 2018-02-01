@@ -14,7 +14,7 @@
 
 		$("#userId").focus();
 
-		$("#loginButton").on(
+		$("#Login").on(
 				"click",
 				function() {
 					var id = $("input:text").val();
@@ -57,7 +57,7 @@
 			<form>
 				<input type="text" name="userId" id="userId" /> <input
 					type="password" name="password" id="password" /> <input
-					type="button" id="loginButton" value="login" />
+					type="button" id="Login" value="login" />
 			</form>
 		</c:otherwise>
 	</c:choose>

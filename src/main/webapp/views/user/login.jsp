@@ -15,7 +15,7 @@ $( function() {
 	
 	$("#userId").focus();
 	
-	$("#loginButton").on("click" , function() {
+	$("#Login").on("click" , function() {
 		var id=$("input:text").val();
 		var pw=$("input:password").val();
 		
@@ -44,7 +44,7 @@ $(function(){
 	
 			if(event.keyCode ==13){
 				event.preventDefault();
- 				$( "#loginButton" ).click();
+ 				$( "#Login" ).click();
 		}
 		
 	})
@@ -65,7 +65,7 @@ This is login page..
 
 <input type="text" name="userId" id="userId" />
 <input type="password" name="password" id="password" />
-<input type="button" id="loginButton" value="로그인"/>
+<input type="button" id="Login" value="로그인"/>
 
 
 <br/><br/><br/><br/>
