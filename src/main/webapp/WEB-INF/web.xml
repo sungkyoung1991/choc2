@@ -30,7 +30,8 @@
 		<param-value>
 			classpath:config/context-common.xml,
 			classpath:config/context-mybatis.xml,
-			classpath:config/context-datasource.xml
+			classpath:config/context-datasource.xml,
+			classpath:config/context-aspect.xml
 		</param-value>
 	</context-param>
 	
