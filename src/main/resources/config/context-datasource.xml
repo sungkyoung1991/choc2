@@ -8,7 +8,7 @@
 	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
             <list>
-                <value>classpath:/common/mysql.properties</value>
+                <value>classpath:/common/connection.properties</value>
             </list>
         </property>
     </bean>
