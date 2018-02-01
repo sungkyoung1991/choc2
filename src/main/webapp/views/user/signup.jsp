@@ -8,6 +8,7 @@
 </head>
 <body>
 	<h2>회원가입 페이지</h2>
+	
 	<table>
 		<tr>
 			<th>아이디</th>
@@ -45,6 +46,13 @@
 				<input type="radio" name="gender" value="여자">
 				<input type="radio" name="gender" value="남자">
 			</td>
+		</tr>
+		<tr>
+			<th>나이</th>
+			<td><input type="text" name="age" id="age"></td>
+		</tr>
+		<tr>
+			
 		</tr>
 	</table>
 
