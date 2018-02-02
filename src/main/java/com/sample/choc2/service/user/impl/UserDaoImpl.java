@@ -29,5 +29,11 @@ public class UserDaoImpl implements UserDao{
 	public User getUser(String userId) throws Exception {
 		return sqlSession.selectOne("UserMapper.getUser", userId);
 	}
+
+	@Override
+	public void createUser(User user) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.update("UserMapper.createUser",user);
+	}
 	
 }

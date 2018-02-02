@@ -5,10 +5,44 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script> src="https://code.jquery.com/jquery-3.1.1.min.js"</script>
+<script type="text/javascript">
+/*  $(document).ready(function(){
+	$("#idCheck").click(function(){
+		if(document.sform.userId.value==""){
+			alert("아이디를 입력하세요");
+			document.sform.userId.focus();
+		}else{
+			var userId = document.sform.userId.value;
+			var data ={
+					'id':userId
+			};
+			var setting ={
+					url:'/idchk',
+					data:data,
+					dataType:'json',
+					success:function(data){
+						if(data.){
+							
+						}else{
+							
+						}
+					},
+					error:function(){
+						alert("error");
+					}
+					
+			};
+		}
+	});
+	
+});
+ */
+</script>
 </head>
 
 	<h2>회원가입 페이지</h2>
-	<form action="user/createUser" method="post" name="sform">
+	<form action="/user/createUser" method="post" name="sform">
 	<table>
 		<tr>
 			<th>아이디</th>

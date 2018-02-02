@@ -20,4 +20,11 @@
 		FROM USERS
 		WHERE user_id = #{value}
 	 </select>
+	 
+	 <insert id="createUser" parameterType="user">
+	 	INSERT INTO
+	 	TBL_USER(USERID,PASSWORD,NICKNAME,NAME,EMAIL,ADDRESS,PHONENO,GENDER,AGE,JUMIN,UUID,ROLE)
+	 	VLAUES(#{USERID},#{PASSWORD},#{NICKNAME},#{NAME},#{EMAIL},#{ADDRESS},#{PHONENO},#{GENDER},#{AGE},#{JUMIN},#{UUID},#{ROLE})
+	 </insert>
+	 
 </mapper>

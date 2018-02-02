@@ -14,7 +14,7 @@ public class User {
 	private int age; //나이
 	private int jumin; //주민
 	private String uuid;//기기 고유값
-	private String role; //사용자, 관리자, 슈퍼유
+	private String role; //사용자, 관리자, 슈퍼유저
 	
 	///Constructor
 	public User(){

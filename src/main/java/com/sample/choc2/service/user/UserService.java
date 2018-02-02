@@ -9,6 +9,8 @@ public interface UserService {
 	
 	
 	public User getUser(String userId) throws Exception;
+
+	public void createUser(User user);
 	
 	
 	
