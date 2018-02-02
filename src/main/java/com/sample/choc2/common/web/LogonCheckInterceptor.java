@@ -97,11 +97,9 @@ public class LogonCheckInterceptor extends HandlerInterceptorAdapter {
 			
 			String uri = request.getRequestURI();
 			
-			if(uri.indexOf("createUserP") != -1) {
+			if(uri.indexOf("login") != -1) {
 				
 				System.out.println("uri=" + uri);
-				
-				
 				
 				return true;
 				
