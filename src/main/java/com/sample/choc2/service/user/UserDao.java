@@ -9,5 +9,7 @@ public interface UserDao {
 
 	public void createUser(User user) throws Exception;
 
+	public String idCheck(String userId) throws Exception;
+
 	
 }

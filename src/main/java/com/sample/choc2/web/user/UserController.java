@@ -1,5 +1,8 @@
 package com.sample.choc2.web.user;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sample.choc2.service.domain.User;
 import com.sample.choc2.service.user.UserService;
@@ -55,20 +59,30 @@ public class UserController {
 		
 	}//로그아웃 처리
 	
-
-	
 	@RequestMapping(value="createUserP", method=RequestMethod.GET)
 	public String createUserp(){
-		logger.info("aa");
-		System.out.println("test");
+		
 		return "user/createUser";
 	}//회원가입 폼으로 이동
+	
+	@RequestMapping(value="idCheck", method=RequestMethod.GET)
+	public @ResponseBody Map<String,String> idCheck(@ModelAttribute("user") User user) throws Exception{
+		logger.info(""+userService.idCheck(user.getUserId()));
+		String result = userService.idCheck(user.getUserId());
+		Map<String,String> map = new HashMap<String,String>();
+		if(result==null) {
+			map.put("result", "사용가능한 아이디입니다.");
+		}else {
+			map.put("result", "존재하는 아이디입니다. 다른아이디를 사용해주세요! ");
+		}
+		return map;
+	}//아이디 중복체크
 	
 	@RequestMapping(value="createUser", method=RequestMethod.POST)
 	public String createUser(@ModelAttribute("user") User user) throws Exception{
 		System.out.println("/user/createUser");
 		userService.createUser(user);
-		return "login";
+		return "";
 		
 	}//회원가입 처리
 

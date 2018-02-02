@@ -35,5 +35,11 @@ public class UserDaoImpl implements UserDao{
 		// TODO Auto-generated method stub
 		sqlSession.update("UserMapper.createUser",user);
 	}
+
+	@Override
+	public String idCheck(String userId) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("UserMapper.idCheck", userId);
+	}
 	
 }

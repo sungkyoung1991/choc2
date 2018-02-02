@@ -5,40 +5,41 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<script> src="https://code.jquery.com/jquery-3.1.1.min.js"</script>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script type="text/javascript">
  $(document).ready(function(){
 	$("#idCheck").click(function(){
-		if(document.sform.userId.value==""){
+		if(document.sform.id.value==""){
 			alert("아이디를 입력하세요");
-			document.sform.userId.focus();
+			document.sform.id.focus();
 			return false;
 		}else{
-			var userId = document.sform.userId.value;
+			var id = document.sform.id.value;
 			var data ={
-					'id':userId
+					'id':id
 			};
 			var setting ={
-					url:'/idCheck',
+					url:'/user/idCheck',
 					data:data,
 					dataType:'json',
 					success:function(data){
-						if(data){
-							
+						if(data.result=="사용가능한 아이디입니다."){
+							$('#idResult').html("<font color='blue'>"+data.result+"</font>");
+							document.sform.userId.value=id;
 						}else{
-							
+							$('#idResult').html("<font color='red'>"+data.result+"</font>");
+							document.sform.userId.focus();
 						}
 					},
 					error:function(){
 						alert("error");
 					}
-					
 			};
 			$.ajax(setting);
 		}
 	});
 	
-	$("#nicheck").click(function(){
+	/* $("#nicheck").click(function(){
 		if(document.sform.nickName.value==""){
 			alert("닉네임을 입력해주세요");
 			document.sform.nickName.focus();
@@ -66,98 +67,52 @@
 			};
 			$.ajax(setting);		
 		}
-	});
+	}); */
 	
 });
  
- 
-function confirm(){
-	if(document.sform.userId.value==""){
-		alert("아이디를 입력하세요!");
-		document.sform.userId.focus();
-		return false;
-	}else if(document.sform.password.value==""){
-		alert("비밀번호를입하세요");
-		document.sform.pwdchk.focus();
-		return false;
-	}else if(document.sform.name.value==""){
-		alert("이름을 입력하세요");
-		document.sform.name.focus();
-		return false;
-	}/* else if(document.sform.id.value.length<6||document.sform.password.value.length>12){
-		alert("비밀번호는 4~8자리까지 입력해주세요");
-		document.sform.password.focus();
-		return false;	
-	}else if(document.sform.password.value.length<4||document.sform.password.value.length>8){
-		alert("아이디는 6~12자리까지 입력해주세요");
-		document.sform.password.focus();
-		return false; */
-	}else if(document.sform.password.value==""){
-		alert("비밀번호를 입력하세요");
-		document.sform.password.focus();
-		return false;
-	}
-	else if(document.sform.nickname.value==""){
-		alert("닉네임을 확인하세요");
-		document.sform.nick.focus();
-		return false;
-	}else if(document.sform.nick.value==""){
-		alert("닉네임을 중복체크하세요");
-		document.getElementById("nickchk").focus();
-		return false;
-	}else if(document.sform.birth.value==""){
-		alert("생일을 입력하세요");
-		document.sform.birth.focus();
-		return false;
-	}else if(document.sform.email.value==""){
-		alert("이메일을 입력하세요");
-		document.sform.email.focus();
-		return false;	
-	}else if(document.sform.answer.value==""){
-		alert("질문에 답을 써주세요");
-		document.sform.answer.focus();
-		return false;
-	}else{
-		document.sform.phone.value = "010-"+document.sform.phone2.value+"-"+document.sform.phone3.value;
-		return true;
-	}
-}
+/*  
+
+} */
 </script>
 </head>
 
-	<h2>회원가입 페이지</h2>
+	<h2>&nbsp;회원가입 페이지</h2>
 	<form action="/user/createUser" method="post" name="sform">
 	<table>
 		<tr>
 			<th>아이디</th>
-			<td><input type="text" name="userId" id="userId" /></td>
-			<td><input type="button" value="아이디체크" id="idCheck" /></td>
-	
+			<td>
+			<input type="text" name="id" id="id" placeholder="아이디"/>
+			<input type="hidden" name="userId" />
+			<input type="button" value="아이디체크" id="idCheck" />
+			<div id="idResult"></div>
+			</td>
 		</tr>
 		<tr>
 			<th>비밀번호</th>
-			<td><input type="password" name="password" id="password" /></td>
+			<td><input type="password" name="password" id="password" placeholder="비밀번호"/></td>
 		</tr>
 		<tr>
 			<th>닉네임</th>
-			<td><input type="text" name="nickName" placeholder="닉네임" id="nickName" /></td>
-			<td><input type="button" value="닉네임체크" name="nickCheck" id="nickCheck" /></td>
+			<td><input type="text" name="nickName" placeholder="닉네임" id="nickName" />
+			<input type="button" value="닉네임체크" name="nickCheck" id="nickCheck" /></td>
 		</tr>
 		<tr>
 			<th>이름</th>
-			<td><input type="text" name="name" id="name" /></td>
+			<td><input type="text" name="name" id="name" placeholder="이름"/></td>
 		</tr>
 		<tr>
 			<th>이메일</th>
-			<td><input type="text" name="email" id="email" /></td>
+			<td><input type="text" name="email" id="email" placeholder="이메일"/></td>
 		</tr>
 		<tr>
 			<th>주소</th>
-			<td><input type="text" name="address" id="address" /></td>
+			<td><input type="text" name="address" id="address" placeholder="주소" /></td>
 		</tr>
 		<tr>
 			<th>핸드폰</th>
-			<td><input type="text" name="phoneNumber" id="phoneNumber" /></td>
+			<td><input type="text" name="phoneNumber" id="phoneNumber" placeholder="폰번호-없이 입력해주세요"/></td>
 		</tr>
 		<tr>
 			<th>성별</th>
@@ -168,13 +123,14 @@ function confirm(){
 		</tr>
 		<tr>
 			<th>나이</th>
-			<td><input type="text" name="age" id="age"></td>
+			<td><input type="text" name="age" id="age" placeholder="나이"></td>
 		</tr>
 		<tr>
 			<th>주민번호</th>
 			<td><input type="text" name="jumin1" id="jumin1">-<input type="text" name="jumnin2" id="jumin2"></td>
 		</tr>
 		<tr>
+			<th></th>
 			<td>
 			<input type="radio" name="role" value="개인" checked>개인
 			<input type="radio" name="role" value="사업자"/>사업자
