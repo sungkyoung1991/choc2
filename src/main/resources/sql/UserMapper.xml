@@ -32,4 +32,10 @@
 	 
 	 </select>
 	 
+	
+	 <select id="nickCheck" parameterType="string" resultType="string">
+		SELECT NICKNAME FROM TBL_USER WHERE NICKNAME = #{NICKNAME}
+	  </select>
+	
+	 
 </mapper>

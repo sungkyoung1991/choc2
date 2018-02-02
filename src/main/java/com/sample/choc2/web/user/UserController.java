@@ -67,7 +67,7 @@ public class UserController {
 	
 	@RequestMapping(value="idCheck", method=RequestMethod.GET)
 	public @ResponseBody Map<String,String> idCheck(@ModelAttribute("user") User user) throws Exception{
-		logger.info(""+userService.idCheck(user.getUserId()));
+	
 		String result = userService.idCheck(user.getUserId());
 		Map<String,String> map = new HashMap<String,String>();
 		if(result==null) {
@@ -77,6 +77,20 @@ public class UserController {
 		}
 		return map;
 	}//아이디 중복체크
+	
+	@RequestMapping(value="nickCheck", method=RequestMethod.GET)
+	public @ResponseBody Map<String,String> nickCheck(@ModelAttribute("user") User user) throws Exception{
+		logger.info(""+userService.nickCheck(user.getNickName()));
+		System.out.println("test");
+		String result = userService.nickCheck(user.getNickName());
+		Map<String,String> map = new HashMap<String,String>();
+		if(result==null) {
+			map.put("result", "사용가능한 닉네임입니다.");
+		}else {
+			map.put("result", "존재하는 닉네임입니다. 다른닉네임를 사용해주세요! ");
+		}
+		return map;
+	}//닉네임 중복체크
 	
 	@RequestMapping(value="createUser", method=RequestMethod.POST)
 	public String createUser(@ModelAttribute("user") User user) throws Exception{

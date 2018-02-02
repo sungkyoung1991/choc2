@@ -13,6 +13,8 @@ public interface UserService {
 	public void createUser(User user);
 
 	public String idCheck(String userId) throws Exception;
+
+	public String nickCheck(String nickName) throws Exception;
 	
 	
 	

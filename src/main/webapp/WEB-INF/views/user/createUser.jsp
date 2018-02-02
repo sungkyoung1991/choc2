@@ -28,7 +28,7 @@
 							document.sform.userId.value=id;
 						}else{
 							$('#idResult').html("<font color='red'>"+data.result+"</font>");
-							document.sform.userId.focus();
+							document.sform.id.focus();
 						}
 					},
 					error:function(){
@@ -39,41 +39,38 @@
 		}
 	});
 	
-	/* $("#nicheck").click(function(){
-		if(document.sform.nickName.value==""){
-			alert("닉네임을 입력해주세요");
-			document.sform.nickName.focus();
+	$("#nickCheck").click(function(){
+		if(document.sform.nick.value==""){
+			alert("닉네임을 입력하세요");
+			document.sform.nick.focus();
+			return false;
 		}else{
-			var nickName = document.sform.nickName.value;
+			var nick = document.sform.nick.value;
 			var data ={
-					'nick':nickName
+					'nick':nick
 			};
 			var setting ={
-					url:'/nickCheck',
+					url:'/user/nickCheck',
 					data:data,
 					dataType:'json',
 					success:function(data){
-						if(){
-							
-						}else(){
-							
+						if(data.result=="사용가능한 닉네임입니다."){
+							$('#nickResult').html("<font color='blue'>"+data.result+"</font>");
+							document.sform.nickName.value=nick;
+						}else{
+							$('#nickResult').html("<font color='red'>"+data.result+"</font>");
+							document.sform.nick.focus();
 						}
 					},
-						error:function(){
-							alert("error");
-						}
-						
-					
+					error:function(){
+						alert("error");
+					}
 			};
-			$.ajax(setting);		
+			$.ajax(setting);
 		}
-	}); */
-	
-});
- 
-/*  
+	});
 
-} */
+}); 
 </script>
 </head>
 
@@ -85,7 +82,7 @@
 			<td>
 			<input type="text" name="id" id="id" placeholder="아이디"/>
 			<input type="hidden" name="userId" />
-			<input type="button" value="아이디체크" id="idCheck" />
+			<input type="button" value="아이디 중복확인" id="idCheck" />
 			<div id="idResult"></div>
 			</td>
 		</tr>
@@ -95,8 +92,11 @@
 		</tr>
 		<tr>
 			<th>닉네임</th>
-			<td><input type="text" name="nickName" placeholder="닉네임" id="nickName" />
-			<input type="button" value="닉네임체크" name="nickCheck" id="nickCheck" /></td>
+			<td><input type="text" name="nick" id="nick" placeholder="닉네임" />
+			<input type="hidden" name="nickName" />
+			<input type="button" value="닉네임 중복확인" id="nickCheck" />
+			<div id="nickResult"></div>
+			</td>
 		</tr>
 		<tr>
 			<th>이름</th>

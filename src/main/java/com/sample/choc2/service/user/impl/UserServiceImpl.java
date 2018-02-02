@@ -48,4 +48,10 @@ public class UserServiceImpl implements UserService{
 		return userDao.idCheck(userId);
 	}
 
+	@Override
+	public String nickCheck(String nickName) throws Exception {
+		// TODO Auto-generated method stub
+		return userDao.nickCheck(nickName);
+	}
+
 }
