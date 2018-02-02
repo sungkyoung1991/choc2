@@ -59,7 +59,7 @@
 	
 	
 	<welcome-file-list>
-	    <welcome-file>views/user/login.jsp</welcome-file>
+	    <welcome-file>views/main/main.jsp</welcome-file>
 	</welcome-file-list>
 	
 	

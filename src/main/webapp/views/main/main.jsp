@@ -59,15 +59,13 @@ $(function(){
 <body>
 <form>
 
-This is login page..
 
-<br>
 
-<input type="text" name="userId" id="userId" />
-<input type="password" name="password" id="password" />
+ID<input type="text" name="userId" id="userId" />
+PW<input type="password" name="password" id="password" />
 <input type="button" id="Login" value="로그인"/>
-
-
+<!-- <a href="/user/createUserp">회원가입</a>  -->
+<input type="button" value="회원가입" onclick="location.href='user/createUserp'">
 <br/><br/><br/><br/>
 
 1.deploy test...

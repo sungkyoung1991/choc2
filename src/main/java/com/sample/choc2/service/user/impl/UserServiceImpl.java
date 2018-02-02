@@ -31,4 +31,15 @@ public class UserServiceImpl implements UserService{
 		return userDao.getUser(userId);
 	}
 
+	@Override
+	public void createUser(User user) {
+		// TODO Auto-generated method stub
+		try {
+			userDao.createUser(user);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 }
