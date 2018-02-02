@@ -2,6 +2,8 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
 	xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.3.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 	
@@ -13,10 +15,10 @@
         </property>
     </bean>
     
-   <!--  	<bean	id="propertyConfigurer"
+    	<bean	id="propertyConfigurer"
 				class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="location" value="classpath:/common/jdbc.properties" />
-	</bean> -->
+	</bean>
 	
     <bean id="dataSource-mysql" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
         <property name="driverClassName" value="${MYSQL.DRIVERCLASS}"/>
@@ -27,5 +29,21 @@
 		<property name="maxIdle" value="10" />
 		<property name="maxWait" value="1000" />
     </bean>
+    
+    
+    <tx:advice id="txAdvice"	transaction-manager="transactionManager">
+	    	<tx:attributes>
+	    		<tx:method name="get*"	propagation="REQUIRED"	read-only="true"/>
+	    		<tx:method name="create*"	propagation="REQUIRED"/>
+	    		<tx:method name="update*"	propagation="REQUIRED"/>
+	    	</tx:attributes>
+    </tx:advice>
+    
+    <aop:config>
+    		<aop:pointcut expression="execution(* com.sample.choc2.service..*ServiceImpl.*(..) )" id="requiredTx"/>
+		<aop:advisor		advice-ref="txAdvice"	pointcut-ref="requiredTx"/>
+    </aop:config>
+    
+    
     
 </beans>
