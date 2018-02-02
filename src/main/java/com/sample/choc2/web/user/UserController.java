@@ -56,7 +56,7 @@ public class UserController {
 	}//로그아웃 처리
 	
 	
-	@RequestMapping(value="createUserp", method=RequestMethod.GET)
+	@RequestMapping(value="createUserP", method=RequestMethod.GET)
 	public String createUserp(){
 		logger.info("aa");
 		System.out.println("test");
