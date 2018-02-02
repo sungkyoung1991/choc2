@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="BoardMapper">
+
+	<insert id="create">
+		INSERT INTO TBL_BOARD (TITLE,CONTENT,WRITER)
+		VALUES(#{title}, #{content}, #{writer})
+	</insert>
+
+	<select id="get" resultType="boardVO">
+		SELECT
+		BNO,TITLE,CONTENT,WRITER,REGDATE,VIEWCNT
+		FROM
+		TBL_BOARD
+		WHERE BNO = #{bno}
+
+	</select>
+
+	<update id="update">
+		UPDATE TBL_BOARD SET TITLE = #{title}, CONTENT = #{content}
+		WHERE BNO = #{bno}
+
+	</update>
+
+	<delete id="delete">
+		DELETE
+		FROM TBL_BOARD
+		WHERE BNO = #{bno}
+
+	</delete>
+
+
+	<select id="list" resultType="boardVO">
+	<![CDATA[  
+	  SELECT * 
+	  FROM TBL_BOARD 
+	  WHERE BNO > 0
+
+	]]>
+
+		<include refid="search"></include>
+	  
+	<![CDATA[    
+	  ORDER BY BNO DESC
+	  LIMIT #{pageStart}, #{perPageNum}
+	]]>
+	</select>
+
+
+	<select id="totalCount" resultType="int">
+	<![CDATA[  
+	  SELECT COUNT(BNO) 
+	  FROM TBL_BOARD 
+	  WHERE BNO > 0 
+
+	]]>
+		<include refid="search"></include>
+	</select>
+
+	<sql id="search">
+		<if test="searchType != null">
+			<if test="searchType == 't'.toString()">
+				AND TITLE LIKE CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'c'.toString()">
+				AND CONTENT LIKE CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'w'.toString()">
+				AND WIRTER LIKE CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'tc'.toString()">
+				AND ( TITLE LIKE CONCAT('%', #{keyword}, '%') OR CONTENT
+				LIKE
+				CONCAT('%', #{keyword}, '%'))
+			</if>
+			<if test="searchType == 'cw'.toString()">
+				AND ( CONTENT LIKE CONCAT('%', #{keyword}, '%') OR WIRTER
+				LIKE
+				CONCAT('%', #{keyword}, '%'))
+			</if>
+			<if test="searchType == 'tcw'.toString()">
+				AND ( TITLE LIKE CONCAT('%', #{keyword}, '%')
+				OR
+				CONTENT
+				LIKE CONCAT('%', #{keyword}, '%')
+				OR
+				WRITER LIKE CONCAT('%',
+				#{keyword}, '%'))
+			</if>
+		</if>
+	</sql>
+</mapper>
