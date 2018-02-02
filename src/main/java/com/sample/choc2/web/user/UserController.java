@@ -55,6 +55,7 @@ public class UserController {
 		
 	}//로그아웃 처리
 	
+
 	
 	@RequestMapping(value="createUserP", method=RequestMethod.GET)
 	public String createUserp(){
@@ -70,5 +71,6 @@ public class UserController {
 		return "login";
 		
 	}//회원가입 처리
+
 	
 }

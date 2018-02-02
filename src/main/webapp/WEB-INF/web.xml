@@ -14,7 +14,7 @@
         <filter-name>encodingFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
-    
+    <!--인풋창에 이상한것 방 -->
     <filter>
 	    <filter-name>XSS</filter-name>
 	    <filter-class>com.sample.choc2.common.CrossScriptingFilter</filter-class>
@@ -28,6 +28,7 @@
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
+		<!-- rootcontext내용 유지보수관리측면에서 편  -->
 			classpath:config/context-common.xml,
 			classpath:config/context-mybatis.xml,
 			classpath:config/context-transaction.xml,

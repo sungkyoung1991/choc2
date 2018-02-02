@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 <script> src="https://code.jquery.com/jquery-3.1.1.min.js"</script>
 <script type="text/javascript">
-/*  $(document).ready(function(){
+ $(document).ready(function(){
 	$("#idCheck").click(function(){
 		if(document.sform.userId.value==""){
 			alert("아이디를 입력하세요");
@@ -19,7 +19,7 @@
 					'id':userId
 			};
 			var setting ={
-					url:'/idchk',
+					url:'/idCheck',
 					data:data,
 					dataType:'json',
 					success:function(data){
@@ -43,13 +43,85 @@
 			alert("닉네임을 입력해주세요");
 			document.sform.nickName.focus();
 		}else{
-			
-			
+			var nickName = document.sform.nickName.value;
+			var data ={
+					'nick':nickName
+			};
+			var setting ={
+					url:'/nickCheck',
+					data:data,
+					dataType:'json',
+					success:function(data){
+						if(){
+							
+						}else(){
+							
+						}
+					},
+						error:function(){
+							alert("error");
+						}
+						
+					
+			};
+			$.ajax(setting);		
 		}
 	});
 	
 });
- */
+ 
+ 
+function confirm(){
+	if(document.sform.userId.value==""){
+		alert("아이디를 입력하세요!");
+		document.sform.userId.focus();
+		return false;
+	}else if(document.sform.password.value==""){
+		alert("비밀번호를입하세요");
+		document.sform.pwdchk.focus();
+		return false;
+	}else if(document.sform.name.value==""){
+		alert("이름을 입력하세요");
+		document.sform.name.focus();
+		return false;
+	}/* else if(document.sform.id.value.length<6||document.sform.password.value.length>12){
+		alert("비밀번호는 4~8자리까지 입력해주세요");
+		document.sform.password.focus();
+		return false;	
+	}else if(document.sform.password.value.length<4||document.sform.password.value.length>8){
+		alert("아이디는 6~12자리까지 입력해주세요");
+		document.sform.password.focus();
+		return false; */
+	}else if(document.sform.password.value==""){
+		alert("비밀번호를 입력하세요");
+		document.sform.password.focus();
+		return false;
+	}
+	else if(document.sform.nickname.value==""){
+		alert("닉네임을 확인하세요");
+		document.sform.nick.focus();
+		return false;
+	}else if(document.sform.nick.value==""){
+		alert("닉네임을 중복체크하세요");
+		document.getElementById("nickchk").focus();
+		return false;
+	}else if(document.sform.birth.value==""){
+		alert("생일을 입력하세요");
+		document.sform.birth.focus();
+		return false;
+	}else if(document.sform.email.value==""){
+		alert("이메일을 입력하세요");
+		document.sform.email.focus();
+		return false;	
+	}else if(document.sform.answer.value==""){
+		alert("질문에 답을 써주세요");
+		document.sform.answer.focus();
+		return false;
+	}else{
+		document.sform.phone.value = "010-"+document.sform.phone2.value+"-"+document.sform.phone3.value;
+		return true;
+	}
+}
 </script>
 </head>
 
@@ -60,6 +132,7 @@
 			<th>아이디</th>
 			<td><input type="text" name="userId" id="userId" /></td>
 			<td><input type="button" value="아이디체크" id="idCheck" /></td>
+	
 		</tr>
 		<tr>
 			<th>비밀번호</th>
@@ -68,7 +141,7 @@
 		<tr>
 			<th>닉네임</th>
 			<td><input type="text" name="nickName" placeholder="닉네임" id="nickName" /></td>
-			<td><input type="button" value="닉네임체크" id="nickCheck" /></td>
+			<td><input type="button" value="닉네임체크" name="nickCheck" id="nickCheck" /></td>
 		</tr>
 		<tr>
 			<th>이름</th>
@@ -109,7 +182,7 @@
 			</td>
 		</tr>
 	</table>
-		<button type="submit">확인</button>
+		<button type="submit" onclick="confirm();">확인</button>
 	</form>
 </body>
 </html>
