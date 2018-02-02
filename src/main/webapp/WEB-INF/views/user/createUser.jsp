@@ -12,6 +12,7 @@
 		if(document.sform.userId.value==""){
 			alert("아이디를 입력하세요");
 			document.sform.userId.focus();
+			return false;
 		}else{
 			var userId = document.sform.userId.value;
 			var data ={
@@ -22,7 +23,7 @@
 					data:data,
 					dataType:'json',
 					success:function(data){
-						if(data.){
+						if(data){
 							
 						}else{
 							
@@ -33,6 +34,17 @@
 					}
 					
 			};
+			$.ajax(setting);
+		}
+	});
+	
+	$("#nicheck").click(function(){
+		if(document.sform.nickName.value==""){
+			alert("닉네임을 입력해주세요");
+			document.sform.nickName.focus();
+		}else{
+			
+			
 		}
 	});
 	
