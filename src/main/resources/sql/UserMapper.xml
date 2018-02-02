@@ -8,13 +8,13 @@
  	
  	
 	<resultMap id="userSelectMap" type="user">
-		<result property="userId" 			column="user_id" 			jdbcType="VARCHAR"/>
+		<result property="userId" 	column="user_id" 		jdbcType="VARCHAR"/>
 		<result property="password" 	column="password" 		jdbcType="VARCHAR" />
 	</resultMap>
 	 
 	 
 	 <!-- 대소문자 test  -->
-	 <select 	id="getUser"	parameterType="string"	resultMap="userSelectMap">
+	 <select id="getUser" parameterType="string"	resultMap="userSelectMap">
 		SELECT
 		user_id , password 		
 		FROM USERS
@@ -26,5 +26,10 @@
 	 	TBL_USER(USERID,PASSWORD,NICKNAME,NAME,EMAIL,ADDRESS,PHONENO,GENDER,AGE,JUMIN,UUID,ROLE)
 	 	VLAUES(#{USERID},#{PASSWORD},#{NICKNAME},#{NAME},#{EMAIL},#{ADDRESS},#{PHONENO},#{GENDER},#{AGE},#{JUMIN},#{UUID},#{ROLE})
 	 </insert>
+	 
+	 <select id="idCheck" parameterType="string" resultType="string">
+		SELECT USERID FROM TBL_USER WHERE USERID = #{USERID}
+	 
+	 </select>
 	 
 </mapper>

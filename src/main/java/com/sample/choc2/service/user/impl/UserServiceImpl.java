@@ -42,4 +42,10 @@ public class UserServiceImpl implements UserService{
 		}
 	}
 
+	@Override
+	public String idCheck(String userId) throws Exception {
+		// TODO Auto-generated method stub
+		return userDao.idCheck(userId);
+	}
+
 }
