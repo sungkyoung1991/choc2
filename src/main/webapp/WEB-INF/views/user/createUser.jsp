@@ -132,6 +132,7 @@ function confirm(){
 			<th>아이디</th>
 			<td><input type="text" name="userId" id="userId" /></td>
 			<td><input type="button" value="아이디체크" id="idCheck" /></td>
+	
 		</tr>
 		<tr>
 			<th>비밀번호</th>
