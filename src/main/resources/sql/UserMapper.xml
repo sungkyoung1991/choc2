@@ -8,7 +8,7 @@
  	
  	
 	<resultMap id="userSelectMap" type="user">
-		<result property="userId" 	column="user_id" 		jdbcType="VARCHAR"/>
+		<result property="userId" 	column="userid" 		jdbcType="VARCHAR"/>
 		<result property="password" 	column="password" 		jdbcType="VARCHAR" />
 	</resultMap>
 	 
@@ -16,25 +16,25 @@
 	 <!-- 대소문자 test  -->
 	 <select id="getUser" parameterType="string"	resultMap="userSelectMap">
 		SELECT
-		user_id , password 		
-		FROM USERS
-		WHERE user_id = #{value}
+		USERID,PASSWORD 		
+		FROM TBL_USER
+		WHERE USERID = #{userId}
 	 </select>
 	 
 	 <insert id="createUser" parameterType="user">
 	 	INSERT INTO
-	 	TBL_USER(USERID,PASSWORD,NICKNAME,NAME,EMAIL,ADDRESS,PHONENO,GENDER,AGE,JUMIN,UUID,ROLE)
-	 	VLAUES(#{USERID},#{PASSWORD},#{NICKNAME},#{NAME},#{EMAIL},#{ADDRESS},#{PHONENO},#{GENDER},#{AGE},#{JUMIN},#{UUID},#{ROLE})
+	 	TBL_USER(USERID,PASSWORD,NICKNAME,NAME,EMAIL,ADDRESS,PHONENO,GENDER,AGE,JUMIN,ROLE)
+	 	VALUES(#{userId},#{password},#{nickName},#{name},#{email},#{address},#{phoneNo},#{gender},#{age},#{jumin},#{role})
 	 </insert>
 	 
 	 <select id="idCheck" parameterType="string" resultType="string">
-		SELECT USERID FROM TBL_USER WHERE USERID = #{USERID}
+		SELECT USERID FROM TBL_USER WHERE USERID = #{userId}
 	 
 	 </select>
 	 
 	
 	 <select id="nickCheck" parameterType="string" resultType="string">
-		SELECT NICKNAME FROM TBL_USER WHERE NICKNAME = #{NICKNAME}
+		SELECT NICKNAME FROM TBL_USER WHERE NICKNAME = #{nickName}
 	  </select>
 	
 	 
