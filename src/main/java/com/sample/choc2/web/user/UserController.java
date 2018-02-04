@@ -67,11 +67,12 @@ public class UserController {
 	
 	@RequestMapping(value="idCheck", method=RequestMethod.GET)
 	public @ResponseBody Map<String,String> idCheck(@ModelAttribute("user") User user) throws Exception{
-	
 		String result = userService.idCheck(user.getUserId());
+		//logger.info(""+ userService.idCheck(user.getUserId()));
+		//logger.info(result);
 		Map<String,String> map = new HashMap<String,String>();
 		if(result==null) {
-			map.put("result", "사용가능한 아이디입니다.");
+			map.put("result", "사용가능한 아이디입니다");
 		}else {
 			map.put("result", "존재하는 아이디입니다. 다른아이디를 사용해주세요! ");
 		}
@@ -80,12 +81,11 @@ public class UserController {
 	
 	@RequestMapping(value="nickCheck", method=RequestMethod.GET)
 	public @ResponseBody Map<String,String> nickCheck(@ModelAttribute("user") User user) throws Exception{
-		logger.info(""+userService.nickCheck(user.getNickName()));
-		System.out.println("test");
 		String result = userService.nickCheck(user.getNickName());
+		logger.info(result);
 		Map<String,String> map = new HashMap<String,String>();
 		if(result==null) {
-			map.put("result", "사용가능한 닉네임입니다.");
+			map.put("result", "사용가능한 닉네임입니다");
 		}else {
 			map.put("result", "존재하는 닉네임입니다. 다른닉네임를 사용해주세요! ");
 		}
@@ -94,9 +94,11 @@ public class UserController {
 	
 	@RequestMapping(value="createUser", method=RequestMethod.POST)
 	public String createUser(@ModelAttribute("user") User user) throws Exception{
-		System.out.println("/user/createUser");
+		
+		//logger.info(user.toString());
 		userService.createUser(user);
-		return "";
+		
+		return "user/test";
 		
 	}//회원가입 처리
 
