@@ -2,61 +2,61 @@ package com.sample.choc2.service.admin.impl;
 
 import java.util.List;
 
-import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 import com.sample.choc2.common.SearchCriteria;
-import com.sample.choc2.service.admin.BoardDao;
+import com.sample.choc2.service.admin.AdminDao;
+import com.sample.choc2.service.admin.AdminSerivce;
 import com.sample.choc2.service.domain.BoardVO;
 
-@Repository("boardDaoImpl")
-public class BoardDaoImpl implements BoardDao{
-
-	private static String namespace="BoardMapper";
+@Service("boardServiceImpl")
+public class AdminServiceImpl implements AdminSerivce{
 	
 	@Autowired
-	@Qualifier("sqlSessionTemplate")
-	private SqlSession session;
+	@Qualifier("boardDaoImpl")
+	private AdminDao dao;
 	
-	public void setSession(SqlSession session) {
-		this.session = session;
+	public void setDao(AdminDao dao) {
+		this.dao = dao;
 	}
-	
+
 	@Override
 	public void create(BoardVO vo) throws Exception {
-		// TODO Auto-generated method stub       
-		session.insert(namespace+".create", vo);
+		// TODO Auto-generated method stub
+		dao.create(vo);
 	}
 
 	@Override
 	public BoardVO get(Integer bno) throws Exception {
 		// TODO Auto-generated method stub
-		return session.selectOne(namespace+".get", bno);
+		return dao.get(bno);
 	}
 
 	@Override
 	public void update(BoardVO vo) throws Exception {
 		// TODO Auto-generated method stub
-		session.update(namespace+".update", vo);
+		dao.update(vo);
 	}
 
 	@Override
 	public void delete(Integer bno) throws Exception {
 		// TODO Auto-generated method stub
-		session.delete(namespace+".delete", bno);
+		dao.delete(bno);
 	}
 
 	@Override
 	public List<BoardVO> list(SearchCriteria cri) throws Exception {
 		// TODO Auto-generated method stub
-		return session.selectList(namespace+".list", cri);
+		return dao.list(cri);
 	}
 
 	@Override
 	public int totalCount(SearchCriteria cri) throws Exception {
 		// TODO Auto-generated method stub
-		return session.selectOne(namespace+".totalCount",cri);
+		return dao.totalCount(cri);
 	}
+	
+	
 
 }

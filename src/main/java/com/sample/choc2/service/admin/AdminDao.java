@@ -5,7 +5,7 @@ import java.util.List;
 import com.sample.choc2.common.SearchCriteria;
 import com.sample.choc2.service.domain.BoardVO;
 
-public interface BoardDao {
+public interface AdminDao {
 
 	public void create(BoardVO vo)throws Exception;
 	
