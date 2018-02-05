@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.sample.choc2.common.PageMaker;
 import com.sample.choc2.common.SearchCriteria;
-import com.sample.choc2.service.admin.AdminSerivce;
+import com.sample.choc2.service.admin.AdminService;
 import com.sample.choc2.service.domain.BoardVO;
 
 @Controller
@@ -23,13 +23,13 @@ public class AdminController {
 	private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
 
 	@Autowired
-	@Qualifier("boardServiceImpl")
-	private AdminSerivce service;
+	@Qualifier("adminServiceImpl")
+	private AdminService service;
 
-	public void setService(AdminSerivce service) {
+	public void setService(AdminService service) {
 		this.service = service;
 	}
-
+//===========================================Board=====================================================
 	// 게시판 등록 화면
 	@RequestMapping(value = "/board/create", method = RequestMethod.GET)
 	public String createBoard(BoardVO vo, Model model) throws Exception {
@@ -98,7 +98,7 @@ public class AdminController {
 		logger.info(rttr.toString());
 		return "redirect:/admin/board/list";
 	}
-	//삭제 처리
+	//게시판 삭제 처리
 	 @RequestMapping(value = "/board/delete", method = RequestMethod.POST)
 	  public String deleteBoard(@RequestParam("bno") int bno, SearchCriteria cri, RedirectAttributes rttr) throws Exception {
 
@@ -113,5 +113,7 @@ public class AdminController {
 
 	    return "redirect:/admin/board/list";  
 	  }
-
+//===============================================================================================
+	 
+	 
 }

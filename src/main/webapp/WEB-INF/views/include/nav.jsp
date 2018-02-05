@@ -13,7 +13,7 @@
   </div>
   <div class="collapse navbar-collapse" id="myNavbar">
    <ul class="nav navbar-nav">
-    <li><a href="/admin/adminHome">Home</a></li>
+    <li><a href="/">Home</a></li>
     <li><a href="#">상품 관리</a></li>
     <li><a href="#">화학 성분 관리</a></li>
     <li><a href="/admin/board/list">유저 게시판</a></li>

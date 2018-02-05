@@ -1,19 +1,24 @@
 package com.sample.choc2.service.admin.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
+
+import com.sample.choc2.common.Criteria;
 import com.sample.choc2.common.SearchCriteria;
 import com.sample.choc2.service.admin.AdminDao;
 import com.sample.choc2.service.domain.BoardVO;
+import com.sample.choc2.service.domain.ReplyVO;
 
-@Repository("boardDaoImpl")
+@Repository("adminDaoImpl")
 public class AdminDaoImpl implements AdminDao{
 
-	private static String namespace="BoardMapper";
+	private static String namespace="AdminMapper";
 	
 	@Autowired
 	@Qualifier("sqlSessionTemplate")
@@ -57,6 +62,48 @@ public class AdminDaoImpl implements AdminDao{
 	public int totalCount(SearchCriteria cri) throws Exception {
 		// TODO Auto-generated method stub
 		return session.selectOne(namespace+".totalCount",cri);
+	}
+
+	@Override
+	public void createReply(ReplyVO vo) throws Exception {
+		// TODO Auto-generated method stub
+		session.insert(namespace+".createReply", vo);
+		
+	}
+
+	@Override
+	public void updateReply(ReplyVO vo) throws Exception {
+		// TODO Auto-generated method stub
+		session.update(namespace+".updateReply",vo);
+	}
+
+	@Override
+	public void deleteReply(Integer rno) throws Exception {
+		// TODO Auto-generated method stub
+		session.delete(namespace+".deleteReply", rno);
+	}
+
+	@Override
+	public List<ReplyVO> listPageReply(Integer bno, Criteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		
+		paramMap.put("bno", bno);
+		paramMap.put("cri", cri);
+		
+		return session.selectList(namespace+".listReplyPage", paramMap);
+	}
+
+	@Override
+	public int countReply(Integer bno) throws Exception {
+		// TODO Auto-generated method stub
+		return session.selectOne(namespace+".countReply",bno);
+	}
+
+	@Override
+	public int getBno(Integer bno) throws Exception {
+		// TODO Auto-generated method stub
+		return session.selectOne(namespace+".getBno",bno);
 	}
 
 }

@@ -35,14 +35,13 @@
 
 				<div class="box-body">
 					<div class="form-group">
-						<label for="exampleInputEmail1">Title</label> <input type="text"
-							name='title' class="form-control" value="${boardVO.title}"
+						<label for="exampleInputEmail1">Title</label> 
+						<input type="text" name='title' class="form-control" value="${boardVO.title}"
 							readonly="readonly">
 					</div>
 					<div class="form-group">
 						<label for="exampleInputPassword1">Content</label>
-						<textarea class="form-control" name="content" rows="3"
-							readonly="readonly">${boardVO.content}</textarea>
+						<textarea class="form-control" name="content" rows="3" readonly="readonly">${boardVO.content}</textarea>
 					</div>
 					<div class="form-group">
 						<label for="exampleInputEmail1">Writer</label> <input type="text"
@@ -79,17 +78,15 @@
 					<h3 class="box-title">ADD NEW REPLY</h3>
 				</div>
 				<div class="box-body">
-					<label for="exampleInputEmail1">Writer</label> <input
-						class="form-control" type="text" placeholder="USER ID"
-						id="newReplyWriter"> <label for="exampleInputEmail1">Reply
-						Text</label> <input class="form-control" type="text"
-						placeholder="REPLY TEXT" id="newReplyText">
+					<label for="exampleInputEmail1">Writer</label> 
+					<input class="form-control" type="text" placeholder="USER ID" id="newReplyWriter"> 
+						<label for="exampleInputEmail1">Reply Text</label>
+						 <input class="form-control" type="text" placeholder="REPLY TEXT" id="newReplyText">
 
 				</div>
 				<!-- /.box-body -->
 				<div class="box-footer">
-					<button type="button" class="btn btn-primary" id="replyAddBtn">ADD
-						REPLY</button>
+					<button type="button" class="btn btn-primary" id="replyAddBtn">ADD REPLY</button>
 				</div>
 			</div>
 
@@ -97,8 +94,7 @@
 			<!-- The time line -->
 			<ul class="timeline">
 				<!-- timeline time label -->
-				<li class="time-label" id="repliesDiv"><span class="bg-green">
-						Replies List </span></li>
+				<li class="time-label" id="repliesDiv"><span class="bg-green">Replies List </span></li>
 			</ul>
 
 			<div class='text-center'>
@@ -200,7 +196,7 @@
 		if ($(".timeline li").size() > 1) {
 			return;
 		}
-		getPage("/replies/" + bno + "/1");
+		getPage("/replyRest/" + bno + "/1");
 	});
 	
 	$(".pagination").on("click", "li a", function(event){
@@ -209,7 +205,7 @@
 		
 		replyPage = $(this).attr("href");
 		
-		getPage("/replies/"+bno+"/"+replyPage);
+		getPage("/replyRest/"+bno+"/"+replyPage);
 		
 	});
 	
@@ -223,7 +219,7 @@
 		  
 		  $.ajax({
 				type:'post',
-				url:'/replies/',
+				url:'/replyRest/',
 				headers: { 
 				      "Content-Type": "application/json",
 				      "X-HTTP-Method-Override": "POST" },
@@ -234,7 +230,7 @@
 					if(result == 'SUCCESS'){
 						alert("등록 되었습니다.");
 						replyPage = 1;
-						getPage("/replies/"+bno+"/"+replyPage );
+						getPage("/replyRest/"+bno+"/"+replyPage );
 						replyerObj.val("");
 						replytextObj.val("");
 					}
@@ -257,7 +253,7 @@
 		  
 		  $.ajax({
 				type:'put',
-				url:'/replies/'+rno,
+				url:'/replyRest/'+rno,
 				headers: { 
 				      "Content-Type": "application/json",
 				      "X-HTTP-Method-Override": "PUT" },
@@ -267,7 +263,7 @@
 					console.log("result: " + result);
 					if(result == 'SUCCESS'){
 						alert("수정 되었습니다.");
-						getPage("/replies/"+bno+"/"+replyPage );
+						getPage("/replyRest/"+bno+"/"+replyPage );
 					}
 			}});
 	});
@@ -278,7 +274,7 @@
 		  
 		  $.ajax({
 				type:'delete',
-				url:'/replies/'+rno,
+				url:'/replyRest/'+rno,
 				headers: { 
 				      "Content-Type": "application/json",
 				      "X-HTTP-Method-Override": "DELETE" },
@@ -287,7 +283,7 @@
 					console.log("result: " + result);
 					if(result == 'SUCCESS'){
 						alert("삭제 되었습니다.");
-						getPage("/replies/"+bno+"/"+replyPage );
+						getPage("/replyRest/"+bno+"/"+replyPage );
 					}
 			}});
 	});

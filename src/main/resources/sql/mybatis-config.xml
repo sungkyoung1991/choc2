@@ -13,11 +13,12 @@
 	<typeAliases>
 		<typeAlias alias="user" type="com.sample.choc2.service.domain.User" />
 		<typeAlias alias="boardVO" type="com.sample.choc2.service.domain.BoardVO" />
+		<typeAlias alias="replyVO" type="com.sample.choc2.service.domain.ReplyVO" />
 	</typeAliases>
 	
 	<mappers>
 		<mapper resource="sql/UserMapper.xml"/>
-		<mapper resource="sql/BoardMapper.xml"/>
+		<mapper resource="sql/AdminMapper.xml"/>
 	</mappers>
 
 </configuration>
