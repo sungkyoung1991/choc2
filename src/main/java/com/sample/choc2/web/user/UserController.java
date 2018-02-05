@@ -98,7 +98,7 @@ public class UserController {
 		//logger.info(user.toString());
 		userService.createUser(user);
 		
-		return "user/test";
+		return "main/main";
 		
 	}//회원가입 처리
 

@@ -10,6 +10,7 @@
 
 var regExp1 = /^.*(?=.{6,20})(?=.*[0-9])(?=.*[a-zA-Z]).*$/; //아이디,비밀번호 영문,숫자혼합하여 6~20자
 
+//아이디 중복확인
 $(document).ready(function(){
 	$("#idCheck").click(function(){
 		if(document.sform.id.value==""){
@@ -50,6 +51,7 @@ $(document).ready(function(){
 		}
 	});
 	
+	//닉네임 중복확인
 	$("#nickCheck").click(function(){
 		if(document.sform.nick.value==""){
 			alert("닉네임을 입력하세요");

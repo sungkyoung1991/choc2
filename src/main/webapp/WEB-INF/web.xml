@@ -61,7 +61,7 @@
 	
 	
 	<welcome-file-list>
-	    <welcome-file>views/main/main.jsp</welcome-file>
+	    <welcome-file>/WEB-INF/views/main/main.jsp</welcome-file>
 	</welcome-file-list>
 	
 	
