@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
+import com.sample.choc2.service.domain.CosmeticVO;
 import com.sample.choc2.service.domain.User;
 import com.sample.choc2.service.user.UserDao;
 
@@ -46,6 +47,12 @@ public class UserDaoImpl implements UserDao{
 	public String nickCheck(String nickName) throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("UserMapper.nickCheck",nickName);
+	}
+
+	@Override
+	public void createCosmetic(CosmeticVO cosmetic) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.update("UserMapper.createCosmetic", cosmetic);
 	}
 	
 }

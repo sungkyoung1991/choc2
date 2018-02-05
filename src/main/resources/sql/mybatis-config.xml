@@ -13,6 +13,7 @@
 	<typeAliases>
 		<typeAlias alias="user" type="com.sample.choc2.service.domain.User" />
 		<typeAlias alias="boardVO" type="com.sample.choc2.service.domain.BoardVO" />
+		<typeAlias alias="cosmetic" type="com.sample.choc2.service.domain.CosmeticVO" />
 	</typeAliases>
 	
 	<mappers>

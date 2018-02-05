@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.sample.choc2.service.domain.CosmeticVO;
 import com.sample.choc2.service.domain.User;
 import com.sample.choc2.service.user.UserService;
 
@@ -101,6 +102,21 @@ public class UserController {
 		return "main/main";
 		
 	}//회원가입 처리
-
+	
+	@RequestMapping(value="createCosmeticP", method=RequestMethod.GET)
+	public String createCosmeticP(){
+		
+		return "user/createCosmetic";
+		
+	}//화장품 정보입력 폼으로 이동
+	
+	@RequestMapping(value="createCosmetic", method=RequestMethod.GET)
+	public String createCosmetic(@ModelAttribute("cosmetic") CosmeticVO cosmetic) throws Exception{
+		
+		userService.createCosmetic(cosmetic);
+		
+		return "user/createCosmetic";
+		
+	}//화장품 정보입력 폼으로 이동
 	
 }

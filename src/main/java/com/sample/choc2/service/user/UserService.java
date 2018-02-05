@@ -1,6 +1,7 @@
 package com.sample.choc2.service.user;
 
 
+import com.sample.choc2.service.domain.CosmeticVO;
 import com.sample.choc2.service.domain.User;
 
 
@@ -15,6 +16,8 @@ public interface UserService {
 	public String idCheck(String userId) throws Exception;
 
 	public String nickCheck(String nickName) throws Exception;
+
+	public void createCosmetic(CosmeticVO cosmetic) throws Exception;
 	
 	
 	

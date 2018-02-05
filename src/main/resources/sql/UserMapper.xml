@@ -36,6 +36,11 @@
 	 <select id="nickCheck" parameterType="string" resultType="string">
 		SELECT NICKNAME FROM TBL_USER WHERE NICKNAME = #{nickName}
 	  </select>
+	  
+	  <insert id="createCosmetic" parameterType="cosmetic">
+	  	INSERT INTO
+	 	TBL_COSMETIC(BRAND,MODEL,PRODUCT,AMOUNT,PRICE,INGREDIENT)
+	 	VALUES(#{brand},#{model},#{product},#{amount},#{price},#{ingredient})
+	  </insert>
 	
-	 
 </mapper>
