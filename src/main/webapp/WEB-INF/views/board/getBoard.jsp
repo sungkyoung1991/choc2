@@ -3,7 +3,16 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 <!-- Main content -->
-<section class="content">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<%@include file="../include/header.jsp"%>
+<title>Insert title here</title>
+</head>
+<body>
+	<%@include file="../include/nav.jsp"%>
+	<section class="content">
 	<div class="row">
 		<!-- left column -->
 		<div class="col-md-12">
@@ -43,11 +52,12 @@
 				</div>
 				<!-- /.box-body -->
 
-			  <div class="box-footer">
-			    <button type="submit" class="btn btn-warning" id="modifyBtn">Modify</button>
-			    <button type="submit" class="btn btn-danger" id="removeBtn">REMOVE</button>
-			    <button type="submit" class="btn btn-primary" id="goListBtn">GO LIST </button>
-			  </div>
+				<div class="box-footer">
+					<button type="submit" class="btn btn-warning" id="modifyBtn">Modify</button>
+					<button type="submit" class="btn btn-danger" id="removeBtn">REMOVE</button>
+					<button type="submit" class="btn btn-primary" id="goListBtn">GO
+						LIST</button>
+				</div>
 
 
 
@@ -100,36 +110,34 @@
 		</div>
 		<!-- /.col -->
 	</div>
-	<!-- /.row -->
+	<!-- /.row --> <!-- Modal -->
+	<div id="modifyModal" class="modal modal-primary fade" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title"></h4>
+				</div>
+				<div class="modal-body" data-rno>
+					<p>
+						<input type="text" id="replytext" class="form-control">
+					</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-info" id="replyModBtn">Modify</button>
+					<button type="button" class="btn btn-danger" id="replyDelBtn">DELETE</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
 
 
-          
-<!-- Modal -->
-<div id="modifyModal" class="modal modal-primary fade" role="dialog">
-  <div class="modal-dialog">
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title"></h4>
-      </div>
-      <div class="modal-body" data-rno>
-        <p><input type="text" id="replytext" class="form-control"></p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-info" id="replyModBtn">Modify</button>
-        <button type="button" class="btn btn-danger" id="replyDelBtn">DELETE</button>
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>      
-	
-	
-</section>
-<!-- /.content -->
+	</section>
+	<!-- /.content -->
 
-<script id="template" type="text/x-handlebars-template">
+	<script id="template" type="text/x-handlebars-template">
 {{#each .}}
 <li class="replyLi" data-rno={{rno}}>
 <i class="fa fa-comments bg-blue"></i>
@@ -148,7 +156,7 @@
 {{/each}}
 </script>
 
-<script>
+	<script>
  	Handlebars.registerHelper("prettifyDate", function(timeValue) {
 		var dateObj = new Date(timeValue);
 		var year = dateObj.getFullYear();
@@ -287,7 +295,7 @@
 </script>
 
 
-<script>
+	<script>
 $(document).ready(function(){
 	
 	var formObj = $("form[role='form']");
@@ -295,25 +303,27 @@ $(document).ready(function(){
 	console.log(formObj);
 	
 	$("#modifyBtn").on("click", function(){
-		formObj.attr("action", "/board/update");
+		formObj.attr("action", "/admin/board/update");
 		formObj.attr("method", "get");		
 		formObj.submit();
 	});
 	
 	$("#removeBtn").on("click", function(){
-		formObj.attr("action", "/board/delete");
+		formObj.attr("action", "/admin/board/delete");
 		formObj.submit();
 	});
 	
 	$("#goListBtn ").on("click", function(){
 		formObj.attr("method", "get");
-		formObj.attr("action", "/board/list");
+		formObj.attr("action", "/admin/board/list");
 		formObj.submit();
 	});
 	
 });
 </script>
 
-
+</body>
+<%@include file="../include/footer.jsp"%>
+</html>
 
 

@@ -5,9 +5,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<%@include file="../include/header.jsp"%>
 <title>Insert title here</title>
 </head>
 <body>
+<%@include file="../include/nav.jsp"%>
 	<!-- Main content -->
 	<section class="content">
 	<div class="row">
@@ -91,4 +93,5 @@
 	<!-- /.content-wrapper -->
 
 </body>
+<%@include file="../include/footer.jsp"%>
 </html>

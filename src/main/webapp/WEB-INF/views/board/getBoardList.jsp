@@ -11,10 +11,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<%@include file="../include/header.jsp"%>
 <title>Insert title here</title>
 </head>
 <body>
-
+<%@include file="../include/nav.jsp"%>
 	<!-- Main content -->
 	<section class="content">
 	<div class="row">
@@ -75,7 +76,7 @@
 							<tr>
 								<td>${boardVO.bno}</td>
 								<td><a
-									href='/board/get${pageMaker.makeSearch(pageMaker.cri.page) }&bno=${boardVO.bno}'>
+									href='/admin/board/get${pageMaker.makeSearch(pageMaker.cri.page) }&bno=${boardVO.bno}'>
 										${boardVO.title}</a></td>
 								<td>${boardVO.writer}</td>
 								<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
@@ -149,4 +150,5 @@
 				});
 	</script>
 </body>
+<%@include file="../include/footer.jsp"%>
 </html>
