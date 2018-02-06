@@ -89,6 +89,24 @@ public class AdminServiceImpl implements AdminService{
 		// TODO Auto-generated method stub
 		return dao.countReply(bno);
 	}
+
+	@Override
+	public void updateViewCnt(Integer bno) throws Exception {
+		// TODO Auto-generated method stub
+		dao.updateViewCnt(bno);
+	}
+
+	@Override
+	public int getBno(Integer bno) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.getBno(bno);
+	}
+
+	@Override
+	public void updateReplyCnt(Integer bno, int amount) throws Exception {
+		// TODO Auto-generated method stub
+		//dao.updateReply();
+	}
 	
 	
 

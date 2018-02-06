@@ -16,94 +16,111 @@ import com.sample.choc2.service.domain.BoardVO;
 import com.sample.choc2.service.domain.ReplyVO;
 
 @Repository("adminDaoImpl")
-public class AdminDaoImpl implements AdminDao{
+public class AdminDaoImpl implements AdminDao {
 
-	private static String namespace="AdminMapper";
-	
+	private static String namespace = "AdminMapper";
+
 	@Autowired
 	@Qualifier("sqlSessionTemplate")
 	private SqlSession session;
-	
+
 	public void setSession(SqlSession session) {
 		this.session = session;
 	}
-	
+
 	@Override
 	public void create(BoardVO vo) throws Exception {
-		// TODO Auto-generated method stub       
-		session.insert(namespace+".create", vo);
+		// TODO Auto-generated method stub
+		session.insert(namespace + ".create", vo);
 	}
 
 	@Override
 	public BoardVO get(Integer bno) throws Exception {
 		// TODO Auto-generated method stub
-		return session.selectOne(namespace+".get", bno);
+		return session.selectOne(namespace + ".get", bno);
 	}
 
 	@Override
 	public void update(BoardVO vo) throws Exception {
 		// TODO Auto-generated method stub
-		session.update(namespace+".update", vo);
+		session.update(namespace + ".update", vo);
 	}
 
 	@Override
 	public void delete(Integer bno) throws Exception {
 		// TODO Auto-generated method stub
-		session.delete(namespace+".delete", bno);
+		session.delete(namespace + ".delete", bno);
 	}
 
 	@Override
 	public List<BoardVO> list(SearchCriteria cri) throws Exception {
 		// TODO Auto-generated method stub
-		return session.selectList(namespace+".list", cri);
+		return session.selectList(namespace + ".list", cri);
 	}
 
 	@Override
 	public int totalCount(SearchCriteria cri) throws Exception {
 		// TODO Auto-generated method stub
-		return session.selectOne(namespace+".totalCount",cri);
+		return session.selectOne(namespace + ".totalCount", cri);
 	}
 
 	@Override
 	public void createReply(ReplyVO vo) throws Exception {
 		// TODO Auto-generated method stub
-		session.insert(namespace+".createReply", vo);
-		
+		session.insert(namespace + ".createReply", vo);
+
 	}
 
 	@Override
 	public void updateReply(ReplyVO vo) throws Exception {
 		// TODO Auto-generated method stub
-		session.update(namespace+".updateReply",vo);
+		session.update(namespace + ".updateReply", vo);
 	}
 
 	@Override
 	public void deleteReply(Integer rno) throws Exception {
 		// TODO Auto-generated method stub
-		session.delete(namespace+".deleteReply", rno);
+		session.delete(namespace + ".deleteReply", rno);
 	}
 
 	@Override
 	public List<ReplyVO> listPageReply(Integer bno, Criteria cri) throws Exception {
 		// TODO Auto-generated method stub
 		Map<String, Object> paramMap = new HashMap<String, Object>();
-		
+
 		paramMap.put("bno", bno);
 		paramMap.put("cri", cri);
-		
-		return session.selectList(namespace+".listReplyPage", paramMap);
+
+		return session.selectList(namespace + ".listReplyPage", paramMap);
 	}
 
 	@Override
 	public int countReply(Integer bno) throws Exception {
 		// TODO Auto-generated method stub
-		return session.selectOne(namespace+".countReply",bno);
+		return session.selectOne(namespace + ".countReply", bno);
 	}
 
 	@Override
 	public int getBno(Integer bno) throws Exception {
 		// TODO Auto-generated method stub
-		return session.selectOne(namespace+".getBno",bno);
+		return session.selectOne(namespace + ".getBno", bno);
+	}
+
+	@Override
+	public void updateViewCnt(Integer bno) throws Exception {
+		// TODO Auto-generated method stub
+		session.update(namespace + ".updateViewCnt", bno);
+	}
+
+	@Override
+	public void updateReplyCnt(Integer bno, int amount) throws Exception {
+		// TODO Auto-generated method stub
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+
+		paramMap.put("bno", bno);
+		paramMap.put("amount", amount);
+
+		session.update(namespace + ".updateReplyCnt", paramMap);
 	}
 
 }

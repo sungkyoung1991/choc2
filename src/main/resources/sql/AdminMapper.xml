@@ -15,12 +15,14 @@
 		BNO,TITLE,CONTENT,WRITER,REGDATE,VIEWCNT
 		FROM
 		TBL_BOARD
-		WHERE BNO = #{bno}
+		WHERE BNO =
+		#{bno}
 
 	</select>
 
 	<update id="update">
-		UPDATE TBL_BOARD SET TITLE = #{title}, CONTENT = #{content}
+		UPDATE TBL_BOARD SET TITLE = #{title}, CONTENT =
+		#{content}
 		WHERE BNO = #{bno}
 
 	</update>
@@ -60,55 +62,59 @@
 		<include refid="search"></include>
 	</select>
 
-<!-- 	<select id="list" resultType="ReplyVO">
-	select
-	*
-	from
-	tbl_reply
-	where bno=#{bno}
-	order by rno desc
-	</select>
- -->
+	<!-- <select id="list" resultType="ReplyVO"> select * from tbl_reply where 
+		bno=#{bno} order by rno desc </select> -->
 	<insert id="createReply">
-	INSERT INTO TBL_REPLY (BNO,REPLYTEXT,REPLYER)
-	VALUES (#{bno},#{replytext},#{replyer})
+		INSERT INTO TBL_REPLY (BNO,REPLYTEXT,REPLYER)
+		VALUES (#{bno},#{replytext},#{replyer})
 	</insert>
-	
+
 	<update id="updateReply">
-	UPDATE TBL_REPLY SET REPLYTEXT = #{replytext}, UPDATEDATE = NOW()
-	WHERE rno = #{rno}
+		UPDATE TBL_REPLY SET REPLYTEXT = #{replytext}, UPDATEDATE = NOW()
+		WHERE rno = #{rno}
 	</update>
-	
+
 	<delete id="deleteReply">
-	DELETE FROM TBL_REPLY WHERE rno=#{rno}
+		DELETE FROM TBL_REPLY WHERE rno=#{rno}
 	</delete>
-	
+
 	<select id="listReplyPage" resultType="replyVO">
-	SELECT
-	*
-	FROM
-	TBL_REPLY
-	WHERE
-	BNO=#{bno}
-	ORDER BY RNO DESC
-	LIMIT #{cri.pageStart}, #{cri.perPageNum}
+		SELECT
+		*
+		FROM
+		TBL_REPLY
+		WHERE
+		BNO=#{bno}
+		ORDER BY RNO DESC
+		LIMIT #{cri.pageStart}, #{cri.perPageNum}
 	</select>
-	
+
 	<select id="countReply" resultType="int">
-		SELECT 
-		COUNT(BNO) 
-		FROM 
+		SELECT
+		COUNT(BNO)
+		FROM
 		TBL_REPLY
 		WHERE
 		BNO=#{bno}
 	</select>
-	
+
 	<select id="getBno" resultType="int">
 		SELECT BNO
 		FROM TBL_REPLY
 		WHERE RNO=#{rno}
 	</select>
+	
+	<update id="updateReplyCnt">
+		UPDATE TBL_BOARD
+		SET REPLYCNT = REPLYCNT + #{amount}
+		WHERE BNO=#{bno}
+	</update>
 
+	<update id="updateViewCnt">
+		UPDATE TBL_BOARD
+		SET VIEWCNT=VIEWCNT +1
+		WHERE BNO = #{bno}
+	</update>
 
 
 
