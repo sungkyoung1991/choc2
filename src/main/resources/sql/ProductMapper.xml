@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="ProductMapper">
+
+	<resultMap id="productSelectMap" type="productVO">
+		<result property="productNo" column="PRODUCT_NO" jdbcType="VARCHAR" />
+		<result property="productImage" column="PRODUCT_IMAGE" jdbcType="VARCHAR" />
+		<result property="productModel" column="PRODUCT_MODEL" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<!-- <insert id="addProduct" parameterType="productVO" >
+		INSERT INTO product (PRODUCT_NO,PRODUCT_MODEL, PRODUCT_IMAGE)
+		VALUES (
+		
+		#{productModel:VARCHAR}, #{productImage:VARCHAR} )
+		
+	</insert> -->
+
+
+
+	<select id="getProduct" parameterType="String" resultMap="productSelectMap" >
+		SELECT * FROM TBL_PRODUCT
+		WHERE PRODUCT_MODEL=#{productModel}
+	</select>
+
+	<update id="updateProduct" parameterType="productVO">
+		UPDATE PRODUCT
+		<set>
+			PRODUCT_MODEL = #{productModel:VARCHAR},
+			PRODUCT_IMAGE = #{productImage:VARCHAR}
+		</set>
+			WHERE PRODUCT_MODEL =#{productModel}
+	</update>
+
+	
+	<select  id="getProductList" parameterType="search"  resultMap="productSelectMap">
+	
+	SELECT * FROM TBL_PRODUCT
+		LIMIT #{startRowNum}, #{pageSize}
+	  
+	 </select>
+	 
+	 <select  id="getTotalCount"  parameterType="search"	 resultType="int">
+	  	SELECT COUNT(*)
+	  	FROM(	SELECT PRODUCT_NO , PRODUCT_MODEL
+						FROM TBL_PRODUCT
+						<if test="searchCondition != null">
+							<where>
+								<if test="searchCondition == 0 and searchKeyword !='' ">
+						 			PRODUCT_MODEL = #{searchKeyword}
+								</if>
+							</where>
+						</if> ) countTable						
+	 </select>
+	 
+	
+	 
+	 
+</mapper>	
+			
+		
