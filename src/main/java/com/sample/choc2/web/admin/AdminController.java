@@ -71,7 +71,7 @@ public class AdminController {
 	@RequestMapping(value = "/board/get", method = RequestMethod.GET)
 	public String getBaord(@RequestParam("bno") int bno, @ModelAttribute("cri") SearchCriteria cri, Model model)
 			throws Exception {
-
+		service.updateViewCnt(bno);
 		model.addAttribute(service.get(bno));
 		return "board/getBoard";
 	}

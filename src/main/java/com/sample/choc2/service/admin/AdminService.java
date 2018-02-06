@@ -21,6 +21,9 @@ public interface AdminService {
 	public List<BoardVO> list(SearchCriteria cri)throws Exception;
 	
 	public int totalCount(SearchCriteria cri)throws Exception;
+	
+	public void updateViewCnt(Integer bno) throws Exception;
+
 //=========================ReplyDao=========================
 	public void createReply(ReplyVO vo)throws Exception;
 	
@@ -32,5 +35,8 @@ public interface AdminService {
 	
 	public int countReply(Integer bno)throws Exception;
 	
-	
+	public int getBno(Integer bno) throws Exception;
+
+	public void updateReplyCnt(Integer bno, int amount) throws Exception;
+
 }
