@@ -1,5 +1,8 @@
 package com.sample.choc2.service.user;
 
+import java.util.List;
+
+import com.sample.choc2.common.SearchCriteria;
 import com.sample.choc2.service.domain.CosmeticVO;
 import com.sample.choc2.service.domain.User;
 
@@ -16,5 +19,8 @@ public interface UserDao {
 
 	public void createCosmetic(CosmeticVO cosmetic) throws Exception;
 
+	public List<CosmeticVO> getCosmeticList(SearchCriteria cri) throws Exception;
+
+	public int totalCount(SearchCriteria cri) throws Exception;
 	
 }

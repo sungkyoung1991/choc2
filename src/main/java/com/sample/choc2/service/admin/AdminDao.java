@@ -19,4 +19,6 @@ public interface AdminDao {
 	
 	public int totalCount(SearchCriteria cri)throws Exception;
 	
+	
+	
 }

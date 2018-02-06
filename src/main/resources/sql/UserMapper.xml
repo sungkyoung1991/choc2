@@ -42,5 +42,39 @@
 	 	TBL_COSMETIC(BRAND,MODEL,PRODUCT,AMOUNT,PRICE,INGREDIENT)
 	 	VALUES(#{brand},#{model},#{product},#{amount},#{price},#{ingredient})
 	  </insert>
-	
+	  
+	  <select id="getCosmeticList" resultType="cosmetic">
+	  <![CDATA[
+		SELECT * FROM TBL_COSMETIC WHERE COSMETIC_NO>0 
+	  ]]>
+	  
+	  	<include refid="search"></include>
+		
+		<![CDATA[
+			ORDER BY COSMETIC_NO DESC
+			LIMIT #{pageStart}. #{perPageNum}
+		]]>
+		
+	  </select>
+	  
+	  <select id="totalCount" resultType="int">
+		<![CDATA[  
+	  		SELECT COUNT(COSMETIC_NO) 
+	  		FROM TBL_COSMETIC 
+	  		WHERE COSMETIC_NO > 0 
+
+		]]>
+		
+		<include refid="search"></include>
+	</select>
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
 </mapper>

@@ -1,9 +1,12 @@
 package com.sample.choc2.service.user.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import com.sample.choc2.common.SearchCriteria;
 import com.sample.choc2.service.domain.CosmeticVO;
 import com.sample.choc2.service.domain.User;
 import com.sample.choc2.service.user.UserDao;
@@ -59,6 +62,18 @@ public class UserServiceImpl implements UserService{
 	public void createCosmetic(CosmeticVO cosmetic) throws Exception{
 		// TODO Auto-generated method stub
 		userDao.createCosmetic(cosmetic);
+	}
+
+	@Override
+	public List<CosmeticVO> getCosmeticList(SearchCriteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return userDao.getCosmeticList(cri);
+	}
+
+	@Override
+	public int totalCount(SearchCriteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return userDao.totalCount(cri);
 	}
 
 }
