@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="MainMapper">
+ 	
+ 	
+	<resultMap id="mainSelectMap" type="mainVO">
+		<result property="productVO.productModel" 	column="PRODUCT_MODEL" 		jdbcType="VARCHAR" />
+		
+			<association property="productModel" javaType="productVO">
+				<id property="productModel"	column="PRODUCT_MODEL"	jdbcType="VARCHAR"/>
+					<result property="productName"	column="PRODUCT_NAME"	jdbcType="VARCHAR"/>
+					<result property="productImage"	column="PRODUCT_IMAGE"	jdbcType="VARCHAR"/>
+			</association>
+			
+		
+		
+		
+		
+	</resultMap>
+	 
+	 
+	 
+</mapper>

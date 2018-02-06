@@ -68,14 +68,10 @@ PW<input type="password" name="password" id="password" />
 <input type="button" value="회원가입" onclick="location.href='user/createUserP'">
 <br/><br/><br/><br/>
 
-1.deploy test...
-<br/>
-2.sk _ enterkey event append
-<br/>
-3.sk _ loginInterceptor append
-<br/>
-
 </form>
+
+
+
 </body>
 
 
