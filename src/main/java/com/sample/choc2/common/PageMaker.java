@@ -58,9 +58,9 @@ public class PageMaker {
 	   * 
 	   * */
 	  private void calcData() {
-		  //끝 페이지 구하지 
+		  //끝 페이지 구하기 
 	    endPage = (int) (Math.ceil(cri.getPage() / (double) displayPageNum) * displayPageNum);
-	    //시작페이지 구하지 
+	    //시작페이지 구하기
 	    startPage = (endPage - displayPageNum) + 1;
 	    // totalCount, endpage 재계
 	    int tempEndPage = (int) (Math.ceil(totalCount / (double) cri.getPerPageNum()));
@@ -120,6 +120,7 @@ public class PageMaker {
 		  
 		  return uriComponents.toString();
 	  }
+	  //검색기능 없을 때 
    public String makeSearch(int page) {
 		  UriComponents uriComponents = 
 				  UriComponentsBuilder.newInstance()
@@ -130,7 +131,9 @@ public class PageMaker {
 		  
 		  return uriComponents.toString();
 	  }
+   	//검색 기능 있을 때 데이터 유지를 위해 사용 
 
+   
 	private String encoding(String keyword) {
 		// TODO Auto-generated method stub
 		if(keyword == null || keyword.trim().length() == 0) {

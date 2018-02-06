@@ -32,4 +32,6 @@ public interface AdminDao {
 	public int countReply(Integer bno) throws Exception;
 	//게시물의 댓글 수 
 	public int getBno(Integer bno) throws Exception;
+
+
 }

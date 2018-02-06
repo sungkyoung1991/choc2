@@ -18,6 +18,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.sample.choc2.common.PageMaker;
+import com.sample.choc2.common.SearchCriteria;
+import com.sample.choc2.service.domain.CosmeticVO;
 import com.sample.choc2.service.domain.User;
 import com.sample.choc2.service.user.UserService;
 
@@ -101,6 +104,38 @@ public class UserController {
 		return "main/main";
 		
 	}//회원가입 처리
-
+	
+	@RequestMapping(value="createCosmeticP", method=RequestMethod.GET)
+	public String createCosmeticP(){
+		
+		return "user/createCosmetic";
+		
+	}//화장품 정보입력 폼으로 이동
+	
+	@RequestMapping(value="createCosmetic", method=RequestMethod.GET)
+	public String createCosmetic(@ModelAttribute("cosmetic") CosmeticVO cosmetic) throws Exception{
+		
+		userService.createCosmetic(cosmetic);
+		
+		return "user/createCosmetic";
+		
+	}//화장품 정보입력 처리
+	
+	@RequestMapping(value="getCosmeticList", method=RequestMethod.GET)
+	public String getCosmeticList(@ModelAttribute("cri")SearchCriteria cri,Model model) throws Exception{
+		
+		model.addAttribute("clist",userService.getCosmeticList(cri));//searchtype,keyword
+		
+		PageMaker pageMaker = new PageMaker();
+		
+		pageMaker.setCri(cri); //현재페이지, 페이지안 데이터갯수
+		
+		pageMaker.setTotalCount(userService.totalCount(cri)); //totalCount로 네비게이션 첫,끝,pre,next 설정
+		
+		model.addAttribute("pageMaker",pageMaker);
+		
+		return "user/getCosmeticList";
+		
+	}//리스트 조회(Searchcriteria, pagemaker)
 	
 }

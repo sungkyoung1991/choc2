@@ -5,10 +5,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script type="text/javascript">
+</script>
 </head>
 <body>
 <h2> 화장품 정보입력</h2>
-<form>
+<form name="cform" action="/user/createCosmetic" method="get">
 <table>
 <tr>
 <th>브랜드</th>
@@ -32,8 +35,12 @@
 </tr>
 <tr>
 <th>성분</th>
-<td><input type="text" name="ingredient" placeholder="블라블라 파운데이션" /></td>
+<td><input type="text" name="ingredient" placeholder="글리세린" />
+<!-- 	<input type="button" name="addButton" style="cursor:hand" value="추가" onclick="insRow()" />
+	<font color="blue">더 추가하려면 추가 버튼을 클릭해보세요!</font> -->
+</td>
 </tr>
+<tr><td><input type="submit" value="확인" /></td></tr>
 </table>
 </form>
 </body>
