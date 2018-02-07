@@ -41,7 +41,10 @@
 	<select  id="getProductList" parameterType="search"  resultMap="productSelectMap">
 	
 	SELECT * FROM TBL_PRODUCT
-		LIMIT #{startRowNum}, #{pageSize}
+	
+		ORDER BY 1 DESC
+		
+			LIMIT #{startRowNum}, #{pageSize}
 	  
 	 </select>
 	 

@@ -60,7 +60,7 @@ public class ProductController {
 		model.addAttribute("resultPage", resultPage);
 
 
-		return "main/main2";
+		return "main/main";
 	}
 
 }
