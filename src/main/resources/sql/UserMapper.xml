@@ -50,10 +50,10 @@
 	  
 	  	<include refid="search"></include>
 		
-		<![CDATA[
+	   <![CDATA[
 			ORDER BY COSMETIC_NO DESC
-			LIMIT #{pageStart}. #{perPageNum}
-		]]>
+			LIMIT #{pageStart}, #{perPageNum}
+	   ]]>
 		
 	  </select>
 	  
@@ -68,13 +68,28 @@
 		<include refid="search"></include>
 	</select>
 	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
+	  <sql id="search">
+		<if test="searchType != null">
+			<if test="searchType == 'brand'.toString()">
+				AND BRAND LIKE CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'model'.toString()">
+				AND MODEL LIKE CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'product'.toString()">
+				AND PRODUCT LIKE CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'amount'.toString()">
+				AND AMOUNT LIKE CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'price'.toString()">
+				AND PRICE LIKE CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'ingredient'.toString()">
+				AND INGREDIENT LIKE CONCAT('%', #{keyword}, '%')
+			</if>
+		</if>
+	</sql>
 	  
 	  
 </mapper>
