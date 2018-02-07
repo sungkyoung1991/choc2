@@ -11,6 +11,7 @@ import com.sample.choc2.common.SearchCriteria;
 import com.sample.choc2.service.admin.AdminDao;
 import com.sample.choc2.service.admin.AdminService;
 import com.sample.choc2.service.domain.BoardVO;
+import com.sample.choc2.service.domain.CosmeticVO;
 import com.sample.choc2.service.domain.ReplyVO;
 
 @Service("adminServiceImpl")
@@ -106,6 +107,42 @@ public class AdminServiceImpl implements AdminService{
 	public void updateReplyCnt(Integer bno, int amount) throws Exception {
 		// TODO Auto-generated method stub
 		//dao.updateReply();
+	}
+
+	@Override
+	public void createCosmetic(CosmeticVO vo) throws Exception {
+		// TODO Auto-generated method stub
+		dao.createCosmetic(vo);
+	}
+
+	@Override
+	public CosmeticVO getCosmetic(Integer cosmetic_no) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.getCosmetic(cosmetic_no);
+	}
+
+	@Override
+	public void updateCosmetic(CosmeticVO vo) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteCosmetic(Integer cosmetic_no) throws Exception {
+		// TODO Auto-generated method stub
+		dao.deleteCosmetic(cosmetic_no);
+	}
+
+	@Override
+	public List<CosmeticVO> listCosmetic(SearchCriteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.listCosmetic(cri);
+	}
+
+	@Override
+	public int countCosmetic(SearchCriteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.countCosmetic(cri);
 	}
 	
 	
