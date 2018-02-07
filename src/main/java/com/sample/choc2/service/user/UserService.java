@@ -25,5 +25,7 @@ public interface UserService {
 	public List<CosmeticVO> getCosmeticList(SearchCriteria cri) throws Exception;
 
 	public int totalCount(SearchCriteria sci) throws Exception;
+
+	public CosmeticVO getCosmetic(int cosmetic_no) throws Exception;
 	
 }

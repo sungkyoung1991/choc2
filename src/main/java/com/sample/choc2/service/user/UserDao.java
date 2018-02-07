@@ -22,5 +22,7 @@ public interface UserDao {
 	public List<CosmeticVO> getCosmeticList(SearchCriteria cri) throws Exception;
 
 	public int totalCount(SearchCriteria cri) throws Exception;
+
+	public CosmeticVO getCosmetic(int cosmetic_no) throws Exception;
 	
 }

@@ -76,4 +76,10 @@ public class UserServiceImpl implements UserService{
 		return userDao.totalCount(cri);
 	}
 
+	@Override
+	public CosmeticVO getCosmetic(int cosmetic_no) throws Exception {
+		// TODO Auto-generated method stub
+		return userDao.getCosmetic(cosmetic_no);
+	}
+
 }

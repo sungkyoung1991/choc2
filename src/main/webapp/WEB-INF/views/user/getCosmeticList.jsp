@@ -12,7 +12,7 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	$('#searchBtn').click(function(){
-				self.location = "getCosmeticList"
+				self.location = "/user/getCosmeticList"
 						+ '${pageMaker.makeQuery(1)}'
 						+ "&searchType="
 						+ $("select option:selected").val()
@@ -20,9 +20,9 @@ $(document).ready(function(){
 						+ $('#keywordInput').val();
 			});
 	$('#newBtn').click(function(){
-		self.location = "createCosmetic";
+		self.location = "/user/createCosmetic";
 	});
-});
+})
 </script>
 <%@include file="../include/header.jsp"%>
 </head>

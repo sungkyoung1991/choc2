@@ -5,40 +5,37 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script type="text/javascript">
-	
-</script>
 <%@include file="../include/header.jsp"%>
 </head>
 <body>
 	<%@include file="../include/nav.jsp"%>
-	<h2>화장품 정보입력</h2>
 	<form name="cform" action="/user/createCosmetic" method="get">
 		<table>
 			<tr>
 				<th>브랜드</th>
-				<td><input type="text" name="brand" placeholder="입생로랑" /></td>
+				<td><input type="text" name="brand" value="${cinfo.brand}"
+					readonly="readonly" /></td>
 			</tr>
 			<tr>
 				<th>모델명</th>
-				<td><input type="text" name="model" placeholder="abc1234" /></td>
+				<td><input type="text" name="model" value="${cinfo.model}" readonly="readonly" /></td>
 			</tr>
 			<tr>
 				<th>제품명</th>
-				<td><input type="text" name="product" placeholder="블라블라 파운데이션" /></td>
+				<td><input type="text" name="product" value="${cinfo.product}"readonly="readonly"/></td>
 			</tr>
 			<tr>
 				<th>용량</th>
-				<td><input type="text" name="amount" placeholder="130ml" /></td>
+				<td><input type="text" name="amount" value="${cinfo.amount}" readonly="readonly"/></td>
 			</tr>
 			<tr>
 				<th>가격</th>
-				<td><input type="text" name="price" placeholder="77,000" />원</td>
+				<td><input type="text" name="price" value="${cinfo.price}" readonly="readonly"/>원</td>
 			</tr>
 			<tr>
 				<th>성분</th>
-				<td><input type="text" name="ingredient" placeholder="글리세린" />
+				<td><input type="text" name="ingredient"
+					value="${cinfo.ingredient}" readonly="readonly"/> 
 					<!-- 	<input type="button" name="addButton" style="cursor:hand" value="추가" onclick="insRow()" />
 	<font color="blue">더 추가하려면 추가 버튼을 클릭해보세요!</font> --></td>
 			</tr>
