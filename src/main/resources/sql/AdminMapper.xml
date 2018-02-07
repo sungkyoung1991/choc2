@@ -65,6 +65,7 @@
 	</select>
 
 	<!-- Reply Mapper -->
+	
 	<insert id="createReply">
 		INSERT INTO TBL_REPLY (BNO,REPLYTEXT,REPLYER)
 		VALUES (#{bno},#{replytext},#{replyer})

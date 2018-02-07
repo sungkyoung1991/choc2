@@ -5,11 +5,13 @@ import java.util.List;
 import com.sample.choc2.common.Criteria;
 import com.sample.choc2.common.SearchCriteria;
 import com.sample.choc2.service.domain.BoardVO;
+import com.sample.choc2.service.domain.CosmeticVO;
 import com.sample.choc2.service.domain.ReplyVO;
 
 public interface AdminService {
 	
-//=========================BoardDao=========================	
+	// =========================BoardService=========================	
+	
 	public void create(BoardVO vo)throws Exception;
 	
 	public BoardVO get(Integer bno)throws Exception;
@@ -24,7 +26,8 @@ public interface AdminService {
 	
 	public void updateViewCnt(Integer bno) throws Exception;
 
-//=========================ReplyDao=========================
+	// =========================ReplyService=========================
+	
 	public void createReply(ReplyVO vo)throws Exception;
 	
 	public void updateReply(ReplyVO vo)throws Exception;
@@ -38,5 +41,18 @@ public interface AdminService {
 	public int getBno(Integer bno) throws Exception;
 
 	public void updateReplyCnt(Integer bno, int amount) throws Exception;
-
+	
+	// =========================CosmeticService=========================
+	
+	public void createCosmetic(CosmeticVO vo)throws Exception;
+	
+	public CosmeticVO getCosmetic(Integer cosmetic_no)throws Exception;
+	
+	public void updateCosmetic(CosmeticVO vo)throws Exception;
+	
+	public void deleteCosmetic(Integer cosmetic_no)throws Exception;
+	
+	public List<CosmeticVO> listCosmetic(SearchCriteria cri)throws Exception;
+	
+	public int countCosmetic(SearchCriteria cri)throws Exception;
 }
