@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sample.choc2.common.PageMaker;
 import com.sample.choc2.common.SearchCriteria;
@@ -113,11 +114,12 @@ public class UserController {
 	}//화장품 정보입력 폼으로 이동
 	
 	@RequestMapping(value="createCosmetic", method=RequestMethod.GET)
-	public String createCosmetic(@ModelAttribute("cosmetic") CosmeticVO cosmetic) throws Exception{
+	public String createCosmetic(@ModelAttribute("cosmetic") CosmeticVO cosmetic,RedirectAttributes rttr) throws Exception{
 		
 		userService.createCosmetic(cosmetic);
 		
-		return "user/createCosmetic";
+		rttr.addFlashAttribute("msg","success"); 
+		return "redirect:/user/getCosmeticList";
 		
 	}//화장품 정보입력 처리
 	
@@ -138,4 +140,11 @@ public class UserController {
 		
 	}//리스트 조회(Searchcriteria, pagemaker)
 	
+	
+	@RequestMapping(value="getCosmetic", method=RequestMethod.GET)
+	public String getCosmetic(@ModelAttribute("cri")SearchCriteria cri,@RequestParam("cosmetic_no") int cosmetic_no,Model model) throws Exception{
+		model.addAttribute("cinfo",userService.getCosmetic(cosmetic_no));
+			
+		return "user/getCosmetic";
+	}//화장품 정보 상세히 보기
 }

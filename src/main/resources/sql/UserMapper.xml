@@ -68,6 +68,12 @@
 		<include refid="search"></include>
 	</select>
 	  
+	  <select id="getCosmetic" resultType="cosmetic">
+	 		SELECT * FROM TBL_COSMETIC WHERE COSMETIC_NO=#{cosmtic_no}
+	  
+	  </select>
+	  
+	  
 	  <sql id="search">
 		<if test="searchType != null">
 			<if test="searchType == 'brand'.toString()">
