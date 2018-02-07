@@ -138,10 +138,16 @@ public class AdminController {
 	public String getCosmeticList(@ModelAttribute("cri") SearchCriteria cri,
 			@RequestParam("cosmetic_no") Integer cosmetic_no, Model model) throws Exception {
 
-		logger.info("Cosmetic info ....");
-
-		service.getCosmetic(cosmetic_no);
-
+		logger.info("Cosmetic List info ....");
+		model.addAttribute("list",service.listCosmetic(cri));
+		
+		PageMaker pageMaker = new PageMaker();
+		
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(service.countCosmetic(cri));
+		
+		model.addAttribute("pageMaker",pageMaker);
+		
 		return "adminCosmetic/getCosmeticList";
 	}
 	//게시물 등록 화면 
