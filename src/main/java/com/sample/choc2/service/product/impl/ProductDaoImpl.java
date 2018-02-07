@@ -23,7 +23,6 @@ public class ProductDaoImpl implements ProductDao {
 	public List<ProductVO> getProductList(Search search) throws Exception {
 		// TODO Auto-generated method stub
 		
-		System.out.println("dao 페이지..........." + search.getCurrentPage());
 		return sqlSession.selectList("ProductMapper.getProductList", search);
 	}
 	
