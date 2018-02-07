@@ -13,6 +13,7 @@ import com.sample.choc2.common.Criteria;
 import com.sample.choc2.common.SearchCriteria;
 import com.sample.choc2.service.admin.AdminDao;
 import com.sample.choc2.service.domain.BoardVO;
+import com.sample.choc2.service.domain.CosmeticVO;
 import com.sample.choc2.service.domain.ReplyVO;
 
 @Repository("adminDaoImpl")
@@ -121,6 +122,42 @@ public class AdminDaoImpl implements AdminDao {
 		paramMap.put("amount", amount);
 
 		session.update(namespace + ".updateReplyCnt", paramMap);
+	}
+
+	@Override
+	public void createCosmetic(CosmeticVO vo) throws Exception {
+		// TODO Auto-generated method stub
+		session.insert(namespace+".createCosmetic",vo);
+	}
+
+	@Override
+	public CosmeticVO getCosmetic(Integer cosmetic_no) throws Exception {
+		// TODO Auto-generated method stub
+		return session.selectOne(namespace+".getCosmetic",cosmetic_no);
+	}
+
+	@Override
+	public void updateCosmetic(CosmeticVO vo) throws Exception {
+		// TODO Auto-generated method stub
+		session.update(namespace+".updateCosmetic",vo);
+	}
+
+	@Override
+	public void deleteCosmetic(Integer cosmetic_no) throws Exception {
+		// TODO Auto-generated method stub
+		session.delete(namespace+".deleteCosmetic",cosmetic_no);
+	}
+
+	@Override
+	public List<CosmeticVO> listCosmetic(SearchCriteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return session.selectList(namespace+".listCosmetic", cri);
+	}
+
+	@Override
+	public int countCosmetic(SearchCriteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return session.selectOne(namespace+".countCosmetic",cri);
 	}
 
 }
