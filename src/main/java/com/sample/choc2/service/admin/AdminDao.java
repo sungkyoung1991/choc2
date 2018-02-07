@@ -5,6 +5,7 @@ import java.util.List;
 import com.sample.choc2.common.Criteria;
 import com.sample.choc2.common.SearchCriteria;
 import com.sample.choc2.service.domain.BoardVO;
+import com.sample.choc2.service.domain.CosmeticVO;
 import com.sample.choc2.service.domain.ReplyVO;
 
 public interface AdminDao {
@@ -40,5 +41,17 @@ public interface AdminDao {
 
 	public void updateReplyCnt(Integer bno, int amount) throws Exception;
 
-
+	// =========================CosmeticDao=========================
+	
+	public void createCosmetic(CosmeticVO vo)throws Exception;
+	
+	public CosmeticVO getCosmetic(Integer cosmetic_no)throws Exception;
+	
+	public void updateCosmetic(CosmeticVO vo)throws Exception;
+	
+	public void deleteCosmetic(Integer cosmetic_no)throws Exception;
+	
+	public List<CosmeticVO> listCosmetic(SearchCriteria cri)throws Exception;
+	
+	public int countCosmetic(SearchCriteria cri)throws Exception;
 }

@@ -5,6 +5,8 @@
 
 <mapper namespace="AdminMapper">
 
+	<!-- Board Mapper -->
+
 	<insert id="create">
 		INSERT INTO TBL_BOARD (TITLE,CONTENT,WRITER)
 		VALUES(#{title}, #{content}, #{writer})
@@ -62,8 +64,7 @@
 		<include refid="search"></include>
 	</select>
 
-	<!-- <select id="list" resultType="ReplyVO"> select * from tbl_reply where 
-		bno=#{bno} order by rno desc </select> -->
+	<!-- Reply Mapper -->
 	<insert id="createReply">
 		INSERT INTO TBL_REPLY (BNO,REPLYTEXT,REPLYER)
 		VALUES (#{bno},#{replytext},#{replyer})
@@ -116,11 +117,52 @@
 		WHERE BNO = #{bno}
 	</update>
 
+	<!-- Cosmetic Mapper -->
+	
+	<insert id="createCosmetic">
+		INSERT INTO TBL_COSMETIC (BRAND, MODEL, PRODUCT, AMOUNT, PRICE, INGREDIENT)
+		VALUES(#{brand},#{model},#{product},#{amount},#{price},#{ingredient})
+	</insert>
+	
+	<select id="getCosmetic" resultType="cosmetic">
+		SELECT *
+		FROM TBL_COSMETIC
+		WHERE COSMETIC_NO = #{cosmetic_no}
+	</select>
+	
+	<update id="updateCosmetic">
+	UPDATE TBL_COSMETIC
+	SET BRAND = #{brand} ,MODEL = #{model} ,PRODUCT = #{product} ,AMOUNT = #{amount} ,PRICE = #{price} ,INGREDIENT = #{ingredient} 
+	WHERE COSMETIC_NO = #{cosmetic_no}
+	</update>
+	
+	<delete id="deleteCosmetic">
+		DELETE FROM TBL_COSMETIC WHERE COSMETIC_NO = #{cosmetic_no}
+	</delete>
+	
+	<select id="listCosmetic" resultType="cosmetic">
+	<![CDATA[
+	SELECT * 
+	FROM TBL_COSMETIC
+	WHERE COSMETIC_NO > 0 
+	]]>
+		<include refid="search"></include>
+	<![CDATA[
+	ORDER BY COSMETIC_NO DESC
+	LIMIT #{pageStart},#{perPageNum}
+	]]>
+	</select>
 
-
-
-
-
+	<select id="countCosmetic" resultType="int">
+	SELECT COUNT(COSMETIC_NO)
+	FROM TBL_COSMETIC
+	WHERE COSMETIC_NO > 0
+	<include refid="search"></include>
+	</select>
+	
+	
+	<!-- common -->
+	
 	<sql id="search">
 		<if test="searchType != null">
 			<if test="searchType == 't'.toString()">
