@@ -14,7 +14,7 @@ import com.sample.choc2.service.user.UserService;
 @RunWith(SpringJUnit4ClassRunner.class)
 
 @ContextConfiguration	(locations = {	"classpath:config/context-common.xml",
-											"classpath:config/context-datasource.xml",
+											"classpath:config/context-mybatis.xml",
 												"classpath:config/context-mybatis.xml"	})
 public class UserServiceTest {
 
