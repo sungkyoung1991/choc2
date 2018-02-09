@@ -82,4 +82,10 @@ public class UserServiceImpl implements UserService{
 		return userDao.getCosmetic(cosmetic_no);
 	}
 
+	@Override
+	public void updateCosmetic(CosmeticVO cosmetic) throws Exception {
+		// TODO Auto-generated method stub
+		userDao.updateCosmetic(cosmetic);
+	}
+
 }

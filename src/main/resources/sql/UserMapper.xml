@@ -73,6 +73,10 @@
 	  
 	  </select>
 	  
+	  <insert id="updateCosmetic" parameterType="cosmetic">
+	 	UPDATE TBL_COSMETIC SET BRAND=#{brand},MODEL=#{model},PRODUCT=#{product},AMOUNT=${amount},PRICE=#{price},INGREDIENT=#{ingredient} WHERE COSMETIC_NO=#{cosmetic_no}
+	  
+	  </insert>
 	  
 	  <sql id="search">
 		<if test="searchType != null">

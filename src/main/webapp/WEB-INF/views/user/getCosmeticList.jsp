@@ -20,7 +20,7 @@ $(document).ready(function(){
 						+ $('#keywordInput').val();
 			});
 	$('#newBtn').click(function(){
-		self.location = "/user/createCosmetic";
+		self.location = "/user/createCosmeticP";
 	});
 })
 </script>
@@ -69,8 +69,8 @@ $(document).ready(function(){
 				<td>${cosmetic.cosmetic_no}</td>
 				<td>${cosmetic.brand}</td>
 				<td><a href='/user/getCosmetic${pageMaker.makeSearch(pageMaker.cri.page) }&cosmetic_no=${cosmetic.cosmetic_no}'>
-						${cosmetic.brand}</a></td>
-				<td>${cosmetic.model}</td>
+						${cosmetic.model}</a></td>
+				<td>${cosmetic.product}</td>
 				<td>${cosmetic.price}</td>
 				<td>${cosmetic.ingredient}</td>
 

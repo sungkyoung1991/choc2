@@ -113,7 +113,7 @@ public class UserController {
 		
 	}//화장품 정보입력 폼으로 이동
 	
-	@RequestMapping(value="createCosmetic", method=RequestMethod.GET)
+	@RequestMapping(value="createCosmetic", method=RequestMethod.POST)
 	public String createCosmetic(@ModelAttribute("cosmetic") CosmeticVO cosmetic,RedirectAttributes rttr) throws Exception{
 		
 		userService.createCosmetic(cosmetic);
@@ -147,4 +147,25 @@ public class UserController {
 			
 		return "user/getCosmetic";
 	}//화장품 정보 상세히 보기
+	
+	@RequestMapping(value="updateCosmeticP", method=RequestMethod.POST)
+	public String updateCosmeticP(@RequestParam("cosmetic_no") int cosmetic_no,@ModelAttribute("cri")SearchCriteria cri,Model model) throws Exception{
+		model.addAttribute("cinfo",userService.getCosmetic(cosmetic_no));	
+		
+		logger.info("gg",userService.getCosmetic(cosmetic_no));
+		return "user/updateCosmetic";
+	}//화장품 글수정 폼으로 이동
+	
+	@RequestMapping(value="updateCosmetic", method=RequestMethod.POST)
+	public String updateCosmetic(@ModelAttribute("cosmetic") CosmeticVO cosmetic, RedirectAttributes rttr, @ModelAttribute("cri")SearchCriteria cri ) throws Exception {
+		userService.updateCosmetic(cosmetic);
+		
+		rttr.addAttribute("page", cri.getPage());
+		rttr.addAttribute("perPageNum", cri.getPerPageNum());
+		rttr.addAttribute("searchType", cri.getSearchType());
+		rttr.addAttribute("keyword", cri.getKeyword());
+		rttr.addFlashAttribute("msg", "SUCCESS");
+		
+		return "redirect:/user/getCosmeticList";
+	}
 }
