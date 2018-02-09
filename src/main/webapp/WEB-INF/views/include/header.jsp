@@ -2,10 +2,10 @@
 	pageEncoding="UTF-8"%>
 
 <!-- jquery -->
-<script src="https://code.jquery.com/jquery-2.2.4.min.js"
+<!-- <script src="https://code.jquery.com/jquery-2.2.4.min.js"
 	integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
-	crossorigin="anonymous"></script>
-
+	crossorigin="anonymous"></script> -->
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <!-- bootstrap -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"

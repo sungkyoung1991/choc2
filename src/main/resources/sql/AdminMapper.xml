@@ -5,14 +5,33 @@
 
 <mapper namespace="AdminMapper">
 
+<!-- 	<resultMap type="boardVO" id="boardSelectMap">
+		<result property="bno" column="BNO" jdbcType="INT"/>
+		<result property="title" column="TITLE" jdbcType="VARCHAR"/>
+		<result property="writer" column="WRITER" jdbcType="VARCHAR"/>
+		<result property="content" column="CONTENT" jdbcType="VARCHAR"/>
+		<result property="viewcnt" column="VIEWCNT" jdbcType="VARCHAR"/>
+		<result property="regdate" column="REGDATE" jdbcType="DATE"/>
+	</resultMap> -->
+<!-- 	<resultMap type="replySelectMap" id="replyVO">
+		<result property="bno" column="BNO" jdbcType="INT"/>
+		<result property="rno" column="RNO" jdbcType="INT"/>
+		<result property="replytext" column="REPLYTEXT" jdbcType="VARCHAR"/>
+		<result property="replyer" column="REPLYER" jdbcType="VARCHAR"/>
+		<result property="regdate" column="REGDATE" jdbcType="DATE"/>
+		<result property="updatedate" column="UPDATEDATE" jdbcType="DATE"/>	
+	</resultMap> -->
+<!-- 	<resultMap type="adminSelectMap" id="cosmetic">
+		
+	</resultMap> -->
 	<!-- Board Mapper -->
 
-	<insert id="create">
+	<insert id="createBoard">
 		INSERT INTO TBL_BOARD (TITLE,CONTENT,WRITER)
 		VALUES(#{title}, #{content}, #{writer})
 	</insert>
 
-	<select id="get" resultType="boardVO">
+	<select id="getBoard" resultType="boardVO">
 		SELECT
 		BNO,TITLE,CONTENT,WRITER,REGDATE,VIEWCNT
 		FROM
@@ -22,14 +41,14 @@
 
 	</select>
 
-	<update id="update">
+	<update id="updateBoard">
 		UPDATE TBL_BOARD SET TITLE = #{title}, CONTENT =
 		#{content}
 		WHERE BNO = #{bno}
 
 	</update>
 
-	<delete id="delete">
+	<delete id="deleteBoard">
 		DELETE
 		FROM TBL_BOARD
 		WHERE BNO = #{bno}
@@ -37,7 +56,7 @@
 	</delete>
 
 
-	<select id="list" resultType="boardVO">
+	<select id="listBoard" resultType="boardVO" >
 	<![CDATA[  
 	  SELECT * 
 	  FROM TBL_BOARD 
@@ -54,7 +73,7 @@
 	</select>
 
 
-	<select id="totalCount" resultType="int">
+	<select id="countBoard" resultType="int">
 	<![CDATA[  
 	  SELECT COUNT(BNO) 
 	  FROM TBL_BOARD 

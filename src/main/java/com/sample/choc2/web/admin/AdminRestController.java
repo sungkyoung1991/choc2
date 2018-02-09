@@ -27,22 +27,23 @@ public class AdminRestController {
 	
 	@Autowired
 	@Qualifier("adminServiceImpl")
-	private AdminService service;
+	private AdminService adminService;
 	
-	public void setService(AdminService service) {
-		this.service = service;
+	public void setAdminService(AdminService adminService) {
+		this.adminService = adminService;
 	}
+	
 	public AdminRestController() {
 		// TODO Auto-generated constructor stub
 		System.out.println(this.getClass());
 	}
 	//댓글 등록 처리 
 	@RequestMapping(value="",method=RequestMethod.POST)
-	public ResponseEntity<String> createReply(@RequestBody ReplyVO vo)throws Exception{
+	public ResponseEntity<String> createReply(@RequestBody ReplyVO replyVO)throws Exception{
 		ResponseEntity<String> entity = null;
 		
 		try {
-			service.createReply(vo);
+			adminService.createReply(replyVO);
 			entity = new ResponseEntity<String>("SUCCESS",HttpStatus.OK);
 			
 		}catch(Exception e) {
@@ -64,11 +65,11 @@ public class AdminRestController {
 			pageMaker.setCri(cri);
 			
 			Map<String, Object> map = new HashMap<String, Object>();
-			List<ReplyVO> list = service.listReplyPage(bno, cri);
+			List<ReplyVO> list = adminService.listReplyPage(bno, cri);
 			
 			map.put("list", list);
 			
-			int CountReply = service.countReply(bno);
+			int CountReply = adminService.countReply(bno);
 			pageMaker.setTotalCount(CountReply);
 			
 			map.put("pageMaker", pageMaker);
@@ -83,12 +84,12 @@ public class AdminRestController {
 	}
 	//댓글 수정 처리
 	@RequestMapping(value="/{rno}",method= {RequestMethod.PUT,RequestMethod.PATCH})
-	public ResponseEntity<String> updateReply(@PathVariable Integer rno,@RequestBody ReplyVO vo)throws Exception{
+	public ResponseEntity<String> updateReply(@PathVariable Integer rno,@RequestBody ReplyVO replyVO)throws Exception{
 		ResponseEntity<String> entity = null;
 		
 		try {
-			vo.setRno(rno);
-			service.updateReply(vo);
+			replyVO.setRno(rno);
+			adminService.updateReply(replyVO);
 			
 			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);			
 		}catch(Exception e) {
@@ -105,7 +106,7 @@ public class AdminRestController {
 	public ResponseEntity<String> deleteeReply(@PathVariable Integer rno)throws Exception{
 		ResponseEntity<String> entity = null;
 		try {
-			service.deleteReply(rno);
+			adminService.deleteReply(rno);
 			entity = new ResponseEntity<String>("SUCCESS",HttpStatus.OK);
 		}catch(Exception e) {
 			e.printStackTrace();
