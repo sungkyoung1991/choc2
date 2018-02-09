@@ -13,11 +13,11 @@
 $(document).ready(function(){
 	$('#searchBtn').click(function(){
 				self.location = "/user/getCosmeticList"
-						+ '${pageMaker.makeQuery(1)}'
-						+ "&searchType="
-						+ $("select option:selected").val()
-						+ "&keyword="
-						+ $('#keywordInput').val();
+						+'${pageMaker.makeQuery(1)}'
+						+"&searchType="
+						+$("select option:selected").val()
+						+"&keyword="
+						+$('#keywordInput').val();
 			});
 	$('#newBtn').click(function(){
 		self.location = "/user/createCosmetic";

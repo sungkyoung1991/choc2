@@ -45,7 +45,7 @@
 					<input type='text' name='keyword' id='keywordInput'
 					value="${cri.keyword}">
 					<button id ='searchBtn'>Search</button>
-					<button id ='NewBtn'>New Cosmetic</button>
+					<button id ='newBtn'>New Cosmetic</button>
 				</div>
 			</div>
 			
@@ -109,10 +109,10 @@
 		</div>
 	</div>
 		<script>
-			var result = '${msg}';
-			if(result == 'SUCCESS'){
-				alter('처리가 완료되었습니다.')
-			}
+		var result = '${msg}';
+		if (result == 'SUCCESS') {
+			alter("처리가 완료되었습니다.");
+		}
 		</script>
 		
 		<script>

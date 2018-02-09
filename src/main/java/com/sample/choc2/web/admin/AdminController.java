@@ -151,12 +151,11 @@ public class AdminController {
 	}
 	//게시물 등록 화면 
 	@RequestMapping(value = "/cosmetic/create", method = RequestMethod.GET)
-	public String createCosmetic(@ModelAttribute("cri") SearchCriteria cri,
-			@RequestParam("cosmetic_no") int cosmetic_no, Model model) throws Exception {
+	public String createCosmetic(CosmeticVO cosmeitcVO, Model model) throws Exception {
 
 		logger.info("Cosmetic register get...");
 		
-		return "adminCosmetic/getAdminCosmetic";
+		return "adminCosmetic/createAdminCosmetic";
 	}
 	//게시물 등록 처리 
 	@RequestMapping(value = "/cosmetic/create", method = RequestMethod.POST)
@@ -210,7 +209,7 @@ public class AdminController {
 
 		rttr.addFlashAttribute("msg", "SUCCESS");
 
-		return "adminCosmetic/getAdminCosmetic";
+		return "redirect:/admin/cosmetic/list";
 	}
 
 }
