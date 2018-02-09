@@ -23,7 +23,7 @@
 				</div>
 				<!-- /.box-header -->
 
-				<form role="form" action="updateBoard" method="post">
+				<form role="form" action="/admin/board/update" method="post">
 
 					<input type='hidden' name='bno' value="${boardVO.bno}"> <input
 						type='hidden' name='page' value="${cri.page}"> <input
