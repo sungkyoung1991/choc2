@@ -25,28 +25,28 @@ public class AdminController {
 
 	@Autowired
 	@Qualifier("adminServiceImpl")
-	private AdminService service;
+	private AdminService adminService;
 
-	public void setService(AdminService service) {
-		this.service = service;
+	public void setAdminService(AdminService adminService) {
+		this.adminService = adminService;
 	}
 
-	// ===========================================Board=====================================================
+	// ===========================================Board Controller=====================================================
 	// 게시판 등록 화면
 	@RequestMapping(value = "/board/create", method = RequestMethod.GET)
-	public String createBoard(BoardVO vo, Model model) throws Exception {
+	public String createBoard(BoardVO boardVO, Model model) throws Exception {
 		logger.info("regist get...");
 
-		return "board/createBoard";
+		return "adminBoard/createAdminBoard";
 	}
 
 	// 게시판 등록 처리
 	@RequestMapping(value = "/board/create", method = RequestMethod.POST)
-	public String createBoard(BoardVO board, RedirectAttributes rttr) throws Exception {
+	public String createBoard(BoardVO boardVO, RedirectAttributes rttr) throws Exception {
 		logger.info("regist post ........");
-		logger.info(board.toString());
+		logger.info(boardVO.toString());
 
-		service.create(board);
+		adminService.createBoard(boardVO);
 
 		rttr.addFlashAttribute("msg", "success");
 		return "redirect:/admin/board/list";
@@ -58,41 +58,41 @@ public class AdminController {
 	public String listBoard(@ModelAttribute("cri") SearchCriteria cri, Model model) throws Exception {
 		logger.info("list get....");
 
-		model.addAttribute("list", service.list(cri));
+		model.addAttribute("list", adminService.listBoard(cri));
 
 		PageMaker pageMaker = new PageMaker();
 
 		pageMaker.setCri(cri);
 
-		pageMaker.setTotalCount(service.totalCount(cri));
+		pageMaker.setTotalCount(adminService.countBoard(cri));
 
 		model.addAttribute("pageMaker", pageMaker);
 
-		return "board/getBoardList";
+		return "adminBoard/getAdminBoardList";
 	}
 
 	// 게시판 조회
 	@RequestMapping(value = "/board/get", method = RequestMethod.GET)
 	public String getBaord(@RequestParam("bno") int bno, @ModelAttribute("cri") SearchCriteria cri, Model model)
 			throws Exception {
-		service.updateViewCnt(bno);
-		model.addAttribute(service.get(bno));
-		return "board/getBoard";
+		adminService.updateViewCnt(bno);
+		model.addAttribute(adminService.getBoard(bno));
+		return "adminBoard/getAdminBoard";
 	}
 
 	// 게시판 수정 화면
 	@RequestMapping(value = "/board/update", method = RequestMethod.GET)
 	public String updateBoard(@RequestParam("bno") int bno, @ModelAttribute("cri") SearchCriteria cri, Model model)
 			throws Exception {
-		model.addAttribute(service.get(bno));
-		return "board/updateBoard";
+		model.addAttribute(adminService.getBoard(bno));
+		return "adminBoard/updateAdminBoard";
 	}
 
 	// 게시판 수정처리
 	@RequestMapping(value = "/board/update", method = RequestMethod.POST)
-	public String updateBoard(BoardVO board, SearchCriteria cri, RedirectAttributes rttr) throws Exception {
+	public String updateBoard(BoardVO boardVO, SearchCriteria cri, RedirectAttributes rttr) throws Exception {
 		logger.info(rttr.toString());
-		service.update(board);
+		adminService.updateBoard(boardVO);
 
 		rttr.addAttribute("page", cri.getPage());
 		rttr.addAttribute("perPageNum", cri.getPerPageNum());
@@ -109,7 +109,7 @@ public class AdminController {
 	public String deleteBoard(@RequestParam("bno") int bno, SearchCriteria cri, RedirectAttributes rttr)
 			throws Exception {
 
-		service.delete(bno);
+		adminService.deleteBoard(bno);
 
 		rttr.addAttribute("page", cri.getPage());
 		rttr.addAttribute("perPageNum", cri.getPerPageNum());
@@ -125,47 +125,46 @@ public class AdminController {
 	//게시물 조회 
 	@RequestMapping(value = "/cosmetic/get", method = RequestMethod.GET)
 	public String getCosmetic(@ModelAttribute("cri") SearchCriteria cri,
-			@RequestParam("cosmetic_no") Integer cosmetic_no, Model model) throws Exception {
+			@RequestParam("cosmetic_no") int cosmetic_no, Model model) throws Exception {
 
 		logger.info("Cosmetic info ....");
 
-		model.addAttribute(service.getCosmetic(cosmetic_no));
+		model.addAttribute(adminService.getCosmetic(cosmetic_no));
 
-		return "adminCosmetic/getCosmetic";
+		return "adminCosmetic/getAdminCosmetic";
 	}
 	//게시물 리스트 조회 
 	@RequestMapping(value = "/cosmetic/list", method = RequestMethod.GET)
-	public String getCosmeticList(@ModelAttribute("cri") SearchCriteria cri,
-			@RequestParam("cosmetic_no") Integer cosmetic_no, Model model) throws Exception {
+	public String getCosmeticList(@ModelAttribute("cri") SearchCriteria cri, Model model) throws Exception {
 
 		logger.info("Cosmetic List info ....");
-		model.addAttribute("list",service.listCosmetic(cri));
+		model.addAttribute("list",adminService.listCosmetic(cri));
 		
 		PageMaker pageMaker = new PageMaker();
 		
 		pageMaker.setCri(cri);
-		pageMaker.setTotalCount(service.countCosmetic(cri));
+		pageMaker.setTotalCount(adminService.countCosmetic(cri));
 		
 		model.addAttribute("pageMaker",pageMaker);
 		
-		return "adminCosmetic/getCosmeticList";
+		return "adminCosmetic/getAdminCosmeticList";
 	}
 	//게시물 등록 화면 
 	@RequestMapping(value = "/cosmetic/create", method = RequestMethod.GET)
 	public String createCosmetic(@ModelAttribute("cri") SearchCriteria cri,
-			@RequestParam("cosmetic_no") Integer cosmetic_no, Model model) throws Exception {
+			@RequestParam("cosmetic_no") int cosmetic_no, Model model) throws Exception {
 
 		logger.info("Cosmetic register get...");
 		
-		return "adminCosmetic/getCosmetic";
+		return "adminCosmetic/getAdminCosmetic";
 	}
 	//게시물 등록 처리 
 	@RequestMapping(value = "/cosmetic/create", method = RequestMethod.POST)
-	public String createCosmetic(CosmeticVO cosmetic, RedirectAttributes rttr) throws Exception {
+	public String createCosmetic(CosmeticVO cosmeticVO, RedirectAttributes rttr) throws Exception {
 
 		logger.info("Cosmetic register post ....");
 
-		service.createCosmetic(cosmetic);
+		adminService.createCosmetic(cosmeticVO);
 		
 		rttr.addFlashAttribute("msg","SUCCESS");
 		return "redirect:/admin/cosmetic/list";
@@ -173,20 +172,20 @@ public class AdminController {
 	//게시물 수정 화면 
 	@RequestMapping(value = "/cosmetic/update", method = RequestMethod.GET)
 	public String updateCosmetic(@ModelAttribute("cri") SearchCriteria cri,
-			@RequestParam("cosmetic_no") Integer cosmetic_no, Model model) throws Exception {
+			@RequestParam("cosmetic_no") int cosmetic_no, Model model) throws Exception {
 
 		logger.info("Cosmetic info ....");
 
-		model.addAttribute(service.getCosmetic(cosmetic_no));
+		model.addAttribute(adminService.getCosmetic(cosmetic_no));
 
-		return "adminCosmetic/updateCosmetic";
+		return "adminCosmetic/updateAdminCosmetic";
 	}
 	//게시물 수정 처리 
 	@RequestMapping(value = "/cosmetic/update", method = RequestMethod.POST)
-	public String updateCosmetic(CosmeticVO cosmetic, SearchCriteria cri, RedirectAttributes rttr) throws Exception {
+	public String updateCosmetic(CosmeticVO cosmeticVO, SearchCriteria cri, RedirectAttributes rttr) throws Exception {
 
 		logger.info(rttr.toString());
-		service.updateCosmetic(cosmetic);
+		adminService.updateCosmetic(cosmeticVO);
 		rttr.addAttribute("page", cri.getPage());
 		rttr.addAttribute("perPageNum", cri.getPerPageNum());
 		rttr.addAttribute("searchType", cri.getSearchType());
@@ -199,11 +198,11 @@ public class AdminController {
 	//게시물 삭제 처리 
 	@RequestMapping(value = "/cosmetic/delete", method = RequestMethod.POST)
 	public String deleteCosmetic(SearchCriteria cri,
-			@RequestParam("cosmetic_no") Integer cosmetic_no, RedirectAttributes rttr) throws Exception {
+			@RequestParam("cosmetic_no") int cosmetic_no, RedirectAttributes rttr) throws Exception {
 
 		logger.info("Cosmetic info ....");
 
-		service.deleteCosmetic(cosmetic_no);
+		adminService.deleteCosmetic(cosmetic_no);
 		rttr.addAttribute("page", cri.getPage());
 		rttr.addAttribute("perPageNum", cri.getPerPageNum());
 		rttr.addAttribute("searchType", cri.getSearchType());
@@ -211,7 +210,7 @@ public class AdminController {
 
 		rttr.addFlashAttribute("msg", "SUCCESS");
 
-		return "adminCosmetic/getCosmetic";
+		return "adminCosmetic/getAdminCosmetic";
 	}
 
 }

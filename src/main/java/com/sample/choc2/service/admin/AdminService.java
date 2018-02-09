@@ -12,25 +12,25 @@ public interface AdminService {
 	
 	// =========================BoardService=========================	
 	
-	public void create(BoardVO vo)throws Exception;
+	public void createBoard(BoardVO boardVO)throws Exception;
 	
-	public BoardVO get(Integer bno)throws Exception;
+	public BoardVO getBoard(Integer bno)throws Exception;
 	
-	public void update(BoardVO vo)throws Exception;
+	public void updateBoard(BoardVO boardVO)throws Exception;
 	
-	public void delete(Integer bno)throws Exception;
+	public void deleteBoard(Integer bno)throws Exception;
 	
-	public List<BoardVO> list(SearchCriteria cri)throws Exception;
+	public List<BoardVO> listBoard(SearchCriteria cri)throws Exception;
 	
-	public int totalCount(SearchCriteria cri)throws Exception;
+	public int countBoard(SearchCriteria cri)throws Exception;
 	
 	public void updateViewCnt(Integer bno) throws Exception;
 
 	// =========================ReplyService=========================
 	
-	public void createReply(ReplyVO vo)throws Exception;
+	public void createReply(ReplyVO replyVO)throws Exception;
 	
-	public void updateReply(ReplyVO vo)throws Exception;
+	public void updateReply(ReplyVO replyVO)throws Exception;
 	
 	public void deleteReply(Integer rno) throws Exception;
 	
@@ -44,11 +44,11 @@ public interface AdminService {
 	
 	// =========================CosmeticService=========================
 	
-	public void createCosmetic(CosmeticVO vo)throws Exception;
+	public void createCosmetic(CosmeticVO cosmeticVO)throws Exception;
 	
 	public CosmeticVO getCosmetic(Integer cosmetic_no)throws Exception;
 	
-	public void updateCosmetic(CosmeticVO vo)throws Exception;
+	public void updateCosmetic(CosmeticVO cosmeticVO)throws Exception;
 	
 	public void deleteCosmetic(Integer cosmetic_no)throws Exception;
 	

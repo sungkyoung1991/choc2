@@ -19,130 +19,130 @@ public class AdminServiceImpl implements AdminService{
 	
 	@Autowired
 	@Qualifier("adminDaoImpl")
-	private AdminDao dao;
+	private AdminDao adminDao;
 	
-	public void setDao(AdminDao dao) {
-		this.dao = dao;
+	public void setDao(AdminDao adminDao) {
+		this.adminDao = adminDao;
 	}
 
 	@Override
-	public void create(BoardVO vo) throws Exception {
+	public void createBoard(BoardVO boardVO) throws Exception {
 		// TODO Auto-generated method stub
-		dao.create(vo);
+		adminDao.createBoard(boardVO);
 	}
 
 	@Override
-	public BoardVO get(Integer bno) throws Exception {
+	public BoardVO getBoard(Integer bno) throws Exception {
 		// TODO Auto-generated method stub
-		return dao.get(bno);
+		return adminDao.getBoard(bno);
 	}
 
 	@Override
-	public void update(BoardVO vo) throws Exception {
+	public void updateBoard(BoardVO boardVO) throws Exception {
 		// TODO Auto-generated method stub
-		dao.update(vo);
+		adminDao.updateBoard(boardVO);
 	}
 
 	@Override
-	public void delete(Integer bno) throws Exception {
+	public void deleteBoard(Integer bno) throws Exception {
 		// TODO Auto-generated method stub
-		dao.delete(bno);
+		adminDao.deleteBoard(bno);
 	}
 
 	@Override
-	public List<BoardVO> list(SearchCriteria cri) throws Exception {
+	public List<BoardVO> listBoard(SearchCriteria cri) throws Exception {
 		// TODO Auto-generated method stub
-		return dao.list(cri);
+		return adminDao.listBoard(cri);
 	}
 
 	@Override
-	public int totalCount(SearchCriteria cri) throws Exception {
+	public int countBoard(SearchCriteria cri) throws Exception {
 		// TODO Auto-generated method stub
-		return dao.totalCount(cri);
+		return adminDao.countBoard(cri);
 	}
 
 	@Override
-	public void createReply(ReplyVO vo) throws Exception {
+	public void createReply(ReplyVO replyVO) throws Exception {
 		// TODO Auto-generated method stub
-		dao.createReply(vo);
+		adminDao.createReply(replyVO);
 	}
 
 	@Override
-	public void updateReply(ReplyVO vo) throws Exception {
+	public void updateReply(ReplyVO replyVO) throws Exception {
 		// TODO Auto-generated method stub
-		dao.updateReply(vo);
+		adminDao.updateReply(replyVO);
 	}
 
 	@Override
 	public void deleteReply(Integer rno) throws Exception {
 		// TODO Auto-generated method stub
-		dao.deleteReply(rno);
+		adminDao.deleteReply(rno);
 	}
 
 	@Override
 	public List<ReplyVO> listReplyPage(Integer bno, Criteria cri) throws Exception {
 		// TODO Auto-generated method stub
-		return dao.listPageReply(bno, cri);
+		return adminDao.listPageReply(bno, cri);
 	}
 
 	@Override
 	public int countReply(Integer bno) throws Exception {
 		// TODO Auto-generated method stub
-		return dao.countReply(bno);
+		return adminDao.countReply(bno);
 	}
 
 	@Override
 	public void updateViewCnt(Integer bno) throws Exception {
 		// TODO Auto-generated method stub
-		dao.updateViewCnt(bno);
+		adminDao.updateViewCnt(bno);
 	}
 
 	@Override
 	public int getBno(Integer bno) throws Exception {
 		// TODO Auto-generated method stub
-		return dao.getBno(bno);
+		return adminDao.getBno(bno);
 	}
 
 	@Override
 	public void updateReplyCnt(Integer bno, int amount) throws Exception {
 		// TODO Auto-generated method stub
-		//dao.updateReply();
+		//adminDao.updateReply();
 	}
 
 	@Override
-	public void createCosmetic(CosmeticVO vo) throws Exception {
+	public void createCosmetic(CosmeticVO cosmeticVO) throws Exception {
 		// TODO Auto-generated method stub
-		dao.createCosmetic(vo);
+		adminDao.createCosmetic(cosmeticVO);
 	}
 
 	@Override
 	public CosmeticVO getCosmetic(Integer cosmetic_no) throws Exception {
 		// TODO Auto-generated method stub
-		return dao.getCosmetic(cosmetic_no);
+		return adminDao.getCosmetic(cosmetic_no);
 	}
 
 	@Override
-	public void updateCosmetic(CosmeticVO vo) throws Exception {
+	public void updateCosmetic(CosmeticVO cosmeticVO) throws Exception {
 		// TODO Auto-generated method stub
-		
+		adminDao.updateCosmetic(cosmeticVO);
 	}
 
 	@Override
 	public void deleteCosmetic(Integer cosmetic_no) throws Exception {
 		// TODO Auto-generated method stub
-		dao.deleteCosmetic(cosmetic_no);
+		adminDao.deleteCosmetic(cosmetic_no);
 	}
 
 	@Override
 	public List<CosmeticVO> listCosmetic(SearchCriteria cri) throws Exception {
 		// TODO Auto-generated method stub
-		return dao.listCosmetic(cri);
+		return adminDao.listCosmetic(cri);
 	}
 
 	@Override
 	public int countCosmetic(SearchCriteria cri) throws Exception {
 		// TODO Auto-generated method stub
-		return dao.countCosmetic(cri);
+		return adminDao.countCosmetic(cri);
 	}
 	
 	

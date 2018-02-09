@@ -30,52 +30,52 @@ public class AdminDaoImpl implements AdminDao {
 	}
 
 	@Override
-	public void create(BoardVO vo) throws Exception {
+	public void createBoard(BoardVO boardVO) throws Exception {
 		// TODO Auto-generated method stub
-		session.insert(namespace + ".create", vo);
+		session.insert(namespace + ".createBoard", boardVO);
 	}
 
 	@Override
-	public BoardVO get(Integer bno) throws Exception {
+	public BoardVO getBoard(Integer bno) throws Exception {
 		// TODO Auto-generated method stub
-		return session.selectOne(namespace + ".get", bno);
+		return session.selectOne(namespace + ".getBoard", bno);
 	}
 
 	@Override
-	public void update(BoardVO vo) throws Exception {
+	public void updateBoard(BoardVO boardVO) throws Exception {
 		// TODO Auto-generated method stub
-		session.update(namespace + ".update", vo);
+		session.update(namespace + ".updateBoard", boardVO);
 	}
 
 	@Override
-	public void delete(Integer bno) throws Exception {
+	public void deleteBoard(Integer bno) throws Exception {
 		// TODO Auto-generated method stub
-		session.delete(namespace + ".delete", bno);
+		session.delete(namespace + ".deleteBoard", bno);
 	}
 
 	@Override
-	public List<BoardVO> list(SearchCriteria cri) throws Exception {
+	public List<BoardVO> listBoard(SearchCriteria cri) throws Exception {
 		// TODO Auto-generated method stub
-		return session.selectList(namespace + ".list", cri);
+		return session.selectList(namespace + ".listBoard", cri);
 	}
 
 	@Override
-	public int totalCount(SearchCriteria cri) throws Exception {
+	public int countBoard(SearchCriteria cri) throws Exception {
 		// TODO Auto-generated method stub
-		return session.selectOne(namespace + ".totalCount", cri);
+		return session.selectOne(namespace + ".countBoard", cri);
 	}
 
 	@Override
-	public void createReply(ReplyVO vo) throws Exception {
+	public void createReply(ReplyVO replyVO) throws Exception {
 		// TODO Auto-generated method stub
-		session.insert(namespace + ".createReply", vo);
+		session.insert(namespace + ".createReply", replyVO);
 
 	}
 
 	@Override
-	public void updateReply(ReplyVO vo) throws Exception {
+	public void updateReply(ReplyVO replyVO) throws Exception {
 		// TODO Auto-generated method stub
-		session.update(namespace + ".updateReply", vo);
+		session.update(namespace + ".updateReply", replyVO);
 	}
 
 	@Override
@@ -125,9 +125,9 @@ public class AdminDaoImpl implements AdminDao {
 	}
 
 	@Override
-	public void createCosmetic(CosmeticVO vo) throws Exception {
+	public void createCosmetic(CosmeticVO cosmeticVO) throws Exception {
 		// TODO Auto-generated method stub
-		session.insert(namespace+".createCosmetic",vo);
+		session.insert(namespace+".createCosmetic",cosmeticVO);
 	}
 
 	@Override
@@ -137,9 +137,9 @@ public class AdminDaoImpl implements AdminDao {
 	}
 
 	@Override
-	public void updateCosmetic(CosmeticVO vo) throws Exception {
+	public void updateCosmetic(CosmeticVO cosmeticVO) throws Exception {
 		// TODO Auto-generated method stub
-		session.update(namespace+".updateCosmetic",vo);
+		session.update(namespace+".updateCosmetic",cosmeticVO);
 	}
 
 	@Override
