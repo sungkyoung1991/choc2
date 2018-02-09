@@ -10,7 +10,59 @@
 <%@include file="../include/header.jsp"%>
 </head>
 <body>
-<%@include file="../include/nav.jsp"%>
+	<%@include file="../include/nav.jsp"%>
+	<!-- Main content -->
+	<div class="content">
+		<!-- left column -->
+		<div class="col-md-12">
+			<!-- general form elements -->
+			<div class="box box-primary">
+				<div class="box-header">
+					<h3 class="box-title">REGISTER COSMETIC</h3>
+				</div>
+				<!-- ./box-header -->
+
+				<form method="post" role="form">
+					<div class="box-body">
+						<div class="form-group">
+							<label for="exampleInputEmail1">Brand</label> <input type="text"
+								name='brand' class="form-control" value="${cosmeticVO.brand}"
+								placeholder="Enter Brand">
+						</div>
+						<div class="form-group">
+							<label for="exampleInputEmail1">Model</label> <input type="text"
+								name='model' class="form-control" value="${cosmeticVO.model}"
+								placeholder="Enter Model">
+						</div>
+						<div class="form-group">
+							<label for="exampleInputEmail1">Product</label> <input
+								type="text" name='product' class="form-control"
+								value="${cosmeticVO.product}" placeholder="Enter Product">
+						</div>
+						<div class="form-group">
+							<label for="exampleInputEmail1">Amount</label> <input type="text"
+								name='amount' class="form-control" value="${cosmeticVO.amount}"
+								placeholder="Enter Amount">
+						</div>
+						<div class="form-group">
+							<label for="exampleInputEmail1">Price</label> <input type="text"
+								name='price' class="form-control" value="${cosmeticVO.price}"
+								placeholder="Enter Price">
+						</div>
+						<div class="form-group">
+							<label for="exampleInputEmail1">Ingredient</label> <input
+								type="text" name='ingredient' class="form-control"
+								value="${cosmeticVO.ingredient}" placeholder="Enter Ingredient">
+						</div>
+					</div>
+					
+					<div class="box-footer">
+						<button type="submit" class="btn btn-primary">Submit</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
 </body>
 <%@include file="../include/footer.jsp"%>
 </html>

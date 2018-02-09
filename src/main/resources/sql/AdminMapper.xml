@@ -157,7 +157,9 @@
 	</update>
 	
 	<delete id="deleteCosmetic">
-		DELETE FROM TBL_COSMETIC WHERE COSMETIC_NO = #{cosmetic_no}
+		DELETE 
+		FROM TBL_COSMETIC 
+		WHERE COSMETIC_NO = #{cosmetic_no}
 	</delete>
 	
 	<select id="listCosmetic" resultType="cosmetic">
