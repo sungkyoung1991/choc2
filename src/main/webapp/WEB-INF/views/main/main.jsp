@@ -69,11 +69,20 @@
 
 <body>
 
-<jsp:include page="/WEB-INF/views/user/index.jsp"></jsp:include>
+<%-- <jsp:include page="/WEB-INF/views/user/index.jsp"></jsp:include> --%>
+
+
 
 <br/><br/><br/><br/>
 
 	<form>
+	
+	ID<input type="text" name="userId" id="userId" />
+	PW<input type="password" name="password" id="password" />
+	<input type="button" id="Login" value="로그인"/>
+	<!-- <a href="/user/createUserp">회원가입</a>  -->
+	<input type="button" value="회원가입" onclick="location.href='user/createUserP'">
+	<br/><br/><br/><br/>
 	
 		전체 게시물 수 : ${resultPage.totalCount }
 		<br/>
