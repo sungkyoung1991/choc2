@@ -158,6 +158,7 @@ public class UserController {
 	
 	@RequestMapping(value="updateCosmetic", method=RequestMethod.POST)
 	public String updateCosmetic(@ModelAttribute("cosmetic") CosmeticVO cosmetic, RedirectAttributes rttr, @ModelAttribute("cri")SearchCriteria cri ) throws Exception {
+		
 		userService.updateCosmetic(cosmetic);
 		
 		rttr.addAttribute("page", cri.getPage());
