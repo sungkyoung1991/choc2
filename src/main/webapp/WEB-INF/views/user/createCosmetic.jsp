@@ -14,7 +14,7 @@
 <body>
 	<%@include file="../include/nav.jsp"%>
 	<h2>화장품 정보입력</h2>
-	<form name="cform" action="/user/createCosmetic" method="get">
+	<form name="cform" action="/user/createCosmetic" method="post">
 		<table>
 			<tr>
 				<th>브랜드</th>
@@ -30,7 +30,7 @@
 			</tr>
 			<tr>
 				<th>용량</th>
-				<td><input type="text" name="amount" placeholder="130ml" /></td>
+				<td><input type="text" name="amount" placeholder="130" />ml</td>
 			</tr>
 			<tr>
 				<th>가격</th>

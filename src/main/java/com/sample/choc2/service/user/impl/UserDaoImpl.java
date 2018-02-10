@@ -75,5 +75,11 @@ public class UserDaoImpl implements UserDao{
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("UserMapper.getCosmetic",cosmetic_no);
 	}
+
+	@Override
+	public void updateCosmetic(CosmeticVO cosmetic) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.update("UserMapper.updateCosmetic",cosmetic);
+	}
 	
 }

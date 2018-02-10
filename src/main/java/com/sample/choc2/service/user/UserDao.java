@@ -25,4 +25,6 @@ public interface UserDao {
 
 	public CosmeticVO getCosmetic(int cosmetic_no) throws Exception;
 	
+	public void updateCosmetic(CosmeticVO cosmetic) throws Exception;
+	
 }
