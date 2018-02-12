@@ -13,13 +13,11 @@
 		<result property="productModel" column="PRODUCT_MODEL" jdbcType="VARCHAR" />
 	</resultMap>
 
-	<!-- <insert id="addProduct" parameterType="productVO" >
-		INSERT INTO product (PRODUCT_NO,PRODUCT_MODEL, PRODUCT_IMAGE)
-		VALUES (
+	<insert id="addProduct" parameterType="productVO">
+		INSERT INTO TBL_PRODUCT (PRODUCT_NO,PRODUCT_MODEL,PRODUCT_IMAGE)
+		VALUES (0,#{productModel:VARCHAR}, #{productImage:VARCHAR} )
 		
-		#{productModel:VARCHAR}, #{productImage:VARCHAR} )
-		
-	</insert> -->
+	</insert>
 
 
 
