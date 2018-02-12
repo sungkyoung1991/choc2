@@ -32,4 +32,13 @@ public class ProductDaoImpl implements ProductDao {
 		return sqlSession.selectOne("ProductMapper.getTotalCount", search);
 	}
 
+	@Override
+	public void addProduct(ProductVO product) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.insert("ProductMapper.addProduct", product);
+		
+		System.out.println("product G Key Value.." + product.getProductNo());
+		
+	}
+
 }

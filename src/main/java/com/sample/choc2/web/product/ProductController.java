@@ -9,10 +9,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sample.choc2.common.Page;
 import com.sample.choc2.common.Search;
+import com.sample.choc2.service.domain.ProductVO;
 import com.sample.choc2.service.product.ProductService;
 
 @Controller
@@ -61,6 +63,31 @@ public class ProductController {
 
 
 		return "main/main";
+	}
+	
+	@RequestMapping(value = "addProduct", method = RequestMethod.POST)
+	public String addProduct(@ModelAttribute("productVO") ProductVO productVO, Model model)
+			throws Exception {
+
+		System.out.println("/addProduct");
+		
+		System.out.println("productVO 확인........." + productVO);
+		
+		productService.addProduct(productVO);
+	
+		model.addAttribute("product", productVO);
+		return "main/addProduct";
+		
+	}
+	
+	@RequestMapping(value = "addProductView", method = RequestMethod.GET)
+	public String addProductView(@ModelAttribute("product") ProductVO productVO)
+			throws Exception {
+
+		System.out.println("/addProductView");
+	
+		return "main/addProductView";
+		
 	}
 
 }
