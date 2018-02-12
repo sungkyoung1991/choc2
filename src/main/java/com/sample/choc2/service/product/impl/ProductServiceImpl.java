@@ -37,4 +37,11 @@ public class ProductServiceImpl implements ProductService {
 				
 	}
 
+	@Override
+	public void addProduct(ProductVO product) throws Exception {
+		// TODO Auto-generated method stub
+		productDao.addProduct(product);
+		
+	}
+
 }
