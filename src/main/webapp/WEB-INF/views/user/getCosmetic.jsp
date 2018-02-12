@@ -11,17 +11,48 @@
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script type="text/javascript">
 
+function deleteCosmetic(no){
+	if(confirm("게시글을 삭제하시겠습니까?")==true){
+	alert("삭제되었습니다");
+	location.href="/user/deleteCosmetic?cosmetic_no="+no;
+	}
+}
 
-
-
-
+function createCmt(nick,no){
+	var content = $("#comment").val();
+	var data= {
+			'nickName' = nick,
+			'cosmetic_no' = no,
+			'content' = content		
+	};
+	var setting = {
+			"url" : "/user/createComment",
+			"type" : "post",
+			"dataType" : "json",
+			"data" : data,
+			"success" : function(data){
+				var d = new Date();
+				var t = d.getFullYear()+"-"+(d.getMonth() + 1)+"-"+d.getDate()+"&nbsp;"+d.getHours()+":"+d.getMinutes();
+				var idx = data.idx;
+				$('#comment').val('');
+				$('#commentArea').append('<div id="'+comment_no+'" ><span style="color: black;font-weight: bold;">'+nickName+'</span>&nbsp;<a href="javascript:deletecomment(\''+comment_no+'\');" style="color: tomato; text-decoration: none;">삭제</a><br/><span style="color: black;">'+content+'</span><br/><span style="color: gray;">'+t +'</span><hr></div>');
+				alert('작성완료');
+				
+			},
+			"error" : function(){}
+	};
+	
+	$.ajax(setting);
+}
+	
+}
 
 </script>
 </head>
 <body>
 	<%@include file="../include/nav.jsp"%>
 		 
-		 <form action="/user/updateCosmeticP" method="post">
+		 <form action="/user/updateCosmeticP" method="get">
 			<input type="hidden" name="cosmetic_no" value = "${cinfo.cosmetic_no}"/>
 			<input type='hidden' name='page' value="${cri.page}"> 
 			<input type='hidden' name='perPageNum' value="${cri.perPageNum}">
@@ -61,62 +92,50 @@
 			</tr>
 		</table>
 			<input type="submit" value="글수정" style="float:left" /> 
-			<input type="button" value="글삭제" style="float:left" onclick="delete('${cinfo.cosmetic_no}')" />
+			<input type="button" value="글삭제" style="float:left" onclick="deleteCosmetic('${cinfo.cosmetic_no}')" />
 		</form>
 		<br />
 		<hr>
 
-	 <table>
+<%-- <table>
 		
 		<tr>
 			<td>${user.nickName}</td>
 		</tr>
 		<tr>
 			<td>
-			<input type="text" id="replyContent" size="100" >
+			<input type="text" id="comment" size="100" >
 			<input type="button" value="댓글쓰기" onclick="createCmt('${user.nickName}','${cinfo.cosmetic_no}')"/></td>
 		</tr>			
 	</table>
 	
-	<table id="commentArea">
+ 	<table id="commentArea">
 	<c:forEach items="${list}" var="data">
 	<tr class={data.idx}>
 	<td>${data.nickName}<c:if test="${data.nickName==user.nickName}"><span style="float:right"><button type="button" onclick="deleteccomment('${data.idx}');">댓글 삭제</button></span> </c:if> </td>			
 	</tr>
 	</c:forEach>
 	</table> 
-	
-		 <div><!--댓글  -->
-		
-		<c:if test="${user!=null}">
-		<span style="color: black; font-weight: bold;">${user.nickName}</span> : <input type="text" id="comment" size="100" /><button type="button" onclick="comment('${user.nickName}','${data.idx}');"> 댓글쓰기</button>
+		 --%>
+		<div><!--댓글  -->
 		<hr>
-		</c:if>
+		<%-- <c:if test="${user!=null }"> --%>
+		<span style="color: black; font-weight: bold;">${user.nick }</span> : <input type="text" id="comment" /><button type="button" onclick="comment('${user.nick }','${cinfo.cosmetic_no}');">댓글쓰기</button>
+		<hr>
+		<%-- </c:if> --%>
 		<div id="commentArea">
-		<c:forEach items="${data}" var="data">
-		<div id='${data.idx}'>
-		<span style="color: black;font-weight: bold;">${data.nickName }</span>&nbsp;<c:if test="${data.nickName==user.nickName }"><a href="javascript:deletecomment('${data.idx}');" style="color: tomato; text-decoration: none;">삭제</a></c:if>
+		<c:forEach items="${comment}" var="data">
+		<div id='${data.comment_no}'>
+		<span style="color: black;font-weight: bold;">${data.nickName}</span>&nbsp;<c:if test="${data.nick==user.nick }"><a href="javascript:deletecomment('${data.comment_no}');" style="color: tomato; text-decoration: none;">삭제</a></c:if>
 		<br/>		
-		<span style="color: black;">${data.contents}</span><br/>
-		<span style="color: gray;"><fmt:formatDate value="${data.cdate}" pattern="yyyy-MM-dd HH:MM"/></span>
+		<span style="color: black;">${data.content}</span><br/>
+		<span style="color: gray;"><fmt:formatDate value="${data.cdate}" pattern="yyyy-MM-dd HH:MM"/></span><c:if test="${data.nick!=user.nick }">&nbsp;<a href="javascript:openReport('${data.nickName }','${user.nickName }','${data.idx}');" style="color: tomato; text-decoration: none;">신고</a></c:if>
 		<hr>		
 		</div>
 		</c:forEach>		
 		</div>
 		</div>
-	
-  <%-- 	    <input type="hidden" name="cosmetic_no" value="${cinfo.model_no}"/>
-			<input type="hidden" name="brand" value="${cinfo.brand}" />
-			<input type="hidden" name="model" value="${cinfo.model}"  />
-			<input type="hidden" name="product" value="${cinfo.product}"  />
-			<input type="hidden" name="amount" value="${cinfo.amount}" />
-			<input type="hidden" name="price" value="${cinfo.price}"  />
-			<input type="hidden" name="ingredient" value="${cinfo.ingredient}"  />
- --%>
-			
-		 
-	<%-- <c:if test="${data.nickName == user.nickName}"> --%>
-	<%-- </c:if>	 --%>
+
 </body>
 
 

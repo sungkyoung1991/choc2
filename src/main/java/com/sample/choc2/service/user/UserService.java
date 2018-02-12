@@ -29,5 +29,7 @@ public interface UserService {
 	public CosmeticVO getCosmetic(int cosmetic_no) throws Exception;
 
 	public void updateCosmetic(CosmeticVO cosmetic) throws Exception;
+
+	public void deleteCosmetic(int cosmetic_no) throws Exception;
 	
 }
