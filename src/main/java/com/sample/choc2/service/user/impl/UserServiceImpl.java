@@ -88,4 +88,10 @@ public class UserServiceImpl implements UserService{
 		userDao.updateCosmetic(cosmetic);
 	}
 
+	@Override
+	public void deleteCosmetic(int cosmetic_no) throws Exception {
+		// TODO Auto-generated method stub
+		userDao.deleteCosmetic(cosmetic_no);
+	}
+
 }

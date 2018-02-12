@@ -78,6 +78,10 @@
 		WHERE COSMETIC_NO = #{cosmetic_no}
 	  </update>
 	  
+	  <delete id="deleteCosmetic" parameterType="cosmetic">
+	  	DELETE FROM TBL_COSMETIC WHERE COSMETIC_NO = #{cosmetic_no}
+	  </delete>
+	  
 	  <sql id="search">
 		<if test="searchType != null">
 			<if test="searchType == 'brand'.toString()">

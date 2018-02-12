@@ -9,8 +9,13 @@
 <title>Insert title here</title>
 </head>
 <body>
-		<form name="cform" action="/user/updateCosmetic" method="post">
-				<input type="hidden" name="cosmetic_no value="${cinfo.cosmetic_no}" />
+	<form name="cform" action="/user/updateCosmetic" method="post">
+		<input type="hidden" name="cosmetic_no value=" ${cinfo.cosmetic_no}" />
+		<input type='hidden' name='page' value="${cri.page}"> 
+		<input type='hidden' name='perPageNum' value="${cri.perPageNum}"> 
+		<input type='hidden' name='searchType' value="${cri.searchType}"> 
+		<input type='hidden' name='keyword' value="${cri.keyword}">
+
 		<table>
 			<tr>
 				<th>브랜드</th>
