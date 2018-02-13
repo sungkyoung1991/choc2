@@ -3,6 +3,7 @@ package com.sample.choc2.service.domain;
 public class User {
 	
 	///Field
+	private int userNo;
 	private String userId; //아이디
 	private String password; //비밀번호
 	private String nickName; //닉네임 
@@ -19,6 +20,17 @@ public class User {
 	///Constructor
 	public User(){
 	}
+	
+	
+	public int getUserNo() {
+		return userNo;
+	}
+
+
+	public void setUserNo(int userNo) {
+		this.userNo = userNo;
+	}
+
 
 	public String getUserId() {
 		return userId;
@@ -117,13 +129,16 @@ public class User {
 		this.role = role;
 	}
 
+
 	@Override
 	public String toString() {
-		return "User [userId=" + userId + ", password=" + password + ", nickName=" + nickName + ", name=" + name
-				+ ", email=" + email + ", address=" + address + ", phoneNo=" + phoneNo + ", gender=" + gender + ", age="
-				+ age + ", jumin=" + jumin + ", uuid=" + uuid + ", role=" + role + "]";
+		return "User [userNo=" + userNo + ", userId=" + userId + ", password=" + password + ", nickName=" + nickName
+				+ ", name=" + name + ", email=" + email + ", address=" + address + ", phoneNo=" + phoneNo + ", gender="
+				+ gender + ", age=" + age + ", jumin=" + jumin + ", uuid=" + uuid + ", role=" + role + "]";
 	}
 
-	
+
+
+
 	
 }
