@@ -65,65 +65,13 @@ public class AdminDaoImpl implements AdminDao {
 		return session.selectOne(namespace + ".countBoard", cri);
 	}
 
-	@Override
-	public void createReply(ReplyVO replyVO) throws Exception {
-		// TODO Auto-generated method stub
-		session.insert(namespace + ".createReply", replyVO);
-
-	}
-
-	@Override
-	public void updateReply(ReplyVO replyVO) throws Exception {
-		// TODO Auto-generated method stub
-		session.update(namespace + ".updateReply", replyVO);
-	}
-
-	@Override
-	public void deleteReply(Integer reply_no) throws Exception {
-		// TODO Auto-generated method stub
-		session.delete(namespace + ".deleteReply", reply_no);
-	}
-
-	@Override
-	public List<ReplyVO> listPageReply(Integer board_no, Criteria cri) throws Exception {
-		// TODO Auto-generated method stub
-		Map<String, Object> paramMap = new HashMap<String, Object>();
-
-		paramMap.put("board_no", board_no);
-		paramMap.put("cri", cri);
-
-		return session.selectList(namespace + ".listReplyPage", paramMap);
-	}
-
-	@Override
-	public int countReply(Integer board_no) throws Exception {
-		// TODO Auto-generated method stub
-		return session.selectOne(namespace + ".countReply", board_no);
-	}
-
-	@Override
-	public int getBoardNo(Integer board_no) throws Exception {
-		// TODO Auto-generated method stub
-		return session.selectOne(namespace + ".getBoard_No", board_no);
-	}
-
+	
 	@Override
 	public void updateViewCnt(Integer board_no) throws Exception {
 		// TODO Auto-generated method stub
 		session.update(namespace + ".updateViewCnt", board_no);
 	}
-
-	@Override
-	public void updateReplyCnt(Integer board_no, int amount) throws Exception {
-		// TODO Auto-generated method stub
-		Map<String, Object> paramMap = new HashMap<String, Object>();
-
-		paramMap.put("board_no", board_no);
-		paramMap.put("amount", amount);
-
-		session.update(namespace + ".updateReplyCnt", paramMap);
-	}
- 
+	
 	@Override
 	public void createCosmetic(CosmeticVO cosmeticVO) throws Exception {
 		// TODO Auto-generated method stub

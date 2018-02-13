@@ -24,23 +24,6 @@ public interface AdminDao {
 
 	public void updateViewCnt(Integer board_no) throws Exception;
 
-	// =========================ReplyDao=========================
-	public void createReply(ReplyVO replyVO) throws Exception;
-
-	public void updateReply(ReplyVO replyVO) throws Exception;
-
-	public void deleteReply(Integer reply_no) throws Exception;
-
-	public List<ReplyVO> listPageReply(Integer board_no, Criteria cri) throws Exception;
-
-	// 페이징처리
-	public int countReply(Integer board_no) throws Exception;
-
-	// 게시물의 댓글 수
-	public int getBoardNo(Integer board_no) throws Exception;
-
-	public void updateReplyCnt(Integer board_no, int amount) throws Exception;
-
 	// =========================CosmeticDao=========================
 	
 	public void createCosmetic(CosmeticVO cosmeticVO)throws Exception;

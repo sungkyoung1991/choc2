@@ -26,22 +26,7 @@ public interface AdminService {
 	
 	public void updateViewCnt(Integer board_no) throws Exception;
 
-	// =========================ReplyService=========================
-	
-	public void createReply(ReplyVO replyVO)throws Exception;
-	
-	public void updateReply(ReplyVO replyVO)throws Exception;
-	
-	public void deleteReply(Integer reply_no) throws Exception;
-	
-	public List<ReplyVO> listReplyPage(Integer bno, Criteria cri)throws Exception;
-	
-	public int countReply(Integer board_no)throws Exception;
-	
-	public int getBoardNo(Integer board_no) throws Exception;
 
-	public void updateReplyCnt(Integer board_no, int amount) throws Exception;
-	
 	// =========================CosmeticService=========================
 	
 	public void createCosmetic(CosmeticVO cosmeticVO)throws Exception;
