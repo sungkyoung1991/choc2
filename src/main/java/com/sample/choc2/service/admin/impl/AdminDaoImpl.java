@@ -19,7 +19,7 @@ import com.sample.choc2.service.domain.ReplyVO;
 @Repository("adminDaoImpl")
 public class AdminDaoImpl implements AdminDao {
 
-	private static String namespace = "AdminMapper";
+	private static String NAMESPACE = "AdminMapper";
 
 	@Autowired
 	@Qualifier("sqlSessionTemplate")
@@ -32,44 +32,44 @@ public class AdminDaoImpl implements AdminDao {
 	@Override
 	public void createBoard(BoardVO boardVO) throws Exception {
 		// TODO Auto-generated method stub
-		session.insert(namespace + ".createBoard", boardVO);
+		session.insert(NAMESPACE + ".createBoard", boardVO);
 	}
 
 	@Override
 	public BoardVO getBoard(Integer board_no) throws Exception {
 		// TODO Auto-generated method stub
-		return session.selectOne(namespace + ".getBoard", board_no);
+		return session.selectOne(NAMESPACE + ".getBoard", board_no);
 	}
 
 	@Override
 	public void updateBoard(BoardVO boardVO) throws Exception {
 		// TODO Auto-generated method stub
-		session.update(namespace + ".updateBoard", boardVO);
+		session.update(NAMESPACE + ".updateBoard", boardVO);
 	}
 
 	@Override
 	public void deleteBoard(Integer board_no) throws Exception {
 		// TODO Auto-generated method stub
-		session.delete(namespace + ".deleteBoard", board_no);
+		session.delete(NAMESPACE + ".deleteBoard", board_no);
 	}
 
 	@Override
 	public List<BoardVO> listBoard(SearchCriteria cri) throws Exception {
 		// TODO Auto-generated method stub
-		return session.selectList(namespace + ".listBoard", cri);
+		return session.selectList(NAMESPACE + ".listBoard", cri);
 	}
 
 	@Override
 	public int countBoard(SearchCriteria cri) throws Exception {
 		// TODO Auto-generated method stub
-		return session.selectOne(namespace + ".countBoard", cri);
+		return session.selectOne(NAMESPACE + ".countBoard", cri);
 	}
 
 	
 	@Override
 	public void updateViewCnt(Integer board_no) throws Exception {
 		// TODO Auto-generated method stub
-		session.update(namespace + ".updateViewCnt", board_no);
+		session.update(NAMESPACE + ".updateViewCnt", board_no);
 	}
 	/*
 	@Override

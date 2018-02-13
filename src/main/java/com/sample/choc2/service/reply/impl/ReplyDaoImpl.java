@@ -16,7 +16,7 @@ import com.sample.choc2.service.reply.ReplyDao;
 @Repository("replyDaoImpl")
 public class ReplyDaoImpl implements ReplyDao {
 	
-	private static String namespace ="ReplyMapper";
+	private static String NAMESPACE ="ReplyMapper";
 	
 	@Autowired
 	@Qualifier("sqlSessionTemplate")
@@ -34,20 +34,20 @@ public class ReplyDaoImpl implements ReplyDao {
 	@Override
 	public void createReply(ReplyVO replyVO) throws Exception {
 		// TODO Auto-generated method stub
-		session.insert(namespace + ".createReply", replyVO);
+		session.insert(NAMESPACE + ".createReply", replyVO);
 
 	}
 
 	@Override
 	public void updateReply(ReplyVO replyVO) throws Exception {
 		// TODO Auto-generated method stub
-		session.update(namespace + ".updateReply", replyVO);
+		session.update(NAMESPACE + ".updateReply", replyVO);
 	}
 
 	@Override
 	public void deleteReply(Integer reply_no) throws Exception {
 		// TODO Auto-generated method stub
-		session.delete(namespace + ".deleteReply", reply_no);
+		session.delete(NAMESPACE + ".deleteReply", reply_no);
 	}
 
 	@Override
@@ -58,19 +58,19 @@ public class ReplyDaoImpl implements ReplyDao {
 		paramMap.put("board_no", board_no);
 		paramMap.put("cri", cri);
 
-		return session.selectList(namespace + ".listReplyPage", paramMap);
+		return session.selectList(NAMESPACE + ".listReplyPage", paramMap);
 	}
 
 	@Override
 	public int countReply(Integer board_no) throws Exception {
 		// TODO Auto-generated method stub
-		return session.selectOne(namespace + ".countReply", board_no);
+		return session.selectOne(NAMESPACE + ".countReply", board_no);
 	}
 
 	@Override
 	public int getBoardNo(Integer board_no) throws Exception {
 		// TODO Auto-generated method stub
-		return session.selectOne(namespace + ".getBoard_No", board_no);
+		return session.selectOne(NAMESPACE + ".getBoard_No", board_no);
 	}
 
 	@Override
@@ -81,6 +81,6 @@ public class ReplyDaoImpl implements ReplyDao {
 		paramMap.put("board_no", board_no);
 		paramMap.put("amount", amount);
 
-		session.update(namespace + ".updateReplyCnt", paramMap);
+		session.update(NAMESPACE + ".updateReplyCnt", paramMap);
 	}
 }

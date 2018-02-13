@@ -15,8 +15,8 @@
    <ul class="nav navbar-nav">
     <li><a href="/">Home</a></li>
     <li><a href="/admin/cosmetic/list">상품 관리</a></li>
-    <li><a href="#">화학 성분 관리</a></li>
-    <li><a href="/admin/board/list">유저 게시판</a></li>
+    <li><a href="/user/getCosmeticList">유저 상품 게시판</a></li>
+    <li><a href="/admin/board/list">유저 관리 게시판</a></li>
    </ul>
    <ul class="nav navbar-nav navbar-right">
  

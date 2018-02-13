@@ -23,6 +23,7 @@
 		<mapper resource="sql/UserMapper.xml"/>
 		<mapper resource="sql/AdminMapper.xml"/>
 		<mapper resource="sql/ProductMapper.xml"/>
+		<mapper resource="sql/ReplyMapper.xml"/>
 	</mappers>
 
 </configuration>

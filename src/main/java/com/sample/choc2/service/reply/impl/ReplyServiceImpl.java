@@ -15,12 +15,13 @@ import com.sample.choc2.service.reply.ReplyService;
 public class ReplyServiceImpl implements ReplyService{
 	
 	@Autowired
-	@Qualifier("replyDaoImple")
+	@Qualifier("replyDaoImpl")
 	private ReplyDao replyDao;
 	
 	public void setReplyDao(ReplyDao replyDao) {
 		this.replyDao = replyDao;
 	}
+	
 	public ReplyServiceImpl() {
 		// TODO Auto-generated constructor stub
 		System.out.println(this.getClass());

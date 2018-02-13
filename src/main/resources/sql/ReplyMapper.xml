@@ -60,9 +60,5 @@
 		WHERE BOARD_NO=#{board_no}
 	</update>
 
-	<update id="updateViewCnt">
-		UPDATE TBL_BOARD
-		SET VIEWCNT=VIEWCNT +1
-		WHERE BOARD_NO = #{board_no}
-	</update>
+
 </mapper>
