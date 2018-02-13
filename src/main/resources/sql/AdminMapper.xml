@@ -5,14 +5,14 @@
 
 <mapper namespace="AdminMapper">
 
-<!-- 	<resultMap type="boardVO" id="boardSelectMap">
-		<result property="board_no" column="BOARD_NO" jdbcType="INT"/>
+	<resultMap type="boardVO" id="boardSelectMap">
+		<result property="board_no" column="BOARD_NO" jdbcType="INTEGER"/>
 		<result property="title" column="TITLE" jdbcType="VARCHAR"/>
 		<result property="writer" column="WRITER" jdbcType="VARCHAR"/>
 		<result property="content" column="CONTENT" jdbcType="VARCHAR"/>
 		<result property="viewcnt" column="VIEWCNT" jdbcType="VARCHAR"/>
 		<result property="regdate" column="REGDATE" jdbcType="DATE"/>
-	</resultMap> -->
+	</resultMap> 
 
 <!-- 	<resultMap type="adminSelectMap" id="cosmetic">
 		
@@ -24,7 +24,7 @@
 		VALUES(#{title}, #{content}, #{writer})
 	</insert>
 
-	<select id="getBoard" resultType="boardVO">
+	<select id="getBoard" resultMap="boardSelectMap">
 		SELECT
 		BOARD_NO,TITLE,CONTENT,WRITER,REGDATE,VIEWCNT
 		FROM
@@ -49,7 +49,7 @@
 	</delete>
 
 
-	<select id="listBoard" resultType="boardVO" >
+	<select id="listBoard" resultMap="boardSelectMap" >
 	<![CDATA[  
 	  SELECT * 
 	  FROM TBL_BOARD 
