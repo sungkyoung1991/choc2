@@ -24,7 +24,11 @@ public class AdminServiceImpl implements AdminService{
 	public void setDao(AdminDao adminDao) {
 		this.adminDao = adminDao;
 	}
-
+	
+	public AdminServiceImpl() {
+		// TODO Auto-generated constructor stub
+		System.out.println(this.getClass());
+	}
 	@Override
 	public void createBoard(BoardVO boardVO) throws Exception {
 		// TODO Auto-generated method stub
@@ -62,53 +66,13 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
-	public void createReply(ReplyVO replyVO) throws Exception {
-		// TODO Auto-generated method stub
-		adminDao.createReply(replyVO);
-	}
-
-	@Override
-	public void updateReply(ReplyVO replyVO) throws Exception {
-		// TODO Auto-generated method stub
-		adminDao.updateReply(replyVO);
-	}
-
-	@Override
-	public void deleteReply(Integer reply_no) throws Exception {
-		// TODO Auto-generated method stub
-		adminDao.deleteReply(reply_no);
-	}
-
-	@Override
-	public List<ReplyVO> listReplyPage(Integer board_no, Criteria cri) throws Exception {
-		// TODO Auto-generated method stub
-		return adminDao.listPageReply(board_no, cri);
-	}
-
-	@Override
-	public int countReply(Integer board_no) throws Exception {
-		// TODO Auto-generated method stub
-		return adminDao.countReply(board_no);
-	}
-
-	@Override
 	public void updateViewCnt(Integer board_no) throws Exception {
 		// TODO Auto-generated method stub
 		adminDao.updateViewCnt(board_no);
+		
 	}
 
-	@Override
-	public int getBoardNo(Integer board_no) throws Exception {
-		// TODO Auto-generated method stub
-		return adminDao.getBoardNo(board_no);
-	}
-
-	@Override
-	public void updateReplyCnt(Integer board_no, int amount) throws Exception {
-		// TODO Auto-generated method stub
-		//adminDao.updateReply();
-	}
-
+/*
 	@Override
 	public void createCosmetic(CosmeticVO cosmeticVO) throws Exception {
 		// TODO Auto-generated method stub
@@ -145,6 +109,6 @@ public class AdminServiceImpl implements AdminService{
 		return adminDao.countCosmetic(cri);
 	}
 	
-	
+	*/
 
 }

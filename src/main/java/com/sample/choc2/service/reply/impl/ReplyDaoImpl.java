@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.sample.choc2.common.Criteria;
 import com.sample.choc2.service.domain.ReplyVO;
+import com.sample.choc2.service.reply.ReplyDao;
 
 @Repository("replyDaoImpl")
 public class ReplyDaoImpl implements ReplyDao {
@@ -23,6 +24,11 @@ public class ReplyDaoImpl implements ReplyDao {
 	
 	public void setSession(SqlSession session) {
 		this.session = session;
+	}
+	
+	public ReplyDaoImpl() {
+		// TODO Auto-generated constructor stub
+		System.out.println(this.getClass());
 	}
 	
 	@Override

@@ -71,7 +71,7 @@ public class AdminDaoImpl implements AdminDao {
 		// TODO Auto-generated method stub
 		session.update(namespace + ".updateViewCnt", board_no);
 	}
-	
+	/*
 	@Override
 	public void createCosmetic(CosmeticVO cosmeticVO) throws Exception {
 		// TODO Auto-generated method stub
@@ -107,5 +107,5 @@ public class AdminDaoImpl implements AdminDao {
 		// TODO Auto-generated method stub
 		return session.selectOne(namespace+".countCosmetic",cri);
 	}
-
+*/
 }

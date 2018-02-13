@@ -25,7 +25,7 @@ public interface AdminDao {
 	public void updateViewCnt(Integer board_no) throws Exception;
 
 	// =========================CosmeticDao=========================
-	
+	/*
 	public void createCosmetic(CosmeticVO cosmeticVO)throws Exception;
 	
 	public CosmeticVO getCosmetic(Integer cosmetic_no)throws Exception;
@@ -37,4 +37,5 @@ public interface AdminDao {
 	public List<CosmeticVO> listCosmetic(SearchCriteria cri)throws Exception;
 	
 	public int countCosmetic(SearchCriteria cri)throws Exception;
+*/
 }

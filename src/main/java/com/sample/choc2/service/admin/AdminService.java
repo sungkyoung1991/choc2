@@ -28,7 +28,7 @@ public interface AdminService {
 
 
 	// =========================CosmeticService=========================
-	
+	/*
 	public void createCosmetic(CosmeticVO cosmeticVO)throws Exception;
 	
 	public CosmeticVO getCosmetic(Integer cosmetic_no)throws Exception;
@@ -40,4 +40,5 @@ public interface AdminService {
 	public List<CosmeticVO> listCosmetic(SearchCriteria cri)throws Exception;
 	
 	public int countCosmetic(SearchCriteria cri)throws Exception;
+	*/
 }
