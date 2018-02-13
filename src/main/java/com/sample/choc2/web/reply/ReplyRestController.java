@@ -1,4 +1,4 @@
-package com.sample.choc2.web.admin;
+package com.sample.choc2.web.reply;
 
 import java.util.HashMap;
 import java.util.List;
@@ -20,20 +20,21 @@ import com.sample.choc2.common.Criteria;
 import com.sample.choc2.common.PageMaker;
 import com.sample.choc2.service.admin.AdminService;
 import com.sample.choc2.service.domain.ReplyVO;
+import com.sample.choc2.service.reply.ReplyService;
 
 @RestController
 @RequestMapping("/replyRest")
-public class AdminRestController {
+public class ReplyRestController {
 	
 	@Autowired
-	@Qualifier("adminServiceImpl")
-	private AdminService adminService;
+	@Qualifier("replyServiceImpl")
+	private ReplyService replyService;
 	
-	public void setAdminService(AdminService adminService) {
-		this.adminService = adminService;
+	public void setReplyService(ReplyService replyService) {
+		this.replyService = replyService;
 	}
 	
-	public AdminRestController() {
+	public ReplyRestController() {
 		// TODO Auto-generated constructor stub
 		System.out.println(this.getClass());
 	}
@@ -43,7 +44,7 @@ public class AdminRestController {
 		ResponseEntity<String> entity = null;
 		
 		try {
-			adminService.createReply(replyVO);
+			replyService.createReply(replyVO);
 			entity = new ResponseEntity<String>("SUCCESS",HttpStatus.OK);
 			
 		}catch(Exception e) {
@@ -65,11 +66,11 @@ public class AdminRestController {
 			pageMaker.setCri(cri);
 			
 			Map<String, Object> map = new HashMap<String, Object>();
-			List<ReplyVO> list = adminService.listReplyPage(reply_no, cri);
+			List<ReplyVO> list = replyService.listReplyPage(reply_no, cri);
 			
 			map.put("list", list);
 			
-			int CountReply = adminService.countReply(reply_no);
+			int CountReply = replyService.countReply(reply_no);
 			pageMaker.setTotalCount(CountReply);
 			
 			map.put("pageMaker", pageMaker);
@@ -89,7 +90,7 @@ public class AdminRestController {
 		
 		try {
 			replyVO.setReply_no(reply_no);
-			adminService.updateReply(replyVO);
+			replyService.updateReply(replyVO);
 			
 			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);			
 		}catch(Exception e) {
@@ -106,7 +107,7 @@ public class AdminRestController {
 	public ResponseEntity<String> deleteeReply(@PathVariable Integer reply_no)throws Exception{
 		ResponseEntity<String> entity = null;
 		try {
-			adminService.deleteReply(reply_no);
+			replyService.deleteReply(reply_no);
 			entity = new ResponseEntity<String>("SUCCESS",HttpStatus.OK);
 		}catch(Exception e) {
 			e.printStackTrace();

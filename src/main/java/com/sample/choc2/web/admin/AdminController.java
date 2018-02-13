@@ -123,7 +123,7 @@ public class AdminController {
 
 	// =======================================Cosmetic Controller========================================================
 	//게시물 조회 
-	@RequestMapping(value = "/cosmetic/get", method = RequestMethod.GET)
+/*	@RequestMapping(value = "/cosmetic/get", method = RequestMethod.GET)
 	public String getCosmetic(@ModelAttribute("cri") SearchCriteria cri,
 			@RequestParam("cosmetic_no") int cosmetic_no, Model model) throws Exception {
 
@@ -211,5 +211,5 @@ public class AdminController {
 
 		return "redirect:/admin/cosmetic/list";
 	}
-
+*/
 }
