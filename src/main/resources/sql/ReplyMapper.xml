@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+		
+<mapper namespace="ReplyMapper">
+<!-- 	<resultMap type="replyVO" id="replySelectMap">
+		<result property="board_no" column="BOARD_NO" jdbcType="INT"/>
+		<result property="reply_no" column="BOARD_NO" jdbcType="INT"/>
+		<result property="replytext" column="REPLYTEXT" jdbcType="VARCHAR"/>
+		<result property="replyer" column="REPLYER" jdbcType="VARCHAR"/>
+		<result property="regdate" column="REGDATE" jdbcType="DATE"/>
+		<result property="updatedate" column="UPDATEDATE" jdbcType="DATE"/>	
+	</resultMap> -->
+				<!-- Reply Mapper -->
+	
+	<insert id="createReply">
+		INSERT INTO TBL_REPLY (BOARD_NO,REPLYTEXT,REPLYER)
+		VALUES (#{board_no},#{replytext},#{replyer})
+	</insert>
+
+	<update id="updateReply">
+		UPDATE TBL_REPLY SET REPLYTEXT = #{replytext}, UPDATEDATE = NOW()
+		WHERE REPLY_NO = #{reply_no}
+	</update>
+
+	<delete id="deleteReply">
+		DELETE FROM TBL_REPLY WHERE REPLY_NO=#{reply_no}
+	</delete>
+
+	<select id="listReplyPage" resultType="replyVO">
+		SELECT
+		*
+		FROM
+		TBL_REPLY
+		WHERE
+		BOARD_NO=#{board_no}
+		ORDER BY REPLY_NO DESC
+		LIMIT #{cri.pageStart}, #{cri.perPageNum}
+	</select>
+
+	<select id="countReply" resultType="int">
+		SELECT
+		COUNT(BOARD_NO)
+		FROM
+		TBL_REPLY
+		WHERE
+		BOARD_NO=#{board_no}
+	</select>
+
+	<select id="getBoard_No" resultType="int">
+		SELECT BOARD_NO
+		FROM TBL_REPLY
+		WHERE REPLY_NO=#{reply_no}
+	</select>
+	
+	<update id="updateReplyCnt">
+		UPDATE TBL_BOARD
+		SET REPLYCNT = REPLYCNT + #{amount}
+		WHERE BOARD_NO=#{board_no}
+	</update>
+
+	<update id="updateViewCnt">
+		UPDATE TBL_BOARD
+		SET VIEWCNT=VIEWCNT +1
+		WHERE BOARD_NO = #{board_no}
+	</update>
+</mapper>
