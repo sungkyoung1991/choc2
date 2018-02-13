@@ -4,14 +4,14 @@
 		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 		
 <mapper namespace="ReplyMapper">
-<!-- 	<resultMap type="replyVO" id="replySelectMap">
-		<result property="board_no" column="BOARD_NO" jdbcType="INT"/>
-		<result property="reply_no" column="BOARD_NO" jdbcType="INT"/>
+	<resultMap type="replyVO" id="replySelectMap">
+		<result property="board_no" column="BOARD_NO" jdbcType="INTEGER"/>
+		<result property="reply_no" column="REPLY_NO" jdbcType="INTEGER"/>
 		<result property="replytext" column="REPLYTEXT" jdbcType="VARCHAR"/>
 		<result property="replyer" column="REPLYER" jdbcType="VARCHAR"/>
 		<result property="regdate" column="REGDATE" jdbcType="DATE"/>
 		<result property="updatedate" column="UPDATEDATE" jdbcType="DATE"/>	
-	</resultMap> -->
+	</resultMap> 
 				<!-- Reply Mapper -->
 	
 	<insert id="createReply">
@@ -28,7 +28,7 @@
 		DELETE FROM TBL_REPLY WHERE REPLY_NO=#{reply_no}
 	</delete>
 
-	<select id="listReplyPage" resultType="replyVO">
+	<select id="listReplyPage" resultMap="replySelectMap" >
 		SELECT
 		*
 		FROM
