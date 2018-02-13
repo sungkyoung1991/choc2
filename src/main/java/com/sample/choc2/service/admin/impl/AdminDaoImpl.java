@@ -123,7 +123,7 @@ public class AdminDaoImpl implements AdminDao {
 
 		session.update(namespace + ".updateReplyCnt", paramMap);
 	}
-
+ 
 	@Override
 	public void createCosmetic(CosmeticVO cosmeticVO) throws Exception {
 		// TODO Auto-generated method stub
