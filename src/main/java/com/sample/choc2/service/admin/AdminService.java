@@ -14,17 +14,17 @@ public interface AdminService {
 	
 	public void createBoard(BoardVO boardVO)throws Exception;
 	
-	public BoardVO getBoard(Integer bno)throws Exception;
+	public BoardVO getBoard(Integer board_no)throws Exception;
 	
 	public void updateBoard(BoardVO boardVO)throws Exception;
 	
-	public void deleteBoard(Integer bno)throws Exception;
+	public void deleteBoard(Integer board_no)throws Exception;
 	
 	public List<BoardVO> listBoard(SearchCriteria cri)throws Exception;
 	
 	public int countBoard(SearchCriteria cri)throws Exception;
 	
-	public void updateViewCnt(Integer bno) throws Exception;
+	public void updateViewCnt(Integer board_no) throws Exception;
 
 	// =========================ReplyService=========================
 	
@@ -32,15 +32,15 @@ public interface AdminService {
 	
 	public void updateReply(ReplyVO replyVO)throws Exception;
 	
-	public void deleteReply(Integer rno) throws Exception;
+	public void deleteReply(Integer reply_no) throws Exception;
 	
 	public List<ReplyVO> listReplyPage(Integer bno, Criteria cri)throws Exception;
 	
-	public int countReply(Integer bno)throws Exception;
+	public int countReply(Integer board_no)throws Exception;
 	
-	public int getBno(Integer bno) throws Exception;
+	public int getBoardNo(Integer board_no) throws Exception;
 
-	public void updateReplyCnt(Integer bno, int amount) throws Exception;
+	public void updateReplyCnt(Integer board_no, int amount) throws Exception;
 	
 	// =========================CosmeticService=========================
 	

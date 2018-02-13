@@ -25,7 +25,7 @@
 
 				<form role="form" action="/admin/board/update" method="post">
 
-					<input type='hidden' name='bno' value="${boardVO.bno}"> <input
+					<input type='hidden' name='board_no' value="${boardVO.board_no}"> <input
 						type='hidden' name='page' value="${cri.page}"> <input
 						type='hidden' name='perPageNum' value="${cri.perPageNum}">
 					<input type='hidden' name='searchType' value="${cri.searchType}">
@@ -115,7 +115,7 @@
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 					<h4 class="modal-title"></h4>
 				</div>
-				<div class="modal-body" data-rno>
+				<div class="modal-body" data-reply_no>
 					<p>
 						<input type="text" id="replytext" class="form-control">
 					</p>
@@ -135,13 +135,13 @@
 
 	<script id="template" type="text/x-handlebars-template">
 {{#each .}}
-<li class="replyLi" data-rno={{rno}}>
+<li class="replyLi" data-reply_no={{reply_no}}>
 <i class="fa fa-comments bg-blue"></i>
  <div class="timeline-item" >
   <span class="time">
     <i class="fa fa-clock-o"></i>{{prettifyDate regdate}}
   </span>
-  <h3 class="timeline-header"><strong>{{rno}}</strong> -{{replyer}}</h3>
+  <h3 class="timeline-header"><strong>{{reply_no}}</strong> -{{replyer}}</h3>
   <div class="timeline-body">{{replytext}} </div>
     <div class="timeline-footer">
      <a class="btn btn-primary btn-xs" 
@@ -166,7 +166,7 @@
 		$(".replyLi").remove();
 		target.after(html);
 	}
-	var bno = ${boardVO.bno};
+	var board_no = ${boardVO.board_no};
 	
 	var replyPage = 1;
 	function getPage(pageInfo) {
@@ -196,7 +196,7 @@
 		if ($(".timeline li").size() > 1) {
 			return;
 		}
-		getPage("/replyRest/" + bno + "/1");
+		getPage("/replyRest/" + board_no + "/1");
 	});
 	
 	$(".pagination").on("click", "li a", function(event){
@@ -205,7 +205,7 @@
 		
 		replyPage = $(this).attr("href");
 		
-		getPage("/replyRest/"+bno+"/"+replyPage);
+		getPage("/replyRest/"+board_no+"/"+replyPage);
 		
 	});
 	
@@ -224,13 +224,13 @@
 				      "Content-Type": "application/json",
 				      "X-HTTP-Method-Override": "POST" },
 				dataType:'text',
-				data: JSON.stringify({bno:bno, replyer:replyer, replytext:replytext}),
+				data: JSON.stringify({board_no:board_no, replyer:replyer, replytext:replytext}),
 				success:function(result){
 					console.log("result: " + result);
 					if(result == 'SUCCESS'){
 						alert("등록 되었습니다.");
 						replyPage = 1;
-						getPage("/replyRest/"+bno+"/"+replyPage );
+						getPage("/replyRest/"+board_no+"/"+replyPage );
 						replyerObj.val("");
 						replytextObj.val("");
 					}
@@ -241,19 +241,19 @@
 		var reply = $(this);
 		
 		$("#replytext").val(reply.find('.timeline-body').text());
-		$(".modal-title").html(reply.attr("data-rno"));
+		$(".modal-title").html(reply.attr("data-reply_no"));
 		
 	});
 	
 	
 	$("#replyModBtn").on("click",function(){
 		  
-		  var rno = $(".modal-title").html();
+		  var reply_no = $(".modal-title").html();
 		  var replytext = $("#replytext").val();
 		  
 		  $.ajax({
 				type:'put',
-				url:'/replyRest/'+rno,
+				url:'/replyRest/'+reply_no,
 				headers: { 
 				      "Content-Type": "application/json",
 				      "X-HTTP-Method-Override": "PUT" },
@@ -263,18 +263,18 @@
 					console.log("result: " + result);
 					if(result == 'SUCCESS'){
 						alert("수정 되었습니다.");
-						getPage("/replyRest/"+bno+"/"+replyPage );
+						getPage("/replyRest/"+board_no+"/"+replyPage );
 					}
 			}});
 	});
 	$("#replyDelBtn").on("click",function(){
 		  
-		  var rno = $(".modal-title").html();
+		  var reply_no = $(".modal-title").html();
 		  var replytext = $("#replytext").val();
 		  
 		  $.ajax({
 				type:'delete',
-				url:'/replyRest/'+rno,
+				url:'/replyRest/'+reply_no,
 				headers: { 
 				      "Content-Type": "application/json",
 				      "X-HTTP-Method-Override": "DELETE" },
@@ -283,7 +283,7 @@
 					console.log("result: " + result);
 					if(result == 'SUCCESS'){
 						alert("삭제 되었습니다.");
-						getPage("/replyRest/"+bno+"/"+replyPage );
+						getPage("/replyRest/"+board_no+"/"+replyPage );
 					}
 			}});
 	});

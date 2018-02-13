@@ -73,18 +73,18 @@ public class AdminController {
 
 	// 게시판 조회
 	@RequestMapping(value = "/board/get", method = RequestMethod.GET)
-	public String getBaord(@RequestParam("bno") int bno, @ModelAttribute("cri") SearchCriteria cri, Model model)
+	public String getBaord(@RequestParam("board_no") int board_no, @ModelAttribute("cri") SearchCriteria cri, Model model)
 			throws Exception {
-		adminService.updateViewCnt(bno);
-		model.addAttribute(adminService.getBoard(bno));
+		adminService.updateViewCnt(board_no);
+		model.addAttribute(adminService.getBoard(board_no));
 		return "adminBoard/getAdminBoard";
 	}
 
 	// 게시판 수정 화면
 	@RequestMapping(value = "/board/update", method = RequestMethod.GET)
-	public String updateBoard(@RequestParam("bno") int bno, @ModelAttribute("cri") SearchCriteria cri, Model model)
+	public String updateBoard(@RequestParam("board_no") int board_no, @ModelAttribute("cri") SearchCriteria cri, Model model)
 			throws Exception {
-		model.addAttribute(adminService.getBoard(bno));
+		model.addAttribute(adminService.getBoard(board_no));
 		return "adminBoard/updateAdminBoard";
 	}
 
@@ -106,10 +106,10 @@ public class AdminController {
 
 	// 게시판 삭제 처리
 	@RequestMapping(value = "/board/delete", method = RequestMethod.POST)
-	public String deleteBoard(@RequestParam("bno") int bno, SearchCriteria cri, RedirectAttributes rttr)
+	public String deleteBoard(@RequestParam("board_no") int board_no, SearchCriteria cri, RedirectAttributes rttr)
 			throws Exception {
 
-		adminService.deleteBoard(bno);
+		adminService.deleteBoard(board_no);
 
 		rttr.addAttribute("page", cri.getPage());
 		rttr.addAttribute("perPageNum", cri.getPerPageNum());

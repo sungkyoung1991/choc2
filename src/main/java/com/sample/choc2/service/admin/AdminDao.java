@@ -12,34 +12,34 @@ public interface AdminDao {
 	// =========================BoardDao=========================
 	public void createBoard(BoardVO boardVO) throws Exception;
 
-	public BoardVO getBoard(Integer bno) throws Exception;
+	public BoardVO getBoard(Integer board_no) throws Exception;
 
 	public void updateBoard(BoardVO boardVO) throws Exception;
 
-	public void deleteBoard(Integer bno) throws Exception;
+	public void deleteBoard(Integer board_no) throws Exception;
 
 	public List<BoardVO> listBoard(SearchCriteria cri) throws Exception;
 
 	public int countBoard(SearchCriteria cri) throws Exception;
 
-	public void updateViewCnt(Integer bno) throws Exception;
+	public void updateViewCnt(Integer board_no) throws Exception;
 
 	// =========================ReplyDao=========================
 	public void createReply(ReplyVO replyVO) throws Exception;
 
 	public void updateReply(ReplyVO replyVO) throws Exception;
 
-	public void deleteReply(Integer rno) throws Exception;
+	public void deleteReply(Integer reply_no) throws Exception;
 
-	public List<ReplyVO> listPageReply(Integer bno, Criteria cri) throws Exception;
+	public List<ReplyVO> listPageReply(Integer board_no, Criteria cri) throws Exception;
 
 	// 페이징처리
-	public int countReply(Integer bno) throws Exception;
+	public int countReply(Integer board_no) throws Exception;
 
 	// 게시물의 댓글 수
-	public int getBno(Integer bno) throws Exception;
+	public int getBoardNo(Integer board_no) throws Exception;
 
-	public void updateReplyCnt(Integer bno, int amount) throws Exception;
+	public void updateReplyCnt(Integer board_no, int amount) throws Exception;
 
 	// =========================CosmeticDao=========================
 	

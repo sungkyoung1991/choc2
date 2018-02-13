@@ -36,9 +36,9 @@ public class AdminDaoImpl implements AdminDao {
 	}
 
 	@Override
-	public BoardVO getBoard(Integer bno) throws Exception {
+	public BoardVO getBoard(Integer board_no) throws Exception {
 		// TODO Auto-generated method stub
-		return session.selectOne(namespace + ".getBoard", bno);
+		return session.selectOne(namespace + ".getBoard", board_no);
 	}
 
 	@Override
@@ -48,9 +48,9 @@ public class AdminDaoImpl implements AdminDao {
 	}
 
 	@Override
-	public void deleteBoard(Integer bno) throws Exception {
+	public void deleteBoard(Integer board_no) throws Exception {
 		// TODO Auto-generated method stub
-		session.delete(namespace + ".deleteBoard", bno);
+		session.delete(namespace + ".deleteBoard", board_no);
 	}
 
 	@Override
@@ -79,46 +79,46 @@ public class AdminDaoImpl implements AdminDao {
 	}
 
 	@Override
-	public void deleteReply(Integer rno) throws Exception {
+	public void deleteReply(Integer reply_no) throws Exception {
 		// TODO Auto-generated method stub
-		session.delete(namespace + ".deleteReply", rno);
+		session.delete(namespace + ".deleteReply", reply_no);
 	}
 
 	@Override
-	public List<ReplyVO> listPageReply(Integer bno, Criteria cri) throws Exception {
+	public List<ReplyVO> listPageReply(Integer board_no, Criteria cri) throws Exception {
 		// TODO Auto-generated method stub
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 
-		paramMap.put("bno", bno);
+		paramMap.put("board_no", board_no);
 		paramMap.put("cri", cri);
 
 		return session.selectList(namespace + ".listReplyPage", paramMap);
 	}
 
 	@Override
-	public int countReply(Integer bno) throws Exception {
+	public int countReply(Integer board_no) throws Exception {
 		// TODO Auto-generated method stub
-		return session.selectOne(namespace + ".countReply", bno);
+		return session.selectOne(namespace + ".countReply", board_no);
 	}
 
 	@Override
-	public int getBno(Integer bno) throws Exception {
+	public int getBoardNo(Integer board_no) throws Exception {
 		// TODO Auto-generated method stub
-		return session.selectOne(namespace + ".getBno", bno);
+		return session.selectOne(namespace + ".getBoard_No", board_no);
 	}
 
 	@Override
-	public void updateViewCnt(Integer bno) throws Exception {
+	public void updateViewCnt(Integer board_no) throws Exception {
 		// TODO Auto-generated method stub
-		session.update(namespace + ".updateViewCnt", bno);
+		session.update(namespace + ".updateViewCnt", board_no);
 	}
 
 	@Override
-	public void updateReplyCnt(Integer bno, int amount) throws Exception {
+	public void updateReplyCnt(Integer board_no, int amount) throws Exception {
 		// TODO Auto-generated method stub
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 
-		paramMap.put("bno", bno);
+		paramMap.put("board_no", board_no);
 		paramMap.put("amount", amount);
 
 		session.update(namespace + ".updateReplyCnt", paramMap);

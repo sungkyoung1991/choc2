@@ -6,16 +6,16 @@
 <mapper namespace="AdminMapper">
 
 <!-- 	<resultMap type="boardVO" id="boardSelectMap">
-		<result property="bno" column="BNO" jdbcType="INT"/>
+		<result property="board_no" column="BOARD_NO" jdbcType="INT"/>
 		<result property="title" column="TITLE" jdbcType="VARCHAR"/>
 		<result property="writer" column="WRITER" jdbcType="VARCHAR"/>
 		<result property="content" column="CONTENT" jdbcType="VARCHAR"/>
 		<result property="viewcnt" column="VIEWCNT" jdbcType="VARCHAR"/>
 		<result property="regdate" column="REGDATE" jdbcType="DATE"/>
 	</resultMap> -->
-<!-- 	<resultMap type="replySelectMap" id="replyVO">
-		<result property="bno" column="BNO" jdbcType="INT"/>
-		<result property="rno" column="RNO" jdbcType="INT"/>
+<!-- 	<resultMap type="replyVO" id="replySelectMap">
+		<result property="board_no" column="BOARD_NO" jdbcType="INT"/>
+		<result property="reply_no" column="BOARD_NO" jdbcType="INT"/>
 		<result property="replytext" column="REPLYTEXT" jdbcType="VARCHAR"/>
 		<result property="replyer" column="REPLYER" jdbcType="VARCHAR"/>
 		<result property="regdate" column="REGDATE" jdbcType="DATE"/>
@@ -33,25 +33,25 @@
 
 	<select id="getBoard" resultType="boardVO">
 		SELECT
-		BNO,TITLE,CONTENT,WRITER,REGDATE,VIEWCNT
+		BOARD_NO,TITLE,CONTENT,WRITER,REGDATE,VIEWCNT
 		FROM
 		TBL_BOARD
-		WHERE BNO =
-		#{bno}
+		WHERE BOARD_NO =
+		#{board_no}
 
 	</select>
 
 	<update id="updateBoard">
 		UPDATE TBL_BOARD SET TITLE = #{title}, CONTENT =
 		#{content}
-		WHERE BNO = #{bno}
+		WHERE BOARD_NO = #{board_no}
 
 	</update>
 
 	<delete id="deleteBoard">
 		DELETE
 		FROM TBL_BOARD
-		WHERE BNO = #{bno}
+		WHERE BOARD_NO = #{board_no}
 
 	</delete>
 
@@ -60,14 +60,14 @@
 	<![CDATA[  
 	  SELECT * 
 	  FROM TBL_BOARD 
-	  WHERE BNO > 0
+	  WHERE BOARD_NO > 0
 
 	]]>
 
 		<include refid="search"></include>
 	  
 	<![CDATA[    
-	  ORDER BY BNO DESC
+	  ORDER BY BOARD_NO DESC
 	  LIMIT #{pageStart}, #{perPageNum}
 	]]>
 	</select>
@@ -75,9 +75,9 @@
 
 	<select id="countBoard" resultType="int">
 	<![CDATA[  
-	  SELECT COUNT(BNO) 
+	  SELECT COUNT(BOARD_NO) 
 	  FROM TBL_BOARD 
-	  WHERE BNO > 0 
+	  WHERE BOARD_NO > 0 
 
 	]]>
 		<include refid="search"></include>
@@ -86,17 +86,17 @@
 	<!-- Reply Mapper -->
 	
 	<insert id="createReply">
-		INSERT INTO TBL_REPLY (BNO,REPLYTEXT,REPLYER)
-		VALUES (#{bno},#{replytext},#{replyer})
+		INSERT INTO TBL_REPLY (BOARD_NO,REPLYTEXT,REPLYER)
+		VALUES (#{board_no},#{replytext},#{replyer})
 	</insert>
 
 	<update id="updateReply">
 		UPDATE TBL_REPLY SET REPLYTEXT = #{replytext}, UPDATEDATE = NOW()
-		WHERE rno = #{rno}
+		WHERE REPLY_NO = #{reply_no}
 	</update>
 
 	<delete id="deleteReply">
-		DELETE FROM TBL_REPLY WHERE rno=#{rno}
+		DELETE FROM TBL_REPLY WHERE REPLY_NO=#{reply_no}
 	</delete>
 
 	<select id="listReplyPage" resultType="replyVO">
@@ -105,36 +105,36 @@
 		FROM
 		TBL_REPLY
 		WHERE
-		BNO=#{bno}
+		BOARD_NO=#{board_no}
 		ORDER BY RNO DESC
 		LIMIT #{cri.pageStart}, #{cri.perPageNum}
 	</select>
 
 	<select id="countReply" resultType="int">
 		SELECT
-		COUNT(BNO)
+		COUNT(BOARD_NO)
 		FROM
 		TBL_REPLY
 		WHERE
-		BNO=#{bno}
+		BOARD_NO=#{board_no}
 	</select>
 
-	<select id="getBno" resultType="int">
-		SELECT BNO
+	<select id="getBoard_No" resultType="int">
+		SELECT BOARD_NO
 		FROM TBL_REPLY
-		WHERE RNO=#{rno}
+		WHERE REPLY_NO=#{reply_no}
 	</select>
 	
 	<update id="updateReplyCnt">
 		UPDATE TBL_BOARD
 		SET REPLYCNT = REPLYCNT + #{amount}
-		WHERE BNO=#{bno}
+		WHERE BOARD_NO=#{board_no}
 	</update>
 
 	<update id="updateViewCnt">
 		UPDATE TBL_BOARD
 		SET VIEWCNT=VIEWCNT +1
-		WHERE BNO = #{bno}
+		WHERE BOARD_NO = #{board_no}
 	</update>
 
 	<!-- Cosmetic Mapper -->

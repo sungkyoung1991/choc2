@@ -33,7 +33,7 @@
 
 						<div class="form-group">
 							<label for="exampleInputEmail1">BNO</label> <input type="text"
-								name='bno' class="form-control" value="${boardVO.bno}"
+								name='board_no' class="form-control" value="${boardVO.board_no}"
 								readonly="readonly">
 						</div>
 

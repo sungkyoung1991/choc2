@@ -4,18 +4,13 @@ import java.util.Date;
 
 public class BoardVO {
 	
-	private int bno;
+	private int board_no;
 	private String title;
 	private String writer;
 	private String content;
 	private int viewcnt;
 	private Date regdate;
-	public int getBno() {
-		return bno;
-	}
-	public void setBno(int bno) {
-		this.bno = bno;
-	}
+
 	public String getTitle() {
 		return title;
 	}
@@ -48,10 +43,16 @@ public class BoardVO {
 	}
 	@Override
 	public String toString() {
-		return "[ bno : "+ bno
+		return "[ board_no : "+ board_no
 				+"/ title : " + title
 				+"/ writer : " + writer
 				+"/ viewcnt : " + viewcnt
 				+"/ regdate : " + regdate + " ]"	;
+	}
+	public int getBoard_no() {
+		return board_no;
+	}
+	public void setBoard_no(int board_no) {
+		this.board_no = board_no;
 	}
 }

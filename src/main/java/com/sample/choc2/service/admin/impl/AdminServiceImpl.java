@@ -32,9 +32,9 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
-	public BoardVO getBoard(Integer bno) throws Exception {
+	public BoardVO getBoard(Integer board_no) throws Exception {
 		// TODO Auto-generated method stub
-		return adminDao.getBoard(bno);
+		return adminDao.getBoard(board_no);
 	}
 
 	@Override
@@ -44,9 +44,9 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
-	public void deleteBoard(Integer bno) throws Exception {
+	public void deleteBoard(Integer board_no) throws Exception {
 		// TODO Auto-generated method stub
-		adminDao.deleteBoard(bno);
+		adminDao.deleteBoard(board_no);
 	}
 
 	@Override
@@ -74,37 +74,37 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
-	public void deleteReply(Integer rno) throws Exception {
+	public void deleteReply(Integer reply_no) throws Exception {
 		// TODO Auto-generated method stub
-		adminDao.deleteReply(rno);
+		adminDao.deleteReply(reply_no);
 	}
 
 	@Override
-	public List<ReplyVO> listReplyPage(Integer bno, Criteria cri) throws Exception {
+	public List<ReplyVO> listReplyPage(Integer board_no, Criteria cri) throws Exception {
 		// TODO Auto-generated method stub
-		return adminDao.listPageReply(bno, cri);
+		return adminDao.listPageReply(board_no, cri);
 	}
 
 	@Override
-	public int countReply(Integer bno) throws Exception {
+	public int countReply(Integer board_no) throws Exception {
 		// TODO Auto-generated method stub
-		return adminDao.countReply(bno);
+		return adminDao.countReply(board_no);
 	}
 
 	@Override
-	public void updateViewCnt(Integer bno) throws Exception {
+	public void updateViewCnt(Integer board_no) throws Exception {
 		// TODO Auto-generated method stub
-		adminDao.updateViewCnt(bno);
+		adminDao.updateViewCnt(board_no);
 	}
 
 	@Override
-	public int getBno(Integer bno) throws Exception {
+	public int getBoardNo(Integer board_no) throws Exception {
 		// TODO Auto-generated method stub
-		return adminDao.getBno(bno);
+		return adminDao.getBoardNo(board_no);
 	}
 
 	@Override
-	public void updateReplyCnt(Integer bno, int amount) throws Exception {
+	public void updateReplyCnt(Integer board_no, int amount) throws Exception {
 		// TODO Auto-generated method stub
 		//adminDao.updateReply();
 	}

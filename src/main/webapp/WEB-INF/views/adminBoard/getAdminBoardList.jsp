@@ -69,9 +69,9 @@
 						<c:forEach items="${list}" var="boardVO">
 
 							<tr>
-								<td>${boardVO.bno}</td>
+								<td>${boardVO.board_no}</td>
 								<td><a
-									href='/admin/board/get${pageMaker.makeSearch(pageMaker.cri.page) }&bno=${boardVO.bno}'>
+									href='/admin/board/get${pageMaker.makeSearch(pageMaker.cri.page) }&board_no=${boardVO.board_no}'>
 										${boardVO.title}</a></td>
 								<td>${boardVO.writer}</td>
 								<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
