@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -55,7 +56,7 @@ public class AdminController {
 
 	// 리스트 조회
 	@RequestMapping(value = "/board/list", method = RequestMethod.GET)
-	public String listBoard(@ModelAttribute("cri") SearchCriteria cri, Model model) throws Exception {
+	public String listBoard(@ModelAttribute("cri") @Validated SearchCriteria cri, Model model) throws Exception {
 		logger.info("list get....");
 
 		model.addAttribute("list", adminService.listBoard(cri));
