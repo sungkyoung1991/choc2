@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
-import com.sample.choc2.service.domain.User;
+import com.sample.choc2.service.domain.UserVO;
 import com.sample.choc2.service.main.MainDao;
 
 @Repository("mainDaoImpl")
@@ -28,7 +28,7 @@ public class MainDaoImpl implements MainDao {
 
 		Map<String, Object> mainModuleList = new HashMap<String, Object>();
 
-		List<User> mainUserList = sqlSession.selectList("UserMapper.");
+		List<UserVO> mainUserList = sqlSession.selectList("UserMapper.");
 
 
 		mainModuleList.put("mainUserList", mainUserList);

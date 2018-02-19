@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.sample.choc2.common.SearchCriteria;
 import com.sample.choc2.service.domain.CosmeticVO;
-import com.sample.choc2.service.domain.User;
+import com.sample.choc2.service.domain.UserVO;
 import com.sample.choc2.service.user.UserDao;
 
 
@@ -30,12 +30,12 @@ public class UserDaoImpl implements UserDao{
 	}
 
 
-	public User getUser(String userId) throws Exception {
+	public UserVO getUser(String userId) throws Exception {
 		return sqlSession.selectOne("UserMapper.getUser", userId);
 	}
 
 	@Override
-	public void createUser(User user) throws Exception {
+	public void createUser(UserVO user) throws Exception {
 		// TODO Auto-generated method stub
 		sqlSession.insert("UserMapper.createUser",user);
 	}
@@ -52,40 +52,5 @@ public class UserDaoImpl implements UserDao{
 		return sqlSession.selectOne("UserMapper.nickCheck",nickName);
 	}
 
-	@Override
-	public void createCosmetic(CosmeticVO cosmetic) throws Exception {
-		// TODO Auto-generated method stub
-		sqlSession.insert("UserMapper.createCosmetic", cosmetic);
-	}
-
-	@Override
-	public List<CosmeticVO> getCosmeticList(SearchCriteria cri) throws Exception {
-		// TODO Auto-generated method stub
-		return sqlSession.selectList("UserMapper.getCosmeticList",cri);
-	}
-
-	@Override
-	public int totalCount(SearchCriteria cri) throws Exception {
-		// TODO Auto-generated method stub
-		return sqlSession.selectOne("UserMapper.totalCount",cri);
-	}
-
-	@Override
-	public CosmeticVO getCosmetic(int cosmetic_no) throws Exception {
-		// TODO Auto-generated method stub
-		return sqlSession.selectOne("UserMapper.getCosmetic",cosmetic_no);
-	}
-
-	@Override
-	public void updateCosmetic(CosmeticVO cosmetic) throws Exception {
-		// TODO Auto-generated method stub
-		sqlSession.update("UserMapper.updateCosmetic",cosmetic);
-	}
-
-	@Override
-	public void deleteCosmetic(int cosmetic_no) throws Exception {
-		// TODO Auto-generated method stub
-		sqlSession.delete("UserMapper.deleteCosmetic", cosmetic_no);
-	}
 	
 }

@@ -1,6 +1,6 @@
 package com.sample.choc2.service.domain;
 
-public class User {
+public class UserVO {
 	
 	///Field
 	private int userNo;
@@ -18,7 +18,7 @@ public class User {
 	private String role; //사용자, 관리자, 슈퍼유저
 	
 	///Constructor
-	public User(){
+	public UserVO(){
 	}
 	
 	

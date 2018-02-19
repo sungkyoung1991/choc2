@@ -179,6 +179,7 @@ $(document).ready(function(){
 
 <h2>&nbsp;회원가입 페이지</h2>
 <form action="/user/createUser" method="post" name="sform">
+	<!-- <input type="hidden" name="userNo"> -->
 	<table>
 		<tr>
 			<th>아이디</th>

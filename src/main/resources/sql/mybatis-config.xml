@@ -11,7 +11,7 @@
 	</settings>	
 	
 	<typeAliases>
-		<typeAlias alias="user" type="com.sample.choc2.service.domain.User" />
+		<typeAlias alias="userVO" type="com.sample.choc2.service.domain.UserVO" />
 		<typeAlias alias="boardVO" type="com.sample.choc2.service.domain.BoardVO" />
 		<typeAlias alias="replyVO" type="com.sample.choc2.service.domain.ReplyVO" />
 		<typeAlias alias="cosmetic" type="com.sample.choc2.service.domain.CosmeticVO" />
@@ -24,6 +24,7 @@
 		<mapper resource="sql/AdminMapper.xml"/>
 		<mapper resource="sql/ProductMapper.xml"/>
 		<mapper resource="sql/ReplyMapper.xml"/>
+		<mapper resource="sql/CosmeticMapper.xml" />
 	</mappers>
 
 </configuration>

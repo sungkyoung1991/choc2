@@ -6,7 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import com.sample.choc2.service.domain.User;
+import com.sample.choc2.service.domain.UserVO;
 
 public class LogonCheckInterceptor extends HandlerInterceptorAdapter {
 
@@ -50,7 +50,7 @@ public class LogonCheckInterceptor extends HandlerInterceptorAdapter {
 		HttpSession session = request.getSession(true);
 		// request 에 해당하는 session 을 가져온다. session 이 없으면 boolean 타입으로 session create 여부를
 		// 정의한다.
-		User user = (User) session.getAttribute("user");
+		UserVO user = (UserVO) session.getAttribute("user");
 		// login Method를 통해 "user"로 setAttribute 된 User 정보를 가져온다.
 		
 		System.out.println("user 정보.." + user);
