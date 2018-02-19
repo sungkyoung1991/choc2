@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sample.choc2.service.domain.User;
+import com.sample.choc2.service.domain.UserVO;
 import com.sample.choc2.service.user.UserService;
 
 @RestController
@@ -30,7 +30,7 @@ public class UserRestController {
 	
 	
 	@RequestMapping(value="json/getUser", method=RequestMethod.POST)
-	public User getUser(@RequestParam("userId")String userId)throws Exception{
+	public UserVO getUser(@RequestParam("userId")String userId)throws Exception{
 		
 		System.out.println("/userRest/json/getUser : GET");
 		
@@ -41,11 +41,11 @@ public class UserRestController {
 	
 	//안드로이드
 	@RequestMapping(value="json/login", method=RequestMethod.POST)
-	public User login(@RequestBody User user, HttpSession session)throws Exception{
+	public UserVO login(@RequestBody UserVO user, HttpSession session)throws Exception{
 	
 		System.out.println("/userRest/json/login : POST");
 		
-		User dbUser=userService.getUser(user.getUserId());
+		UserVO dbUser=userService.getUser(user.getUserId());
 		if(user.getPassword().equals(dbUser.getPassword())) {
 	     session.setAttribute("user", user);
 		}
