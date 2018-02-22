@@ -15,6 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.sample.choc2.common.PageMaker;
 import com.sample.choc2.common.SearchCriteria;
 import com.sample.choc2.service.admin.AdminService;
+import com.sample.choc2.service.cosmetic.CosmeticService;
 import com.sample.choc2.service.domain.BoardVO;
 import com.sample.choc2.service.domain.CosmeticVO;
 
@@ -23,7 +24,14 @@ import com.sample.choc2.service.domain.CosmeticVO;
 public class AdminController {
 
 	private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
-
+	@Autowired
+	@Qualifier("cosmeticServiceImpl")
+	private CosmeticService cosmeticService;
+	
+	public void setCosmeticService(CosmeticService cosmeticService) {
+		this.cosmeticService = cosmeticService;
+	}
+	
 	@Autowired
 	@Qualifier("adminServiceImpl")
 	private AdminService adminService;
@@ -124,13 +132,13 @@ public class AdminController {
 
 	// =======================================Cosmetic Controller========================================================
 	//게시물 조회 
-/*	@RequestMapping(value = "/cosmetic/get", method = RequestMethod.GET)
+	@RequestMapping(value = "/cosmetic/get", method = RequestMethod.GET)
 	public String getCosmetic(@ModelAttribute("cri") SearchCriteria cri,
 			@RequestParam("cosmetic_no") int cosmetic_no, Model model) throws Exception {
 
 		logger.info("Cosmetic info ....");
 
-		model.addAttribute(adminService.getCosmetic(cosmetic_no));
+		model.addAttribute(cosmeticService.getCosmetic(cosmetic_no));
 
 		return "adminCosmetic/getAdminCosmetic";
 	}
@@ -139,12 +147,12 @@ public class AdminController {
 	public String getCosmeticList(@ModelAttribute("cri") SearchCriteria cri, Model model) throws Exception {
 
 		logger.info("Cosmetic List info ....");
-		model.addAttribute("list",adminService.listCosmetic(cri));
+		model.addAttribute("list",cosmeticService.getCosmeticList(cri));
 		
 		PageMaker pageMaker = new PageMaker();
 		
 		pageMaker.setCri(cri);
-		pageMaker.setTotalCount(adminService.countCosmetic(cri));
+		pageMaker.setTotalCount(cosmeticService.totalCountCosmetic(cri));
 		
 		model.addAttribute("pageMaker",pageMaker);
 		
@@ -164,7 +172,7 @@ public class AdminController {
 
 		logger.info("Cosmetic register post ....");
 
-		adminService.createCosmetic(cosmeticVO);
+		cosmeticService.createCosmetic(cosmeticVO);
 		
 		rttr.addFlashAttribute("msg","SUCCESS");
 		return "redirect:/admin/cosmetic/list";
@@ -176,7 +184,7 @@ public class AdminController {
 
 		logger.info("Cosmetic info ....");
 
-		model.addAttribute(adminService.getCosmetic(cosmetic_no));
+		model.addAttribute(cosmeticService.getCosmetic(cosmetic_no));
 
 		return "adminCosmetic/updateAdminCosmetic";
 	}
@@ -184,8 +192,10 @@ public class AdminController {
 	@RequestMapping(value = "/cosmetic/update", method = RequestMethod.POST)
 	public String updateCosmetic(CosmeticVO cosmeticVO, SearchCriteria cri, RedirectAttributes rttr) throws Exception {
 
-		logger.info(rttr.toString());
-		adminService.updateCosmetic(cosmeticVO);
+		logger.error(rttr.toString());
+		logger.error(cosmeticVO.toString());
+		
+		cosmeticService.updateCosmetic(cosmeticVO);
 		rttr.addAttribute("page", cri.getPage());
 		rttr.addAttribute("perPageNum", cri.getPerPageNum());
 		rttr.addAttribute("searchType", cri.getSearchType());
@@ -202,7 +212,7 @@ public class AdminController {
 
 		logger.info("Cosmetic info ....");
 
-		adminService.deleteCosmetic(cosmetic_no);
+		cosmeticService.deleteCosmetic(cosmetic_no);
 		rttr.addAttribute("page", cri.getPage());
 		rttr.addAttribute("perPageNum", cri.getPerPageNum());
 		rttr.addAttribute("searchType", cri.getSearchType());
@@ -212,5 +222,5 @@ public class AdminController {
 
 		return "redirect:/admin/cosmetic/list";
 	}
-*/
+
 }

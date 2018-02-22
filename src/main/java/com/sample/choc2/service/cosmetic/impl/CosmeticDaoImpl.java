@@ -3,6 +3,8 @@ package com.sample.choc2.service.cosmetic.impl;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
@@ -14,6 +16,7 @@ import com.sample.choc2.service.domain.CosmeticVO;
 @Repository("cosmeticDaoImpl")
 public class CosmeticDaoImpl implements CosmeticDao {
 	
+	private static final Logger logger = LoggerFactory.getLogger(CosmeticDaoImpl.class);
 	///Field
 		@Autowired
 		@Qualifier("sqlSessionTemplate")
@@ -40,13 +43,13 @@ public class CosmeticDaoImpl implements CosmeticDao {
 	}
 
 	@Override
-	public int totalCount(SearchCriteria cri) throws Exception {
+	public int totalCountCosmetic(SearchCriteria cri) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne("CosmeticMapper.totalCount",cri);
+		return sqlSession.selectOne("CosmeticMapper.totalCountCosmetic",cri);
 	}
 
 	@Override
-	public CosmeticVO getCosmetic(int cosmetic_no) throws Exception {
+	public CosmeticVO getCosmetic(Integer cosmetic_no) throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("CosmeticMapper.getCosmetic",cosmetic_no);
 	}
@@ -54,11 +57,13 @@ public class CosmeticDaoImpl implements CosmeticDao {
 	@Override
 	public void updateCosmetic(CosmeticVO cosmetic) throws Exception {
 		// TODO Auto-generated method stub
+		logger.error(cosmetic.toString());
 		sqlSession.update("CosmeticMapper.updateCosmetic",cosmetic);
+		
 	}
 
 	@Override
-	public void deleteCosmetic(int cosmetic_no) throws Exception {
+	public void deleteCosmetic(Integer cosmetic_no) throws Exception {
 		// TODO Auto-generated method stub
 		sqlSession.delete("CosmeticMapper.deleteCosmetic", cosmetic_no);
 	}

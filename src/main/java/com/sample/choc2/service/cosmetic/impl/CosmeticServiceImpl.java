@@ -40,13 +40,13 @@ public class CosmeticServiceImpl implements CosmeticService{
 	}
 
 	@Override
-	public int totalCount(SearchCriteria cri) throws Exception {
+	public int totalCountCosmetic(SearchCriteria cri) throws Exception {
 		// TODO Auto-generated method stub
-		return cosmeticDao.totalCount(cri);
+		return cosmeticDao.totalCountCosmetic(cri);
 	}
 
 	@Override
-	public CosmeticVO getCosmetic(int cosmetic_no) throws Exception {
+	public CosmeticVO getCosmetic(Integer cosmetic_no) throws Exception {
 		// TODO Auto-generated method stub
 		return cosmeticDao.getCosmetic(cosmetic_no);
 	}
@@ -58,7 +58,7 @@ public class CosmeticServiceImpl implements CosmeticService{
 	}
 
 	@Override
-	public void deleteCosmetic(int cosmetic_no) throws Exception {
+	public void deleteCosmetic(Integer cosmetic_no) throws Exception {
 		// TODO Auto-generated method stub
 		cosmeticDao.deleteCosmetic(cosmetic_no);
 	}

@@ -7,16 +7,16 @@ import com.sample.choc2.service.domain.CosmeticVO;
 
 public interface CosmeticDao {
 
-	public void createCosmetic(CosmeticVO cosmetic) throws Exception;
-
 	public List<CosmeticVO> getCosmeticList(SearchCriteria cri) throws Exception;
 
-	public int totalCount(SearchCriteria cri) throws Exception;
-
-	public CosmeticVO getCosmetic(int cosmetic_no) throws Exception;
+	public void createCosmetic(CosmeticVO cosmeticVO)throws Exception;
 	
-	public void updateCosmetic(CosmeticVO cosmetic) throws Exception;
-
-	public void deleteCosmetic(int cosmetic_no) throws Exception;
+	public CosmeticVO getCosmetic(Integer cosmetic_no)throws Exception;
+	
+	public void updateCosmetic(CosmeticVO cosmeticVO)throws Exception;
+	
+	public void deleteCosmetic(Integer cosmetic_no)throws Exception;
+	
+	public int totalCountCosmetic(SearchCriteria cri)throws Exception;
 	
 }

@@ -10,7 +10,7 @@
 </head>
 <body>
 	<form name="cform" action="/user/updateCosmetic" method="post">
-		<input type="hidden" name="cosmetic_no value=" ${cinfo.cosmetic_no}" />
+		<input type="hidden" name="cosmetic_no" value="${cinfo.cosmetic_no}" />
 		<input type='hidden' name='page' value="${cri.page}"> 
 		<input type='hidden' name='perPageNum' value="${cri.perPageNum}"> 
 		<input type='hidden' name='searchType' value="${cri.searchType}"> 

@@ -14,7 +14,7 @@
 		<typeAlias alias="userVO" type="com.sample.choc2.service.domain.UserVO" />
 		<typeAlias alias="boardVO" type="com.sample.choc2.service.domain.BoardVO" />
 		<typeAlias alias="replyVO" type="com.sample.choc2.service.domain.ReplyVO" />
-		<typeAlias alias="cosmetic" type="com.sample.choc2.service.domain.CosmeticVO" />
+		<typeAlias alias="cosmeticVO" type="com.sample.choc2.service.domain.CosmeticVO" />
 		<typeAlias alias="productVO" type="com.sample.choc2.service.domain.ProductVO" />
 		<typeAlias alias="search" type="com.sample.choc2.common.Search" />
 	</typeAliases>

@@ -6,13 +6,13 @@
 
 <mapper namespace="CosmeticMapper">		
  
-	  <insert id="createCosmetic" parameterType="cosmetic">
+	  <insert id="createCosmetic" parameterType="cosmeticVO">
 	  	INSERT INTO
 	 	TBL_COSMETIC(BRAND,MODEL,PRODUCT,AMOUNT,PRICE,INGREDIENT)
 	 	VALUES(#{brand},#{model},#{product},#{amount},#{price},#{ingredient})
 	  </insert>
 	  
-	  <select id="getCosmeticList" resultType="cosmetic">
+	  <select id="getCosmeticList" resultType="cosmeticVO">
 	  <![CDATA[
 		SELECT * FROM TBL_COSMETIC WHERE COSMETIC_NO>0 
 	  ]]>
@@ -26,7 +26,7 @@
 		
 	  </select>
 	  
-	  <select id="totalCount" resultType="int">
+	  <select id="totalCountCosmetic" resultType="int">
 		<![CDATA[  
 	  		SELECT COUNT(COSMETIC_NO) 
 	  		FROM TBL_COSMETIC 
@@ -37,17 +37,20 @@
 		<include refid="search"></include>
 	</select>
 	  
-	  <select id="getCosmetic" resultType="cosmetic">
-	 		SELECT * FROM TBL_COSMETIC WHERE COSMETIC_NO=#{cosmtic_no}
+	  <select id="getCosmetic" resultType="cosmeticVO">
+	 		SELECT * 
+	 		FROM TBL_COSMETIC 
+	 		WHERE COSMETIC_NO=#{cosmtic_no}
 	  
 	  </select>
 	  
-	  <update id="updateCosmetic" parameterType="cosmetic">
-	 	UPDATE TBL_COSMETIC SET BRAND = #{brand} ,MODEL = #{model} ,PRODUCT = #{product} ,AMOUNT = #{amount} ,PRICE = #{price} ,INGREDIENT = #{ingredient} 
+	  <update id="updateCosmetic" parameterType="cosmeticVO">
+	 	UPDATE TBL_COSMETIC 
+	 	SET BRAND = #{brand} ,MODEL = #{model} ,PRODUCT = #{product} ,AMOUNT = #{amount} ,PRICE = #{price} ,INGREDIENT = #{ingredient} 
 		WHERE COSMETIC_NO = #{cosmetic_no}
 	  </update>
 	  
-	  <delete id="deleteCosmetic" parameterType="cosmetic">
+	  <delete id="deleteCosmetic" parameterType="cosmeticVO">
 	  	DELETE FROM TBL_COSMETIC WHERE COSMETIC_NO = #{cosmetic_no}
 	  </delete>
 	  
