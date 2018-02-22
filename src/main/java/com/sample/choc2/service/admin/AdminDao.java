@@ -9,7 +9,9 @@ import com.sample.choc2.service.domain.CosmeticVO;
 import com.sample.choc2.service.domain.ReplyVO;
 
 public interface AdminDao {
+	
 	// =========================BoardDao=========================
+	
 	public void createBoard(BoardVO boardVO) throws Exception;
 
 	public BoardVO getBoard(Integer board_no) throws Exception;
@@ -23,8 +25,9 @@ public interface AdminDao {
 	public int countBoard(SearchCriteria cri) throws Exception;
 
 	public void updateViewCnt(Integer board_no) throws Exception;
-
+	
 	// =========================CosmeticDao=========================
+	
 	/*
 	public void createCosmetic(CosmeticVO cosmeticVO)throws Exception;
 	
@@ -38,4 +41,5 @@ public interface AdminDao {
 	
 	public int countCosmetic(SearchCriteria cri)throws Exception;
 */
+	
 }
