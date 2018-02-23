@@ -58,7 +58,7 @@
 								name='price' class="form-control" value="${cosmeticVO.price}"
 								placeholder="Enter Price">
 						</div>
-						<div class="form-group">
+						<div class="form-group" id="pre_set">
 							<label for="exampleInputEmail1">Ingredient</label> <input
 								type="text" name='ingredient' class="form-control"
 								value="${cosmeticVO.ingredient}" placeholder="Enter Ingredient">

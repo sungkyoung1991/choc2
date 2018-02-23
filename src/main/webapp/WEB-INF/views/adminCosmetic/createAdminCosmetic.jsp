@@ -6,6 +6,21 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<script type="text/javascript">
+
+    function add_item(){
+        // pre_set 에 있는 내용을 읽어와서 처리..
+        var div = document.createElement('div');
+        div.innerHTML = document.getElementById('pre_set').innerHTML;
+        document.getElementById('field').appendChild(div);
+    }
+ 
+    function remove_item(obj){
+        // obj.parentNode 를 이용하여 삭제
+        document.getElementById('field').removeChild(obj.parentNode);
+    }
+
+</script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%@include file="../include/header.jsp"%>
 </head>
@@ -49,11 +64,13 @@
 								name='price' class="form-control" value="${cosmeticVO.price}"
 								placeholder="Enter Price">
 						</div>
-						<div class="form-group">
-							<label for="exampleInputEmail1">Ingredient</label> <input
-								type="text" name='ingredient' class="form-control"
-								value="${cosmeticVO.ingredient}" placeholder="Enter Ingredient">
+						<label for="exampleInputEmail1">Ingredient</label>
+						<div class="form-group" id="pre_set">
+							<input type="text" name='ingredient' class="form-control"
+								value="${cosmeticVO.ingredient}" placeholder="Enter Ingredient" style="width:200px"><input type="button" value="삭제" onclick="remove_item(this)">
 						</div>
+						<div id="field"></div>
+						<input type="button" value=" 추가 " onclick="add_item()"><br>
 					</div>
 					
 					<div class="box-footer">
