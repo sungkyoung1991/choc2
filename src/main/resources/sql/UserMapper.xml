@@ -21,6 +21,35 @@
  		<result property="jumin"		column="JUMIN"		jdbcType="INTEGER" />
 		<result property="role"		column="ROLE"		jdbcType="VARCHAR" />
 	</resultMap>  
+	
+	<resultMap type="userVO" id="userCommonSelectMap">
+		<result property="userNo" 	column="USER_NO" 	jdbcType="INTEGER"/> 
+		<result property="userId" 	column="USERID" 	 	jdbcType="VARCHAR"/>
+		<result property="nickName"  column="NICKNAME"   jdbcType="VARCHAR" />
+		<result property="name"  	column="NAME"   		jdbcType="VARCHAR" />
+		<result property="email"  	column="EMAIL"   	jdbcType="VARCHAR" />
+		<result property="address"	column="ADDRESS"		jdbcType="VARCHAR" />
+		<result property="phoneNo"	column="PHONENO"		jdbcType="INTEGER" />
+		<result property="gender"	column="GENDER"		jdbcType="VARCHAR" /> 
+		<result property="age"		column="AGE"			jdbcType="INTEGER" />
+		<result property="role"		column="ROLE"		jdbcType="VARCHAR" />
+		
+		<result property="common_no" column="common_no" jdbcType="INTEGER"/>
+	</resultMap>
+	
+	<select id="getUserList" resultMap="userCommonSelectMap">
+		SELECT C.COMMON_NO, C.ROLE, U.USERID,U.NAME, 
+		U.NICKNAME, U.EMAIL,U.ADDRESS,U.PHONENO,U.GENDER,U.AGE,U.USER_NO
+		FROM TBL_COMMON AS C INNER JOIN TBL_USER AS U
+		ON C.ROLE = U.ROLE
+		ORDER BY C.COMMON_NO ASC;
+	</select>
+	
+	<select id="getSuperUser" resultType="userVO">
+		SELECT *
+		FROM TBL_USER
+		WHERE USER_NO = #{userNo}
+	</select>
 
 	<!--  대소문자 test  -->
  	 <select id="getUser" parameterType="String"	resultMap="userSelectMap">

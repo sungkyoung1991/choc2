@@ -52,5 +52,17 @@ public class UserDaoImpl implements UserDao{
 		return sqlSession.selectOne("UserMapper.nickCheck",nickName);
 	}
 
+	@Override
+	public List<UserVO> getUserList() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("UserMapper.getUserList");
+	}
+
+	@Override
+	public UserVO getSuperUser(Integer userNo) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("UserMapper.getSuperUser");
+	}
+
 	
 }

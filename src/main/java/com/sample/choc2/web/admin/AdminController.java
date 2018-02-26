@@ -18,6 +18,7 @@ import com.sample.choc2.service.admin.AdminService;
 import com.sample.choc2.service.cosmetic.CosmeticService;
 import com.sample.choc2.service.domain.BoardVO;
 import com.sample.choc2.service.domain.CosmeticVO;
+import com.sample.choc2.service.user.UserService;
 
 @Controller
 @RequestMapping("/admin/*")
@@ -39,6 +40,14 @@ public class AdminController {
 	public void setAdminService(AdminService adminService) {
 		this.adminService = adminService;
 	}
+	
+//	@Autowired
+//	@Qualifier("userServiceImple")
+//	private UserService userService;
+//	
+//	public void setUserService(UserService userService) {
+//		this.userService = userService;
+//	}
 
 	// ===========================================Board Controller=====================================================
 	// 게시판 등록 화면
@@ -222,5 +231,6 @@ public class AdminController {
 
 		return "redirect:/admin/cosmetic/list";
 	}
+	
 
 }

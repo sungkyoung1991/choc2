@@ -16,6 +16,7 @@
 		<typeAlias alias="replyVO" type="com.sample.choc2.service.domain.ReplyVO" />
 		<typeAlias alias="cosmeticVO" type="com.sample.choc2.service.domain.CosmeticVO" />
 		<typeAlias alias="productVO" type="com.sample.choc2.service.domain.ProductVO" />
+		<typeAlias alias="commonVO" type="com.sample.choc2.service.domain.CommonVO" />
 		<typeAlias alias="search" type="com.sample.choc2.common.Search" />
 	</typeAliases>
 	
@@ -25,6 +26,7 @@
 		<mapper resource="sql/ProductMapper.xml"/>
 		<mapper resource="sql/ReplyMapper.xml"/>
 		<mapper resource="sql/CosmeticMapper.xml" />
+		<mapper resource="sql/CommonMapper.xml" />
 	</mappers>
 
 </configuration>
