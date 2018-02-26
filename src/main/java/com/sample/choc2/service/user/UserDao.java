@@ -16,6 +16,8 @@ public interface UserDao {
 	public String idCheck(String userId) throws Exception;
 
 	public String nickCheck(String nickName) throws Exception;
-
 	
+	public List<UserVO> getUserList()throws Exception;
+
+	public UserVO getSuperUser(Integer userNo)throws Exception;
 }

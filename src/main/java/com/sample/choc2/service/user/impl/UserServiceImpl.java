@@ -58,5 +58,18 @@ public class UserServiceImpl implements UserService{
 		return userDao.nickCheck(nickName);
 	}
 
+	@Override
+	public List<UserVO> getUserList() throws Exception {
+		// TODO Auto-generated method stub
+		return userDao.getUserList();
+	}
+
+	@Override
+	public UserVO getSuperUser(Integer userNo) throws Exception {
+		// TODO Auto-generated method stub
+		return userDao.getSuperUser(userNo);
+	}
+
+
 	
 }

@@ -20,5 +20,7 @@ public interface UserService {
 
 	public String nickCheck(String nickName) throws Exception;
 
+	public List<UserVO> getUserList()throws Exception;
 	
+	public UserVO getSuperUser(Integer userNo)throws Exception;
 }

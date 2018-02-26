@@ -1,7 +1,8 @@
 package com.sample.choc2.service.domain;
 
 public class UserVO {
-	
+	//UserManage
+	private int common_no;
 	///Field
 	private int userNo;
 	private String userId; //아이디
@@ -132,9 +133,19 @@ public class UserVO {
 
 	@Override
 	public String toString() {
-		return "User [userNo=" + userNo + ", userId=" + userId + ", password=" + password + ", nickName=" + nickName
+		return "Common [common_no "+common_no+"] User [userNo=" + userNo + ", userId=" + userId + ", password=" + password + ", nickName=" + nickName
 				+ ", name=" + name + ", email=" + email + ", address=" + address + ", phoneNo=" + phoneNo + ", gender="
 				+ gender + ", age=" + age + ", jumin=" + jumin + ", uuid=" + uuid + ", role=" + role + "]";
+	}
+
+
+	public int getCommon_no() {
+		return common_no;
+	}
+
+
+	public void setCommon_no(int common_no) {
+		this.common_no = common_no;
 	}
 
 
