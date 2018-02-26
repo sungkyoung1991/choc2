@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -181,6 +182,7 @@ $(document).ready(function(){
 <form action="/user/createUser" method="post" name="sform">
 	<!-- <input type="hidden" name="userNo"> -->
 	<table>
+		
 		<tr>
 			<th>아이디</th>
 			<td><input type="text" name="id" id="id" placeholder="영문,숫자 혼합 6~20자 이내" /> <input
@@ -204,6 +206,14 @@ $(document).ready(function(){
 			<th>이름</th>
 			<td><input type="text" name="name" id="name" /></td>
 		</tr>
+		
+		<c:if test="${fuser!=null}">
+			<tr>
+			<th>이메일</th>
+			<td><input type="text" name="email" id="email" value="${fuser.email}"/></td>
+		</tr>
+		</c:if>
+		
 		<tr>
 			<th>이메일</th>
 			<td><input type="text" name="email" id="email" placeholder="abc123@gmail.com" /></td>
@@ -217,6 +227,13 @@ $(document).ready(function(){
 			<td><input type="text" name="phoneNo" id="phoneNo"
 				placeholder="폰번호-없이 입력해주세요" /></td>
 		</tr>
+		<c:if test="${fuser.gender==female}">
+			<tr>
+			<th>이메일</th>
+			<td><input type="text" name="email" id="email" value="${fuser.email}"/></td>
+		</tr>
+		</c:if>
+		
 		<tr>
 			<th>성별</th>
 			<td><input type="radio" name="gender" value="여자" id="gender1">여자
@@ -233,10 +250,13 @@ $(document).ready(function(){
 		</tr>
 		<tr>
 			<th></th>
-			<td><input type="radio" name="role" value="개인" id="role1">개인
-				<input type="radio" name="role" value="사업자" id="role2"/>사업자 <input
-				type="radio" name="role" value="관리자" id="role3"/>관리자</td>
+			<td><input type="radio" name="role" value="USER" id="role1">개인
+				<input type="radio" name="role" value="ADMIN" id="role2"/>사업자 <input
+				type="radio" name="role" value="SUPER" id="role3"/>관리자</td>
 		</tr>
+		<!--  <input type="checkbox" name="check_info value="check1""/>체크1
+		<input type="checkbox" name="check_info value="check2""/>체크2
+		<input type="checkbox" name="check_info value="check3""/>체크3  -->
 	</table>
 	<button type="submit" onclick="return confirm();">확인</button>
 </form>

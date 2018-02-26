@@ -55,6 +55,8 @@ public class CosmeticController {
 		
 		model.addAttribute("clist",cosmeticService.getCosmeticList(cri));//searchtype,keyword
 		
+		logger.info(""+cosmeticService.getCosmeticList(cri));
+		
 		PageMaker pageMaker = new PageMaker();
 		
 		pageMaker.setCri(cri); //현재페이지, 페이지안 데이터갯수

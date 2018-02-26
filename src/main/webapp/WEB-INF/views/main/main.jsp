@@ -166,15 +166,25 @@
  	<button type="button" class="button facebook" onclick="fbLoginAction();">Login with Facebook</button>
 	<div id="status"></div> -->
 
-<button type="button" class="button facebook" id="loginBtn">페이스북 계정</button>
+<button type="button" class="button facebook" id="loginBtn">페이스북 계정으로 로그인</button>
  
-            <div id="access_token"></div>
-            <div id="user_id"></div>
-            <div id="name"></div>
-            <div id="email"></div>
-            <div id="gender"></div>
-            <div id="birthday"></div>
-            <div id="id"></div>
+          	  <!-- <div id="access_token"></div>
+            	  <div id="user_id"></div>
+              <div id="name"></div>
+              <div id="email"></div>
+              <div id="gender"></div>
+              <div id="birthday"></div>
+              <div id="id"></div> -->
+            
+             <form name=f>
+            <!--  <input type="hidden" name="access_token" id="access_token">
+             <input type="hidden" name="user_id" id="user_id"> 
+             <input type="hidden" name="nickName" id="nickName">  -->
+             <input type="hidden" name="email" id="email">
+         	 <input type="hidden" name="gender" id="gender">
+            <!--  <input type="hidden" name="birthday" id="birthday">
+              <input type="hidden" name="id" id="id">  -->
+             </form> 
 <script>
 function getUserData() {
     /* FB.api('/me', function(response) {
@@ -183,11 +193,13 @@ function getUserData() {
     }); */
     FB.api('/me', {fields: 'name,email,gender,birthday'}, function(response) {
         console.log(JSON.stringify(response));
-        $("#name").text("이름 : "+response.name);
-        $("#email").text("이메일 : "+response.email);
-        $("#gender").text("성별 : "+response.gender);
-        $("#birthday").text("생년월일 : "+response.birthday);
-        $("#id").text("아이디 : "+response.id);
+        document.f.email.value = response.email;
+        console.log(eamil.value);
+       // $("#name").text("이름 : "+response.name);
+        //$("#email").text("이메일 : "+response.email);
+        document.f.gender.value = response.gender;
+      	//  $("#birthday").text("생년월일 : "+response.birthday);
+       	// $("#id").text("아이디 : "+response.id);
     });
 }
   
@@ -195,8 +207,7 @@ window.fbAsyncInit = function() {
     //SDK loaded, initialize it
     FB.init({
         appId      : '2043489025940197', //App ID
-        cookie     : true,  // enable cookies to allow the server to access
-                // the session
+        cookie     : true,  // enable cookies to allow the server to access the session
         xfbml      : true,  // parse social plugins on this page
         version    : 'v2.8' // use graph api version 2.8
     });
@@ -229,23 +240,26 @@ document.getElementById('loginBtn').addEventListener('click', function() {
         if (response.authResponse) {
             access_token = response.authResponse.accessToken; //get access token
             user_id = response.authResponse.userID; //get FB UID
-            console.log('access_token = '+access_token);
-            console.log('user_id = '+user_id);
+            //console.log('access_token = '+access_token);
+            //console.log('user_id = '+user_id);
             $("#access_token").text("접근 토큰 : "+access_token);
             $("#user_id").text("FB UID : "+user_id);
             //user just authorized your app
-            //document.getElementById('loginBtn').style.display = 'none';
+            document.getElementById('loginBtn').style.display = 'none';
             getUserData();
+            $("form").attr("method","POST").attr("action","/user/createUserP").submit();
+            
         }
-    }, {scope: 'email,public_profile,user_birthday',
+    }, {scope: 'email,public_profile,user_birthday', //permission
         return_scopes: true});
 }, false);
+
 </script>
  
 
 <br/><br/><br/><br/>
 
-	<form>
+	 <form>
 	
 	ID<input type="text" name="userId" id="userId" />
 	PW<input type="password" name="password" id="password" />
@@ -286,7 +300,7 @@ document.getElementById('loginBtn').addEventListener('click', function() {
 		
 	<!-- <input type="hidden" id="currentPage" name="currentPage" value=""/> -->
 		
-	</form>
+	</form> 
 	
 	<%-- <jsp:include page="./pageNavigator.jsp" /> --%>
 

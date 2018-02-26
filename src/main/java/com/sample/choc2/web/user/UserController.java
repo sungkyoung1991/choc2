@@ -64,8 +64,10 @@ public class UserController {
 	}//로그아웃 처리
 	
 	@RequestMapping(value="createUserP", method=RequestMethod.GET)
-	public String createUserp(){
+	public String createUserp(UserVO uservo, Model model){
 		
+		model.addAttribute("fuser", uservo);
+		logger.info(""+uservo);
 		return "user/createUser";
 	}//회원가입 폼으로 이동
 	
@@ -105,6 +107,12 @@ public class UserController {
 		return "user/createCosmetic";
 		
 	}//회원가입 처리
+	
+	@RequestMapping(value="getMypage", method=RequestMethod.GET)
+	public String getMypage(UserVO user,Model model) throws Exception {
+		model.addAttribute("mypage",userService.getUser(user.getUserId()));
+		return "user/getMypage";
+	}//마이페이지 이동
 	
 	
 }

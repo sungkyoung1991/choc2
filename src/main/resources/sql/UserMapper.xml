@@ -25,7 +25,7 @@
 	<!--  대소문자 test  -->
  	 <select id="getUser" parameterType="String"	resultMap="userSelectMap">
 		SELECT
-		USERID,PASSWORD 		
+		* 		
 		FROM TBL_USER
 		WHERE USERID = #{userId}
 	 </select> 
@@ -47,5 +47,4 @@
 		SELECT NICKNAME FROM TBL_USER WHERE NICKNAME = #{nickName}
 	  </select>
 	 
-	  
 </mapper>
