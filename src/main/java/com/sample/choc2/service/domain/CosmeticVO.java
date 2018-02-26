@@ -8,6 +8,7 @@ public class CosmeticVO {
 	private String amount;
 	private String price;
 	private String ingredient;
+	private String image;
 	public int getCosmetic_no() {
 		return cosmetic_no;
 	}
@@ -50,12 +51,19 @@ public class CosmeticVO {
 	public void setIngredient(String ingredient) {
 		this.ingredient = ingredient;
 	}
+	
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
+	}
 	@Override
 	public String toString() {
 		return "CosmeticVO [cosmetic_no=" + cosmetic_no + ", brand=" + brand + ", model=" + model + ", product="
-				+ product + ", amount=" + amount + ", price=" + price + ", ingredient=" + ingredient + "]";
+				+ product + ", amount=" + amount + ", price=" + price + ", ingredient=" + ingredient + ", image="
+				+ image + "]";
 	}
-	
 	
 	
 }

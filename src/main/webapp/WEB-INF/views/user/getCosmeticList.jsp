@@ -57,22 +57,24 @@ $(document).ready(function(){
 
 	<table>
 		<tr>
-			<th>CNO</th>
-			<th>BRAND</th>
-			<th>MODEL</th>
+			<th>PICTURE &nbsp;</th>
+			<!-- <th>CNO</th> -->
+			<th>BRAND &nbsp;</th>
+			<th>MODEL &nbsp;</th>
 			<th>PRODUCT</th>
-			<th>PRICE</th>
-			<th>INGREDIENT</th>
+		<!-- 	<th>PRICE</th>
+			<th>INGREDIENT</th> -->
 		</tr>
 		<c:forEach items="${clist}" var="cosmetic">
 			<tr>
-				<td>${cosmetic.cosmetic_no}</td>
+				<td>${cosmetic.image}</td>
+			<%-- <td>${cosmetic.cosmetic_no}</td> --%>
 				<td>${cosmetic.brand}</td>
 				<td><a href='/user/getCosmetic${pageMaker.makeSearch(pageMaker.cri.page) }&cosmetic_no=${cosmetic.cosmetic_no}'>
 						${cosmetic.model}</a></td>
-				<td>${cosmetic.product}</td>
-				<td>${cosmetic.price}</td>
-				<td>${cosmetic.ingredient}</td>
+				 <td>${cosmetic.product}</td>
+				<%-- <td>${cosmetic.price}</td>
+				<td>${cosmetic.ingredient}</td>  --%>
 
 			</tr>
 

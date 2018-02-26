@@ -10,6 +10,9 @@
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 
 <script type="text/javascript">
+console.log("1,2,3".split(","));
+console.log("helloworld".charAt(0));
+console.log(isNan(123));
 	$(function() {
 
 		$("#userId").focus();
@@ -47,6 +50,8 @@
 			<!-- 로그인 했을때 -->
 			<h2>You have been successfully logged in</h2>
 			<strong>${sessionScope.user.userId}</strong>님, you are very welcome 반가워요!!
+			<button id="myPage" onclick="location.href='/user/getMypage?userId=${sessionScope.user.userId}'">마이페이지</button> 
+			<a href="/user/getMypage?userId=${sessionScope.user.userId}">마이페이지</a>
 	 		<input type="button" value="logout"
 				onclick="location.replace('/user/logout');" />
 			<!-- <a href="/user/logout" >logout</a> -->

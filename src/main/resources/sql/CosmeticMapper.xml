@@ -5,6 +5,12 @@
 		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="CosmeticMapper">		
+ 		
+ 		<resultMap type="cosmeticVO" id="selectCosmeticMap">
+
+ 		
+ 		</resultMap>
+ 
  
 	  <insert id="createCosmetic" parameterType="cosmeticVO">
 	  	INSERT INTO

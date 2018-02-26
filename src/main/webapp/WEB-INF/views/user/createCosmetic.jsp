@@ -30,7 +30,12 @@
 			</tr>
 			<tr>
 				<th>용량</th>
-				<td><input type="text" name="amount" placeholder="130" />ml</td>
+				<td><input type="text" name="amount" placeholder="130" />
+				<!-- <select name="amount_count">
+				<option value="ml">ml</option>
+				<option value="g">g</option>
+				</select> --></td>
+					
 			</tr>
 			<tr>
 				<th>가격</th>

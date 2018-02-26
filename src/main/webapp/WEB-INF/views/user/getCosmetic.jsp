@@ -60,6 +60,9 @@ function createCmt(nick,no){
 			<input type='hidden' name='keyword' value="${cri.keyword}">
 		<table>
 			<tr>
+				<td><img alt="cosmetic" src="https://images.innisfree.co.kr/upload/product/16636_l.png"> </td>
+			</tr>
+			<tr>
 				<th>브랜드</th>
 				<td><input type="text" name="brand" value="${cinfo.brand}"
 					readonly="readonly" /></td>
