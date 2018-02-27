@@ -20,7 +20,12 @@ import com.sample.choc2.service.user.UserService;
 @Controller
 @RequestMapping("/super")
 public class SuperManageController {
-	
+	/*	Sujin 18/2/27 super관리자 컨트롤러
+	 * 
+	 * 회원관리 => 리스트, 상세조회, 삭제, 수정 기능 
+	 * userService 사용 
+	 * 
+	 * */
 	private static Logger logger = LoggerFactory.getLogger(SuperManageController.class);
 	public SuperManageController() {
 		// TODO Auto-generated constructor stub
