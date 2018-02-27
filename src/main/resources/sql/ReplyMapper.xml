@@ -5,8 +5,8 @@
 		
 <mapper namespace="ReplyMapper">
 	<resultMap type="replyVO" id="replySelectMap">
-		<result property="board_no" column="BOARD_NO" jdbcType="INTEGER"/>
-		<result property="reply_no" column="REPLY_NO" jdbcType="INTEGER"/>
+		<result property="boardNo" column="BOARD_NO" jdbcType="INTEGER"/>
+		<result property="replyNo" column="REPLY_NO" jdbcType="INTEGER"/>
 		<result property="replytext" column="REPLYTEXT" jdbcType="VARCHAR"/>
 		<result property="replyer" column="REPLYER" jdbcType="VARCHAR"/>
 		<result property="regdate" column="REGDATE" jdbcType="DATE"/>
@@ -16,16 +16,16 @@
 	
 	<insert id="createReply">
 		INSERT INTO TBL_REPLY (BOARD_NO,REPLYTEXT,REPLYER)
-		VALUES (#{board_no},#{replytext},#{replyer})
+		VALUES (#{boardNo},#{replytext},#{replyer})
 	</insert>
 
 	<update id="updateReply">
 		UPDATE TBL_REPLY SET REPLYTEXT = #{replytext}, UPDATEDATE = NOW()
-		WHERE REPLY_NO = #{reply_no}
+		WHERE REPLY_NO = #{replyNo}
 	</update>
 
 	<delete id="deleteReply">
-		DELETE FROM TBL_REPLY WHERE REPLY_NO=#{reply_no}
+		DELETE FROM TBL_REPLY WHERE REPLY_NO=#{replyNo}
 	</delete>
 
 	<select id="listReplyPage" resultMap="replySelectMap" >
@@ -34,7 +34,7 @@
 		FROM
 		TBL_REPLY
 		WHERE
-		BOARD_NO=#{board_no}
+		BOARD_NO=#{boardNo}
 		ORDER BY REPLY_NO DESC
 		LIMIT #{cri.pageStart}, #{cri.perPageNum}
 	</select>
@@ -45,19 +45,19 @@
 		FROM
 		TBL_REPLY
 		WHERE
-		BOARD_NO=#{board_no}
+		BOARD_NO=#{boardNo}
 	</select>
 
-	<select id="getBoard_No" resultType="int">
+	<select id="getBoardNo" resultType="int">
 		SELECT BOARD_NO
 		FROM TBL_REPLY
-		WHERE REPLY_NO=#{reply_no}
+		WHERE REPLY_NO=#{replyNo}
 	</select>
 	
 	<update id="updateReplyCnt">
 		UPDATE TBL_BOARD
 		SET REPLYCNT = REPLYCNT + #{amount}
-		WHERE BOARD_NO=#{board_no}
+		WHERE BOARD_NO=#{boardNo}
 	</update>
 
 

@@ -54,8 +54,8 @@ public class ReplyRestController {
 			return entity;
 	}
 	//댓글 리스트 처리 
-	@RequestMapping(value="/{reply_no}/{page}",method=RequestMethod.GET)
-	public ResponseEntity<Map<String,Object>> listReply(@PathVariable Integer reply_no, @PathVariable Integer page)throws Exception{
+	@RequestMapping(value="/{replyNo}/{page}",method=RequestMethod.GET)
+	public ResponseEntity<Map<String,Object>> listReply(@PathVariable Integer replyNo, @PathVariable Integer page)throws Exception{
 		
 		ResponseEntity<Map<String, Object>> entity = null;
 		try {
@@ -66,11 +66,11 @@ public class ReplyRestController {
 			pageMaker.setCri(cri);
 			
 			Map<String, Object> map = new HashMap<String, Object>();
-			List<ReplyVO> list = replyService.listReplyPage(reply_no, cri);
+			List<ReplyVO> list = replyService.listReplyPage(replyNo, cri);
 			
 			map.put("list", list);
 			
-			int CountReply = replyService.countReply(reply_no);
+			int CountReply = replyService.countReply(replyNo);
 			pageMaker.setTotalCount(CountReply);
 			
 			map.put("pageMaker", pageMaker);
@@ -84,12 +84,12 @@ public class ReplyRestController {
 		return entity;
 	}
 	//댓글 수정 처리
-	@RequestMapping(value="/{reply_no}",method= {RequestMethod.PUT,RequestMethod.PATCH})
-	public ResponseEntity<String> updateReply(@PathVariable Integer reply_no,@RequestBody ReplyVO replyVO)throws Exception{
+	@RequestMapping(value="/{replyNo}",method= {RequestMethod.PUT,RequestMethod.PATCH})
+	public ResponseEntity<String> updateReply(@PathVariable Integer replyNo,@RequestBody ReplyVO replyVO)throws Exception{
 		ResponseEntity<String> entity = null;
 		
 		try {
-			replyVO.setReply_no(reply_no);
+			replyVO.setReplyNo(replyNo);
 			replyService.updateReply(replyVO);
 			
 			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);			
@@ -103,11 +103,11 @@ public class ReplyRestController {
 		return entity;
 	}
 	//댓글 삭제 처리 
-	@RequestMapping(value="/{reply_no}",method=RequestMethod.DELETE)
-	public ResponseEntity<String> deleteeReply(@PathVariable Integer reply_no)throws Exception{
+	@RequestMapping(value="/{replyNo}",method=RequestMethod.DELETE)
+	public ResponseEntity<String> deleteeReply(@PathVariable Integer replyNo)throws Exception{
 		ResponseEntity<String> entity = null;
 		try {
-			replyService.deleteReply(reply_no);
+			replyService.deleteReply(replyNo);
 			entity = new ResponseEntity<String>("SUCCESS",HttpStatus.OK);
 		}catch(Exception e) {
 			e.printStackTrace();

@@ -96,7 +96,7 @@ public class UserController {
 	
 	@RequestMapping(value="nickCheck", method=RequestMethod.GET)
 	public @ResponseBody Map<String,String> nickCheck(@ModelAttribute("user") UserVO user) throws Exception{
-		String result = userService.nickCheck(user.getNickName());
+		String result = userService.nickCheck(user.getNickname());
 		logger.info(result);
 		Map<String,String> map = new HashMap<String,String>();
 		if(result==null) {

@@ -47,21 +47,39 @@ public class UserDaoImpl implements UserDao{
 	}
 
 	@Override
-	public String nickCheck(String nickName) throws Exception {
+	public String nickCheck(String nickname) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne("UserMapper.nickCheck",nickName);
+		return sqlSession.selectOne("UserMapper.nickCheck",nickname);
 	}
 
 	@Override
-	public List<UserVO> getUserList() throws Exception {
+	public List<UserVO> getUserList(SearchCriteria cri) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList("UserMapper.getUserList");
+		return sqlSession.selectList("UserMapper.getUserList",cri);
 	}
 
 	@Override
 	public UserVO getSuperUser(Integer userNo) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne("UserMapper.getSuperUser");
+		return sqlSession.selectOne("UserMapper.getSuperUser",userNo);
+	}
+
+	@Override
+	public void updateUser(UserVO userVO) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.update("UserMapper.updateUser",userVO);
+	}
+
+	@Override
+	public void deleteUser(Integer userNo) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.delete("UserMapper.deleteUser",userNo);
+	}
+
+	@Override
+	public int totalCountUser(SearchCriteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("UserMapper.totalCountUser",cri);
 	}
 
 	

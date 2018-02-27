@@ -36,9 +36,9 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
-	public BoardVO getBoard(Integer board_no) throws Exception {
+	public BoardVO getBoard(Integer boardNo) throws Exception {
 		// TODO Auto-generated method stub
-		return adminDao.getBoard(board_no);
+		return adminDao.getBoard(boardNo);
 	}
 
 	@Override
@@ -48,9 +48,9 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
-	public void deleteBoard(Integer board_no) throws Exception {
+	public void deleteBoard(Integer boardNo) throws Exception {
 		// TODO Auto-generated method stub
-		adminDao.deleteBoard(board_no);
+		adminDao.deleteBoard(boardNo);
 	}
 
 	@Override
@@ -66,9 +66,9 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
-	public void updateViewCnt(Integer board_no) throws Exception {
+	public void updateViewCnt(Integer boardNo) throws Exception {
 		// TODO Auto-generated method stub
-		adminDao.updateViewCnt(board_no);
+		adminDao.updateViewCnt(boardNo);
 		
 	}
 

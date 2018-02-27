@@ -36,9 +36,9 @@ public class AdminDaoImpl implements AdminDao {
 	}
 
 	@Override
-	public BoardVO getBoard(Integer board_no) throws Exception {
+	public BoardVO getBoard(Integer boardNo) throws Exception {
 		// TODO Auto-generated method stub
-		return session.selectOne(NAMESPACE + ".getBoard", board_no);
+		return session.selectOne(NAMESPACE + ".getBoard", boardNo);
 	}
 
 	@Override
@@ -48,9 +48,9 @@ public class AdminDaoImpl implements AdminDao {
 	}
 
 	@Override
-	public void deleteBoard(Integer board_no) throws Exception {
+	public void deleteBoard(Integer boardNo) throws Exception {
 		// TODO Auto-generated method stub
-		session.delete(NAMESPACE + ".deleteBoard", board_no);
+		session.delete(NAMESPACE + ".deleteBoard", boardNo);
 	}
 
 	@Override
@@ -67,45 +67,9 @@ public class AdminDaoImpl implements AdminDao {
 
 	
 	@Override
-	public void updateViewCnt(Integer board_no) throws Exception {
+	public void updateViewCnt(Integer boardNo) throws Exception {
 		// TODO Auto-generated method stub
-		session.update(NAMESPACE + ".updateViewCnt", board_no);
-	}
-	/*
-	@Override
-	public void createCosmetic(CosmeticVO cosmeticVO) throws Exception {
-		// TODO Auto-generated method stub
-		session.insert(namespace+".createCosmetic",cosmeticVO);
+		session.update(NAMESPACE + ".updateViewCnt", boardNo);
 	}
 
-	@Override
-	public CosmeticVO getCosmetic(Integer cosmetic_no) throws Exception {
-		// TODO Auto-generated method stub
-		return session.selectOne(namespace+".getCosmetic",cosmetic_no);
-	}
-
-	@Override
-	public void updateCosmetic(CosmeticVO cosmeticVO) throws Exception {
-		// TODO Auto-generated method stub
-		session.update(namespace+".updateCosmetic",cosmeticVO);
-	}
-
-	@Override
-	public void deleteCosmetic(Integer cosmetic_no) throws Exception {
-		// TODO Auto-generated method stub
-		session.delete(namespace+".deleteCosmetic",cosmetic_no);
-	}
-
-	@Override
-	public List<CosmeticVO> listCosmetic(SearchCriteria cri) throws Exception {
-		// TODO Auto-generated method stub
-		return session.selectList(namespace+".listCosmetic", cri);
-	}
-
-	@Override
-	public int countCosmetic(SearchCriteria cri) throws Exception {
-		// TODO Auto-generated method stub
-		return session.selectOne(namespace+".countCosmetic",cri);
-	}
-*/
 }

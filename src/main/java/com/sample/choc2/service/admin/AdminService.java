@@ -14,17 +14,17 @@ public interface AdminService {
 	
 	public void createBoard(BoardVO boardVO)throws Exception;
 	
-	public BoardVO getBoard(Integer board_no)throws Exception;
+	public BoardVO getBoard(Integer boardNo)throws Exception;
 	
 	public void updateBoard(BoardVO boardVO)throws Exception;
 	
-	public void deleteBoard(Integer board_no)throws Exception;
+	public void deleteBoard(Integer boardNo)throws Exception;
 	
 	public List<BoardVO> listBoard(SearchCriteria cri)throws Exception;
 	
 	public int countBoard(SearchCriteria cri)throws Exception;
 	
-	public void updateViewCnt(Integer board_no) throws Exception;
+	public void updateViewCnt(Integer boardNo) throws Exception;
 
 
 	// =========================CosmeticService=========================

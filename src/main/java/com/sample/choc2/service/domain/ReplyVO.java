@@ -3,8 +3,8 @@ package com.sample.choc2.service.domain;
 import java.util.Date;
 
 public class ReplyVO {
-	private int board_no;
-	private int reply_no;
+	private int boardNo;
+	private int replyNo;
 	private String replytext;
 	private String replyer;
 	private Date regdate;
@@ -36,24 +36,24 @@ public class ReplyVO {
 	}
 	@Override
 	public String toString() {
-		return "[ board_no : "+ board_no
-				+"/ reply_no : " + reply_no
+		return "[ boardNo : "+ boardNo
+				+"/ replyNo : " + replyNo
 				+"/ replytext : " + replytext
 				+"/ replyer : " + replyer
 				+"/ regdate : " + regdate
 				+"/ updatedate : " + updatedate + " ]"	;
 	}
 
-	public int getBoard_no() {
-		return board_no;
+	public int getBoardNo() {
+		return boardNo;
 	}
-	public void setBoard_no(int board_no) {
-		this.board_no = board_no;
+	public void setBoardNo(int boardNo) {
+		this.boardNo = boardNo;
 	}
-	public int getReply_no() {
-		return reply_no;
+	public int getReplyNo() {
+		return replyNo;
 	}
-	public void setReply_no(int reply_no) {
-		this.reply_no = reply_no;
+	public void setReplyNo(int replyNo) {
+		this.replyNo = replyNo;
 	}
 }

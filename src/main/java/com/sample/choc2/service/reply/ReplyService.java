@@ -12,14 +12,14 @@ public interface ReplyService {
 	
 	public void updateReply(ReplyVO replyVO)throws Exception;
 	
-	public void deleteReply(Integer reply_no) throws Exception;
+	public void deleteReply(Integer replyNo) throws Exception;
 	
 	public List<ReplyVO> listReplyPage(Integer bno, Criteria cri)throws Exception;
 	
-	public int countReply(Integer board_no)throws Exception;
+	public int countReply(Integer boardNo)throws Exception;
 	
-	public int getBoardNo(Integer board_no) throws Exception;
+	public int getBoardNo(Integer boardNo) throws Exception;
 
-	public void updateReplyCnt(Integer board_no, int amount) throws Exception;
+	public void updateReplyCnt(Integer boardNo, int amount) throws Exception;
 	
 }
