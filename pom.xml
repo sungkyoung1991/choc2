@@ -24,7 +24,7 @@
 				<exclusion>
 					<groupId>commons-logging</groupId>
 					<artifactId>commons-logging</artifactId>
-				 </exclusion>
+				</exclusion>
 			</exclusions>
 		</dependency>
 		<dependency>
@@ -32,14 +32,35 @@
 			<artifactId>spring-webmvc</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
-				
+
 		<!-- AspectJ -->
 		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjrt</artifactId>
 			<version>${org.aspectj-version}</version>
-		</dependency>	
-		
+		</dependency>
+		<!-- sujin 18/02/20 추가 Crawling을 위한 Jsoup, json-simple, webClient -->
+		<dependency>
+			<groupId>org.jsoup</groupId>
+			<artifactId>jsoup</artifactId>
+			<version>1.11.2</version>
+		</dependency>
+		<dependency>
+			<groupId>com.googlecode.json-simple</groupId>
+			<artifactId>json-simple</artifactId>
+			<version>1.1.1</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sourceforge.htmlunit</groupId>
+			<artifactId>htmlunit</artifactId>
+			<version>2.29</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-java</artifactId>
+			<version>3.3.1</version>
+		</dependency>
 		<!-- Logging -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -89,12 +110,12 @@
 			<artifactId>javax.inject</artifactId>
 			<version>1</version>
 		</dependency>
-				
+
 		<!-- Servlet -->
 		<dependency>
-		    <groupId>javax.servlet</groupId>
-		    <artifactId>javax.servlet-api</artifactId>
-		    <version>3.1.0</version>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.1.0</version>
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet.jsp</groupId>
@@ -106,37 +127,57 @@
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
-	
+
 		<!-- Test -->
+		<!-- sujin 2018/2/27 junit 4.12 -> 4.8.2 version up, hamcrest 추가 
+		Compile Dependencies가 있는 JUnit은 hamcrest를 같이 추가해 주어야 한다.
+		 -->
 		<dependency>
-		    <groupId>junit</groupId>
-		    <artifactId>junit</artifactId>
-		    <version>4.12</version>
-		    <scope>test</scope>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<scope>test</scope>
 		</dependency>
-		
 		<dependency>
-		    <groupId>org.mockito</groupId>
-		    <artifactId>mockito-all</artifactId>
-		    <version>1.10.19</version>
-		    <scope>test</scope>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest-all</artifactId>
+			<version>1.1</version>
+			<scope>test</scope>
 		</dependency>
-		
 		<dependency>
-		    <groupId>org.springframework</groupId>
-		    <artifactId>spring-test</artifactId>
-		    <version>${org.springframework-version}</version>
-		    <scope>test</scope>
-		</dependency>
-		
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+            <version>1.6.0</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.google.guava</groupId>
+                    <artifactId>guava</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
 		<dependency>
-		    <groupId>com.jayway.jsonpath</groupId>
-		    <artifactId>json-path-assert</artifactId>
-		    <version>2.2.0</version>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-all</artifactId>
+			<version>1.10.19</version>
+			<scope>test</scope>
 		</dependency>
-		
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${org.springframework-version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.jayway.jsonpath</groupId>
+			<artifactId>json-path-assert</artifactId>
+			<version>2.2.0</version>
+		</dependency>
+
 		<!-- Test -->
-		
+
 		<!-- 추가 -->
 		<!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
 		<dependency>
@@ -144,33 +185,33 @@
 			<artifactId>spring-jdbc</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.38</version>
-		</dependency> 
+		</dependency>
 
 		<dependency>
 			<groupId>commons-dbcp</groupId>
 			<artifactId>commons-dbcp</artifactId>
 			<version>1.4</version>
 		</dependency>
-		
+
 		<!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
 		<dependency>
-		    <groupId>org.mybatis</groupId>
-		    <artifactId>mybatis</artifactId>
-		    <version>3.4.1</version>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+			<version>3.4.1</version>
 		</dependency>
-		
+
 		<!-- https://mvnrepository.com/artifact/org.mybatis/mybatis-spring -->
 		<dependency>
-		    <groupId>org.mybatis</groupId>
-		    <artifactId>mybatis-spring</artifactId>
-		    <version>1.3.0</version>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis-spring</artifactId>
+			<version>1.3.0</version>
 		</dependency>
-		
+
 		<!-- MultipartHttpServletRequset -->
 		<dependency>
 			<groupId>commons-io</groupId>
@@ -183,30 +224,30 @@
 			<artifactId>commons-fileupload</artifactId>
 			<version>1.2.2</version>
 		</dependency>
-		
+
 		<!-- https://mvnrepository.com/artifact/commons-codec/commons-codec -->
 		<dependency>
 			<groupId>commons-codec</groupId>
 			<artifactId>commons-codec</artifactId>
 			<version>1.10</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>commons-lang</groupId>
 			<artifactId>commons-lang</artifactId>
 			<version>2.6</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>commons-collections</groupId>
 			<artifactId>commons-collections</artifactId>
 			<version>3.2.1</version>
 		</dependency>
-		
+
 		<dependency>
-		    <groupId>com.fasterxml.jackson.core</groupId>
-		    <artifactId>jackson-databind</artifactId>
-		    <version>2.8.5</version>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.8.5</version>
 		</dependency>
 
 		<dependency>
@@ -221,190 +262,182 @@
 			<version>2.4</version>
 			<classifier>jdk15</classifier>
 		</dependency>
-		
+
 		<!-- https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple -->
 		<dependency>
-		    <groupId>com.googlecode.json-simple</groupId>
-		    <artifactId>json-simple</artifactId>
-		    <version>1.1.1</version>
+			<groupId>com.googlecode.json-simple</groupId>
+			<artifactId>json-simple</artifactId>
+			<version>1.1.1</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>xom</groupId>
 			<artifactId>xom</artifactId>
 			<version>1.2.5</version>
 		</dependency>
-		   
+
 		<dependency>
-		    <groupId>org.apache.commons</groupId>
-		    <artifactId>commons-compress</artifactId>
-		    <version>1.13</version>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-compress</artifactId>
+			<version>1.13</version>
 		</dependency>
-		
-		<!-- for transaction annotation -->		   
+
+		<!-- for transaction annotation -->
 		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjweaver</artifactId>
 			<version>1.6.11</version>
 		</dependency>
-		
-		<!-- <dependency>
-		    <groupId>io.springfox</groupId>
-		    <artifactId>springfox-swagger2</artifactId>
-		    <version>2.5.0</version>
-		</dependency> 
-		<dependency>
-		    <groupId>io.springfox</groupId>
-		    <artifactId>springfox-swagger-ui</artifactId>
-		    <version>2.5.0</version>
-		</dependency> -->
+
+		<!-- <dependency> <groupId>io.springfox</groupId> <artifactId>springfox-swagger2</artifactId> 
+			<version>2.5.0</version> </dependency> <dependency> <groupId>io.springfox</groupId> 
+			<artifactId>springfox-swagger-ui</artifactId> <version>2.5.0</version> </dependency> -->
 		<!-- 추가 -->
-		         
+
 	</dependencies>
-    <build> 
-        <plugins>
-        	<!-- 
-				2017.03.28 by jaehunpark
-				http://stackoverflow.com/questions/270445/maven-compile-with-multiple-src-directories
-				http://www.mojohaus.org/build-helper-maven-plugin/usage.html
-				현재 스프링 프로젝트 구조는 maven 기본 아키텍처에서 벗어났으므로, jenkins에서 maven을 빌드하면, src/main/java와 src/main/resources의 
-				기본 아키텍처를 기반으로 빌드를 한다.
-				그러므로, maven이 기본 아키텍처외에도 자바소스와 resources들을 같이 빌드할수있도록 플러그인을통해 maven에게 경로를 알려주도록한다
-		 	-->
+	<build>
+		<plugins>
+			<!-- 2017.03.28 by jaehunpark http://stackoverflow.com/questions/270445/maven-compile-with-multiple-src-directories 
+				http://www.mojohaus.org/build-helper-maven-plugin/usage.html 현재 스프링 프로젝트 
+				구조는 maven 기본 아키텍처에서 벗어났으므로, jenkins에서 maven을 빌드하면, src/main/java와 src/main/resources의 
+				기본 아키텍처를 기반으로 빌드를 한다. 그러므로, maven이 기본 아키텍처외에도 자바소스와 resources들을 같이 빌드할수있도록 
+				플러그인을통해 maven에게 경로를 알려주도록한다 -->
 			<plugin>
-            	<groupId>org.codehaus.mojo</groupId>
-            	<artifactId>build-helper-maven-plugin</artifactId>
-            	<executions>
-                	<execution>
-                    	<phase>generate-sources</phase>
-                    	<goals>
-                        	<goal>add-source</goal>
-                    	</goals>
-                    	<configuration>
-                        	<sources>
-                        		<!-- src/main/skeletone/java도 함께빌드를 하자 -->
-                            	<source>src/main/java</source>
-                        	</sources>
-                    	</configuration>
-                	</execution>
-                	<execution>
-            			<id>add-resource</id>
-            			<phase>generate-resources</phase>
-            			<goals>
-              				<goal>add-resource</goal>
-            			</goals>
-            			<configuration>
-              				<resources>
-                				<resource>
-                					<!-- src/main/skeletone/resources도 함께빌드를 하자. 이곳이 비지니스로직이 설정이 전부있다.-->
-                  					<directory>src/main/resources</directory>
-								</resource>
-								<resource>
-									<!-- 추가로, 위의 소스레벨에 SQL xml이 함께있으므로, 소스레벨의 패키지를 적어주고 모든 SQL.xml을 검색해서 같이 resources로인식한다 -->
-                  					<directory>src/main/java</directory>
-                 					<includes>
-                 						<include>**/*SQL.xml</include>
-                 					</includes>
-								</resource>
-								<resource>
-									<!-- src/main/skeletone/java 디렉토리 하위의 *.SQL.xml resources에서 상위 패키지, src/main/java 내의 SQL을 끌어씀으로 .. -->
-		                  			<directory>src/main/java</directory>
-                 					<includes>
-                 						<!-- 상위 소스레벨의 SQL도함께 resources로 인식할수있도록 설정 .. -->
-                 						<include>**/*SQL.xml</include>
-                 					</includes>
-								</resource>
-              				</resources>
-            			</configuration>
-          			</execution>
-          			
-          			<execution>
-			            <id>add-test-source</id>
-			            <phase>generate-test-sources</phase>
-			            <goals>
-			            	
-			              	<goal>add-test-source</goal>
-			            </goals>
-			            <configuration>
-			              	<sources>
-			              		<!-- 해당경로의 unit test를 수행하자 -->
-			                	<source>src/test/java</source>
-			              	</sources>
-			            </configuration>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>add-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<!-- src/main/skeletone/java도 함께빌드를 하자 -->
+								<source>src/main/java</source>
+							</sources>
+						</configuration>
 					</execution>
-			          
-            	</executions>
-        	</plugin>
-        
-        	<!-- maven이 설치된 개발버신의 jdk버전과 빌드 타켓 버전을 설정하도록한다. 
-        	설정하지않을시 MojoFailureException 발생. 굉장히 낮은버전의 jdk로 mvn을 빌드하는듯. maven은 자동으로 jdk버전을 인식하지않으므로 꼭 설정해주도록하자 . -->
+					<execution>
+						<id>add-resource</id>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>add-resource</goal>
+						</goals>
+						<configuration>
+							<resources>
+								<resource>
+									<!-- src/main/skeletone/resources도 함께빌드를 하자. 이곳이 비지니스로직이 설정이 전부있다. -->
+									<directory>src/main/resources</directory>
+								</resource>
+								<resource>
+									<!-- 추가로, 위의 소스레벨에 SQL xml이 함께있으므로, 소스레벨의 패키지를 적어주고 모든 SQL.xml을 
+										검색해서 같이 resources로인식한다 -->
+									<directory>src/main/java</directory>
+									<includes>
+										<include>**/*SQL.xml</include>
+									</includes>
+								</resource>
+								<resource>
+									<!-- src/main/skeletone/java 디렉토리 하위의 *.SQL.xml resources에서 상위 패키지, 
+										src/main/java 내의 SQL을 끌어씀으로 .. -->
+									<directory>src/main/java</directory>
+									<includes>
+										<!-- 상위 소스레벨의 SQL도함께 resources로 인식할수있도록 설정 .. -->
+										<include>**/*SQL.xml</include>
+									</includes>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+
+					<execution>
+						<id>add-test-source</id>
+						<phase>generate-test-sources</phase>
+						<goals>
+
+							<goal>add-test-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<!-- 해당경로의 unit test를 수행하자 -->
+								<source>src/test/java</source>
+							</sources>
+						</configuration>
+					</execution>
+
+				</executions>
+			</plugin>
+
+			<!-- maven이 설치된 개발버신의 jdk버전과 빌드 타켓 버전을 설정하도록한다. 설정하지않을시 MojoFailureException 
+				발생. 굉장히 낮은버전의 jdk로 mvn을 빌드하는듯. maven은 자동으로 jdk버전을 인식하지않으므로 꼭 설정해주도록하자 . -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.6.1</version>
-					<configuration>
-						<source>1.8</source>
-						<target>1.8</target>
-						<encoding>${project.build.sourceEncoding}</encoding>
-					</configuration>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+					<encoding>${project.build.sourceEncoding}</encoding>
+				</configuration>
 			</plugin>
-				<!-- Jenkins 배포를 위한 plugin -->
-				
-				
-				
-		<plugin>
-		    <groupId>org.apache.tomcat.maven</groupId>
-		    <artifactId>tomcat7-maven-plugin</artifactId>
-		    <version>2.2</version>
-		    <configuration>
-		        <path>/</path>
-		        <url>http://210.221.220.71:3030/manager/text</url>
-		        <!-- <url>http://localhost:8080/manager/text</url> -->
-		        <username>admin</username>
-		        <password>0308</password>
-		        <update>true</update>
-		    </configuration>
-		</plugin>
-		
-		
-		
-		
-		
-		
-            <plugin>
-                <artifactId>maven-eclipse-plugin</artifactId>
-                <version>2.9</version>
-                <configuration>
-                    <additionalProjectnatures>
-                        <projectnature>org.springframework.ide.eclipse.core.springnature</projectnature>
-                    </additionalProjectnatures>
-                    <additionalBuildcommands>
-                        <buildcommand>org.springframework.ide.eclipse.core.springbuilder</buildcommand>
-                    </additionalBuildcommands>
-                    <downloadSources>true</downloadSources>
-                    <downloadJavadocs>true</downloadJavadocs>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.5.1</version>
-                <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
-                    <compilerArgument>-Xlint:all</compilerArgument>
-                    <showWarnings>true</showWarnings>
-                    <showDeprecation>true</showDeprecation>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <version>1.2.1</version>
-                <configuration>
-                    <mainClass>org.test.int1.Main</mainClass>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+			<!-- Jenkins 배포를 위한 plugin -->
+
+
+
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<version>2.2</version>
+				<configuration>
+					<path>/</path>
+					<url>http://210.221.220.71:3030/manager/text</url>
+					<!-- <url>http://localhost:8080/manager/text</url> -->
+					<username>admin</username>
+					<password>0308</password>
+					<update>true</update>
+				</configuration>
+			</plugin>
+
+
+
+
+
+
+			<plugin>
+				<artifactId>maven-eclipse-plugin</artifactId>
+				<version>2.9</version>
+				<configuration>
+					<additionalProjectnatures>
+						<projectnature>org.springframework.ide.eclipse.core.springnature</projectnature>
+					</additionalProjectnatures>
+					<additionalBuildcommands>
+						<buildcommand>org.springframework.ide.eclipse.core.springbuilder</buildcommand>
+					</additionalBuildcommands>
+					<downloadSources>true</downloadSources>
+					<downloadJavadocs>true</downloadJavadocs>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.5.1</version>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+					<compilerArgument>-Xlint:all</compilerArgument>
+					<showWarnings>true</showWarnings>
+					<showDeprecation>true</showDeprecation>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>1.2.1</version>
+				<configuration>
+					<mainClass>org.test.int1.Main</mainClass>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>
