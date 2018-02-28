@@ -9,10 +9,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.sample.choc2.common.Page;
-import com.sample.choc2.common.Search;
+import com.sample.choc2.common.PageMaker;
+import com.sample.choc2.common.SearchCriteria;
+import com.sample.choc2.service.admin.AdminService;
+import com.sample.choc2.service.cosmetic.CosmeticService;
 import com.sample.choc2.service.main.MainService;
-import com.sample.choc2.service.product.ProductService;
 
 @Controller
 @RequestMapping("/main/*")
@@ -23,8 +24,17 @@ public class MainController {
 	private MainService mainService;
 	
 	@Autowired
-	@Qualifier("productServiceImpl")
-	private ProductService productService;
+	@Qualifier("cosmeticServiceImpl")
+	private CosmeticService cosmeticService;
+	
+	public void setCosmeticService(CosmeticService cosmeticService) {
+		this.cosmeticService = cosmeticService;
+	}
+	
+	@Autowired
+	@Qualifier("adminServiceImpl")
+	private AdminService adminService;
+	
 	
 	@Value("#{commonProperties['pageUnit']}")
 	int pageUnit;
@@ -38,18 +48,24 @@ public class MainController {
 	}
 	
 	@RequestMapping(value="mainModule", method=RequestMethod.GET)
-	public String getProductList(@ModelAttribute("search") Search search, @ModelAttribute("page") Page page, Model model) throws Exception{
+	public String getProductList(@ModelAttribute("cri") SearchCriteria cri, Model model) throws Exception{
 		
-		if (search.getCurrentPage() == 0) {
-			search.setCurrentPage(1);
-		}
-		search.setPageSize(pageSize);
+//		model.addAttribute("productList",productService.getProductList(search).get("list"));
+//		
+//		Page resultPage = new Page(search.getCurrentPage(), ((Integer) productService.getProductList(search).get("totalCount")).intValue(), pageUnit,
+//				pageSize);
+//		model.addAttribute("resultPage",resultPage);
 		
-		model.addAttribute("productList",productService.getProductList(search).get("list"));
 		
-		Page resultPage = new Page(search.getCurrentPage(), ((Integer) productService.getProductList(search).get("totalCount")).intValue(), pageUnit,
-				pageSize);
-		model.addAttribute("resultPage",resultPage);
+		
+		model.addAttribute("productList",cosmeticService.getCosmeticList(cri));
+		
+		PageMaker pageMaker = new PageMaker();
+		
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(cosmeticService.totalCountCosmetic(cri));
+		
+		model.addAttribute("pageMaker",pageMaker);
 		
 		return "main/main";
 	}

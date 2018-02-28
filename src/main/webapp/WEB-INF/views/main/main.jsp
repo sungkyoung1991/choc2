@@ -3,9 +3,9 @@
 	
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<c:if test="${ productList eq null }">
+<%-- <c:if test="${ mainList eq null }">
  	<jsp:forward page="/main/mainModule"/>
-</c:if>
+</c:if> --%>
 
 
 <!DOCTYPE html>
@@ -268,41 +268,9 @@ document.getElementById('loginBtn').addEventListener('click', function() {
 	<input type="button" value="회원가입" onclick="location.href='user/createUserP'">
 	<br/><br/><br/><br/>
 	
-		전체 게시물 수 : ${resultPage.totalCount }
-		<br/>
-		<br/>
-		게시하고있는 페이지 : ${resultPage.currentPage } 
-		<br/>
-		
-		<h2><strong>신상품</strong></h2>
-		
-	
-	
-	<table>
-			<tr>
-				<th>제품번호</th>
-				<th>제품명</th>
-				<th>제품이미지</th>
-			</tr>
-		
-		<c:set var="i" value="0" />
-		<c:forEach var="product" items="${productList }" begin="0">
-		<c:set var="i" value="${i+1 }"/>
-			<tr>
-				<td>${product.productNo }</td>
-				<td>${product.productModel }</td>
-				<td>
-					<img src="/resources/imageRepository/${product.productImage }.png" width="50" height="50"/>
-				</td>
-		</c:forEach>
-
-		</table>
-		
-	<!-- <input type="hidden" id="currentPage" name="currentPage" value=""/> -->
 		
 	</form> 
 	
-	<%-- <jsp:include page="./pageNavigator.jsp" /> --%>
 
 </body>
 

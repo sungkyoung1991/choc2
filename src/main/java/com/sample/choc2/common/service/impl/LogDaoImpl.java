@@ -14,7 +14,7 @@ import com.sample.choc2.common.service.LogDao;
 import com.sample.choc2.service.cosmetic.CosmeticDao;
 import com.sample.choc2.service.domain.UserVO;
 
-@Repository("logDAOImpl")
+@Repository("logDaoImpl")
 public class LogDaoImpl implements LogDao {
 
 	@Autowired
@@ -22,7 +22,7 @@ public class LogDaoImpl implements LogDao {
 	private SqlSession sqlSession;
 	
 	@Autowired
-	@Qualifier("CosmeticDaoImpl")
+	@Qualifier("cosmeticDaoImpl")
 	private CosmeticDao cosmeticDao;
 	
 	public LogDaoImpl() {
