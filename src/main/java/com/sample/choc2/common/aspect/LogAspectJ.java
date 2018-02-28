@@ -1,35 +1,188 @@
 package com.sample.choc2.common.aspect;
 
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+
+import com.sample.choc2.common.domain.CommonUtil;
+import com.sample.choc2.common.domain.Const;
+import com.sample.choc2.common.domain.Log;
+import com.sample.choc2.common.service.LogService;
+import com.sample.choc2.service.domain.CosmeticVO;
+import com.sample.choc2.service.domain.UserVO;
 
 class LogAspectJ {
 
+	@Autowired
+	@Qualifier("logServiceImpl")
+	private LogService logService;
+	
 	public LogAspectJ() {
-		System.out.println("\nAspectJ instence 생성 ::" + this.getClass() + "\n");
-		// TODO Auto-generated constructor stub
+		System.out.println("Constructor :: "+getClass().getName());
+	}
+	
+	public Object logWrite(ProceedingJoinPoint joinPoint) throws Throwable{
+
+		String methodName = joinPoint.getSignature().getName();
+		int categoryNo = parseCategoryToInt(methodName);
+		int behavior = parseBehaviorToInt(methodName);
+		int addBehavior = parseAddBehaviorToInt(methodName);
+
+		Object obj = this.invoke(joinPoint);
+		
+		if(categoryNo == Const.NONE ||
+				behavior == Const.NONE ||
+				behavior == Const.Behavior.LIST ||
+				addBehavior == Const.AddBehavior.REPLY) {
+			
+			System.out.println("Log :: "+ methodName + " 로그를 남기지 않는 method");
+			
+		}else if( !this.checkUserLogin(joinPoint) && behavior != Const.Behavior.GET){
+			
+			System.out.println("Log :: 비회원 로그는 남기지 않음");
+			
+		}else {
+
+			UserVO user = null;
+			if(behavior == Const.Behavior.GET) {
+				if(!this.checkUserLogin(joinPoint)) {
+					if(joinPoint.getArgs()[0] instanceof UserVO || joinPoint.getArgs()[0] == null) {
+						user = new UserVO();
+						user.setEmail("anonymous");
+						System.out.println("Log :: 비회원 게시물 조회");
+					}else {
+						System.out.println("Log :: 비회원 로그는 남기지 않음");
+						return obj;
+					} 
+				}else if(this.checkAuthorUser(categoryNo, obj, joinPoint)) {
+					
+					System.out.println("Log :: 자신이 작성한 게시물 조회는 로그를 남기지 않음");
+					return obj;
+					
+				}
+			}
+			
+			System.out.println("Log :: 로그를 남기는 method");
+			Object targetNo = getTargetNo(joinPoint.getArgs()[1], obj);
+			
+			if(user == null) {
+				user = (UserVO)joinPoint.getArgs()[0];
+			}
+			
+			this.addLogModule(user, categoryNo, behavior, addBehavior, targetNo);
+			
+
+		}
+		
+		return obj;
+	}
+	
+	public Object invoke(ProceedingJoinPoint joinPoint) throws Throwable{
+		
+		System.out.println("[Around before] " + 
+						joinPoint.getTarget().getClass().getName() + "." + 
+						joinPoint.getSignature().getName() + "()" );
+		
+		Object obj = joinPoint.proceed();
+		
+		System.out.println("[Around after] return value : " + obj);
+		
+		return obj;
+	}
+	public int parseCategoryToInt(String methodName) {
+		
+		String lowerCaseMethodName = methodName.toLowerCase();
+		
+		for(int i=1; i<=10; i++) {
+			if(lowerCaseMethodName.contains(CommonUtil.getConstProp().getProperty("S_C"+i))) {
+				return i;
+			}
+		}
+		
+		return Const.NONE;
+	}
+	public int parseBehaviorToInt(String methodName) {
+		
+		String lowerCaseMethodName = methodName.toLowerCase();
+		
+		for(int i=0; i<=10; i++) {
+			if(lowerCaseMethodName.contains(CommonUtil.getConstProp().getProperty("S_B"+i))) {
+				return i;
+			}
+		}
+		
+		return Const.NONE;
+	}
+	
+	public int parseAddBehaviorToInt(String methodName) {
+		
+		String lowerCaseMethodName = methodName.toLowerCase();
+		
+		for(int i=1; i<=5; i++) {
+			if(lowerCaseMethodName.contains(CommonUtil.getConstProp().getProperty("S_AB"+i))) {
+				return i;
+			}
+		}
+		
+		return Const.NONE;
+	}
+	
+	public Object getTargetNo(Object target, Object returnObject) {
+		
+		Object targetNo = null;
+		
+		if(target instanceof CosmeticVO) {
+			targetNo = ((CosmeticVO)target).getCosmeticNo();
+		}
+		System.out.println("Log :: 로그를 남길 targetNo = "+targetNo);
+		return targetNo;
+	}
+	public boolean checkUserLogin(ProceedingJoinPoint joinPoint) throws Throwable{
+		if(joinPoint.getArgs() == null) {
+			return false;
+		}else if(joinPoint.getArgs()[0] instanceof UserVO) {
+			if( ( (UserVO)joinPoint.getArgs()[0] ).getEmail() != null){
+				return true;
+			}else {
+				return false;
+			}
+		}else {
+			return false;
+		}
+	}
+	
+	public boolean checkAuthorUser(int categoryNo, Object returnObject, ProceedingJoinPoint joinPoint) {
+		UserVO author = new UserVO();
+		switch(categoryNo){
+			case Const.Category.BOARD:
+//				author = (	(BoardVO)returnObject	).getWriter();
+				break;
+			default:
+				author.setEmail("");
+		}
+		return author.getEmail().equals( ((UserVO)joinPoint.getArgs()[0]).getEmail() );
+	}
+	
+	public void addLogModule(UserVO user, int categoryNo, int behavior, int addBehavior, Object targetNo) {
+		Log log = new Log();
+		log.setUser(user);
+		log.setCategoryNo(categoryNo);
+		log.setBehavior(behavior);
+		log.setAddBehavior(addBehavior);
+		log.setTargetNo(targetNo);
+		
+		logService.addLog(log);
 	}
 
-	public Object invoke(ProceedingJoinPoint joinpoint) throws Throwable {
+
+	public void addLogModule(UserVO user, int categoryNo, int behavior, Object targetNo) {
+		Log log = new Log();
+		log.setUser(user);
+		log.setCategoryNo(categoryNo);
+		log.setBehavior(behavior);
+		log.setTargetNo(targetNo);
 		
-		
-		System.out.println("AOP inovoke method 실행..");
-
-		System.out.println("[before Cross Concern] : " + joinpoint.getTarget().getClass().getName() + "."
-				+ joinpoint.getSignature().getName());
-
-		
-//proceed(java.lang.Object[] args) 
-//Proceed with the next advice or target method invocation
-//The given args Object[] must be in the same order and size as the advice signature but without the actual joinpoint instance
-		if (joinpoint.getArgs().length != 0) {
-			System.out.println("[before Cross Concern] : " + joinpoint.getArgs()[0]);
-		}
-
-		Object obj = joinpoint.proceed();
-
-		System.out.println("[after Cross Concern] " + obj);
-
-		return obj;
+		logService.addLog(log);
 	}
 
 }
