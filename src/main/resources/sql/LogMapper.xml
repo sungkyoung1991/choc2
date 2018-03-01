@@ -14,7 +14,7 @@
 		<result property="targetNo" column="target_no" jdbcType="INTEGER"/>
 		<result property="behavior" column="behavior" jdbcType="INTEGER"/>
 		<result property="addBehavior" column="add_behavior" jdbcType="INTEGER"/>
-		<association property="user" javaType="user">
+		<association property="user" javaType="userVO">
 			<result property="email" column="email"/>
 			<result property="nickname" column="nickname"/>
 		</association>
@@ -33,7 +33,7 @@
 		)
 	</insert>
 
-	<select id="getLogList" parameterType="user" resultMap="logSelectMap">
+	<select id="getLogList" parameterType="userVO" resultMap="logSelectMap">
 		SELECT l.email, u.nickname, MAX(l.reg_date) 'reg_date', l.target_no, l.add_behavior, l.behavior, l.category_no
 		FROM TBL_LOG l, TBL_USER u
 		WHERE l.email = #{email} AND l.email = u.email

@@ -11,19 +11,14 @@ import org.springframework.stereotype.Repository;
 import com.sample.choc2.common.domain.CommonUtil;
 import com.sample.choc2.common.domain.Log;
 import com.sample.choc2.common.service.LogDao;
-import com.sample.choc2.service.cosmetic.CosmeticDao;
 import com.sample.choc2.service.domain.UserVO;
 
-@Repository("logDAOImpl")
+@Repository("logDaoImpl")
 public class LogDaoImpl implements LogDao {
 
 	@Autowired
 	@Qualifier("sqlSessionTemplate")
 	private SqlSession sqlSession;
-	
-	@Autowired
-	@Qualifier("CosmeticDaoImpl")
-	private CosmeticDao cosmeticDao;
 	
 	public LogDaoImpl() {
 		System.out.println("Constructor :: "+getClass().getName());
