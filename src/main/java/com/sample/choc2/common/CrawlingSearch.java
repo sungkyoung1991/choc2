@@ -2,6 +2,7 @@ package com.sample.choc2.common;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -10,6 +11,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.springframework.test.context.ContextConfiguration;
+
+import com.sample.choc2.common.domain.CrawlingVO;
 
 import io.github.bonigarcia.wdm.ChromeDriverManager;
 
@@ -33,22 +36,15 @@ public class CrawlingSearch {
 		//System.setProperty("webdriver.chrome.driver", "src/main/resources/driver/chromedriver"); // 다운받은 ChromeDriver 위치를 넣어줍니다. 
 		
 		driver = new ChromeDriver(); // Driver 생성   
-		String product;
-	    String brand;
-	    String price;
-	    String imagePath; 
-	    
-	    String mount; // 용량					key : cosmetic0
-	    String skinType;// 피부타입			key : cosmetic1
-	    String term;// 사용기간 				key : cosmetic2
-	    String method; //사용방법 				key : cosmetic3
-	    String manufacturer; //제조사 			key : cosmetic4
-	    String origination;// 제조국 			key : cosmetic5
-	    String ingredient;// 성분 			key : cosmetic6
-		String functional;// 기능성 화장품 		key : cosmetic7
-	    String precautions;// 주의사항			key : cosmetic8
+		String xpathClick = "//*[@id=\"buyInfo\"]/a";
+	    String xpathBrand = "//p[@class=\"prd_brand\"]";
+	    String xpathPrdName = "//*[@class=\"prd_info\"]/*[@class=\"prd_name\"]";
+	    String xpathPrice = "//*[@class=\"prd_info\"]/ul/li/span[@class=\"tx_cont cur_price\"]/span[@class=\"tx_num\"]";
+	    String xpathImage = "//div[@class=\"prd_detail_box\"]/div[@class=\"left_area\"]/div[@class=\"prd_img\"]/img";
+	    LinkedHashMap<String,String> map = new LinkedHashMap<String,String>();
+	    CrawlingVO crawlingVO = new CrawlingVO();
 
-	    Map<String,String> map = new HashMap<String,String>();
+	    //Map<String,String> map = new HashMap<String,String>();
 		/*
 		 * Oliveyoung 검색창을 활용하여 모델명, 브랜드명을 파라미터로 받아
 		 * 화장품 정보를 색출 해내는 기능.
@@ -98,7 +94,51 @@ public class CrawlingSearch {
 		for(int i=0; i<1;i++) {
 			System.out.println("url :"+"http://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo="+arg1.get(i)+"&dispCatNo="+arg2.get(i));
 		driver.get("http://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo="+arg1.get(i)+"&dispCatNo="+arg2.get(i)); // URL로 접속하기
-		WebElement buyinfo = driver.findElement(By.className("goods_buyinfo")); // 클래스이름으로 Element 가져오기
+		
+		String brand = driver.findElement(By.xpath(xpathBrand)).getText();
+		System.out.println(brand.split("브랜드")[0]);
+		
+		String prdName = driver.findElement(By.xpath(xpathPrdName)).getText();
+		System.out.println(prdName);
+		
+		String price = driver.findElement(By.xpath(xpathPrice)).getText();
+		System.out.println(price);
+		
+		WebElement image = driver.findElement(By.xpath(xpathImage));
+		System.out.println(image.getAttribute("src").toString());
+		
+		
+		driver.findElement(By.xpath(xpathClick)).click();
+		
+		for(int j=1; j<= 9; j++) {
+			String num = String.valueOf(j);
+			String xpathList = "//*[@id=\"artcInfo\"]/dl[" +num + "]/dd";
+			String infoData = driver.findElement(By.xpath(xpathList)).getText();
+			if(infoData.contains("■")) {
+				infoData = infoData.split("■")[1];
+			}
+			System.out.println(infoData);
+		}
+		}
+//		
+//		Document targetDoc= 
+//				Jsoup.connect(
+//							"http://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo="
+//							+arg1.get(0)+"&dispCatNo="+arg2.get(0)).get();
+//		System.out.println(targetDoc);
+
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally{
+			driver.quit(); // Driver 종료
+		}
+		
+
+		 
+	}
+}
+/*
+ * 		WebElement buyinfo = driver.findElement(By.className("goods_buyinfo")); // 클래스이름으로 Element 가져오기
 		buyinfo.click();//동적 사이트 버튼 클릭 
 		List<WebElement> column = driver.findElements(By.className("detail_info_list"));
 		
@@ -123,25 +163,7 @@ public class CrawlingSearch {
 				System.out.println("key : " + "cosmetic"+k +" / value : " + map.get("cosmetic"+k));
 				
 			}
-		}
-//		
-//		Document targetDoc= 
-//				Jsoup.connect(
-//							"http://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo="
-//							+arg1.get(0)+"&dispCatNo="+arg2.get(0)).get();
-//		System.out.println(targetDoc);
-
-		}catch(Exception e) {
-			e.printStackTrace();
-		}finally{
-			driver.quit(); // Driver 종료
-		}
-		
-
-		 
-	}
-}
-
+ * */
 //System.out.println("--------------url----------------\n"+url.toString());
 
 //https://m.oliveyoung.co.kr/m/goods/getGoodsDetail.do?goodsNo=A000000111760&dispCatNo=1000001000100010002

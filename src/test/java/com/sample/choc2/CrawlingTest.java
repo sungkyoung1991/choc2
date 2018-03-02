@@ -2,6 +2,7 @@ package com.sample.choc2;
 
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,6 +19,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.fasterxml.jackson.databind.deser.impl.SetterlessProperty;
+import com.sample.choc2.common.domain.CrawlingVO;
 
 
 //JUnit 테스트 클래스를 실행시킬 환경(클래스)
@@ -25,22 +27,15 @@ import com.fasterxml.jackson.databind.deser.impl.SetterlessProperty;
 @ContextConfiguration(locations={"file:src/main/resources/config/*.xml"})
 public class CrawlingTest {
 	private WebDriver driver;
-	String product;
-    String brand;
-    String price;
-    String imagePath; 
-    
-    String mount; // 용량					key : cosmetic0
-    String skinType;// 피부타입			key : cosmetic1
-    String term;// 사용기간 				key : cosmetic2
-    String method; //사용방법 				key : cosmetic3
-    String manufacturer; //제조사 			key : cosmetic4
-    String origination;// 제조국 			key : cosmetic5
-    String ingredient;// 성분 			key : cosmetic6
-	String functional;// 기능성 화장품 		key : cosmetic7
-    String precautions;// 주의사항			key : cosmetic8
-    
-    Map<String,String> map = new HashMap<String,String>();
+
+    //xPath
+    String xpathClick = "//*[@id=\"buyInfo\"]/a";
+    String xpathBrand = "//p[@class=\"prd_brand\"]";
+    String xpathPrdName = "//*[@class=\"prd_info\"]/*[@class=\"prd_name\"]";
+    String xpathPrice = "//*[@class=\"prd_info\"]/ul/li/span[@class=\"tx_cont cur_price\"]/span[@class=\"tx_num\"]";
+    String xpathImage = "//div[@class=\"prd_detail_box\"]/div[@class=\"left_area\"]/div[@class=\"prd_img\"]/img";
+    LinkedHashMap<String,String> map = new LinkedHashMap<String,String>();
+    CrawlingVO crawlingVO = new CrawlingVO();
 	@Before
     public void setUp(){
 	    	System.setProperty("webdriver.chrome.driver", "src/test/resources/driver/chromedriver"); // 다운받은 ChromeDriver 위치를 넣어줍니다.
@@ -54,63 +49,79 @@ public class CrawlingTest {
 
 	@Test
 	public void test_crawling() { // 타이틀 확인하는 테스트 코드
+		//driver.get("http://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000014447&dispCatNo=1000001000100010001"); // URL로 접속하기
+		
+		// xPath로 경로 접근하여 크롤링하기 
 		driver.get("http://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000014447&dispCatNo=1000001000100010001"); // URL로 접속하기
-
-
-		WebElement buyinfo = driver.findElement(By.className("goods_buyinfo")); // 클래스이름으로 Element 가져오기
-		buyinfo.click();
-
-		List<WebElement> column = driver.findElements(By.className("detail_info_list"));
+		String brand = driver.findElement(By.xpath(xpathBrand)).getText();
+		System.out.println(brand.split("브랜드")[0]);
+		
+		String prdName = driver.findElement(By.xpath(xpathPrdName)).getText();
+		System.out.println(prdName);
+		
+		String price = driver.findElement(By.xpath(xpathPrice)).getText();
+		System.out.println(price);
+		
+		WebElement image = driver.findElement(By.xpath(xpathImage));
+		System.out.println(image.getAttribute("src").toString());
 		
 		
-		System.out.println("===========================================================");
-		// <key : value>에 담는다. 
-		for(int i=0;i<=8;i++) {
-			String keyName="cosmetic"+i;
-			map.put(keyName, column.get(i).getText());
-		}
-		for(int i=0;i<=8;i++) {
-			if(map.get("cosmetic"+i)==map.get("cosmetic6")) {
-				map.put("cosmetic6", map.get("cosmetic6").replaceAll(" ",""));
-				map.put("cosmetic6", map.get("cosmetic6").replaceAll("\\s", ""));
+		driver.findElement(By.xpath(xpathClick)).click();
+		
+		for(int i=1; i<= 9; i++) {
+			String index = String.valueOf(i);
+			String xpathList = "//*[@id=\"artcInfo\"]/dl[" +index + "]/dd";
+			String infoData = driver.findElement(By.xpath(xpathList)).getText();
+			if(infoData.contains("■")) {
+				infoData = infoData.split("■")[1];
 			}
-			if(map.get("cosmetic"+i).contains("■")) {
-			map.put("cosmetic"+i, map.get("cosmetic"+i).split("■")[1]);
-			}else {
-				map.put("cosmetic"+i, map.get("cosmetic"+i).split("여부 ")[1]);	
-			}
-			
-			System.out.println("key : " + "cosmetic"+i +" / value : " + map.get("cosmetic"+i));
-			
+			System.out.println(infoData);
 		}
-
-		
-		// 뒤죽박죽 안좋음 
-//		Iterator<String> keys2 = map.keySet().iterator();
-//		while(keys2.hasNext()) {
-//			String key = keys2.next();
-//			System.out.print("key: "+key);
-//			System.out.print(", value: "+map.get(key)+'\n');
-//		}
 		
 
-		
-		
-//		mount = column.get(0).toString();
-//		term = column.get(2).toString();
-//		manufacturer = column.get(3).toString();
-//		origination = column.get(4).toString();
-//		ingredient = column.get(5).toString();
-//		functional = column.get(6).toString();
-//		precautions = column.get(7).toString();
-//		
-//		WebElement iframe = driver.findElement(By.tagName("iframe")); // 태그이름으로 Element 가져오기
-		//Assert.assertThat(driver.getTitle(), is("URL의 Title")); // Title 확인 작업
-//		Assert.assertThat(driver.getTitle(), null, null); // Title 확인 작업
+
 	}
 }
 
+/* 클래스이름으로 Element 가져오기
+WebElement buyinfo = driver.findElement(By.className("goods_buyinfo")); 
+buyinfo.click();
 
+List<WebElement> column = driver.findElements(By.className("detail_info_list"));
+
+
+System.out.println("===========================================================");
+// <key : value>에 담는다. 
+for(int i=0;i<=8;i++) {
+	String keyName="cosmetic"+i;
+	map.put(keyName, column.get(i).getText());
+}
+for(int i=0;i<=8;i++) {
+	if(map.get("cosmetic"+i)==map.get("cosmetic6")) {
+		map.put("cosmetic6", map.get("cosmetic6").replaceAll(" ",""));
+		map.put("cosmetic6", map.get("cosmetic6").replaceAll("\\s", ""));
+	}
+	if(map.get("cosmetic"+i).contains("■")) {
+	map.put("cosmetic"+i, map.get("cosmetic"+i).split("■")[1]);
+	}else {
+		map.put("cosmetic"+i, map.get("cosmetic"+i).split("여부 ")[1]);	
+	}
+	
+	System.out.println("key : " + "cosmetic"+i +" / value : " + map.get("cosmetic"+i));
+	
+}
+*/	
+
+
+
+
+// 뒤죽박죽 안좋음 
+//Iterator<String> keys2 = map.keySet().iterator();
+//while(keys2.hasNext()) {
+//	String key = keys2.next();
+//	System.out.print("key: "+key);
+//	System.out.print(", value: "+map.get(key)+'\n');
+//}
 
 //driver.get("http://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000014447&dispCatNo=1000001000100010001"); // URL로 접속하기
 //WebElement coolestWidgetEvah = driver.findElement(By.id("coolestWidgetEvah")); // id로 Element 가져오기
