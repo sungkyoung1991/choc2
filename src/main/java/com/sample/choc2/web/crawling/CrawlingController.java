@@ -13,12 +13,21 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.support.HttpRequestHandlerServlet;
 
 import com.sample.choc2.common.CrawlingSearch;
+import com.sample.choc2.common.domain.CrawlingVO;
+import com.sample.choc2.common.service.CrawlingService;
 
 @Controller
 @RequestMapping("/crawling")
 public class CrawlingController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(CrawlingController.class);
+	@Autowired
+	@Qualifier("crawlingServiceImpl")
+	private CrawlingService crawlingService;
+	
+	public void setCrawlingService(CrawlingService crawlingService) {
+		this.crawlingService = crawlingService;
+	}
 	
 //	@Autowired
 //	@Qualifier("crawlingServiceImpl")
@@ -44,10 +53,13 @@ public class CrawlingController {
 	public String oliveSearch (Model model,@RequestParam("index")String index, HttpRequestHandlerServlet request) throws Exception{
 //	public String oliveSearch (Model model,@RequestBody String index) throws Exception{
 		logger.info("SearchPost");
-		System.out.println("index : "+index );
+		CrawlingVO crawlingVO = new CrawlingVO();
+		//System.out.println("index : "+index );
 		CrawlingSearch clo = new CrawlingSearch();
-		clo.CrawlingOlive(index);
-		
+		clo.CrawlingOlive(index,crawlingVO);
+		//System.out.println(CrawlingVO.toString());
+		//System.out.println(crawlingVO.toString());
+		crawlingService.createOvlieCrawling(crawlingVO);
 		return "redirect:/crawling/oliveSearch";
 	}
 	

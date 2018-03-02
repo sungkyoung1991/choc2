@@ -1,18 +1,16 @@
 package com.sample.choc2.common;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.springframework.test.context.ContextConfiguration;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 
 import com.sample.choc2.common.domain.CrawlingVO;
+import com.sample.choc2.common.service.CrawlingService;
 
 import io.github.bonigarcia.wdm.ChromeDriverManager;
 
@@ -20,18 +18,22 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class CrawlingSearch {
+	@Autowired
+	@Qualifier("crawlingServiceImpl")
+	private CrawlingService crawlingService;
 	
+	public void setCrawlingService(CrawlingService crawlingService) {
+		this.crawlingService = crawlingService;
+	}
 	WebDriver driver;
 	private static final Logger logger = LoggerFactory.getLogger(CrawlingSearch.class);
-	public void CrawlingOlive(String index) throws Exception{
+	public CrawlingVO CrawlingOlive(String index,CrawlingVO crawlingVO) throws Exception{
 		
-		try {
+		try {//---------------------------------------------------try
 			 ChromeDriverManager.getInstance().setup();
 		//System.setProperty("webdriver.chrome.driver", "src/main/resources/driver/chromedriver"); // 다운받은 ChromeDriver 위치를 넣어줍니다. 
 		
@@ -41,8 +43,7 @@ public class CrawlingSearch {
 	    String xpathPrdName = "//*[@class=\"prd_info\"]/*[@class=\"prd_name\"]";
 	    String xpathPrice = "//*[@class=\"prd_info\"]/ul/li/span[@class=\"tx_cont cur_price\"]/span[@class=\"tx_num\"]";
 	    String xpathImage = "//div[@class=\"prd_detail_box\"]/div[@class=\"left_area\"]/div[@class=\"prd_img\"]/img";
-	    LinkedHashMap<String,String> map = new LinkedHashMap<String,String>();
-	    CrawlingVO crawlingVO = new CrawlingVO();
+	    //CrawlingVO crawlingVO = new CrawlingVO();
 
 	    //Map<String,String> map = new HashMap<String,String>();
 		/*
@@ -55,7 +56,6 @@ public class CrawlingSearch {
 		//String arg2;
 		ArrayList<String> arg1 = new ArrayList<String>();
 		ArrayList<String> arg2 = new ArrayList<String>();
-		ArrayList<String> targetURL = new ArrayList<String>();		
 		Document doc= 
 				Jsoup.connect("https://m.oliveyoung.co.kr/m/search/getSearchMain.do?query="+index+"#load_SearchLst").get();
 		
@@ -77,10 +77,10 @@ public class CrawlingSearch {
 				//javascript:common.link.moveGoodsDetail('A000000014447','1000001000100010001');
 				
 				
-				System.out.println("target :" + targets.toString());
+				//System.out.println("target :" + targets.toString());
 				arg1.add(targets.split("\'")[1].split("\',\'")[0]);
 				arg2.add(targets.split("\',\'")[1].split("\'")[0]);
-				System.out.println("targets 파싱 : "+arg1+", "+arg2);
+				//System.out.println("targets 파싱 : "+arg1+", "+arg2);
 				
 				
 				//=--=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-selenium-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-
@@ -92,46 +92,101 @@ public class CrawlingSearch {
 		System.out.println("=--=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-selenium-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-");
 		
 		for(int i=0; i<1;i++) {
-			System.out.println("url :"+"http://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo="+arg1.get(i)+"&dispCatNo="+arg2.get(i));
-		driver.get("http://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo="+arg1.get(i)+"&dispCatNo="+arg2.get(i)); // URL로 접속하기
-		
-		String brand = driver.findElement(By.xpath(xpathBrand)).getText();
-		System.out.println(brand.split("브랜드")[0]);
-		
-		String prdName = driver.findElement(By.xpath(xpathPrdName)).getText();
-		System.out.println(prdName);
-		
-		String price = driver.findElement(By.xpath(xpathPrice)).getText();
-		System.out.println(price);
-		
-		WebElement image = driver.findElement(By.xpath(xpathImage));
-		System.out.println(image.getAttribute("src").toString());
-		
-		
-		driver.findElement(By.xpath(xpathClick)).click();
-		
-		for(int j=1; j<= 9; j++) {
-			String num = String.valueOf(j);
-			String xpathList = "//*[@id=\"artcInfo\"]/dl[" +num + "]/dd";
-			String infoData = driver.findElement(By.xpath(xpathList)).getText();
-			if(infoData.contains("■")) {
-				infoData = infoData.split("■")[1];
+			try {
+			System.out.println("url :"+"http://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo="+arg1.get(0)+"&dispCatNo="+arg2.get(0));
+			}catch(Exception e){
+				e.printStackTrace();
+				System.out.println("이런! 없는 상품이에요 ! ");
 			}
-			System.out.println(infoData);
+			
+		driver.get("http://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo="+arg1.get(0)+"&dispCatNo="+arg2.get(0)); // URL로 접속하기
+		
+		// xPath로 경로 접근하여 크롤링하기 
+				//driver.get("http://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000014447&dispCatNo=1000001000100010001"); // URL로 접속하기
+				String prdName = driver.findElement(By.xpath(xpathPrdName)).getText();
+				crawlingVO.setProductName(prdName);
+				System.out.println(crawlingVO.getProductName());		
+				
+				String brand = driver.findElement(By.xpath(xpathBrand)).getText();
+				crawlingVO.setBrand(brand.split("브랜드")[0]);
+				System.out.println(crawlingVO.getBrand());
+				
+				String price = driver.findElement(By.xpath(xpathPrice)).getText();
+				crawlingVO.setPrice(price);
+				System.out.println(crawlingVO.getPrice());
+				
+				WebElement image = driver.findElement(By.xpath(xpathImage));
+				crawlingVO.setImagePath(image.getAttribute("src").toString());
+				System.out.println(crawlingVO.getImagePath());
+				
+
+				driver.findElement(By.xpath(xpathClick)).click();
+		
+				for(int j=1; j<= 9; j++) {
+					String num = String.valueOf(j);
+					String xpathList = "//*[@id=\"artcInfo\"]/dl[" +num + "]/dd";
+					String infoData = driver.findElement(By.xpath(xpathList)).getText();
+					if(infoData.contains("■")) {
+						infoData = infoData.split("■")[1];
+					}
+					//System.out.println(infoData);
+					switch (j) {
+					case 1:
+						crawlingVO.setMount(infoData);
+						System.out.println(crawlingVO.getMount());
+						break;
+					case 2:
+						crawlingVO.setSkinType(infoData);
+						System.out.println(crawlingVO.getSkinType());
+						break;
+					case 3:
+						crawlingVO.setTerm(infoData);
+						System.out.println(crawlingVO.getTerm());
+						break;
+					case 4:
+						crawlingVO.setMethod(infoData);
+						System.out.println(crawlingVO.getMethod());
+						break;
+					case 5:
+						crawlingVO.setManufacturer(infoData);
+						System.out.println(crawlingVO.getManufacturer());
+						break;
+					case 6:
+						crawlingVO.setOrigination(infoData);
+						System.out.println(crawlingVO.getOrigination());
+						break;
+					case 7:
+						crawlingVO.setIngredient(infoData);
+						System.out.println(crawlingVO.getIngredient());
+						break;
+					case 8:
+						crawlingVO.setFunctional(infoData);
+						System.out.println(crawlingVO.getFunctional());
+						break;
+					case 9:
+						crawlingVO.setPrecautions(infoData);
+						System.out.println(crawlingVO.getPrecautions());
+						
+						break;
+			
+					default:
+						break;
+					}
+				}
+				
+				logger.info("test : "+crawlingVO);
+				//crawlingService.createOvlieCrawling(crawlingVO);
 		}
-		}
-//		
-//		Document targetDoc= 
-//				Jsoup.connect(
-//							"http://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo="
-//							+arg1.get(0)+"&dispCatNo="+arg2.get(0)).get();
-//		System.out.println(targetDoc);
+		return crawlingVO;
 
 		}catch(Exception e) {
 			e.printStackTrace();
+			
 		}finally{
 			driver.quit(); // Driver 종료
+			//return ;
 		}
+		return crawlingVO;
 		
 
 		 

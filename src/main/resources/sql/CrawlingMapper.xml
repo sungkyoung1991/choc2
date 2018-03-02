@@ -4,12 +4,27 @@
 		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="CrawlingMapper">
-
-
-<!-- OliveYoungSearch -->
-<insert id="createCrawlingOlive">
-		INSERT INTO TBL_CRAWLING_OLIVEYOUNG(PRODUCT_NAME,BRAND,PRICE,IMAGE_PATH,MOUNT,SKIN_TYPE,TERM,METHOD,MANUFACTURER,ORIGINATION,INGREDIENT,FUNCTIONAL,PRECAUTIONS)
-	VALUES(#{productName},#{brand},#{price},#{imagePath},#{mount},#{skinType},#{term},#{method},#{manufacturer},#{origination},#{ingredient},#{functional},#{precautions})
+<!-- 	<resultMap type="crawlingVO" id="crawlingInsertMap">
+		<result property="productName" column="PRODUCT_NAME" jdbcType="VARCHAR"/>
+		<result property="brand" column="BRAND" jdbcType="VARCHAR"/>
+		<result property="price" column="PRICE" jdbcType="VARCHAR"/>
+		<result property="imagePath" column="IMAGE_PATH" jdbcType="VARCHAR"/>
+		<result property="mount" column="MOUNT" jdbcType="VARCHAR"/>
+		<result property="skinType" column="SKIN_TYPE" jdbcType="VARCHAR"/>
+		<result property="term" column="TERM" jdbcType="VARCHAR"/>
+		<result property="method" column="METHOD" jdbcType="VARCHAR"/>
+		<result property="manufacturer" column="MANUFACTURER" jdbcType="VARCHAR"/>
+		<result property="origination" column="ORIGINATION" jdbcType="VARCHAR"/>
+		<result property="ingredient" column="INGREDIENT" jdbcType="VARCHAR"/>
+		<result property="functional" column="FUNCTIONAL" jdbcType="VARCHAR"/>
+		<result property="precautions" column="PRECAUTIONS" jdbcType="VARCHAR"/>
+	</resultMap> 
+parameterMap="crawlingInsertMap" -->
+<!-- OliveYoungSearch -->	
+<insert id="createCrawlingOlive" >
+		INSERT INTO TBL_CRAWLING_OLIVEYOUNG
+		(PRODUCT_NAME,BRAND,PRICE,IMAGE_PATH,MOUNT,SKIN_TYPE,TERM,METHOD,MANUFACTURER,ORIGINATION,INGREDIENT,FUNCTIONAL,PRECAUTIONS)
+		VALUES(#{productName},#{brand},#{price},#{imagePath},#{mount},#{skinType},#{term},#{method},#{manufacturer},#{origination},#{ingredient},#{functional},#{precautions})
 </insert>
 
 </mapper>
