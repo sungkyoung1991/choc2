@@ -47,7 +47,15 @@ console.log(isNan(123));
 <body>
 	<c:choose>
 		<c:when test="${sessionScope.user.userId!=null }">
-			<!-- 로그인 했을때 -->
+			<!-- 로그인 했을때 --> 
+			<ul class="nav navbar-nav">
+		    <li><a href="/">home</a></li>
+		    <li><a href="/admin/cosmetic/list">상품 관리</a></li>
+		    <li><a href="/admin/board/list">게시판 관리</a></li>
+		    <li><a href="/super/userManage/list">회원 관리</a></li>
+		    <li><a href="/user/getCosmeticList">유저 상품 게시판</a></li>
+		    
+		   </ul>
 			<h2>You have been successfully logged in</h2>
 			<strong>${sessionScope.user.userId}</strong>님, you are very welcome 반가워요!!
 			<button id="myPage" onclick="location.href='/user/getMypage?userId=${sessionScope.user.userId}'">마이페이지</button> 
