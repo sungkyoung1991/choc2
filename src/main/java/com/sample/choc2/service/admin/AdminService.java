@@ -31,11 +31,11 @@ public interface AdminService {
 	/*
 	public void createCosmetic(CosmeticVO cosmeticVO)throws Exception;
 	
-	public CosmeticVO getCosmetic(Integer cosmetic_no)throws Exception;
+	public CosmeticVO getCosmetic(Integer cosmeticNo)throws Exception;
 	
 	public void updateCosmetic(CosmeticVO cosmeticVO)throws Exception;
 	
-	public void deleteCosmetic(Integer cosmetic_no)throws Exception;
+	public void deleteCosmetic(Integer cosmeticNo)throws Exception;
 	
 	public List<CosmeticVO> listCosmetic(SearchCriteria cri)throws Exception;
 	

@@ -80,9 +80,9 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
-	public CosmeticVO getCosmetic(Integer cosmetic_no) throws Exception {
+	public CosmeticVO getCosmetic(Integer cosmeticNo) throws Exception {
 		// TODO Auto-generated method stub
-		return adminDao.getCosmetic(cosmetic_no);
+		return adminDao.getCosmetic(cosmeticNo);
 	}
 
 	@Override
@@ -92,9 +92,9 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
-	public void deleteCosmetic(Integer cosmetic_no) throws Exception {
+	public void deleteCosmetic(Integer cosmeticNo) throws Exception {
 		// TODO Auto-generated method stub
-		adminDao.deleteCosmetic(cosmetic_no);
+		adminDao.deleteCosmetic(cosmeticNo);
 	}
 
 	@Override

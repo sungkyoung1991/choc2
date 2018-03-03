@@ -73,7 +73,7 @@ public class AdminController {
 
 	// 리스트 조회
 	@RequestMapping(value = "/board/list", method = RequestMethod.GET)
-	public String listBoard(@ModelAttribute("cri") @Validated SearchCriteria cri, Model model) throws Exception {
+	public String listBoard(@ModelAttribute("cri")SearchCriteria cri, Model model) throws Exception {
 		logger.info("list get....");
 
 		model.addAttribute("list", adminService.listBoard(cri));
@@ -143,18 +143,18 @@ public class AdminController {
 	//게시물 조회 
 	@RequestMapping(value = "/cosmetic/get", method = RequestMethod.GET)
 	public String getCosmetic(@ModelAttribute("cri") SearchCriteria cri,
-			@RequestParam("cosmetic_no") int cosmetic_no, Model model) throws Exception {
+			@RequestParam("cosmeticNo") int cosmeticNo, Model model) throws Exception {
 
 		logger.info("Cosmetic info ....");
 
-		model.addAttribute(cosmeticService.getCosmetic(cosmetic_no));
+		model.addAttribute(cosmeticService.getCosmetic(cosmeticNo));
 
 		return "adminCosmetic/getAdminCosmetic";
 	}
 	//게시물 리스트 조회 
 	@RequestMapping(value = "/cosmetic/list", method = RequestMethod.GET)
 	public String getCosmeticList(@ModelAttribute("cri") SearchCriteria cri, Model model) throws Exception {
-
+		
 		logger.info("Cosmetic List info ....");
 		model.addAttribute("list",cosmeticService.getCosmeticList(cri));
 		
@@ -189,11 +189,11 @@ public class AdminController {
 	//게시물 수정 화면 
 	@RequestMapping(value = "/cosmetic/update", method = RequestMethod.GET)
 	public String updateCosmetic(@ModelAttribute("cri") SearchCriteria cri,
-			@RequestParam("cosmetic_no") int cosmetic_no, Model model) throws Exception {
+			@RequestParam("cosmeticNo") int cosmeticNo, Model model) throws Exception {
 
 		logger.info("Cosmetic info ....");
 
-		model.addAttribute(cosmeticService.getCosmetic(cosmetic_no));
+		model.addAttribute(cosmeticService.getCosmetic(cosmeticNo));
 
 		return "adminCosmetic/updateAdminCosmetic";
 	}
@@ -217,11 +217,11 @@ public class AdminController {
 	//게시물 삭제 처리 
 	@RequestMapping(value = "/cosmetic/delete", method = RequestMethod.POST)
 	public String deleteCosmetic(SearchCriteria cri,
-			@RequestParam("cosmetic_no") int cosmetic_no, RedirectAttributes rttr) throws Exception {
+			@RequestParam("cosmeticNo") int cosmeticNo, RedirectAttributes rttr) throws Exception {
 
 		logger.info("Cosmetic info ....");
 
-		cosmeticService.deleteCosmetic(cosmetic_no);
+		cosmeticService.deleteCosmetic(cosmeticNo);
 		rttr.addAttribute("page", cri.getPage());
 		rttr.addAttribute("perPageNum", cri.getPerPageNum());
 		rttr.addAttribute("searchType", cri.getSearchType());

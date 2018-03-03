@@ -44,8 +44,8 @@
 						<textarea class="form-control" name="content" rows="3" readonly="readonly">${boardVO.content}</textarea>
 					</div>
 					<div class="form-group">
-						<label for="exampleInputEmail1">Writer</label> <input type="text"
-							name="writer" class="form-control" value="${boardVO.writer}"
+						<label for="exampleInputEmail1">UserId</label> <input type="text"
+							name="userId" class="form-control" value="${boardVO.userId}"
 							readonly="readonly">
 					</div>
 				</div>
@@ -75,8 +75,8 @@
 					<h3 class="box-title">ADD NEW REPLY</h3>
 				</div>
 				<div class="box-body">
-					<label for="exampleInputEmail1">Writer</label> 
-					<input class="form-control" type="text" placeholder="USER ID" id="newReplyWriter"> 
+					<label for="exampleInputEmail1">UserId</label> 
+					<input class="form-control" type="text" placeholder="USER ID" id="newReplyUserId"> 
 						<label for="exampleInputEmail1">Reply Text</label>
 						 <input class="form-control" type="text" placeholder="REPLY TEXT" id="newReplyText">
 
@@ -208,7 +208,7 @@
 	
 	$("#replyAddBtn").on("click",function(){
 		 
-		 var replyerObj = $("#newReplyWriter");
+		 var replyerObj = $("#newReplyUserId");
 		 var replytextObj = $("#newReplyText");
 		 var replyer = replyerObj.val();
 		 var replytext = replytextObj.val();

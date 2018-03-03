@@ -4,63 +4,69 @@
 		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="CosmeticMapper">		
- 		
- 		<resultMap type="cosmeticVO" id="selectCosmeticMap">
+<mapper namespace="CosmeticMapper">
 
- 		
- 		</resultMap>
- 
- 
-	  <insert id="createCosmetic" parameterType="cosmeticVO">
-	  	INSERT INTO
-	 	TBL_COSMETIC(BRAND,MODEL,PRODUCT,AMOUNT,PRICE,INGREDIENT)
-	 	VALUES(#{brand},#{model},#{product},#{amount},#{price},#{ingredient})
-	  </insert>
-	  
-	  <select id="getCosmeticList" resultType="cosmeticVO">
+	<resultMap type="cosmeticVO" id="selectCosmeticMap">
+		<result property="cosmeticNo" column="COSMETIC_NO" jdbcType="INTEGER"/>
+		<result property="brand" column="BRAND" jdbcType="VARCHAR"/>
+		<result property="model" column="MODEL" jdbcType="VARCHAR"/>
+		<result property="product" column="PRODUCT" jdbcType="VARCHAR"/>
+		<result property="amount" column="AMOUNT" jdbcType="VARCHAR"/>
+		<result property="price" column="PRICE" jdbcType="VARCHAR"/>
+		<result property="ingredient" column="INGREDIENT" jdbcType="VARCHAR"/>
+	</resultMap>
+
+
+	<insert id="createCosmetic" parameterType="cosmeticVO">
+		INSERT INTO
+		TBL_COSMETIC(BRAND,MODEL,PRODUCT,AMOUNT,PRICE,INGREDIENT)
+		VALUES(#{brand},#{model},#{product},#{amount},#{price},#{ingredient})
+	</insert>
+
+	<select id="getCosmeticList" resultMap="selectCosmeticMap">
 	  <![CDATA[
 		SELECT * FROM TBL_COSMETIC WHERE COSMETIC_NO>0 
 	  ]]>
-	  
-	  	<include refid="search"></include>
+
+		<include refid="search"></include>
 		
 	   <![CDATA[
 			ORDER BY COSMETIC_NO DESC
 			LIMIT #{pageStart}, #{perPageNum}
 	   ]]>
-		
-	  </select>
-	  
-	  <select id="totalCountCosmetic" resultType="int">
+
+	</select>
+
+	<select id="totalCountCosmetic" resultType="int">
 		<![CDATA[  
 	  		SELECT COUNT(COSMETIC_NO) 
 	  		FROM TBL_COSMETIC 
 	  		WHERE COSMETIC_NO > 0 
 
 		]]>
-		
+
 		<include refid="search"></include>
 	</select>
-	  
-	  <select id="getCosmetic" resultType="cosmeticVO">
-	 		SELECT * 
-	 		FROM TBL_COSMETIC 
-	 		WHERE COSMETIC_NO=#{cosmtic_no}
-	  
-	  </select>
-	  
-	  <update id="updateCosmetic" parameterType="cosmeticVO">
-	 	UPDATE TBL_COSMETIC 
-	 	SET BRAND = #{brand} ,MODEL = #{model} ,PRODUCT = #{product} ,AMOUNT = #{amount} ,PRICE = #{price} ,INGREDIENT = #{ingredient} 
-		WHERE COSMETIC_NO = #{cosmetic_no}
-	  </update>
-	  
-	  <delete id="deleteCosmetic" parameterType="cosmeticVO">
-	  	DELETE FROM TBL_COSMETIC WHERE COSMETIC_NO = #{cosmetic_no}
-	  </delete>
-	  
-	  <sql id="search">
+
+	<select id="getCosmetic" resultMap="selectCosmeticMap">
+		SELECT *
+		FROM TBL_COSMETIC
+		WHERE COSMETIC_NO=#{cosmeticNo}
+
+	</select>
+
+	<update id="updateCosmetic" parameterType="cosmeticVO">
+		UPDATE TBL_COSMETIC
+		SET BRAND = #{brand} ,MODEL = #{model} ,PRODUCT = #{product} ,AMOUNT =
+		#{amount} ,PRICE = #{price} ,INGREDIENT = #{ingredient}
+		WHERE COSMETIC_NO = #{cosmeticNo}
+	</update>
+
+	<delete id="deleteCosmetic" parameterType="cosmeticVO">
+		DELETE FROM TBL_COSMETIC WHERE COSMETIC_NO = #{cosmeticNo}
+	</delete>
+
+	<sql id="search">
 		<if test="searchType != null">
 			<if test="searchType == 'brand'.toString()">
 				AND BRAND LIKE CONCAT('%', #{keyword}, '%')
@@ -82,5 +88,5 @@
 			</if>
 		</if>
 	</sql>
-			
+
 </mapper>

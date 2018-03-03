@@ -49,9 +49,9 @@ public class CosmeticDaoImpl implements CosmeticDao {
 	}
 
 	@Override
-	public CosmeticVO getCosmetic(Integer cosmetic_no) throws Exception {
+	public CosmeticVO getCosmetic(Integer cosmeticNo) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne("CosmeticMapper.getCosmetic",cosmetic_no);
+		return sqlSession.selectOne("CosmeticMapper.getCosmetic",cosmeticNo);
 	}
 
 	@Override
@@ -63,9 +63,9 @@ public class CosmeticDaoImpl implements CosmeticDao {
 	}
 
 	@Override
-	public void deleteCosmetic(Integer cosmetic_no) throws Exception {
+	public void deleteCosmetic(Integer cosmeticNo) throws Exception {
 		// TODO Auto-generated method stub
-		sqlSession.delete("CosmeticMapper.deleteCosmetic", cosmetic_no);
+		sqlSession.delete("CosmeticMapper.deleteCosmetic", cosmeticNo);
 	}
 	
 }

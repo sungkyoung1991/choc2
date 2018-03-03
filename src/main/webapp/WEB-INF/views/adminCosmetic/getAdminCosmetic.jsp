@@ -18,7 +18,7 @@
 				<!-- /.box header -->
 
 				<form role="form" action="/admin/cosmetic/update" method="post">
-					<input type='hidden' name='cosmetic_no' value="${cosmeticVO.cosmetic_no}"> 
+					<input type='hidden' name='cosmeticNo' value="${cosmeticVO.cosmeticNo}"> 
 					<input type='hidden' name='page' value="${cri.page}"> 
 					<input type='hidden' name='perPageNum' value="${cri.perPageNum}">
 					<input type='hidden' name='searchType' value="${cri.searchType}">
