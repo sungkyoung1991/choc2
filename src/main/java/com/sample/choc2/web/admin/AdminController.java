@@ -18,6 +18,7 @@ import com.sample.choc2.service.admin.AdminService;
 import com.sample.choc2.service.cosmetic.CosmeticService;
 import com.sample.choc2.service.domain.BoardVO;
 import com.sample.choc2.service.domain.CosmeticVO;
+import com.sample.choc2.service.user.UserService;
 
 @Controller
 @RequestMapping("/admin/*")
@@ -39,6 +40,14 @@ public class AdminController {
 	public void setAdminService(AdminService adminService) {
 		this.adminService = adminService;
 	}
+	
+//	@Autowired
+//	@Qualifier("userServiceImple")
+//	private UserService userService;
+//	
+//	public void setUserService(UserService userService) {
+//		this.userService = userService;
+//	}
 
 	// ===========================================Board Controller=====================================================
 	// 게시판 등록 화면
@@ -64,7 +73,7 @@ public class AdminController {
 
 	// 리스트 조회
 	@RequestMapping(value = "/board/list", method = RequestMethod.GET)
-	public String listBoard(@ModelAttribute("cri") @Validated SearchCriteria cri, Model model) throws Exception {
+	public String listBoard(@ModelAttribute("cri")SearchCriteria cri, Model model) throws Exception {
 		logger.info("list get....");
 
 		model.addAttribute("list", adminService.listBoard(cri));
@@ -82,18 +91,18 @@ public class AdminController {
 
 	// 게시판 조회
 	@RequestMapping(value = "/board/get", method = RequestMethod.GET)
-	public String getBaord(@RequestParam("board_no") int board_no, @ModelAttribute("cri") SearchCriteria cri, Model model)
+	public String getBaord(@RequestParam("boardNo") int boardNo, @ModelAttribute("cri") SearchCriteria cri, Model model)
 			throws Exception {
-		adminService.updateViewCnt(board_no);
-		model.addAttribute(adminService.getBoard(board_no));
+		adminService.updateViewCnt(boardNo);
+		model.addAttribute(adminService.getBoard(boardNo));
 		return "adminBoard/getAdminBoard";
 	}
 
 	// 게시판 수정 화면
 	@RequestMapping(value = "/board/update", method = RequestMethod.GET)
-	public String updateBoard(@RequestParam("board_no") int board_no, @ModelAttribute("cri") SearchCriteria cri, Model model)
+	public String updateBoard(@RequestParam("boardNo") int boardNo, @ModelAttribute("cri") SearchCriteria cri, Model model)
 			throws Exception {
-		model.addAttribute(adminService.getBoard(board_no));
+		model.addAttribute(adminService.getBoard(boardNo));
 		return "adminBoard/updateAdminBoard";
 	}
 
@@ -115,10 +124,10 @@ public class AdminController {
 
 	// 게시판 삭제 처리
 	@RequestMapping(value = "/board/delete", method = RequestMethod.POST)
-	public String deleteBoard(@RequestParam("board_no") int board_no, SearchCriteria cri, RedirectAttributes rttr)
+	public String deleteBoard(@RequestParam("boardNo") int boardNo, SearchCriteria cri, RedirectAttributes rttr)
 			throws Exception {
 
-		adminService.deleteBoard(board_no);
+		adminService.deleteBoard(boardNo);
 
 		rttr.addAttribute("page", cri.getPage());
 		rttr.addAttribute("perPageNum", cri.getPerPageNum());
@@ -134,18 +143,18 @@ public class AdminController {
 	//게시물 조회 
 	@RequestMapping(value = "/cosmetic/get", method = RequestMethod.GET)
 	public String getCosmetic(@ModelAttribute("cri") SearchCriteria cri,
-			@RequestParam("cosmetic_no") int cosmetic_no, Model model) throws Exception {
+			@RequestParam("cosmeticNo") int cosmeticNo, Model model) throws Exception {
 
 		logger.info("Cosmetic info ....");
 
-		model.addAttribute(cosmeticService.getCosmetic(cosmetic_no));
+		model.addAttribute(cosmeticService.getCosmetic(cosmeticNo));
 
 		return "adminCosmetic/getAdminCosmetic";
 	}
 	//게시물 리스트 조회 
 	@RequestMapping(value = "/cosmetic/list", method = RequestMethod.GET)
 	public String getCosmeticList(@ModelAttribute("cri") SearchCriteria cri, Model model) throws Exception {
-
+		
 		logger.info("Cosmetic List info ....");
 		model.addAttribute("list",cosmeticService.getCosmeticList(cri));
 		
@@ -180,11 +189,11 @@ public class AdminController {
 	//게시물 수정 화면 
 	@RequestMapping(value = "/cosmetic/update", method = RequestMethod.GET)
 	public String updateCosmetic(@ModelAttribute("cri") SearchCriteria cri,
-			@RequestParam("cosmetic_no") int cosmetic_no, Model model) throws Exception {
+			@RequestParam("cosmeticNo") int cosmeticNo, Model model) throws Exception {
 
 		logger.info("Cosmetic info ....");
 
-		model.addAttribute(cosmeticService.getCosmetic(cosmetic_no));
+		model.addAttribute(cosmeticService.getCosmetic(cosmeticNo));
 
 		return "adminCosmetic/updateAdminCosmetic";
 	}
@@ -208,11 +217,11 @@ public class AdminController {
 	//게시물 삭제 처리 
 	@RequestMapping(value = "/cosmetic/delete", method = RequestMethod.POST)
 	public String deleteCosmetic(SearchCriteria cri,
-			@RequestParam("cosmetic_no") int cosmetic_no, RedirectAttributes rttr) throws Exception {
+			@RequestParam("cosmeticNo") int cosmeticNo, RedirectAttributes rttr) throws Exception {
 
 		logger.info("Cosmetic info ....");
 
-		cosmeticService.deleteCosmetic(cosmetic_no);
+		cosmeticService.deleteCosmetic(cosmeticNo);
 		rttr.addAttribute("page", cri.getPage());
 		rttr.addAttribute("perPageNum", cri.getPerPageNum());
 		rttr.addAttribute("searchType", cri.getSearchType());
@@ -222,5 +231,6 @@ public class AdminController {
 
 		return "redirect:/admin/cosmetic/list";
 	}
+	
 
 }

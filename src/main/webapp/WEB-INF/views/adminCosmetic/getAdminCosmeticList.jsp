@@ -66,11 +66,11 @@
 						</tr>
 						<c:forEach items="${list}" var="cosmeticVO">
 						<tr>
-							<td>${cosmeticVO.cosmetic_no}</td>
+							<td>${cosmeticVO.cosmeticNo}</td>
 							<td>${cosmeticVO.brand}</td>
+							<td>${cosmeticVO.model}</td>		
 							<td><a href='/admin/cosmetic/get${pageMaker.makeSearch(pageMaker.cri.page) }
-							&cosmetic_no=${cosmeticVO.cosmetic_no}'>${cosmeticVO.model}</a></td>		
-							<td>${cosmeticVO.product}</td>
+							&cosmeticNo=${cosmeticVO.cosmeticNo}'>${cosmeticVO.product}</a></td>
 							<td>${cosmeticVO.amount}</td>
 							<td>${cosmeticVO.price}</td>
 							<td>${cosmeticVO.ingredient}</td>	

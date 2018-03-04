@@ -45,40 +45,40 @@ public class ReplyDaoImpl implements ReplyDao {
 	}
 
 	@Override
-	public void deleteReply(Integer reply_no) throws Exception {
+	public void deleteReply(Integer replyNo) throws Exception {
 		// TODO Auto-generated method stub
-		session.delete(NAMESPACE + ".deleteReply", reply_no);
+		session.delete(NAMESPACE + ".deleteReply", replyNo);
 	}
 
 	@Override
-	public List<ReplyVO> listPageReply(Integer board_no, Criteria cri) throws Exception {
+	public List<ReplyVO> listPageReply(Integer boardNo, Criteria cri) throws Exception {
 		// TODO Auto-generated method stub
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 
-		paramMap.put("board_no", board_no);
+		paramMap.put("boardNo", boardNo);
 		paramMap.put("cri", cri);
 
 		return session.selectList(NAMESPACE + ".listReplyPage", paramMap);
 	}
 
 	@Override
-	public int countReply(Integer board_no) throws Exception {
+	public int countReply(Integer boardNo) throws Exception {
 		// TODO Auto-generated method stub
-		return session.selectOne(NAMESPACE + ".countReply", board_no);
+		return session.selectOne(NAMESPACE + ".countReply", boardNo);
 	}
 
 	@Override
-	public int getBoardNo(Integer board_no) throws Exception {
+	public int getBoardNo(Integer boardNo) throws Exception {
 		// TODO Auto-generated method stub
-		return session.selectOne(NAMESPACE + ".getBoard_No", board_no);
+		return session.selectOne(NAMESPACE + ".getboardNo", boardNo);
 	}
 
 	@Override
-	public void updateReplyCnt(Integer board_no, int amount) throws Exception {
+	public void updateReplyCnt(Integer boardNo, int amount) throws Exception {
 		// TODO Auto-generated method stub
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 
-		paramMap.put("board_no", board_no);
+		paramMap.put("boardNo", boardNo);
 		paramMap.put("amount", amount);
 
 		session.update(NAMESPACE + ".updateReplyCnt", paramMap);

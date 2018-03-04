@@ -1,12 +1,13 @@
 package com.sample.choc2.service.domain;
 
 public class UserVO {
-	
+	//UserManage
+	private int commonNo;
 	///Field
 	private int userNo;
 	private String userId; //아이디
 	private String password; //비밀번호
-	private String nickName; //닉네임 
+	private String nickname; //닉네임 
 	private String name;  //이름
 	private String email; //이메일
 	private String address; //주소
@@ -48,13 +49,16 @@ public class UserVO {
 		this.password = password;
 	}
 
-	public String getNickName() {
-		return nickName;
+
+	public String getNickname() {
+		return nickname;
 	}
 
-	public void setNickName(String nickName) {
-		this.nickName = nickName;
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
+
 
 	public String getName() {
 		return name;
@@ -132,9 +136,19 @@ public class UserVO {
 
 	@Override
 	public String toString() {
-		return "User [userNo=" + userNo + ", userId=" + userId + ", password=" + password + ", nickName=" + nickName
+		return "Common [commonNo "+commonNo+"] User [userNo=" + userNo + ", userId=" + userId + ", password=" + password + ", nickname=" + nickname
 				+ ", name=" + name + ", email=" + email + ", address=" + address + ", phoneNo=" + phoneNo + ", gender="
 				+ gender + ", age=" + age + ", jumin=" + jumin + ", uuid=" + uuid + ", role=" + role + "]";
+	}
+
+
+	public int getCommonNo() {
+		return commonNo;
+	}
+
+
+	public void setCommonNo(int commonNo) {
+		this.commonNo = commonNo;
 	}
 
 

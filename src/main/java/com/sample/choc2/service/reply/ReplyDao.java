@@ -12,15 +12,15 @@ public interface ReplyDao {
 
 	public void updateReply(ReplyVO replyVO) throws Exception;
 
-	public void deleteReply(Integer reply_no) throws Exception;
+	public void deleteReply(Integer replyNo) throws Exception;
 
-	public List<ReplyVO> listPageReply(Integer board_no, Criteria cri) throws Exception;
+	public List<ReplyVO> listPageReply(Integer boardNo, Criteria cri) throws Exception;
 
 	// 페이징처리
-	public int countReply(Integer board_no) throws Exception;
+	public int countReply(Integer boardNo) throws Exception;
 
 	// 게시물의 댓글 수
-	public int getBoardNo(Integer board_no) throws Exception;
+	public int getBoardNo(Integer boardNo) throws Exception;
 
-	public void updateReplyCnt(Integer board_no, int amount) throws Exception;
+	public void updateReplyCnt(Integer boardNo, int amount) throws Exception;
 }

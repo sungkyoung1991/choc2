@@ -53,10 +53,41 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public String nickCheck(String nickName) throws Exception {
+	public String nickCheck(String nickname) throws Exception {
 		// TODO Auto-generated method stub
-		return userDao.nickCheck(nickName);
+		return userDao.nickCheck(nickname);
 	}
+
+	@Override
+	public List<UserVO> getUserList(SearchCriteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return userDao.getUserList(cri);
+	}
+
+	@Override
+	public UserVO getSuperUser(Integer userNo) throws Exception {
+		// TODO Auto-generated method stub
+		return userDao.getSuperUser(userNo);
+	}
+
+	@Override
+	public void updateUser(UserVO userVO) throws Exception {
+		// TODO Auto-generated method stub
+		userDao.updateUser(userVO);
+	}
+
+	@Override
+	public void deleteUser(Integer userNo) throws Exception {
+		// TODO Auto-generated method stub
+		userDao.deleteUser(userNo);
+	}
+
+	@Override
+	public int totalCountUser(SearchCriteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return userDao.totalCountUser(cri);
+	}
+
 
 	
 }

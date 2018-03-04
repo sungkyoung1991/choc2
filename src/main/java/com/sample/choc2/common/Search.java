@@ -3,7 +3,7 @@ package com.sample.choc2.common;
  
 public class Search {
 	
-	///Field
+	///Field//
 	private int currentPage;
 	private String searchCondition;
 	private String searchKeyword;

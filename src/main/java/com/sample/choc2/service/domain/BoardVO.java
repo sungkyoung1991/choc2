@@ -3,10 +3,10 @@ package com.sample.choc2.service.domain;
 import java.util.Date;
 
 public class BoardVO {
-	
-	private int board_no;
+	private int boardNo;
 	private String title;
-	private String writer;
+	private String userId;
+
 	private String content;
 	private int viewcnt;
 	private Date regdate;
@@ -23,12 +23,7 @@ public class BoardVO {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public String getWriter() {
-		return writer;
-	}
-	public void setWriter(String writer) {
-		this.writer = writer;
-	}
+
 	public int getViewcnt() {
 		return viewcnt;
 	}
@@ -41,18 +36,22 @@ public class BoardVO {
 	public void setRegdate(Date regdate) {
 		this.regdate = regdate;
 	}
+
 	@Override
 	public String toString() {
-		return "[ board_no : "+ board_no
-				+"/ title : " + title
-				+"/ writer : " + writer
-				+"/ viewcnt : " + viewcnt
-				+"/ regdate : " + regdate + " ]"	;
+		return "BoardVO [boardNo=" + boardNo + ", title=" + title + ", userId=" + userId + ", content=" + content
+				+ ", viewcnt=" + viewcnt + ", regdate=" + regdate + "]";
 	}
-	public int getBoard_no() {
-		return board_no;
+	public int getBoardNo() {
+		return boardNo;
 	}
-	public void setBoard_no(int board_no) {
-		this.board_no = board_no;
+	public void setBoardNo(int boardNo) {
+		this.boardNo = boardNo;
+	}
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 }

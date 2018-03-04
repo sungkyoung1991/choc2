@@ -6,6 +6,7 @@
 
 <mapper namespace="CosmeticMapper">
 
+<<<<<<< HEAD
 	<resultMap type="cosmeticVO" id="CosmeticSelectMap">
 		<result property="cosmetic_no" column="COSMETIC_NO" jdbcType="INTEGER" />
 		<result property="brand" column="BRAND" jdbcType="VARCHAR" />
@@ -76,6 +77,26 @@
 	<!-- <select id="getCosmeticList" resultType="cosmeticVO"> -->
 
 	<select id="getCosmeticList" resultMap="CosmeticSelectMap">
+=======
+	<resultMap type="cosmeticVO" id="selectCosmeticMap">
+		<result property="cosmeticNo" column="COSMETIC_NO" jdbcType="INTEGER"/>
+		<result property="brand" column="BRAND" jdbcType="VARCHAR"/>
+		<result property="model" column="MODEL" jdbcType="VARCHAR"/>
+		<result property="product" column="PRODUCT" jdbcType="VARCHAR"/>
+		<result property="amount" column="AMOUNT" jdbcType="VARCHAR"/>
+		<result property="price" column="PRICE" jdbcType="VARCHAR"/>
+		<result property="ingredient" column="INGREDIENT" jdbcType="VARCHAR"/>
+	</resultMap>
+
+
+	<insert id="createCosmetic" parameterType="cosmeticVO">
+		INSERT INTO
+		TBL_COSMETIC(BRAND,MODEL,PRODUCT,AMOUNT,PRICE,INGREDIENT)
+		VALUES(#{brand},#{model},#{product},#{amount},#{price},#{ingredient})
+	</insert>
+
+	<select id="getCosmeticList" resultMap="selectCosmeticMap">
+>>>>>>> refs/heads/master
 	  <![CDATA[
 		SELECT * FROM TBL_COSMETIC WHERE COSMETIC_NO>0 
 	  ]]>
@@ -100,6 +121,7 @@
 		<include refid="search"></include>
 	</select>
 
+<<<<<<< HEAD
 	<select id="getCosmetic" resultMap="CosmeticSelectMap">
 		SELECT *
 		FROM TBL_COSMETIC
@@ -120,6 +142,25 @@
 		TBL_COSMETIC WHERE COSMETIC_NO = #{cosmetic_no}
 	</delete>
 
+=======
+	<select id="getCosmetic" resultMap="selectCosmeticMap">
+		SELECT *
+		FROM TBL_COSMETIC
+		WHERE COSMETIC_NO=#{cosmeticNo}
+
+	</select>
+
+	<update id="updateCosmetic" parameterType="cosmeticVO">
+		UPDATE TBL_COSMETIC
+		SET BRAND = #{brand} ,MODEL = #{model} ,PRODUCT = #{product} ,AMOUNT =
+		#{amount} ,PRICE = #{price} ,INGREDIENT = #{ingredient}
+		WHERE COSMETIC_NO = #{cosmeticNo}
+	</update>
+
+	<delete id="deleteCosmetic" parameterType="cosmeticVO">
+		DELETE FROM TBL_COSMETIC WHERE COSMETIC_NO = #{cosmeticNo}
+	</delete>
+>>>>>>> refs/heads/master
 
 	<sql id="search">
 		<if test="searchType != null">
@@ -144,6 +185,7 @@
 		</if>
 	</sql>
 
+<<<<<<< HEAD
 
 	<select id="getIngredientList" parameterType="int" resultType="String">
 		SELECT INGREDIENT
@@ -186,4 +228,6 @@
 		from TBL_SENSITIVE_SKIN
 	</select>
 	
+=======
+>>>>>>> refs/heads/master
 </mapper>

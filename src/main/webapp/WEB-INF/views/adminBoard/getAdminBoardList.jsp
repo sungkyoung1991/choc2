@@ -33,18 +33,18 @@
 						<option value="c"
 							<c:out value="${cri.searchType eq 'c'?'selected':''}"/>>
 							Content</option>
-						<option value="w"
-							<c:out value="${cri.searchType eq 'w'?'selected':''}"/>>
-							Writer</option>
+						<option value="u"
+							<c:out value="${cri.searchType eq 'u'?'selected':''}"/>>
+							UserId</option>
 						<option value="tc"
 							<c:out value="${cri.searchType eq 'tc'?'selected':''}"/>>
 							Title OR Content</option>
 						<option value="cw"
-							<c:out value="${cri.searchType eq 'cw'?'selected':''}"/>>
-							Content OR Writer</option>
+							<c:out value="${cri.searchType eq 'cu'?'selected':''}"/>>
+							Content OR UserId</option>
 						<option value="tcw"
-							<c:out value="${cri.searchType eq 'tcw'?'selected':''}"/>>
-							Title OR Content OR Writer</option>
+							<c:out value="${cri.searchType eq 'tcu'?'selected':''}"/>>
+							Title OR Content OR UserId</option>
 					</select> <input type="text" name='keyword' id="keywordInput"
 						value='${cri.keyword }'>
 					<button id='searchBtn'>Search</button>
@@ -61,7 +61,7 @@
 						<tr>
 							<th style="width: 10px">BNO</th>
 							<th>TITLE</th>
-							<th>WRITER</th>
+							<th>USERID</th>
 							<th>REGDATE</th>
 							<th style="width: 40px">VIEWCNT</th>
 						</tr>
@@ -69,11 +69,11 @@
 						<c:forEach items="${list}" var="boardVO">
 
 							<tr>
-								<td>${boardVO.board_no}</td>
+								<td>${boardVO.boardNo}</td>
 								<td><a
-									href='/admin/board/get${pageMaker.makeSearch(pageMaker.cri.page) }&board_no=${boardVO.board_no}'>
+									href='/admin/board/get${pageMaker.makeSearch(pageMaker.cri.page) }&boardNo=${boardVO.boardNo}'>
 										${boardVO.title}</a></td>
-								<td>${boardVO.writer}</td>
+								<td>${boardVO.userId}</td>
 								<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
 										value="${boardVO.regdate}" /></td>
 								<td><span class="badge bg-red">${boardVO.viewcnt }</span></td>

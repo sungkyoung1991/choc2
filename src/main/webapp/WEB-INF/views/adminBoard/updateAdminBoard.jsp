@@ -33,7 +33,7 @@
 
 						<div class="form-group">
 							<label for="exampleInputEmail1">BNO</label> <input type="text"
-								name='board_no' class="form-control" value="${boardVO.board_no}"
+								name='boardNo' class="form-control" value="${boardVO.boardNo}"
 								readonly="readonly">
 						</div>
 
@@ -46,8 +46,8 @@
 							<textarea class="form-control" name="content" rows="3">${boardVO.content}</textarea>
 						</div>
 						<div class="form-group">
-							<label for="exampleInputEmail1">Writer</label> <input type="text"
-								name="writer" class="form-control" value="${boardVO.writer}"readonly="readonly">
+							<label for="exampleInputEmail1">UserId</label> <input type="text"
+								name="userId" class="form-control" value="${boardVO.userId}"readonly="readonly">
 						</div>
 					</div>
 					<!-- /.box-body -->

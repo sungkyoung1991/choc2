@@ -75,11 +75,20 @@ $(document).ready(function(){
 		<c:forEach items="${clist}" var="cosmetic">
 			
 			<tr>
+<<<<<<< HEAD
 				<td><a href='/user/getCosmetic?${pageMaker.makeSearch(pageMaker.cri.page) }&cosmetic_no=${cosmetic.cosmetic_no}'><img alt="picture" src="${cosmetic.image}" height="100px" width="100px"></a></td>
 			<%-- <td>${cosmetic.cosmetic_no}</td> --%>
 				<td><a href='/user/getCosmetic?${pageMaker.makeSearch(pageMaker.cri.page) }&cosmetic_no=${cosmetic.cosmetic_no}'><font color="gray">${cosmetic.brand}</font></a><br>
 			<%-- <td>${cosmetic.model}</td> --%>
 				 <a href='/user/getCosmetic?${pageMaker.makeSearch(pageMaker.cri.page) }&cosmetic_no=${cosmetic.cosmetic_no}'>${cosmetic.product}</a></td>
+=======
+				<td>${cosmetic.image}</td>
+			<%-- <td>${cosmetic.cosmeticNo}</td> --%>
+				<td>${cosmetic.brand}</td>
+				<td><a href='/user/getCosmetic${pageMaker.makeSearch(pageMaker.cri.page) }&cosmeticNo=${cosmetic.cosmeticNo}'>
+						${cosmetic.model}</a></td>
+				 <td>${cosmetic.product}</td>
+>>>>>>> refs/heads/master
 				<%-- <td>${cosmetic.price}</td>
 				<td>${cosmetic.ingredient}</td>  --%>
 			</tr>

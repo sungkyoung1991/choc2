@@ -39,32 +39,32 @@ public class ReplyServiceImpl implements ReplyService{
 	}
 
 	@Override
-	public void deleteReply(Integer reply_no) throws Exception {
+	public void deleteReply(Integer replyNo) throws Exception {
 		// TODO Auto-generated method stub
-		replyDao.deleteReply(reply_no);
+		replyDao.deleteReply(replyNo);
 	}
 
 	@Override
-	public List<ReplyVO> listReplyPage(Integer board_no, Criteria cri) throws Exception {
+	public List<ReplyVO> listReplyPage(Integer boardNo, Criteria cri) throws Exception {
 		// TODO Auto-generated method stub
-		return replyDao.listPageReply(board_no, cri);
+		return replyDao.listPageReply(boardNo, cri);
 	}
 
 	@Override
-	public int countReply(Integer board_no) throws Exception {
+	public int countReply(Integer boardNo) throws Exception {
 		// TODO Auto-generated method stub
-		return replyDao.countReply(board_no);
+		return replyDao.countReply(boardNo);
 	}
 
 
 	@Override
-	public int getBoardNo(Integer board_no) throws Exception {
+	public int getBoardNo(Integer boardNo) throws Exception {
 		// TODO Auto-generated method stub
-		return replyDao.getBoardNo(board_no);
+		return replyDao.getBoardNo(boardNo);
 	}
 
 	@Override
-	public void updateReplyCnt(Integer board_no, int amount) throws Exception {
+	public void updateReplyCnt(Integer boardNo, int amount) throws Exception {
 		// TODO Auto-generated method stub
 		//adminDao.updateReply();
 	}
