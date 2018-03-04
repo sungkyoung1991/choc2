@@ -14,7 +14,7 @@
 function deleteCosmetic(no){
 	if(confirm("게시글을 삭제하시겠습니까?")==true){
 	alert("삭제되었습니다");
-	location.href="/user/deleteCosmetic?cosmetic_no="+no;
+	location.href="/user/deleteCosmetic?cosmeticNo="+no;
 	}
 }
 
@@ -22,7 +22,7 @@ function createCmt(nick,no){
 	var content = $("#comment").val();
 	var data= {
 			'nickName' = nick,
-			'cosmetic_no' = no,
+			'cosmeticNo' = no,
 			'content' = content		
 	};
 	var setting = {
@@ -53,7 +53,7 @@ function createCmt(nick,no){
 	<%@include file="../include/nav.jsp"%>
 		 
 		 <form action="/user/updateCosmeticP" method="get">
-			<input type="hidden" name="cosmetic_no" value = "${cinfo.cosmetic_no}"/>
+			<input type="hidden" name="cosmeticNo" value = "${cinfo.cosmeticNo}"/>
 			<input type='hidden' name='page' value="${cri.page}"> 
 			<input type='hidden' name='perPageNum' value="${cri.perPageNum}">
 			<input type='hidden' name='searchType' value="${cri.searchType}">
@@ -95,7 +95,7 @@ function createCmt(nick,no){
 			</tr>
 		</table>
 			<input type="submit" value="글수정" style="float:left" /> 
-			<input type="button" value="글삭제" style="float:left" onclick="deleteCosmetic('${cinfo.cosmetic_no}')" />
+			<input type="button" value="글삭제" style="float:left" onclick="deleteCosmetic('${cinfo.cosmeticNo}')" />
 		</form>
 		<br />
 		<hr>
@@ -108,7 +108,7 @@ function createCmt(nick,no){
 		<tr>
 			<td>
 			<input type="text" id="comment" size="100" >
-			<input type="button" value="댓글쓰기" onclick="createCmt('${user.nickName}','${cinfo.cosmetic_no}')"/></td>
+			<input type="button" value="댓글쓰기" onclick="createCmt('${user.nickName}','${cinfo.cosmeticNo}')"/></td>
 		</tr>			
 	</table>
 	
@@ -123,7 +123,7 @@ function createCmt(nick,no){
 		<div><!--댓글  -->
 		<hr>
 		<%-- <c:if test="${user!=null }"> --%>
-		<span style="color: black; font-weight: bold;">${user.nick }</span> : <input type="text" id="comment" /><button type="button" onclick="comment('${user.nick }','${cinfo.cosmetic_no}');">댓글쓰기</button>
+		<span style="color: black; font-weight: bold;">${user.nick }</span> : <input type="text" id="comment" /><button type="button" onclick="comment('${user.nick }','${cinfo.cosmeticNo}');">댓글쓰기</button>
 		<hr>
 		<%-- </c:if> --%>
 		<div id="commentArea">

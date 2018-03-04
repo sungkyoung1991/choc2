@@ -68,6 +68,12 @@
 </head>
 
 <body>
+<<<<<<< HEAD
+=======
+<a herf="/admin/board/list"><h3>admin board manage</h3></a>
+<a herf="/admin/cosmetic/list"><h3>admin cosmetic manage</h3></a>
+<a herf="/super/userManage/list"><h3>super user manage</h3></a>
+>>>>>>> refs/heads/master
 
 <%-- <jsp:include page="/WEB-INF/views/user/index.jsp"></jsp:include> --%>
 
@@ -258,7 +264,7 @@ document.getElementById('loginBtn').addEventListener('click', function() {
  
 
 <br/><br/><br/><br/>
-
+ 
 	 <form>
 	
 	ID<input type="text" name="userId" id="userId" />

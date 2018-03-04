@@ -33,8 +33,9 @@
 								placeholder="Enter ..."></textarea>
 						</div>
 						<div class="form-group">
-							<label for="exampleInputEmail1">Writer</label> <input type="text"
-								name="writer" class="form-control" placeholder="Enter Writer">
+							<label for="exampleInputEmail1">UserId</label> <input type="text"
+								name="userId" class="form-control" 
+								readonly="readonly" value='${user.userId}' placeholder="Enter userId">
 						</div>
 					</div>
 					<!-- /.box-body -->

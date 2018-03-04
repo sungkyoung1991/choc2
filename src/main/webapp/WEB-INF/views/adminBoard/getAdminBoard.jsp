@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>  
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 <!-- Main content -->
@@ -44,8 +46,8 @@
 						<textarea class="form-control" name="content" rows="3" readonly="readonly">${boardVO.content}</textarea>
 					</div>
 					<div class="form-group">
-						<label for="exampleInputEmail1">Writer</label> <input type="text"
-							name="writer" class="form-control" value="${boardVO.writer}"
+						<label for="exampleInputEmail1">UserId</label> <input type="text"
+							name="userId" class="form-control" value="${boardVO.userId}"
 							readonly="readonly">
 					</div>
 				</div>
@@ -74,9 +76,12 @@
 				<div class="box-header">
 					<h3 class="box-title">ADD NEW REPLY</h3>
 				</div>
+				
+				  <c:if test="${not empty user}">  
 				<div class="box-body">
-					<label for="exampleInputEmail1">Writer</label> 
-					<input class="form-control" type="text" placeholder="USER ID" id="newReplyWriter"> 
+					<label for="exampleInputEmail1">UserId</label> 
+					<input class="form-control" type="text" placeholder="USER ID" id="newReplyUserId"
+					readonly="readonly" value="${user.userId}"> 
 						<label for="exampleInputEmail1">Reply Text</label>
 						 <input class="form-control" type="text" placeholder="REPLY TEXT" id="newReplyText">
 
@@ -85,6 +90,13 @@
 				<div class="box-footer">
 					<button type="button" class="btn btn-primary" id="replyAddBtn">ADD REPLY</button>
 				</div>
+				</c:if>
+				
+				<c:if test="${empty user}">
+			    <div class="box-body">
+			      <div><a href="/" >Login Please</a></div>
+			    </div>
+			  </c:if>
 			</div>
 
 
@@ -138,7 +150,7 @@
   <span class="time">
     <i class="fa fa-clock-o"></i>{{prettifyDate regdate}}
   </span>
-  <h3 class="timeline-header"><strong>{{replyNo}}</strong> -{{replyer}}</h3>
+  <h3 class="timeline-header"><strong>{{replyNo}}</strong> -{{userId}}</h3>
   <div class="timeline-body">{{replytext}} </div>
     <div class="timeline-footer">
      <a class="btn btn-primary btn-xs" 
@@ -208,9 +220,9 @@
 	
 	$("#replyAddBtn").on("click",function(){
 		 
-		 var replyerObj = $("#newReplyWriter");
+		 var userIdObj = $("#newReplyUserId");
 		 var replytextObj = $("#newReplyText");
-		 var replyer = replyerObj.val();
+		 var userId = userIdObj.val();
 		 var replytext = replytextObj.val();
 		
 		  
@@ -221,14 +233,14 @@
 				      "Content-Type": "application/json",
 				      "X-HTTP-Method-Override": "POST" },
 				dataType:'text',
-				data: JSON.stringify({boardNo:boardNo, replyer:replyer, replytext:replytext}),
+				data: JSON.stringify({boardNo:boardNo, userId:userId, replytext:replytext}),
 				success:function(result){
 					console.log("result: " + result);
 					if(result == 'SUCCESS'){
 						alert("등록 되었습니다.");
 						replyPage = 1;
 						getPage("/replyRest/"+boardNo+"/"+replyPage );
-						replyerObj.val("");
+						userIdObj.val("");
 						replytextObj.val("");
 					}
 			}});

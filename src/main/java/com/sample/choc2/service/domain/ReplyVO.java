@@ -6,7 +6,8 @@ public class ReplyVO {
 	private int boardNo;
 	private int replyNo;
 	private String replytext;
-	private String replyer;
+	private String userId;
+
 	private Date regdate;
 	private Date updatedate;
 
@@ -16,11 +17,11 @@ public class ReplyVO {
 	public void setReplytext(String replytext) {
 		this.replytext = replytext;
 	}
-	public String getReplyer() {
-		return replyer;
+	public String getUserId() {
+		return userId;
 	}
-	public void setReplyer(String replyer) {
-		this.replyer = replyer;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 	public Date getRegdate() {
 		return regdate;
@@ -39,7 +40,7 @@ public class ReplyVO {
 		return "[ boardNo : "+ boardNo
 				+"/ replyNo : " + replyNo
 				+"/ replytext : " + replytext
-				+"/ replyer : " + replyer
+				+"/ userId : " + userId
 				+"/ regdate : " + regdate
 				+"/ updatedate : " + updatedate + " ]"	;
 	}

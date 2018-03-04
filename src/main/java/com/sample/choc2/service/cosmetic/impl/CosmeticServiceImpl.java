@@ -12,11 +12,12 @@ import com.sample.choc2.service.cosmetic.CosmeticService;
 import com.sample.choc2.service.domain.CosmeticVO;
 
 @Service("cosmeticServiceImpl")
-public class CosmeticServiceImpl implements CosmeticService{
-	
+public class CosmeticServiceImpl implements CosmeticService {
+
 	@Autowired
 	@Qualifier("cosmeticDaoImpl")
 	private CosmeticDao cosmeticDao;
+
 	public void setCosmeticDao(CosmeticDao cosmeticDao) {
 		this.cosmeticDao = cosmeticDao;
 	}
@@ -25,10 +26,8 @@ public class CosmeticServiceImpl implements CosmeticService{
 		System.out.println(this.getClass());
 	}
 
-
-
 	@Override
-	public void createCosmetic(CosmeticVO cosmetic) throws Exception{
+	public void createCosmetic(CosmeticVO cosmetic) throws Exception {
 		// TODO Auto-generated method stub
 		cosmeticDao.createCosmetic(cosmetic);
 	}
@@ -46,9 +45,9 @@ public class CosmeticServiceImpl implements CosmeticService{
 	}
 
 	@Override
-	public CosmeticVO getCosmetic(Integer cosmetic_no) throws Exception {
+	public CosmeticVO getCosmetic(Integer cosmeticNo) throws Exception {
 		// TODO Auto-generated method stub
-		return cosmeticDao.getCosmetic(cosmetic_no);
+		return cosmeticDao.getCosmetic(cosmeticNo);
 	}
 
 	@Override
@@ -58,11 +57,9 @@ public class CosmeticServiceImpl implements CosmeticService{
 	}
 
 	@Override
-	public void deleteCosmetic(Integer cosmetic_no) throws Exception {
+	public void deleteCosmetic(Integer cosmeticNo) throws Exception {
 		// TODO Auto-generated method stub
-		cosmeticDao.deleteCosmetic(cosmetic_no);
+		cosmeticDao.deleteCosmetic(cosmeticNo);
 	}
 
-	
-	
 }

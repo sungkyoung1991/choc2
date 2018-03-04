@@ -8,10 +8,12 @@
 	<resultMap type="boardVO" id="boardSelectMap">
 		<result property="boardNo" column="BOARD_NO" jdbcType="INTEGER"/>
 		<result property="title" column="TITLE" jdbcType="VARCHAR"/>
-		<result property="writer" column="WRITER" jdbcType="VARCHAR"/>
+		<!-- <result property="writer" column="WRITER" jdbcType="VARCHAR"/> -->
 		<result property="content" column="CONTENT" jdbcType="VARCHAR"/>
 		<result property="viewcnt" column="VIEWCNT" jdbcType="VARCHAR"/>
 		<result property="regdate" column="REGDATE" jdbcType="DATE"/>
+		
+		<result property="userId" column="USERID" jdbcType="VARCHAR" />
 	</resultMap> 
 
 <!-- 	<resultMap type="adminSelectMap" id="cosmetic">
@@ -20,17 +22,14 @@
 	<!-- Board Mapper -->
 
 	<insert id="createBoard">
-		INSERT INTO TBL_BOARD (TITLE,CONTENT,WRITER)
-		VALUES(#{title}, #{content}, #{writer})
+		INSERT INTO TBL_BOARD (TITLE,CONTENT,USERID)
+		VALUES(#{title}, #{content}, #{userId})
 	</insert>
 
 	<select id="getBoard" resultMap="boardSelectMap">
-		SELECT
-		BOARD_NO,TITLE,CONTENT,WRITER,REGDATE,VIEWCNT
-		FROM
-		TBL_BOARD
-		WHERE BOARD_NO =
-		#{boardNo}
+		SELECT *
+		FROM TBL_BOARD 
+		WHERE BOARD_NO = #{boardNo}
 
 	</select>
 
@@ -51,9 +50,10 @@
 
 	<select id="listBoard" resultMap="boardSelectMap" >
 	<![CDATA[  
-	  SELECT * 
-	  FROM TBL_BOARD 
-	  WHERE BOARD_NO > 0
+		SELECT B.TITLE, U.USERID, B.CONTENT, B.VIEWCNT,B.REGDATE,B.BOARD_NO
+		FROM TBL_USER AS U INNER JOIN TBL_BOARD AS B
+		ON U.USERID=B.USERID
+		AND BOARD_NO > 0
 
 	]]>
 
@@ -69,8 +69,8 @@
 	<select id="countBoard" resultType="int">
 	<![CDATA[  
 	  SELECT COUNT(BOARD_NO) 
-	  FROM TBL_BOARD 
-	  WHERE BOARD_NO > 0 
+	  FROM TBL_USER AS U INNER JOIN TBL_BOARD AS B
+		ON U.USERID=B.USERID 
 
 	]]>
 		<include refid="search"></include>
@@ -92,26 +92,26 @@
 			<if test="searchType == 'c'.toString()">
 				AND CONTENT LIKE CONCAT('%', #{keyword}, '%')
 			</if>
-			<if test="searchType == 'w'.toString()">
-				AND WIRTER LIKE CONCAT('%', #{keyword}, '%')
+			<if test="searchType == 'u'.toString()">
+				AND USERID LIKE CONCAT('%', #{keyword}, '%')
 			</if>
 			<if test="searchType == 'tc'.toString()">
 				AND ( TITLE LIKE CONCAT('%', #{keyword}, '%') OR CONTENT
 				LIKE
 				CONCAT('%', #{keyword}, '%'))
 			</if>
-			<if test="searchType == 'cw'.toString()">
-				AND ( CONTENT LIKE CONCAT('%', #{keyword}, '%') OR WIRTER
+			<if test="searchType == 'cu'.toString()">
+				AND ( CONTENT LIKE CONCAT('%', #{keyword}, '%') OR USERID
 				LIKE
 				CONCAT('%', #{keyword}, '%'))
 			</if>
-			<if test="searchType == 'tcw'.toString()">
+			<if test="searchType == 'tcu'.toString()">
 				AND ( TITLE LIKE CONCAT('%', #{keyword}, '%')
 				OR
 				CONTENT
 				LIKE CONCAT('%', #{keyword}, '%')
 				OR
-				WRITER LIKE CONCAT('%',
+				USERID LIKE CONCAT('%',
 				#{keyword}, '%'))
 			</if>
 		</if>

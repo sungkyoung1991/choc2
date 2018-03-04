@@ -162,18 +162,18 @@ public class UserController {
 	
 	
 	@RequestMapping(value="getCosmetic", method=RequestMethod.GET)
-	public String getCosmetic(@ModelAttribute("cri")SearchCriteria cri,@RequestParam("cosmetic_no") int cosmetic_no,Model model) throws Exception{
-		model.addAttribute("cinfo",cosmeticService.getCosmetic(cosmetic_no));
+	public String getCosmetic(@ModelAttribute("cri")SearchCriteria cri,@RequestParam("cosmeticNo") int cosmeticNo,Model model) throws Exception{
+		model.addAttribute("cinfo",cosmeticService.getCosmetic(cosmeticNo));
 			
 		return "user/getCosmetic";
 	}//화장품 정보 상세히 보기
 	
 	@RequestMapping(value="updateCosmeticP", method=RequestMethod.GET)
-	public String updateCosmeticP(@RequestParam("cosmetic_no") int cosmetic_no,@ModelAttribute("cri")SearchCriteria cri,Model model) throws Exception{
+	public String updateCosmeticP(@RequestParam("cosmeticNo") int cosmeticNo,@ModelAttribute("cri")SearchCriteria cri,Model model) throws Exception{
 		
-		model.addAttribute("cinfo",cosmeticService.getCosmetic(cosmetic_no));	
+		model.addAttribute("cinfo",cosmeticService.getCosmetic(cosmeticNo));	
 		
-		logger.info("gg",cosmeticService.getCosmetic(cosmetic_no));
+		logger.info("gg",cosmeticService.getCosmetic(cosmeticNo));
 		return "user/updateCosmetic";
 	}//화장품 글수정 폼으로 이동
 	
@@ -192,10 +192,10 @@ public class UserController {
 	}//화장품 글 수정 처리
 	
 	@RequestMapping(value="deleteCosmetic", method=RequestMethod.GET)
-	public String deleteCosmetic(@RequestParam("cosmetic_no") int cosmetic_no, RedirectAttributes rttr,SearchCriteria cri ) throws Exception {
+	public String deleteCosmetic(@RequestParam("cosmeticNo") int cosmeticNo, RedirectAttributes rttr,SearchCriteria cri ) throws Exception {
 		
 		
-		cosmeticService.deleteCosmetic(cosmetic_no);
+		cosmeticService.deleteCosmetic(cosmeticNo);
 		rttr.addAttribute("page", cri.getPage());
 		rttr.addAttribute("perPageNum", cri.getPerPageNum());
 		rttr.addAttribute("searchType", cri.getSearchType());

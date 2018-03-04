@@ -8,15 +8,15 @@
 		<result property="boardNo" column="BOARD_NO" jdbcType="INTEGER"/>
 		<result property="replyNo" column="REPLY_NO" jdbcType="INTEGER"/>
 		<result property="replytext" column="REPLYTEXT" jdbcType="VARCHAR"/>
-		<result property="replyer" column="REPLYER" jdbcType="VARCHAR"/>
 		<result property="regdate" column="REGDATE" jdbcType="DATE"/>
 		<result property="updatedate" column="UPDATEDATE" jdbcType="DATE"/>	
+		<result property="userId" column="USERID" jdbcType="VARCHAR" />
 	</resultMap> 
 				<!-- Reply Mapper -->
 	
 	<insert id="createReply">
-		INSERT INTO TBL_REPLY (BOARD_NO,REPLYTEXT,REPLYER)
-		VALUES (#{boardNo},#{replytext},#{replyer})
+		INSERT INTO TBL_REPLY (BOARD_NO,REPLYTEXT,USERID)
+		VALUES (#{boardNo},#{replytext},#{userId})
 	</insert>
 
 	<update id="updateReply">
@@ -29,12 +29,10 @@
 	</delete>
 
 	<select id="listReplyPage" resultMap="replySelectMap" >
-		SELECT
-		*
-		FROM
-		TBL_REPLY
-		WHERE
-		BOARD_NO=#{boardNo}
+		SELECT U.USERID, R.REPLYTEXT,R.REGDATE, R.UPDATEDATE,R.BOARD_NO,R.REPLY_NO
+		FROM TBL_USER AS U INNER JOIN TBL_REPLY AS R
+		ON U.USERID=R.USERID
+		AND BOARD_NO = #{boardNo}
 		ORDER BY REPLY_NO DESC
 		LIMIT #{cri.pageStart}, #{cri.perPageNum}
 	</select>

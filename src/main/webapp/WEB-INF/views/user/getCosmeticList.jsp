@@ -68,9 +68,9 @@ $(document).ready(function(){
 		<c:forEach items="${clist}" var="cosmetic">
 			<tr>
 				<td>${cosmetic.image}</td>
-			<%-- <td>${cosmetic.cosmetic_no}</td> --%>
+			<%-- <td>${cosmetic.cosmeticNo}</td> --%>
 				<td>${cosmetic.brand}</td>
-				<td><a href='/user/getCosmetic${pageMaker.makeSearch(pageMaker.cri.page) }&cosmetic_no=${cosmetic.cosmetic_no}'>
+				<td><a href='/user/getCosmetic${pageMaker.makeSearch(pageMaker.cri.page) }&cosmeticNo=${cosmetic.cosmeticNo}'>
 						${cosmetic.model}</a></td>
 				 <td>${cosmetic.product}</td>
 				<%-- <td>${cosmetic.price}</td>

@@ -1,4 +1,4 @@
-package com.sample.choc2.service.domain;
+package com.sample.choc2.common.domain;
 
 public class CommonVO {
 	private int commonNo;
