@@ -16,6 +16,13 @@
 		<typeAlias alias="replyVO" type="com.sample.choc2.service.domain.ReplyVO" />
 		<typeAlias alias="cosmeticVO" type="com.sample.choc2.service.domain.CosmeticVO" />
 		<typeAlias alias="productVO" type="com.sample.choc2.service.domain.ProductVO" />
+		<typeAlias alias="toxicVO" type="com.sample.choc2.service.domain.ToxicVO" />
+		<typeAlias alias="uvraysVO" type="com.sample.choc2.service.domain.UvraysVO" />
+		<typeAlias alias="whiteningVO" type="com.sample.choc2.service.domain.WhiteningVO" />
+		<typeAlias alias="wrinkleVO" type="com.sample.choc2.service.domain.WrinkleVO" />
+		<typeAlias alias="oilyVO" type="com.sample.choc2.service.domain.OilyVO" />
+		<typeAlias alias="dryVO" type="com.sample.choc2.service.domain.DryVO" />
+		<typeAlias alias="sensitiveVO" type="com.sample.choc2.service.domain.SensitiveVO" />
 		<typeAlias alias="search" type="com.sample.choc2.common.Search" />
 	</typeAliases>
 	

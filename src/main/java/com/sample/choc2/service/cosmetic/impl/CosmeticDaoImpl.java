@@ -12,6 +12,12 @@ import org.springframework.stereotype.Repository;
 import com.sample.choc2.common.SearchCriteria;
 import com.sample.choc2.service.cosmetic.CosmeticDao;
 import com.sample.choc2.service.domain.CosmeticVO;
+import com.sample.choc2.service.domain.DryVO;
+import com.sample.choc2.service.domain.OilyVO;
+import com.sample.choc2.service.domain.ToxicVO;
+import com.sample.choc2.service.domain.UvraysVO;
+import com.sample.choc2.service.domain.WhiteningVO;
+import com.sample.choc2.service.domain.WrinkleVO;
 
 @Repository("cosmeticDaoImpl")
 public class CosmeticDaoImpl implements CosmeticDao {
@@ -66,6 +72,54 @@ public class CosmeticDaoImpl implements CosmeticDao {
 	public void deleteCosmetic(Integer cosmetic_no) throws Exception {
 		// TODO Auto-generated method stub
 		sqlSession.delete("CosmeticMapper.deleteCosmetic", cosmetic_no);
+	}
+
+	@Override
+	public String getIngredientList(int cosmetic_no) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("CosmeticMapper.getIngredientList",cosmetic_no);
+	}
+
+	@Override
+	public List<ToxicVO> getToxicList() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("CosmeticMapper.getToxicList");
+	}
+
+	@Override
+	public List<UvraysVO> getUvraysIngredientList() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("CosmeticMapper.getUvraysIngredientList");
+	}
+
+	@Override
+	public List<WhiteningVO> getWhiteningIngredeintList() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("CosmeticMapper.getWhiteningIngredeintList");
+	}
+
+	@Override
+	public List<WrinkleVO> getWrinkleIngredientList() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("CosmeticMapper.getWrinkleIngredientList");
+	}
+
+	@Override
+	public List<OilyVO> getOilyIngredient() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("CosmeticMapper.getOilyIngredient");
+	}
+
+	@Override
+	public List<DryVO> getDryIngredient() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("CosmeticMapper.getDryIngredient");
+	}
+
+	@Override
+	public List<DryVO> getSensitiveIngredient() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("CosmeticMapper.getSensitiveIngredient");
 	}
 	
 }
