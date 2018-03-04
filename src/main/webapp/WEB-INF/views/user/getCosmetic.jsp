@@ -97,7 +97,6 @@ function createCmt(nick,no){
 			</tr> --%>
 		
 		</table>
-<<<<<<< HEAD
 		<br />
 		<hr>
 		

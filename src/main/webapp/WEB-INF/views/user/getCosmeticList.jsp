@@ -80,12 +80,12 @@ $(document).ready(function(){
 				<td><a href='/user/getCosmetic?${pageMaker.makeSearch(pageMaker.cri.page) }&cosmeticNo=${cosmetic.cosmeticNo}'><font color="gray">${cosmetic.brand}</font></a><br>
 			<%-- <td>${cosmetic.model}</td> --%>
 				 <a href='/user/getCosmetic?${pageMaker.makeSearch(pageMaker.cri.page) }&cosmeticNo=${cosmetic.cosmeticNo}'>${cosmetic.product}</a></td>
-				<td>${cosmetic.image}</td>
+				<%-- <td>${cosmetic.image}</td> --%>
 			<%-- <td>${cosmetic.cosmeticNo}</td> --%>
-				<td>${cosmetic.brand}</td>
-				<td><a href='/user/getCosmetic${pageMaker.makeSearch(pageMaker.cri.page) }&cosmeticNo=${cosmetic.cosmeticNo}'>
-						${cosmetic.model}</a></td>
-				 <td>${cosmetic.product}</td>
+				<%-- <td>${cosmetic.brand}</td> --%>
+			<%-- 	<td><a href='/user/getCosmetic${pageMaker.makeSearch(pageMaker.cri.page) }&cosmeticNo=${cosmetic.cosmeticNo}'>
+						${cosmetic.model}</a></td> --%>
+				<%--  <td>${cosmetic.product}</td>  --%>
 				<%-- <td>${cosmetic.price}</td>
 				<td>${cosmetic.ingredient}</td>  --%>
 			</tr>
