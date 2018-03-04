@@ -1,6 +1,9 @@
 package com.sample.choc2.web.user;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -11,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,7 +25,14 @@ import com.sample.choc2.common.PageMaker;
 import com.sample.choc2.common.SearchCriteria;
 import com.sample.choc2.service.cosmetic.CosmeticService;
 import com.sample.choc2.service.domain.CosmeticVO;
+import com.sample.choc2.service.domain.DryVO;
+import com.sample.choc2.service.domain.OilyVO;
+import com.sample.choc2.service.domain.SensitiveVO;
+import com.sample.choc2.service.domain.ToxicVO;
 import com.sample.choc2.service.domain.UserVO;
+import com.sample.choc2.service.domain.UvraysVO;
+import com.sample.choc2.service.domain.WhiteningVO;
+import com.sample.choc2.service.domain.WrinkleVO;
 import com.sample.choc2.service.user.UserService;
 
 
@@ -148,6 +157,8 @@ public class UserController {
 		
 		model.addAttribute("clist",cosmeticService.getCosmeticList(cri));//searchtype,keyword
 		
+		logger.info(""+cosmeticService.getCosmeticList(cri));
+		
 		PageMaker pageMaker = new PageMaker();
 		
 		pageMaker.setCri(cri); //현재페이지, 페이지안 데이터갯수
@@ -204,4 +215,74 @@ public class UserController {
 		
 		return "redirect:/user/getCosmeticList";
 	}//화장품 글 삭제
+	
+	
+	@RequestMapping(value="getIngredientList", method=RequestMethod.GET)
+	 public String getIngredientList(@RequestParam("cosmeticNo") int cosmeticNo,Model model) throws Exception {
+		
+
+		String ingredient = cosmeticService.getIngredientList(cosmeticNo); 
+		List<String> object = Arrays.asList(ingredient.split("\\s*,\\s*"));
+//		String [] object = ingredient.split("\\s*,\\s*");
+		List<ToxicVO> toxicVo = cosmeticService.getToxicList();
+		
+//		ArrayList<String>list = new ArrayList<>();
+//		for(String ingre:sArray) {
+//			list.add(ingre);
+//		}		
+		model.addAttribute("ingreinfo",object);
+		model.addAttribute("toxicinfo",toxicVo);
+				
+//		System.out.println("vo 확인중............"+sArray);
+		logger.info("성분 리스트 "+object);
+//		logger.info("성분 "+cosmeticService.getIngredientList(cosmeticNo));
+		logger.info("독성 리스트"+toxicVo.toString());
+
+		
+		return "user/getIngredientList";
+	}
+	
+	@RequestMapping(value="getFunctionalIngredientList", method=RequestMethod.GET)
+	public String getFunctionalIngredientList (@RequestParam("cosmeticNo") int cosmeticNo,Model model) throws Exception {
+		String ingredient = cosmeticService.getIngredientList(cosmeticNo);
+		List<String> object = Arrays.asList(ingredient.split("\\s*,\\s*"));
+		List<UvraysVO> uvVO = cosmeticService.getUvraysIngredientList();
+		List<WhiteningVO> whiteningVO = cosmeticService.getWhiteningIngredeintList();
+		List<WrinkleVO> wrinkleVO = cosmeticService.getWrinkleIngredientList();
+		
+		model.addAttribute("ingreinfo",object);
+		model.addAttribute("uvingreinfo",uvVO);
+		model.addAttribute("whiteningingreinfo",whiteningVO);
+		model.addAttribute("wrinkleingreinfo",wrinkleVO);
+		
+		logger.info("성분 리스트 "+object);
+		logger.info("자외선차단 리스트 "+uvVO);
+		logger.info("미백 리스트 "+ whiteningVO);
+		logger.info("주름 리스트 "+ wrinkleVO);
+		
+		return "user/getFunctionalIngredientList";
+	}
+	
+	@RequestMapping(value="getSkinTypeIngredientList", method=RequestMethod.GET)
+		public String getSkinTypeIngredientList(@RequestParam("cosmeticNo")int cosmeticNo,Model model) throws Exception {
+		String ingredient = cosmeticService.getIngredientList(cosmeticNo);
+		List<String> object = Arrays.asList(ingredient.split("\\s*,\\s*"));
+		List<OilyVO> oilyVO = cosmeticService.getOilyIngredient();
+		List<DryVO> dryVO = cosmeticService.getDryIngredient();
+		List<SensitiveVO> sensitiveVO = cosmeticService.getSensitiveIngredient();
+		
+		model.addAttribute("ingreinfo",object);
+		model.addAttribute("oilyingreinfo",oilyVO);
+		model.addAttribute("dryingreinfo",dryVO);
+		model.addAttribute("sensitiveingreinfo",sensitiveVO);
+		logger.info("성분 리스트 "+object);
+		logger.info("지성 리스트 "+oilyVO);
+		logger.info("건성 리스트 "+dryVO);
+		logger.info("민감 리스트 "+sensitiveVO);
+		
+		return "user/getSkinTypeIngredientList"; 
+	}
+	
+	
+	
 }

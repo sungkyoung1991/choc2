@@ -6,6 +6,7 @@
 
 <mapper namespace="CosmeticMapper">
 
+
 	<resultMap type="cosmeticVO" id="selectCosmeticMap">
 		<result property="cosmeticNo" column="COSMETIC_NO" jdbcType="INTEGER"/>
 		<result property="brand" column="BRAND" jdbcType="VARCHAR"/>
@@ -16,6 +17,69 @@
 		<result property="ingredient" column="INGREDIENT" jdbcType="VARCHAR"/>
 	</resultMap>
 
+	<!-- <select id="getCosmeticList" resultMap="selectCosmeticMap"> -->
+	<!-- <resultMap type="cosmeticVO" id="CosmeticSelectMap">
+		<result property="cosmeticNo" column="COSMETIC_NO" jdbcType="INTEGER" />
+		<result property="brand" column="BRAND" jdbcType="VARCHAR" />
+		<result property="model" column="MODEL" jdbcType="VARCHAR" />
+		<result property="product" column="PRODUCT" jdbcType="VARCHAR" />
+		<result property="amount" column="AMOUNT" jdbcType="VARCHAR" />
+		<result property="price" column="PRICE" jdbcType="VARCHAR" />
+		<result property="ingredient" column="INGREDIENT" jdbcType="VARCHAR" />
+		<result property="image" column="IMAGE_PATH" jdbcType="VARCHAR" />
+
+	</resultMap> -->
+
+	<resultMap type="toxicVO" id="ToxicSelectMap">
+		<result property="toxicNo" column="TOXIC_NO" jdbcType="INTEGER" />
+		<result property="toxicKoreanName" column="TOXIC_KOREAN_NAME"
+			jdbcType="VARCHAR" />
+		<result property="toxicEnglishName" column="TOXIC_ENGLISH_NAME"
+			jdbcType="VARCHAR" />
+		<result property="description" column="DESCRIPTION" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap type="uvraysVO" id="UvraysSelectMap">
+		<result property="uvNo" column="UV_NO" jdbcType="INTEGER" />
+		<result property="ingredient" column="INGREDIENT" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<resultMap type="whiteningVO" id="WhiteningSelectMap">
+		<result property="whiteningNo" column="WHITENING_NO" jdbcType="INTEGER" />
+		<result property="ingredient" column="INGREDIENT" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<resultMap type="wrinkleVO" id="WrinkleSelectMap">
+		<result property="wrinkleNo" column="WRINKLE_NO" jdbcType="INTEGER" />
+		<result property="ingredient" column="INGREDIENT" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<resultMap type="oilyVO" id="OilySelectMap">
+		<result property="oilyNo" column="OILY_NO" jdbcType="INTEGER" />
+		<result property="goodIngredient" column="GOOD_INGREDIENT" jdbcType="VARCHAR" />
+		<result property="goodDescription" column="GOOD_DESCRIPTION" jdbcType="VARCHAR" />
+		<result property="badIngredient" column="BAD_INGREDIENT" jdbcType="VARCHAR" />
+		<result property="badDescription" column="BAD_DESCRIPTION" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<resultMap type="dryVO" id="DrySelectMap">
+		<result property="dryNo" column="DRY_NO" jdbcType="INTEGER" />
+		<result property="goodIngredient" column="GOOD_INGREDIENT" jdbcType="VARCHAR" />
+		<result property="goodDescription" column="GOOD_DESCRIPTION" jdbcType="VARCHAR" />
+		<result property="badIngredient" column="BAD_INGREDIENT" jdbcType="VARCHAR" />
+		<result property="badDescription" column="BAD_DESCRIPTION" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap type="sensitiveVO" id="SensitiveSelectMap">
+		<result property="sensitiveNo" column="SENSITIVE_NO" jdbcType="INTEGER" />
+		<result property="goodIngredient" column="GOOD_INGREDIENT" jdbcType="VARCHAR" />
+		<result property="goodDescription" column="GOOD_DESCRIPTION" jdbcType="VARCHAR" />
+		<result property="badIngredient" column="BAD_INGREDIENT" jdbcType="VARCHAR" />
+		<result property="badDescription" column="BAD_DESCRIPTION" jdbcType="VARCHAR" />
+	</resultMap>
+	
+
+
 
 	<insert id="createCosmetic" parameterType="cosmeticVO">
 		INSERT INTO
@@ -23,7 +87,10 @@
 		VALUES(#{brand},#{model},#{product},#{amount},#{price},#{ingredient})
 	</insert>
 
-	<select id="getCosmeticList" resultMap="selectCosmeticMap">
+	<!-- <select id="getCosmeticList" resultType="cosmeticVO"> -->
+
+	<select id="getCosmeticList" resultMap="CosmeticSelectMap">
+
 	  <![CDATA[
 		SELECT * FROM TBL_COSMETIC WHERE COSMETIC_NO>0 
 	  ]]>
@@ -66,6 +133,27 @@
 		DELETE FROM TBL_COSMETIC WHERE COSMETIC_NO = #{cosmeticNo}
 	</delete>
 
+	<select id="getCosmetic" resultMap="CosmeticSelectMap">
+		SELECT *
+		FROM TBL_COSMETIC
+		WHERE COSMETIC_NO=#{cosmeticNo}
+
+	</select>
+
+	<update id="updateCosmetic" parameterType="cosmeticVO">
+		UPDATE TBL_COSMETIC
+		SET BRAND = #{brand} ,MODEL = #{model} ,PRODUCT = #{product} ,AMOUNT =
+		#{amount} ,PRICE = #{price} ,INGREDIENT = #{ingredient}
+		WHERE
+		COSMETIC_NO = #{cosmeticNo}
+	</update>
+
+	<delete id="deleteCosmetic" parameterType="cosmeticVO">
+		DELETE FROM
+		TBL_COSMETIC WHERE COSMETIC_NO = #{cosmeticNo}
+	</delete>
+
+
 	<sql id="search">
 		<if test="searchType != null">
 			<if test="searchType == 'brand'.toString()">
@@ -88,5 +176,48 @@
 			</if>
 		</if>
 	</sql>
+
+
+	<select id="getIngredientList" parameterType="int" resultType="String">
+		SELECT INGREDIENT
+		FROM TBL_COSMETIC
+		WHERE COSMETIC_NO=#{cosmeticNo}
+	</select>
+
+	<select id="getToxicList" resultMap="ToxicSelectMap">
+		select TOXIC_KOREAN_NAME
+		from TBL_TOXIC
+	</select>
+
+	<select id="getUvraysIngredientList" resultMap="UvraysSelectMap">
+		select INGREDIENT
+		from TBL_UVRAYS
+	</select>
+	
+	<select id="getWhiteningIngredeintList" resultMap="WhiteningSelectMap">
+		select INGREDIENT
+		from TBL_WHITENING
+	</select>
+	
+	<select id="getWrinkleIngredientList" resultMap="WrinkleSelectMap">
+		select INGREDIENT
+		from TBL_WRINKLE
+	</select>
+	
+	<select id="getOilyIngredient" resultMap="OilySelectMap">
+		select *
+		from TBL_OILY_SKIN
+	</select>
+	
+	<select id="getDryIngredient" resultMap="DrySelectMap">
+		select *
+		from TBL_DRY_SKIN
+	</select>
+	
+	<select id="getSensitiveIngredient" resultMap="SensitiveSelectMap">
+		select *
+		from TBL_SENSITIVE_SKIN
+	</select>
+	
 
 </mapper>
