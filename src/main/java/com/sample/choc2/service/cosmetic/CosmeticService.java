@@ -6,6 +6,7 @@ import com.sample.choc2.common.SearchCriteria;
 import com.sample.choc2.service.domain.CosmeticVO;
 import com.sample.choc2.service.domain.DryVO;
 import com.sample.choc2.service.domain.OilyVO;
+import com.sample.choc2.service.domain.SensitiveVO;
 import com.sample.choc2.service.domain.ToxicVO;
 import com.sample.choc2.service.domain.UvraysVO;
 import com.sample.choc2.service.domain.WhiteningVO;
@@ -25,7 +26,7 @@ public interface CosmeticService {
 	
 	public int totalCountCosmetic(SearchCriteria cri)throws Exception;
 
-	public String getIngredientList(int cosmetic_no) throws Exception;
+	public String getIngredientList(int cosmeticNo) throws Exception;
 
 	public List<ToxicVO> getToxicList() throws Exception;
 
@@ -39,5 +40,5 @@ public interface CosmeticService {
 
 	public List<DryVO> getDryIngredient() throws Exception;
 
-	public List<DryVO> getSensitiveIngredient() throws Exception;
+	public List<SensitiveVO> getSensitiveIngredient() throws Exception;
 }

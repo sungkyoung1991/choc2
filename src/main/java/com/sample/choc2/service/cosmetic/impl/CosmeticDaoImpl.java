@@ -14,6 +14,7 @@ import com.sample.choc2.service.cosmetic.CosmeticDao;
 import com.sample.choc2.service.domain.CosmeticVO;
 import com.sample.choc2.service.domain.DryVO;
 import com.sample.choc2.service.domain.OilyVO;
+import com.sample.choc2.service.domain.SensitiveVO;
 import com.sample.choc2.service.domain.ToxicVO;
 import com.sample.choc2.service.domain.UvraysVO;
 import com.sample.choc2.service.domain.WhiteningVO;
@@ -75,9 +76,9 @@ public class CosmeticDaoImpl implements CosmeticDao {
 	}
 
 	@Override
-	public String getIngredientList(int cosmetic_no) throws Exception {
+	public String getIngredientList(int cosmeticNo) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne("CosmeticMapper.getIngredientList",cosmetic_no);
+		return sqlSession.selectOne("CosmeticMapper.getIngredientList",cosmeticNo);
 	}
 
 	@Override
@@ -117,7 +118,7 @@ public class CosmeticDaoImpl implements CosmeticDao {
 	}
 
 	@Override
-	public List<DryVO> getSensitiveIngredient() throws Exception {
+	public List<SensitiveVO> getSensitiveIngredient() throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("CosmeticMapper.getSensitiveIngredient");
 	}

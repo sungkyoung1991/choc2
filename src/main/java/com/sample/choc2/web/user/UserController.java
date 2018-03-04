@@ -27,6 +27,7 @@ import com.sample.choc2.service.cosmetic.CosmeticService;
 import com.sample.choc2.service.domain.CosmeticVO;
 import com.sample.choc2.service.domain.DryVO;
 import com.sample.choc2.service.domain.OilyVO;
+import com.sample.choc2.service.domain.SensitiveVO;
 import com.sample.choc2.service.domain.ToxicVO;
 import com.sample.choc2.service.domain.UserVO;
 import com.sample.choc2.service.domain.UvraysVO;
@@ -217,10 +218,10 @@ public class UserController {
 	
 	
 	@RequestMapping(value="getIngredientList", method=RequestMethod.GET)
-	 public String getIngredientList(@RequestParam("cosmetic_no") int cosmetic_no,Model model) throws Exception {
+	 public String getIngredientList(@RequestParam("cosmeticNo") int cosmeticNo,Model model) throws Exception {
 		
 
-		String ingredient = cosmeticService.getIngredientList(cosmetic_no); 
+		String ingredient = cosmeticService.getIngredientList(cosmeticNo); 
 		List<String> object = Arrays.asList(ingredient.split("\\s*,\\s*"));
 //		String [] object = ingredient.split("\\s*,\\s*");
 		List<ToxicVO> toxicVo = cosmeticService.getToxicList();
@@ -234,7 +235,7 @@ public class UserController {
 				
 //		System.out.println("vo 확인중............"+sArray);
 		logger.info("성분 리스트 "+object);
-//		logger.info("성분 "+cosmeticService.getIngredientList(cosmetic_no));
+//		logger.info("성분 "+cosmeticService.getIngredientList(cosmeticNo));
 		logger.info("독성 리스트"+toxicVo.toString());
 
 		
@@ -242,8 +243,8 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="getFunctionalIngredientList", method=RequestMethod.GET)
-	public String getFunctionalIngredientList (@RequestParam("cosmetic_no") int cosmetic_no,Model model) throws Exception {
-		String ingredient = cosmeticService.getIngredientList(cosmetic_no);
+	public String getFunctionalIngredientList (@RequestParam("cosmeticNo") int cosmeticNo,Model model) throws Exception {
+		String ingredient = cosmeticService.getIngredientList(cosmeticNo);
 		List<String> object = Arrays.asList(ingredient.split("\\s*,\\s*"));
 		List<UvraysVO> uvVO = cosmeticService.getUvraysIngredientList();
 		List<WhiteningVO> whiteningVO = cosmeticService.getWhiteningIngredeintList();
@@ -263,12 +264,12 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="getSkinTypeIngredientList", method=RequestMethod.GET)
-		public String getSkinTypeIngredientList(@RequestParam("cosmetic_no")int cosmetic_no,Model model) throws Exception {
-		String ingredient = cosmeticService.getIngredientList(cosmetic_no);
+		public String getSkinTypeIngredientList(@RequestParam("cosmeticNo")int cosmeticNo,Model model) throws Exception {
+		String ingredient = cosmeticService.getIngredientList(cosmeticNo);
 		List<String> object = Arrays.asList(ingredient.split("\\s*,\\s*"));
 		List<OilyVO> oilyVO = cosmeticService.getOilyIngredient();
 		List<DryVO> dryVO = cosmeticService.getDryIngredient();
-		List<DryVO> sensitiveVO = cosmeticService.getSensitiveIngredient();
+		List<SensitiveVO> sensitiveVO = cosmeticService.getSensitiveIngredient();
 		
 		model.addAttribute("ingreinfo",object);
 		model.addAttribute("oilyingreinfo",oilyVO);

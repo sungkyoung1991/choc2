@@ -6,9 +6,8 @@
 
 <mapper namespace="CosmeticMapper">
 
-<<<<<<< HEAD
 	<resultMap type="cosmeticVO" id="CosmeticSelectMap">
-		<result property="cosmetic_no" column="COSMETIC_NO" jdbcType="INTEGER" />
+		<result property="cosmeticNo" column="COSMETIC_NO" jdbcType="INTEGER" />
 		<result property="brand" column="BRAND" jdbcType="VARCHAR" />
 		<result property="model" column="MODEL" jdbcType="VARCHAR" />
 		<result property="product" column="PRODUCT" jdbcType="VARCHAR" />
@@ -76,8 +75,6 @@
 
 	<!-- <select id="getCosmeticList" resultType="cosmeticVO"> -->
 
-	<select id="getCosmeticList" resultMap="CosmeticSelectMap">
-=======
 	<resultMap type="cosmeticVO" id="selectCosmeticMap">
 		<result property="cosmeticNo" column="COSMETIC_NO" jdbcType="INTEGER"/>
 		<result property="brand" column="BRAND" jdbcType="VARCHAR"/>
@@ -96,7 +93,6 @@
 	</insert>
 
 	<select id="getCosmeticList" resultMap="selectCosmeticMap">
->>>>>>> refs/heads/master
 	  <![CDATA[
 		SELECT * FROM TBL_COSMETIC WHERE COSMETIC_NO>0 
 	  ]]>
@@ -121,11 +117,10 @@
 		<include refid="search"></include>
 	</select>
 
-<<<<<<< HEAD
 	<select id="getCosmetic" resultMap="CosmeticSelectMap">
 		SELECT *
 		FROM TBL_COSMETIC
-		WHERE COSMETIC_NO=#{cosmtic_no}
+		WHERE COSMETIC_NO=#{cosmeticNo}
 
 	</select>
 
@@ -134,15 +129,14 @@
 		SET BRAND = #{brand} ,MODEL = #{model} ,PRODUCT = #{product} ,AMOUNT =
 		#{amount} ,PRICE = #{price} ,INGREDIENT = #{ingredient}
 		WHERE
-		COSMETIC_NO = #{cosmetic_no}
+		COSMETIC_NO = #{cosmeticNo}
 	</update>
 
 	<delete id="deleteCosmetic" parameterType="cosmeticVO">
 		DELETE FROM
-		TBL_COSMETIC WHERE COSMETIC_NO = #{cosmetic_no}
+		TBL_COSMETIC WHERE COSMETIC_NO = #{cosmeticNo}
 	</delete>
 
-=======
 	<select id="getCosmetic" resultMap="selectCosmeticMap">
 		SELECT *
 		FROM TBL_COSMETIC
@@ -160,7 +154,6 @@
 	<delete id="deleteCosmetic" parameterType="cosmeticVO">
 		DELETE FROM TBL_COSMETIC WHERE COSMETIC_NO = #{cosmeticNo}
 	</delete>
->>>>>>> refs/heads/master
 
 	<sql id="search">
 		<if test="searchType != null">
@@ -185,12 +178,11 @@
 		</if>
 	</sql>
 
-<<<<<<< HEAD
 
 	<select id="getIngredientList" parameterType="int" resultType="String">
 		SELECT INGREDIENT
 		FROM TBL_COSMETIC
-		WHERE COSMETIC_NO=#{cosmtic_no}
+		WHERE COSMETIC_NO=#{cosmeticNo}
 	</select>
 
 	<select id="getToxicList" resultMap="ToxicSelectMap">
@@ -228,6 +220,4 @@
 		from TBL_SENSITIVE_SKIN
 	</select>
 	
-=======
->>>>>>> refs/heads/master
 </mapper>

@@ -101,18 +101,16 @@ function createCmt(nick,no){
 		<br />
 		<hr>
 		
-		<a href="/user/getIngredientList?cosmetic_no=${cinfo.cosmetic_no}">성분구성</a><br />
-		<a href="/user/getSkinTypeIngredientList?cosmetic_no=${cinfo.cosmetic_no}">피부타입별 성분</a><br />
-		<a href="/user/getFunctionalIngredientList?cosmetic_no=${cinfo.cosmetic_no}">기능성 성분</a>
+		<a href="/user/getIngredientList?cosmeticNo=${cinfo.cosmeticNo}">성분구성</a><br />
+		<a href="/user/getSkinTypeIngredientList?cosmeticNo=${cinfo.cosmeticNo}">피부타입별 성분</a><br />
+		<a href="/user/getFunctionalIngredientList?cosmeticNo=${cinfo.cosmeticNo}">기능성 성분</a>
 		<br />
 		<hr>
 		
 		<%-- 	<input type="submit" value="글수정" style="float:left" /> 
 			<input type="button" value="글삭제" style="float:left" onclick="deleteCosmetic('${cinfo.cosmetic_no}')" /> --%>
-=======
 			<input type="submit" value="글수정" style="float:left" /> 
 			<input type="button" value="글삭제" style="float:left" onclick="deleteCosmetic('${cinfo.cosmeticNo}')" />
->>>>>>> refs/heads/master
 		</form>
 		<br />
 		<hr>
