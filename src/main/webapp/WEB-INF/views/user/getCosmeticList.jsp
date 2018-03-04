@@ -8,8 +8,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<!-- <style type="text/css">
+a:link {text-decoration: none; color: blue;}
+a:visited {text-decoration: none; color: green;}
+a:active {text-decoration: none; color: grey;}
+a:hover {text-decoration: underline; color: red;}
+
+</style> -->
 
 <script type="text/javascript">
+
 $(document).ready(function(){
 	$('#searchBtn').click(function(){
 				self.location = "/user/getCosmeticList"
@@ -53,34 +61,42 @@ $(document).ready(function(){
 	
 	<button id='searchBtn'>Search</button>
 	<button id='newBtn'>New Board</button>
-	
-
+	<br/><br/>
 	<table>
-		<tr>
-			<th>PICTURE &nbsp;</th>
-			<!-- <th>CNO</th> -->
-			<th>BRAND &nbsp;</th>
-			<th>MODEL &nbsp;</th>
-			<th>PRODUCT</th>
-		<!-- 	<th>PRICE</th>
-			<th>INGREDIENT</th> -->
-		</tr>
+		<!-- <tr>
+			<th>&nbsp;PICTURE &nbsp;</th>
+			<th>CNO</th>
+			<th>&nbsp;BRAND &nbsp;</th>
+			<th>&nbsp;MODEL &nbsp;</th>
+			<th>&nbsp;PRODUCT</th>
+		 	<th>PRICE</th>
+			<th>INGREDIENT</th> 
+		</tr> -->
 		<c:forEach items="${clist}" var="cosmetic">
+			
 			<tr>
+
 				<td>${cosmetic.image}</td>
 			<%-- <td>${cosmetic.cosmeticNo}</td> --%>
 				<td>${cosmetic.brand}</td>
-				<td><a href='/user/getCosmetic${pageMaker.makeSearch(pageMaker.cri.page) }&cosmeticNo=${cosmetic.cosmeticNo}'>
+				<td><a href='/user/getCosmetic?${pageMaker.makeSearch(pageMaker.cri.page) }&cosmeticNo=${cosmetic.cosmeticNo}'>
 						${cosmetic.model}</a></td>
 				 <td>${cosmetic.product}</td>
+
+				<td><a href='/user/getCosmetic?${pageMaker.makeSearch(pageMaker.cri.page) }&cosmeticNo=${cosmetic.cosmeticNo}'><img alt="picture" src="${cosmetic.image}" height="100px" width="100px"></a></td>
+			<%-- <td>${cosmetic.cosmeticNo}</td> --%>
+				<td><a href='/user/getCosmetic?${pageMaker.makeSearch(pageMaker.cri.page) }&cosmeticNo=${cosmetic.cosmeticNo}'><font color="gray">${cosmetic.brand}</font></a><br>
+			<%-- <td>${cosmetic.model}</td> --%>
+				 <a href='/user/getCosmetic?${pageMaker.makeSearch(pageMaker.cri.page) }&cosmeticNo=${cosmetic.cosmeticNo}'>${cosmetic.product}</a></td>
+
 				<%-- <td>${cosmetic.price}</td>
 				<td>${cosmetic.ingredient}</td>  --%>
-
 			</tr>
-
+			
 		</c:forEach>
-
+			
 	</table>
+			<hr>
 
 	<ul class="pagination">
 

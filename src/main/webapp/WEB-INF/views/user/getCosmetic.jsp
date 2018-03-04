@@ -60,42 +60,59 @@ function createCmt(nick,no){
 			<input type='hidden' name='keyword' value="${cri.keyword}">
 		<table>
 			<tr>
-				<td><img alt="cosmetic" src="https://images.innisfree.co.kr/upload/product/16636_l.png"> </td>
+				<td><img alt="cosmetic" src="${cinfo.image}" height="150px" width="150px"></td>
 			</tr>
 			<tr>
-				<th>브랜드</th>
-				<td><input type="text" name="brand" value="${cinfo.brand}"
+				<td>브랜드 &nbsp;
+				<input type="text" name="brand" value="${cinfo.brand}"
 					readonly="readonly" /></td>
 			</tr>
-			<tr>
+			<%-- <tr>
 				<th>모델명</th>
 				<td><input type="text" name="model" value="${cinfo.model}"
 					readonly="readonly" /></td>
-			</tr>
+			</tr> --%>
 			<tr>
-				<th>제품명</th>
-				<td><input type="text" name="product" value="${cinfo.product}"
+				<td>모델명 &nbsp;
+				<input type="text" name="product" value="${cinfo.product}"
+					readonly="readonly" /></td>
+			</tr>
+			
+			<tr>
+				<td>용량 &nbsp;&nbsp;&nbsp;&nbsp;
+				<input type="text" name="amount" value="${cinfo.amount}"
 					readonly="readonly" /></td>
 			</tr>
 			<tr>
-				<th>용량</th>
-				<td><input type="text" name="amount" value="${cinfo.amount}"
-					readonly="readonly" />ml</td>
-			</tr>
-			<tr>
-				<th>가격</th>
-				<td><input type="text" name="price" value="${cinfo.price}"
+				<td>정가 &nbsp;&nbsp;&nbsp;&nbsp;
+				<input type="text" name="price" value="${cinfo.price}"
 					readonly="readonly" />원</td>
 			</tr>
-			<tr>
-				<th>성분</th>
-				<td><input type="text" name="ingredient"
+		
+			<%-- <tr>
+				<td>성분구성
+				<input type="text" name="ingredient"
 					value="${cinfo.ingredient}" readonly="readonly" /> <!-- 	<input type="button" name="addButton" style="cursor:hand" value="추가" onclick="insRow()" />
-	<font color="blue">더 추가하려면 추가 버튼을 클릭해보세요!</font> --></td>
-			</tr>
+			<font color="blue">더 추가하려면 추가 버튼을 클릭해보세요!</font> --></td>
+			</tr> --%>
+		
 		</table>
+
 			<input type="submit" value="글수정" style="float:left" /> 
 			<input type="button" value="글삭제" style="float:left" onclick="deleteCosmetic('${cinfo.cosmeticNo}')" />
+
+		<br />
+		<hr>
+		
+		<a href="/user/getIngredientList?cosmeticNo=${cinfo.cosmeticNo}">성분구성</a><br />
+		<a href="/user/getSkinTypeIngredientList?cosmeticNo=${cinfo.cosmeticNo}">피부타입별 성분</a><br />
+		<a href="/user/getFunctionalIngredientList?cosmeticNo=${cinfo.cosmeticNo}">기능성 성분</a>
+		<br />
+		<hr>
+		
+		<%-- 	<input type="submit" value="글수정" style="float:left" /> 
+			<input type="button" value="글삭제" style="float:left" onclick="deleteCosmetic('${cinfo.cosmetic_no}')" /> --%>
+
 		</form>
 		<br />
 		<hr>
