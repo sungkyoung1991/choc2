@@ -19,7 +19,7 @@
 		</tr>
 		<tr>
 			<th>닉네임</th>
-			<td><input type="text" name="nick" id="nick" value = "${user.nickName}"/>
+			<td><input type="text" name="nick" id="nick" value = "${user.nickname}"/>
 		</tr>
 		
 			<tr>

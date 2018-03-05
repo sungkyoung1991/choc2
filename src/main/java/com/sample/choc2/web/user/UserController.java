@@ -59,6 +59,7 @@ public class UserController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 	
+	
 	@RequestMapping( value="login", method=RequestMethod.POST )
 	public String login(@ModelAttribute("user") UserVO user , HttpSession session ) throws Exception{
 		
@@ -122,7 +123,8 @@ public class UserController {
 		logger.info(user.toString());
 		userService.createUser(user);
 		
-		return "user/createCosmetic";
+//		return "redirect:http://210.221.220.71:3030/";
+		return "redirect:http://localhost:8080/";
 		
 	}//회원가입 처리
 

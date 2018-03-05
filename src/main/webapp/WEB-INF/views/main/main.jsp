@@ -72,6 +72,8 @@
 <a herf="/admin/cosmetic/list"><h3>admin cosmetic manage</h3></a>
 <a herf="/super/userManage/list"><h3>super user manage</h3></a>
 
+<a href="/user/getCosmeticList">user cosmetic manage</a><br /><br />
+
 <%-- <jsp:include page="/WEB-INF/views/user/index.jsp"></jsp:include> --%>
 
 <!-- JavaScript SDK를 사용하여 Facebook 로그인을 구현 -->
@@ -250,7 +252,7 @@ document.getElementById('loginBtn').addEventListener('click', function() {
             //user just authorized your app
             document.getElementById('loginBtn').style.display = 'none';
             getUserData();
-            $("form").attr("method","POST").attr("action","/user/createUserP").submit();
+            $("form").attr("method","GET").attr("action","/user/createUserP").submit();
             
         }
     }, {scope: 'email,public_profile,user_birthday', //permission

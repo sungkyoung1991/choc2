@@ -108,8 +108,8 @@ function createCmt(nick,no){
 		
 		<%-- 	<input type="submit" value="글수정" style="float:left" /> 
 			<input type="button" value="글삭제" style="float:left" onclick="deleteCosmetic('${cinfo.cosmetic_no}')" /> --%>
-			<input type="submit" value="글수정" style="float:left" /> 
-			<input type="button" value="글삭제" style="float:left" onclick="deleteCosmetic('${cinfo.cosmeticNo}')" />
+		<%-- 	<input type="submit" value="글수정" style="float:left" /> 
+			<input type="button" value="글삭제" style="float:left" onclick="deleteCosmetic('${cinfo.cosmeticNo}')" /> --%>
 		</form>
 		<br />
 		<hr>
@@ -137,7 +137,7 @@ function createCmt(nick,no){
 		<div><!--댓글  -->
 		<hr>
 		<%-- <c:if test="${user!=null }"> --%>
-		<span style="color: black; font-weight: bold;">${user.nick }</span> : <input type="text" id="comment" /><button type="button" onclick="comment('${user.nick }','${cinfo.cosmeticNo}');">댓글쓰기</button>
+<%-- 		<span style="color: black; font-weight: bold;">${user.nick }</span> : <input type="text" id="comment" /><button type="button" onclick="comment('${user.nick }','${cinfo.cosmeticNo}');">댓글쓰기</button> --%>
 		<hr>
 		<%-- </c:if> --%>
 		<div id="commentArea">

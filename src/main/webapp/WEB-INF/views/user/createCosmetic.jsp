@@ -39,11 +39,11 @@
 			</tr>
 			<tr>
 				<th>가격</th>
-				<td><input type="text" name="price" placeholder="77,000" />원</td>
+				<td><input type="text" name="price" placeholder="77000" />원</td>
 			</tr>
 			<tr>
 				<th>성분</th>
-				<td><input type="text" name="ingredient" placeholder="글리세린" />
+				<td><input type="text" name="ingredient" size="100" placeholder="성분을 ,로 구분하여 나열하세요" />
 					<!-- 	<input type="button" name="addButton" style="cursor:hand" value="추가" onclick="insRow()" />
 	<font color="blue">더 추가하려면 추가 버튼을 클릭해보세요!</font> --></td>
 			</tr>

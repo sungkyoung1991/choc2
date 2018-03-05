@@ -40,18 +40,18 @@ $(document).ready(function(){
 		<option value="brand"
 			<c:out value="${cri.searchType eq 'brand'?'selected':''}"/>>
 			brand</option>
-		<option value="model"
+		<%-- <option value="model"
 			<c:out value="${cri.searchType eq 'model'?'selected':''}"/>>
-			model</option>
+			model</option> --%>
 		<option value="product"
 			<c:out value="${cri.searchType eq 'product'?'selected':''}"/>>
 			product</option>
-		<option value="amount"
+		<%-- <option value="amount"
 			<c:out value="${cri.searchType eq 'amount'?'selected':''}"/>>
 			amount</option>
 		<option value="price"
 			<c:out value="${cri.searchType eq 'price'?'selected':''}"/>>
-			price</option>
+			price</option> --%>
 		<option value="ingredient"
 			<c:out value="${cri.searchType eq 'ingredient'?'selected':''}"/>>
 			ingredient</option>
