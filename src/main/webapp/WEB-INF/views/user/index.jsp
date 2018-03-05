@@ -56,21 +56,22 @@ console.log(isNan(123));
 		    <li><a href="/user/getCosmeticList">유저 상품 게시판</a></li>
 		    
 		   </ul>
-			<h2>You have been successfully logged in</h2>
+			<h3>You have been successfully logged in!</h3>
 			<strong>${sessionScope.user.userId}</strong>님, you are very welcome 반가워요!!
 			<button id="myPage" onclick="location.href='/user/getMypage?userId=${sessionScope.user.userId}'">마이페이지</button> 
-			<a href="/user/getMypage?userId=${sessionScope.user.userId}">마이페이지</a>
+			<%-- <a href="/user/getMypage?userId=${sessionScope.user.userId}">마이페이지</a> --%>
 	 		<input type="button" value="logout"
 				onclick="location.replace('/user/logout');" />
 			<!-- <a href="/user/logout" >logout</a> -->
 		</c:when>
 		<c:otherwise>
 			<!-- 로그아웃 했을때 -->
-			<h2>You have been successfully logged out..</h2>
+			<h3>You have been successfully logged out!</h3>
 			<form>
 				<input type="text" name="userId" id="userId" /> <input
 					type="password" name="password" id="password" /> <input
 					type="button" id="Login" value="login" />
+				<input type="button" value="회원가입" onclick="location.href='/user/createUserP'">	
 			</form>
 		</c:otherwise>
 	</c:choose>

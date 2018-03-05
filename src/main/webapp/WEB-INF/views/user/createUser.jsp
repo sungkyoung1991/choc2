@@ -61,7 +61,7 @@ $(document).ready(function(){
 		}else{
 			var nick = document.sform.nick.value;
 			var data ={
-					'nickName':nick
+					'nickname':nick
 			};
 			var setting ={
 					url:'/user/nickCheck',
@@ -70,7 +70,7 @@ $(document).ready(function(){
 					success:function(data){
 						if(data.result=="사용가능한 닉네임입니다"){
 							$('#nickResult').html("<font color='blue' size='2px'>"+data.result+"</font>");
-							document.sform.nickName.value=nick;
+							document.sform.nickname.value=nick;
 						}else{
 							$('#nickResult').html("<font color='red' size='2px'>"+data.result+"</font>");
 							document.sform.nick.focus();
@@ -121,7 +121,7 @@ $(document).ready(function(){
 			alert("닉네임을 확인하세요");
 			document.sform.nick.focus();
 			return false;
-		}else if(document.sform.nickName.value==""){
+		}else if(document.sform.nickname.value==""){
 			alert("닉네임을 중복체크하세요");
 			document.getElementById("nickCheck").focus();
 			return false;
@@ -185,54 +185,54 @@ $(document).ready(function(){
 		
 		<tr>
 			<th>아이디</th>
-			<td><input type="text" name="id" id="id" placeholder="영문,숫자 혼합 6~20자 이내" /> <input
+			<td><input type="text" name="id" id="id" size="25" placeholder="영문,숫자 혼합 6~20자 이내" /> <input
 				type="hidden" name="userId" /> <input type="button"
 				value="아이디 중복확인" id="idCheck" />
 				<div id="idResult"></div></td>
 		</tr>
 		<tr>
 			<th>비밀번호</th>
-			<td><input type="password" name="password" id="password"
+			<td><input type="password" name="password" id="password" size="25"
 				placeholder="영문,숫자 혼합 6~20자 이내" /></td>
 		</tr>
 		<tr>
 			<th>닉네임</th>
-			<td><input type="text" name="nick" id="nick" />
-				<input type="hidden" name="nickName" /> <input type="button"
+			<td><input type="text" name="nick" id="nick" size="25"/>
+				<input type="hidden" name="nickname" /> <input type="button"
 				value="닉네임 중복확인" id="nickCheck" />
 				<div id="nickResult"></div></td>
 		</tr>
 		<tr>
 			<th>이름</th>
-			<td><input type="text" name="name" id="name" /></td>
+			<td><input type="text" name="name" id="name" size="25"/></td>
 		</tr>
 		
-		<c:if test="${fuser!=null}">
+	<%-- 	<c:if test="${fuser!=null}">
 			<tr>
 			<th>이메일</th>
 			<td><input type="text" name="email" id="email" value="${fuser.email}"/></td>
 		</tr>
-		</c:if>
+		</c:if> --%>
 		
 		<tr>
 			<th>이메일</th>
-			<td><input type="text" name="email" id="email" placeholder="abc123@gmail.com" /></td>
+			<td><input type="text" name="email" id="email" placeholder="abc123@gmail.com" size="25" /></td>
 		</tr>
-		<tr>
+		<!-- <tr>
 			<th>주소</th>
 			<td><input type="text" name="address" id="address" placeholder="주소" /></td>
-		</tr>
+		</tr> -->
 		<tr>
 			<th>핸드폰</th>
 			<td><input type="text" name="phoneNo" id="phoneNo"
-				placeholder="폰번호-없이 입력해주세요" /></td>
+				placeholder="폰번호-없이 입력해주세요" size="25"/></td>
 		</tr>
-		<c:if test="${fuser.gender==female}">
+	<%-- 	<c:if test="${fuser.gender==female}">
 			<tr>
 			<th>이메일</th>
 			<td><input type="text" name="email" id="email" value="${fuser.email}"/></td>
 		</tr>
-		</c:if>
+		</c:if> --%>
 		
 		<tr>
 			<th>성별</th>
@@ -241,13 +241,13 @@ $(document).ready(function(){
 		</tr>
 		<tr>
 			<th>나이</th>
-			<td><input type="text" name="age" id="age" placeholder="나이"></td>
+			<td><input type="text" name="age" id="age" placeholder="나이" size="25"></td>
 		</tr>
-		<tr>
+		<!-- <tr>
 			<th>주민번호</th>
 			<td><input type="text" name="jumin1" id="jumin1">-<input
 				type="text" name="jumnin2" id="jumin2"></td>
-		</tr>
+		</tr> -->
 		<tr>
 			<th></th>
 			<td><input type="radio" name="role" value="USER" id="role1">개인

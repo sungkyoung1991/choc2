@@ -75,6 +75,8 @@
 <a herf="/super/userManage/list"><h3>super user manage</h3></a>
 >>>>>>> refs/heads/master
 
+<a href="/user/getCosmeticList">user cosmetic manage</a><br /><br />
+
 <%-- <jsp:include page="/WEB-INF/views/user/index.jsp"></jsp:include> --%>
 
 <!-- JavaScript SDK를 사용하여 Facebook 로그인을 구현 -->
@@ -172,7 +174,7 @@
  	<button type="button" class="button facebook" onclick="fbLoginAction();">Login with Facebook</button>
 	<div id="status"></div> -->
 
-<button type="button" class="button facebook" id="loginBtn">페이스북 계정으로 로그인</button>
+<!-- <button type="button" class="button facebook" id="loginBtn">페이스북 계정으로 로그인</button> -->
  
           	  <!-- <div id="access_token"></div>
             	  <div id="user_id"></div>
@@ -253,7 +255,7 @@ document.getElementById('loginBtn').addEventListener('click', function() {
             //user just authorized your app
             document.getElementById('loginBtn').style.display = 'none';
             getUserData();
-            $("form").attr("method","POST").attr("action","/user/createUserP").submit();
+            $("form").attr("method","GET").attr("action","/user/createUserP").submit();
             
         }
     }, {scope: 'email,public_profile,user_birthday', //permission

@@ -100,19 +100,19 @@
 	<insert id="createUser" parameterType="userVO">
 		INSERT INTO
 		TBL_USER(USERID,PASSWORD,NICKNAME,NAME,EMAIL,ADDRESS,PHONENO,GENDER,AGE,JUMIN,ROLE)
-		VALUES(#{userId},#{password},#{nickName},#{name},#{email},#{address},#{phoneNo},#{gender},#{age},#{jumin},#{role})
+		VALUES(#{userId},#{password},#{nickname},#{name},#{email},#{address},#{phoneNo},#{gender},#{age},#{jumin},#{role})
 	</insert>
 
-	<select id="idCheck" parameterType="String" resultMap="userSelectMap">
+	<select id="idCheck" parameterType="String" resultType="String">
 		SELECT
 		USERID
 		FROM TBL_USER
 		WHERE USERID = #{userId}
 	</select>
 
-	<select id="nickCheck" parameterType="String" resultMap="userSelectMap">
+	<select id="nickCheck" parameterType="String" resultType="String">
 		SELECT
-		NICKNAME FROM TBL_USER WHERE NICKNAME = #{nickName}
+		NICKNAME FROM TBL_USER WHERE NICKNAME = #{nickname}
 	</select>
 
 

@@ -15,10 +15,14 @@
 	<input type="text" name="email" id="email" value="${user.email}"/> --%>
 	
 	<table>
+	<tr>
+			<th>이메일</th>
+			<td><input type="text" name="email" value="${mypage.email}" readonly="readonly"/> 
+	</tr>
 	
 	<tr>
 			<th>닉네임</th>
-			<td><input type="text" name="nickName" value="${mypage.nickName}"/> 
+			<td><input type="text" name="nickname" value="${mypage.nickname}"/> 
 	</tr>
 		
 	</table>	

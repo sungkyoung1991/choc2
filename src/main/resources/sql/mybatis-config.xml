@@ -23,6 +23,7 @@
 		<typeAlias alias="oilyVO" type="com.sample.choc2.service.domain.OilyVO" />
 		<typeAlias alias="dryVO" type="com.sample.choc2.service.domain.DryVO" />
 		<typeAlias alias="sensitiveVO" type="com.sample.choc2.service.domain.SensitiveVO" />
+		<typeAlias alias="commonVO" type="com.sample.choc2.common.domain.CommonVO" />
 		<typeAlias alias="search" type="com.sample.choc2.common.Search" />
 		<typeAlias alias="log" type="com.sample.choc2.common.domain.Log" />
 	</typeAliases>

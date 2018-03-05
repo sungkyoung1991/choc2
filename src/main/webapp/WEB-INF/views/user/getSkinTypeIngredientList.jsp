@@ -8,7 +8,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+ <font color="red">안좋은 성분</font>,
+<font color="blue"> 좋은 성분</font><br><br>
 <strong>[지성피부 관련성분]</strong><br><br>
 			 <table>
 			 <c:forEach items="${ingreinfo}" var="ingr" >
