@@ -123,8 +123,8 @@ public class UserController {
 		logger.info(user.toString());
 		userService.createUser(user);
 		
-//		return "redirect:http://210.221.220.71:3030/";
-		return "redirect:http://localhost:8080/";
+		return "redirect:http://210.221.220.71:3030/";
+//		return "redirect:http://localhost:8080/";
 		
 	}//회원가입 처리
 
