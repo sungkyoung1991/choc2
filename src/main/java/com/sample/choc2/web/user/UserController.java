@@ -113,7 +113,7 @@ public class UserController {
 			map.put("result", "사용가능한 닉네임입니다");
 		}else {
 			map.put("result", "존재하는 닉네임입니다. 다른닉네임를 사용해주세요! ");
-		}
+		} 
 		return map;
 	}//닉네임 중복체크
 	
