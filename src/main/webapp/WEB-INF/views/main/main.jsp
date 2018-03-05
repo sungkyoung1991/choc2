@@ -171,7 +171,7 @@
  	<button type="button" class="button facebook" onclick="fbLoginAction();">Login with Facebook</button>
 	<div id="status"></div> -->
 
-<button type="button" class="button facebook" id="loginBtn">페이스북 계정으로 로그인</button>
+<!-- <button type="button" class="button facebook" id="loginBtn">페이스북 계정으로 로그인</button> -->
  
           	  <!-- <div id="access_token"></div>
             	  <div id="user_id"></div>
