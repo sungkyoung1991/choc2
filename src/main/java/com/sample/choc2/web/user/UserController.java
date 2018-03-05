@@ -78,7 +78,8 @@ public class UserController {
 	public String logout(HttpSession session) {
 		
 		session.invalidate();
-		return "user/index";
+	
+		return "redirect:http://210.221.220.71:3030/";
 		
 	}//로그아웃 처리
 	
