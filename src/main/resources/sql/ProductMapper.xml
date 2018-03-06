@@ -7,13 +7,13 @@
 
 <mapper namespace="ProductMapper">
 
-	<resultMap id="productSelectMap" type="productVO">
+	<resultMap id="productSelectMap" type="product">
 		<result property="productNo" column="PRODUCT_NO" jdbcType="VARCHAR" />
 		<result property="productImage" column="PRODUCT_IMAGE" jdbcType="VARCHAR" />
 		<result property="productModel" column="PRODUCT_MODEL" jdbcType="VARCHAR" />
 	</resultMap>
 
-	<insert id="addProduct" parameterType="productVO">
+	<insert id="addProduct" parameterType="product">
 		INSERT INTO TBL_PRODUCT (PRODUCT_NO,PRODUCT_MODEL,PRODUCT_IMAGE)
 		VALUES (0,#{productModel:VARCHAR}, #{productImage:VARCHAR} )
 		
@@ -26,7 +26,7 @@
 		WHERE PRODUCT_MODEL=#{productModel}
 	</select>
 
-	<update id="updateProduct" parameterType="productVO">
+	<update id="updateProduct" parameterType="product">
 		UPDATE PRODUCT
 		<set>
 			PRODUCT_MODEL = #{productModel:VARCHAR},
