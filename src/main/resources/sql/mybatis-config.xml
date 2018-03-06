@@ -21,10 +21,11 @@
 		<typeAlias alias="whiteningVO" type="com.sample.choc2.service.domain.WhiteningVO" />
 		<typeAlias alias="wrinkleVO" type="com.sample.choc2.service.domain.WrinkleVO" />
 		<typeAlias alias="oilyVO" type="com.sample.choc2.service.domain.OilyVO" />
-		<typeAlias alias="dryVO" type="com.sample.choc2.service.domain.DryVO" />
+		<typeAlias alias="dryVO" type="com.sample.choc2.service.domain.DryVO" />	
 		<typeAlias alias="sensitiveVO" type="com.sample.choc2.service.domain.SensitiveVO" />
 		<typeAlias alias="commonVO" type="com.sample.choc2.common.domain.CommonVO" />
-		<typeAlias alias="search" type="com.sample.choc2.common.Search" />
+		<typeAlias alias="crawlingVO" type="com.sample.choc2.common.domain.CrawlingVO" />
+		<typeAlias alias="search" type="com.sample.choc2.common.Search" />	
 		<typeAlias alias="log" type="com.sample.choc2.common.domain.Log" />
 		<typeAlias alias="product" type="com.sample.choc2.service.domain.Product" />
 	</typeAliases>
@@ -37,6 +38,8 @@
 		<mapper resource="sql/CosmeticMapper.xml" />
 		<mapper resource="sql/CommonMapper.xml" />
 		<mapper resource="sql/ProductMapper.xml" />
+		<mapper resource="sql/CrawlingMapper.xml" />
+
 	</mappers>
 
 </configuration>

@@ -3,11 +3,34 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page session="false"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%@include file="../include/header.jsp"%>
+	<script>
+		var result = '${msg}';
+		if (result == 'SUCCESS') {
+			alter("처리가 완료되었습니다.");
+		}
+	</script>
+
+	<script>
+	$(document).ready(function(){
+					$('#searchBtn').on("click",function(event) {
+								self.location = "list"
+										+ '${pageMaker.makeQuery(1)}'
+										+ "&searchType="
+										+ $("select option:selected").val()
+										+ "&keyword="
+										+ $('#keywordInput').val();
+							});
+					$('#newBtn').on("click", function(evt) {
+						self.location = "create";
+					});
+				});
+	</script>
 </head>
 <body>
 <%@include file="../include/nav.jsp"%>
@@ -121,29 +144,8 @@
 	<!-- /.row --> </section>
 	<!-- /.content -->
 
-<!-- <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script> -->
-	<script>
-		var result = '${msg}';
-		if (result == 'SUCCESS') {
-			alter("처리가 완료되었습니다.");
-		}
-	</script>
 
-	<script>
-	$(document).ready(function(){
-					$('#searchBtn').on("click",function(event) {
-								self.location = "list"
-										+ '${pageMaker.makeQuery(1)}'
-										+ "&searchType="
-										+ $("select option:selected").val()
-										+ "&keyword="
-										+ $('#keywordInput').val();
-							});
-					$('#newBtn').on("click", function(evt) {
-						self.location = "create";
-					});
-				});
-	</script>
+
 </body>
 <%@include file="../include/footer.jsp"%>
 </html>

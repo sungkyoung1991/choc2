@@ -1,4 +1,4 @@
-package com.sample.choc2.common.service.impl;
+package com.sample.choc2.service.crawling.impl;
 
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import com.sample.choc2.common.domain.CrawlingVO;
-import com.sample.choc2.common.service.CrawlingDao;
+import com.sample.choc2.service.crawling.CrawlingDao;
 import com.sample.choc2.web.supermanage.SuperManageController;
 
 @Repository("crawlingDaoImpl")
