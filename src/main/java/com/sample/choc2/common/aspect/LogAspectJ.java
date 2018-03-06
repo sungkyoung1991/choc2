@@ -27,21 +27,20 @@ class LogAspectJ {
 	}
 	
 	public Object logWrite(ProceedingJoinPoint joinPoint) throws Throwable{
-		
-		System.out.println("로그 쓰기 시작!.................");
-		
-		
 
 		String methodName = joinPoint.getSignature().getName();
+		System.out.println("LogAspect_logWrite_methodName : " + methodName);
+		
 		int categoryNo = parseCategoryToInt(methodName);
 		int behavior = parseBehaviorToInt(methodName);
 		int addBehavior = parseAddBehaviorToInt(methodName);
+		
 
 		Object obj = this.invoke(joinPoint);
 		
 		if(categoryNo == Const.NONE ||
 				behavior == Const.NONE ||
-				behavior == Const.Behavior.LIST ||
+//				behavior == Const.Behavior.LIST ||
 				addBehavior == Const.AddBehavior.REPLY) {
 			
 			System.out.println("Log :: "+ methodName + " 로그를 남기지 않는 method");
@@ -59,6 +58,7 @@ class LogAspectJ {
 						user = new UserVO();
 						user.setEmail("anonymous");
 						System.out.println("Log :: 비회원 게시물 조회");
+						
 					}else {
 						System.out.println("Log :: 비회원 로그는 남기지 않음");
 						return obj;
@@ -97,13 +97,14 @@ class LogAspectJ {
 		System.out.println("[Around after] return value : " + obj);
 		
 		return obj;
+	
 	}
 	
 	public int parseCategoryToInt(String methodName) {
 		
 		String lowerCaseMethodName = methodName.toLowerCase();
 		
-		for(int i=1; i<=10; i++) {
+		for(int i=1; i<=3; i++) {
 			if(lowerCaseMethodName.contains(CommonUtil.getConstProp().getProperty("S_C"+i))) {
 				return i;
 			}
@@ -116,8 +117,15 @@ class LogAspectJ {
 		
 		String lowerCaseMethodName = methodName.toLowerCase();
 		
-		for(int i=0; i<=10; i++) {
-			if(lowerCaseMethodName.contains(CommonUtil.getConstProp().getProperty("S_B"+i))) {
+		if(lowerCaseMethodName.contains("get") && lowerCaseMethodName.contains("list"))
+			lowerCaseMethodName = "list";
+		
+		for(int i=0; i<=6; i++) {
+			if(lowerCaseMethodName.contains(CommonUtil.getConstProp().getProperty("S_B"+i)   )   ) {
+				
+				
+				
+				
 				return i;
 			}
 		}
@@ -129,7 +137,7 @@ class LogAspectJ {
 		
 		String lowerCaseMethodName = methodName.toLowerCase();
 		
-		for(int i=1; i<=5; i++) {
+		for(int i=1; i<=1; i++) {
 			if(lowerCaseMethodName.contains(CommonUtil.getConstProp().getProperty("S_AB"+i))) {
 				return i;
 			}

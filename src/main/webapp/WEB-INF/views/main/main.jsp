@@ -63,7 +63,36 @@
 		$("#currentPage").val(currentPage)
 		$("form").attr("method" , "GET").attr("action" , "/main/mainModule").submit();
 	}
+	
+	
+	
+	
+	
+	
+	
+	$(function(){
+		$("#prod").on("click", function(){
+			
+			self.location = "/product/listProduct";
+			
+		});
+	});
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 </head>
 
@@ -275,6 +304,9 @@ document.getElementById('loginBtn').addEventListener('click', function() {
 	
 		
 	</form> 
+	
+	
+	<input type="button" value="물품" id="prod">
 	
 
 </body>
