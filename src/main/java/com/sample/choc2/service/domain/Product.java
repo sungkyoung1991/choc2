@@ -5,8 +5,17 @@ public class Product {
 	private int productNo;
 	private String productImage;
 	private String productModel;
+	private UserVO writer;
 
 	public Product() {
+	}
+
+	public UserVO getWriter() {
+		return writer;
+	}
+
+	public void setWriter(UserVO writer) {
+		this.writer = writer;
 	}
 
 	public int getProductNo() {
@@ -36,7 +45,7 @@ public class Product {
 	@Override
 	public String toString() {
 		return "Product [productNo=" + productNo + ", productImage=" + productImage + ", productModel=" + productModel
-				+ "]";
+				+ "UserVO = " + writer + "]";
 	}
 
 }

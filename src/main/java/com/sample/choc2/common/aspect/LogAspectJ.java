@@ -9,6 +9,7 @@ import com.sample.choc2.common.domain.Const;
 import com.sample.choc2.common.domain.Log;
 import com.sample.choc2.common.service.LogService;
 import com.sample.choc2.service.domain.CosmeticVO;
+import com.sample.choc2.service.domain.Product;
 import com.sample.choc2.service.domain.UserVO;
 
 class LogAspectJ {
@@ -19,9 +20,17 @@ class LogAspectJ {
 	
 	public LogAspectJ() {
 		System.out.println("Constructor :: "+getClass().getName());
+		
+		System.out.println("로그 AspectJ 생성자 확인중.........");
+		
+		
 	}
 	
 	public Object logWrite(ProceedingJoinPoint joinPoint) throws Throwable{
+		
+		System.out.println("로그 쓰기 시작!.................");
+		
+		
 
 		String methodName = joinPoint.getSignature().getName();
 		int categoryNo = parseCategoryToInt(methodName);
@@ -89,6 +98,7 @@ class LogAspectJ {
 		
 		return obj;
 	}
+	
 	public int parseCategoryToInt(String methodName) {
 		
 		String lowerCaseMethodName = methodName.toLowerCase();
@@ -101,6 +111,7 @@ class LogAspectJ {
 		
 		return Const.NONE;
 	}
+	
 	public int parseBehaviorToInt(String methodName) {
 		
 		String lowerCaseMethodName = methodName.toLowerCase();
@@ -137,6 +148,7 @@ class LogAspectJ {
 		System.out.println("Log :: 로그를 남길 targetNo = "+targetNo);
 		return targetNo;
 	}
+	
 	public boolean checkUserLogin(ProceedingJoinPoint joinPoint) throws Throwable{
 		if(joinPoint.getArgs() == null) {
 			return false;
@@ -154,8 +166,8 @@ class LogAspectJ {
 	public boolean checkAuthorUser(int categoryNo, Object returnObject, ProceedingJoinPoint joinPoint) {
 		UserVO author = new UserVO();
 		switch(categoryNo){
-			case Const.Category.BOARD:
-//				author = (	(BoardVO)returnObject	).getWriter();
+			case Const.Category.PRODUCT:
+				author = (	(Product)returnObject	).getWriter();
 				break;
 			default:
 				author.setEmail("");
@@ -184,5 +196,9 @@ class LogAspectJ {
 		
 		logService.addLog(log);
 	}
-
 }
+
+
+
+
+
