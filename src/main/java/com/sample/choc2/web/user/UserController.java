@@ -59,6 +59,7 @@ public class UserController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 	
+	
 	@RequestMapping( value="login", method=RequestMethod.POST )
 	public String login(@ModelAttribute("user") UserVO user , HttpSession session ) throws Exception{
 		
@@ -77,7 +78,8 @@ public class UserController {
 	public String logout(HttpSession session) {
 		
 		session.invalidate();
-		return "user/index";
+	
+		return "redirect:http://210.221.220.71:3030/";
 		
 	}//로그아웃 처리
 	
@@ -112,7 +114,7 @@ public class UserController {
 			map.put("result", "사용가능한 닉네임입니다");
 		}else {
 			map.put("result", "존재하는 닉네임입니다. 다른닉네임를 사용해주세요! ");
-		}
+		} 
 		return map;
 	}//닉네임 중복체크
 	
@@ -122,7 +124,8 @@ public class UserController {
 		logger.info(user.toString());
 		userService.createUser(user);
 		
-		return "user/createCosmetic";
+		return "redirect:http://210.221.220.71:3030/";
+//		return "redirect:http://localhost:8080/";
 		
 	}//회원가입 처리
 

@@ -3,19 +3,21 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 		xmlns:aop="http://www.springframework.org/schema/aop"
 		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		xsi:schemaLocation=
-				"http://www.springframework.org/schema/beans 
-				 http://www.springframework.org/schema/beans/spring-beans.xsd
-				 http://www.springframework.org/schema/aop 
-				 http://www.springframework.org/schema/aop/spring-aop.xsd">
+		xsi:schemaLocation="http://www.springframework.org/schema/beans
+							http://www.springframework.org/schema/beans/spring-beans.xsd
+							
+							http://www.springframework.org/schema/aop
+							http://www.springframework.org/schema/aop/spring-aop.xsd">
 				 
 				 
-				 <bean id="logAspectJ"	class="com.sample.choc2.common.aspect.LogAspectJ"/>
-				 
+				 <bean id="logAspect"	class="com.sample.choc2.common.aspect.LogAspectJ"/>
 				 <aop:config>
-				 	<aop:aspect ref="logAspectJ">
-				 		<aop:around pointcut="execution(* com.sample.choc2.service..*Impl.*(..))"	method="invoke"/>
-						<aop:around pointcut="execution(* com.sample.choc2.service..*ServiceImpl.*(..))" method="logWrite"/>
+				 	<aop:aspect ref="logAspect">
+				 	
+				 	<!-- <aop:around pointcut="execution(* com.sample.choc2.service..*Impl.*(..))" method="invoke"/> -->
+					<aop:around pointcut="execution(* com.sample.choc2.service..*ServiceImpl.*(..))" method="logWrite"/>
+			
+			
 				 	</aop:aspect>
 				 </aop:config>
 				 

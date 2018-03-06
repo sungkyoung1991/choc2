@@ -9,6 +9,7 @@ import com.sample.choc2.common.domain.Const;
 import com.sample.choc2.common.domain.Log;
 import com.sample.choc2.common.service.LogService;
 import com.sample.choc2.service.domain.CosmeticVO;
+import com.sample.choc2.service.domain.Product;
 import com.sample.choc2.service.domain.UserVO;
 
 class LogAspectJ {
@@ -19,20 +20,27 @@ class LogAspectJ {
 	
 	public LogAspectJ() {
 		System.out.println("Constructor :: "+getClass().getName());
+		
+		System.out.println("로그 AspectJ 생성자 확인중.........");
+		
+		
 	}
 	
 	public Object logWrite(ProceedingJoinPoint joinPoint) throws Throwable{
 
 		String methodName = joinPoint.getSignature().getName();
+		System.out.println("LogAspect_logWrite_methodName : " + methodName);
+		
 		int categoryNo = parseCategoryToInt(methodName);
 		int behavior = parseBehaviorToInt(methodName);
 		int addBehavior = parseAddBehaviorToInt(methodName);
+		
 
 		Object obj = this.invoke(joinPoint);
 		
 		if(categoryNo == Const.NONE ||
 				behavior == Const.NONE ||
-				behavior == Const.Behavior.LIST ||
+//				behavior == Const.Behavior.LIST ||
 				addBehavior == Const.AddBehavior.REPLY) {
 			
 			System.out.println("Log :: "+ methodName + " 로그를 남기지 않는 method");
@@ -50,6 +58,7 @@ class LogAspectJ {
 						user = new UserVO();
 						user.setEmail("anonymous");
 						System.out.println("Log :: 비회원 게시물 조회");
+						
 					}else {
 						System.out.println("Log :: 비회원 로그는 남기지 않음");
 						return obj;
@@ -88,12 +97,14 @@ class LogAspectJ {
 		System.out.println("[Around after] return value : " + obj);
 		
 		return obj;
+	
 	}
+	
 	public int parseCategoryToInt(String methodName) {
 		
 		String lowerCaseMethodName = methodName.toLowerCase();
 		
-		for(int i=1; i<=10; i++) {
+		for(int i=1; i<=3; i++) {
 			if(lowerCaseMethodName.contains(CommonUtil.getConstProp().getProperty("S_C"+i))) {
 				return i;
 			}
@@ -101,12 +112,20 @@ class LogAspectJ {
 		
 		return Const.NONE;
 	}
+	
 	public int parseBehaviorToInt(String methodName) {
 		
 		String lowerCaseMethodName = methodName.toLowerCase();
 		
-		for(int i=0; i<=10; i++) {
-			if(lowerCaseMethodName.contains(CommonUtil.getConstProp().getProperty("S_B"+i))) {
+		if(lowerCaseMethodName.contains("get") && lowerCaseMethodName.contains("list"))
+			lowerCaseMethodName = "list";
+		
+		for(int i=0; i<=6; i++) {
+			if(lowerCaseMethodName.contains(CommonUtil.getConstProp().getProperty("S_B"+i)   )   ) {
+				
+				
+				
+				
 				return i;
 			}
 		}
@@ -118,7 +137,7 @@ class LogAspectJ {
 		
 		String lowerCaseMethodName = methodName.toLowerCase();
 		
-		for(int i=1; i<=5; i++) {
+		for(int i=1; i<=1; i++) {
 			if(lowerCaseMethodName.contains(CommonUtil.getConstProp().getProperty("S_AB"+i))) {
 				return i;
 			}
@@ -137,6 +156,7 @@ class LogAspectJ {
 		System.out.println("Log :: 로그를 남길 targetNo = "+targetNo);
 		return targetNo;
 	}
+	
 	public boolean checkUserLogin(ProceedingJoinPoint joinPoint) throws Throwable{
 		if(joinPoint.getArgs() == null) {
 			return false;
@@ -154,8 +174,8 @@ class LogAspectJ {
 	public boolean checkAuthorUser(int categoryNo, Object returnObject, ProceedingJoinPoint joinPoint) {
 		UserVO author = new UserVO();
 		switch(categoryNo){
-			case Const.Category.BOARD:
-//				author = (	(BoardVO)returnObject	).getWriter();
+			case Const.Category.PRODUCT:
+				author = (	(Product)returnObject	).getWriter();
 				break;
 			default:
 				author.setEmail("");
@@ -184,5 +204,9 @@ class LogAspectJ {
 		
 		logService.addLog(log);
 	}
-
 }
+
+
+
+
+

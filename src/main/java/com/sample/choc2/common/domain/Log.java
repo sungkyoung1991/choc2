@@ -120,13 +120,10 @@ public class Log {
 		StringBuffer link = new StringBuffer();
 		link.append("../");
 		switch (this.categoryNo) {
-			case Const.Category.BOARD:
-				link.append(" 상대경로 path 줘야함..");
+			case Const.Category.PRODUCT:
+				link.append("product/getProduct?productNo=");
 				break;
 				
-			case Const.Category.COSMETIC:
-				link.append("상대경로 path 줘야함..");
-				break;
 				
 		}
 		link.append(this.targetNo);

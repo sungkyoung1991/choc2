@@ -7,12 +7,13 @@ public class Const {
 	public class Category{
 		public static final int BOARD = 1;
 		public static final int COSMETIC = 2;
+		public static final int PRODUCT = 3;
 	}
 	
 	public class Behavior{
 		public static final int LIST = 0;
 		public static final int GET = 1;
-		public static final int CREATE = 2;
+		public static final int ADD = 2;
 		public static final int SEARCH = 3;
 		public static final int UPDATE = 4;
 		public static final int DELETE = 5;

@@ -63,7 +63,36 @@
 		$("#currentPage").val(currentPage)
 		$("form").attr("method" , "GET").attr("action" , "/main/mainModule").submit();
 	}
+	
+	
+	
+	
+	
+	
+	
+	$(function(){
+		$("#prod").on("click", function(){
+			
+			self.location = "/product/listProduct";
+			
+		});
+	});
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 </head>
 
@@ -71,6 +100,11 @@
 <a herf="/admin/board/list"><h3>admin board manage</h3></a>
 <a herf="/admin/cosmetic/list"><h3>admin cosmetic manage</h3></a>
 <a herf="/super/userManage/list"><h3>super user manage</h3></a>
+<<<<<<< HEAD
+=======
+
+<a href="/user/getCosmeticList">user cosmetic manage</a><br /><br />
+>>>>>>> branch 'sk' of git@gitlab.com:nainfox/server/choc2_server.git
 
 <%-- <jsp:include page="/WEB-INF/views/user/index.jsp"></jsp:include> --%>
 
@@ -169,7 +203,7 @@
  	<button type="button" class="button facebook" onclick="fbLoginAction();">Login with Facebook</button>
 	<div id="status"></div> -->
 
-<button type="button" class="button facebook" id="loginBtn">페이스북 계정으로 로그인</button>
+<!-- <button type="button" class="button facebook" id="loginBtn">페이스북 계정으로 로그인</button> -->
  
           	  <!-- <div id="access_token"></div>
             	  <div id="user_id"></div>
@@ -250,7 +284,7 @@ document.getElementById('loginBtn').addEventListener('click', function() {
             //user just authorized your app
             document.getElementById('loginBtn').style.display = 'none';
             getUserData();
-            $("form").attr("method","POST").attr("action","/user/createUserP").submit();
+            $("form").attr("method","GET").attr("action","/user/createUserP").submit();
             
         }
     }, {scope: 'email,public_profile,user_birthday', //permission
@@ -273,6 +307,9 @@ document.getElementById('loginBtn').addEventListener('click', function() {
 	
 		
 	</form> 
+	
+	
+	<input type="button" value="물품" id="prod">
 	
 
 </body>
