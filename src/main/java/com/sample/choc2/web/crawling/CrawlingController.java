@@ -14,7 +14,7 @@ import org.springframework.web.context.support.HttpRequestHandlerServlet;
 
 import com.sample.choc2.common.CrawlingSearch;
 import com.sample.choc2.common.domain.CrawlingVO;
-import com.sample.choc2.common.service.CrawlingService;
+import com.sample.choc2.service.crawling.CrawlingService;
 
 @Controller
 @RequestMapping("/crawling")
@@ -51,14 +51,10 @@ public class CrawlingController {
 	
 	@RequestMapping(value="/oliveSearch",method=RequestMethod.POST)
 	public String oliveSearch (Model model,@RequestParam("index")String index, HttpRequestHandlerServlet request) throws Exception{
-//	public String oliveSearch (Model model,@RequestBody String index) throws Exception{
 		logger.info("SearchPost");
 		CrawlingVO crawlingVO = new CrawlingVO();
-		//System.out.println("index : "+index );
 		CrawlingSearch clo = new CrawlingSearch();
 		clo.CrawlingOlive(index,crawlingVO);
-		//System.out.println(CrawlingVO.toString());
-		//System.out.println(crawlingVO.toString());
 		crawlingService.createOvlieCrawling(crawlingVO);
 		return "redirect:/crawling/oliveSearch";
 	}

@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
 import com.sample.choc2.common.domain.CrawlingVO;
-import com.sample.choc2.common.service.CrawlingService;
+import com.sample.choc2.service.crawling.CrawlingService;
 
 import io.github.bonigarcia.wdm.ChromeDriverManager;
 

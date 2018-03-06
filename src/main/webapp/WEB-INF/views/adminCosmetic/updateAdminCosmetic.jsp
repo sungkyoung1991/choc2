@@ -3,11 +3,27 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page session="false"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%@include file="../include/header.jsp"%>
+<script>
+					$(document).ready(function() {
+						var formObj = $("form[role='form']");
+						console.log(formObj);
+						$(".btn-warning").on("click", function() {
+							formObj.attr("method", "get");
+							formObj.attr("action", "/admin/cosmetic/list");
+							formObj.submit();
+						});
+						
+						
+						$(".btn-primary").on("click", function() {
+							formObj.submit();
+						});
+					});
+				</script>
 </head>
 <body>
 	<%@include file="../include/nav.jsp"%>
@@ -71,27 +87,6 @@
 					<button type="submit" class="btn btn-primary">SAVE</button>
 					<button type="submit" class="btn btn-warning">CANCEL</button>
 				</div>
-				<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-				<script>
-					$(document).ready(function() {
-						var formObj = $("form[role='form']");
-						console.log(formObj);
-						$(".btn-warning").on("click", function() {
-							formObj.attr("method", "get");
-							formObj.attr("action", "/admin/board/list");
-							formObj.submit();
-						});
-						
-						
-						$(".btn-primary").on("click", function() {
-							formObj.submit();
-						});
-					});
-				</script>
-
-
-
-
 			</div>
 			<!-- /.box -->
 		</div>
@@ -100,7 +95,7 @@
 	</div>
 	<!-- /.row --> </section>
 	<!-- /.content -->
-	</div>
+	
 </body>
 <%@include file="../include/footer.jsp"%>
 </html>

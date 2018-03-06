@@ -1,4 +1,4 @@
-package com.sample.choc2.common.service.impl;
+package com.sample.choc2.service.crawling.impl;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.sample.choc2.common.domain.CrawlingVO;
-import com.sample.choc2.common.service.CrawlingDao;
-import com.sample.choc2.common.service.CrawlingService;
+import com.sample.choc2.service.crawling.CrawlingDao;
+import com.sample.choc2.service.crawling.CrawlingService;
 import com.sample.choc2.web.supermanage.SuperManageController;
 
 @Service("crawlingServiceImpl")

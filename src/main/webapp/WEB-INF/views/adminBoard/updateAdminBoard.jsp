@@ -7,6 +7,27 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%@include file="../include/header.jsp"%>
 <title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+				<script>
+					$(document)
+							.ready(
+									function() {
+										var formObj = $("form[role='form']");
+										console.log(formObj);
+										$(".btn-warning").on("click",function() {
+											formObj.attr("method", "get");
+											formObj.attr("action", "/admin/board/list");
+											formObj.submit();
+															/* self.location = "/admin/board/list"; */
+														});
+										/* ?page=${cri.page}&perPageNum=${cri.perPageNum}"
+										+ "$searchType=${cri.searchType}&keyword=${cri.keyword}" */
+										$(".btn-primary").on("click",
+												function() {
+													formObj.submit();
+												});
+									});
+				</script>
 </head>
 <body>
 <%@include file="../include/nav.jsp"%>
@@ -58,27 +79,7 @@
 				</div>
 				
 				
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-				<script>
-					$(document)
-							.ready(
-									function() {
-										var formObj = $("form[role='form']");
-										console.log(formObj);
-										$(".btn-warning").on("click",function() {
-											formObj.attr("method", "get");
-											formObj.attr("action", "/admin/board/list");
-											formObj.submit();
-															/* self.location = "/admin/board/list"; */
-														});
-										/* ?page=${cri.page}&perPageNum=${cri.perPageNum}"
-										+ "$searchType=${cri.searchType}&keyword=${cri.keyword}" */
-										$(".btn-primary").on("click",
-												function() {
-													formObj.submit();
-												});
-									});
-				</script>
+
 
 
 
