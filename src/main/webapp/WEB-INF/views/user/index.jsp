@@ -1,18 +1,13 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!-- <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"> -->
 <!DOCTYPE html>
 <html>
 <head>
-<title>Home</title>
+<title>로그인 됬을때 화면</title>
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-
 <script type="text/javascript">
-console.log("1,2,3".split(","));
-console.log("helloworld".charAt(0));
-console.log(isNan(123));
+
 	$(function() {
 
 		$("#userId").focus();
@@ -40,6 +35,12 @@ console.log(isNan(123));
 					$("form").attr("method", "POST").attr("action",
 							"/user/login").submit();
 				});
+		
+		$("#Logout").on("click",function(){
+			self.location="/user/logout";
+			
+		});
+		
 	});
 </script>
 
@@ -56,24 +57,13 @@ console.log(isNan(123));
 		    <li><a href="/user/getCosmeticList">유저 상품 게시판</a></li>
 		    
 		   </ul>
+		   
 			<h3>You have been successfully logged in!</h3>
-			<strong>${sessionScope.user.userId}</strong>님, you are very welcome 반가워요!!
-			<button id="myPage" onclick="location.href='/user/getMypage?userId=${sessionScope.user.userId}'">마이페이지</button> 
-			<%-- <a href="/user/getMypage?userId=${sessionScope.user.userId}">마이페이지</a> --%>
-	 		<input type="button" value="logout"
-				onclick="location.replace('/user/logout');" />
-			<!-- <a href="/user/logout" >logout</a> -->
+			<strong>${sessionScope.user.userId}</strong>님, you are very welcome 반가워요:)
+			 <a href="/user/getMyPage?userId=${sessionScope.user.userId}">마이페이지</a> 
+	 	<!-- 	<input type="button" onclick="location.replace('/user/logout');" /> -->
+				<button type="button" id="Logout">Logout</button>
 		</c:when>
-		<c:otherwise>
-			<!-- 로그아웃 했을때 -->
-			<h3>You have been successfully logged out!</h3>
-			<form>
-				<input type="text" name="userId" id="userId" /> <input
-					type="password" name="password" id="password" /> <input
-					type="button" id="Login" value="login" />
-				<input type="button" value="회원가입" onclick="location.href='/user/createUserP'">	
-			</form>
-		</c:otherwise>
 	</c:choose>
 
 

@@ -83,8 +83,8 @@ public class UserController {
 		
 	}//로그아웃 처리
 	
-	@RequestMapping(value="createUserP", method=RequestMethod.GET)
-	public String createUserp(UserVO uservo, Model model){
+	@RequestMapping(value="createUserPage", method=RequestMethod.GET)
+	public String createUserPage(UserVO uservo, Model model){
 		
 		model.addAttribute("fuser", uservo);
 		logger.info(""+uservo);
@@ -128,21 +128,21 @@ public class UserController {
 //		return "redirect:http://localhost:8080/";
 		
 	}//회원가입 처리
+	
+	@RequestMapping(value="getMyPage", method=RequestMethod.GET)
+	public String getMypage(UserVO user,Model model) throws Exception {
+		model.addAttribute("mypage",userService.getUser(user.getUserId()));
+		return "user/getMyPage";
+	}//마이페이지 이동
+	
 
 	//-----------------------------Cosmetic----------------------------------
 	@RequestMapping(value="createCosmeticP", method=RequestMethod.GET)
 	public String createCosmeticP(){
 		
-		return "user/createCosmetic";
+		return "userCosmetic/createCosmetic";
 		
 	}//화장품 정보입력 폼으로 이동
-
-	@RequestMapping(value="getMypage", method=RequestMethod.GET)
-	public String getMypage(UserVO user,Model model) throws Exception {
-		model.addAttribute("mypage",userService.getUser(user.getUserId()));
-		return "user/getMypage";
-	}//마이페이지 이동
-	
 
 	
 	@RequestMapping(value="createCosmetic", method=RequestMethod.POST)
@@ -170,7 +170,7 @@ public class UserController {
 		
 		model.addAttribute("pageMaker",pageMaker);
 		
-		return "user/getCosmeticList";
+		return "userCosmetic/getCosmeticList";
 		
 	}//리스트 조회(Searchcriteria, pagemaker)
 	
@@ -179,7 +179,7 @@ public class UserController {
 	public String getCosmetic(@ModelAttribute("cri")SearchCriteria cri,@RequestParam("cosmeticNo") int cosmeticNo,Model model) throws Exception{
 		model.addAttribute("cinfo",cosmeticService.getCosmetic(cosmeticNo));
 			
-		return "user/getCosmetic";
+		return "userCosmetic/getCosmetic";
 	}//화장품 정보 상세히 보기
 	
 	@RequestMapping(value="updateCosmeticP", method=RequestMethod.GET)
@@ -188,7 +188,7 @@ public class UserController {
 		model.addAttribute("cinfo",cosmeticService.getCosmetic(cosmeticNo));	
 		
 		logger.info("gg",cosmeticService.getCosmetic(cosmeticNo));
-		return "user/updateCosmetic";
+		return "userCosmetic/updateCosmetic";
 	}//화장품 글수정 폼으로 이동
 	
 	@RequestMapping(value="updateCosmetic", method=RequestMethod.POST)
@@ -242,7 +242,7 @@ public class UserController {
 		logger.info("독성 리스트"+toxicVo.toString());
 
 		
-		return "user/getIngredientList";
+		return "userCosmetic/getIngredientList";
 	}
 	
 	@RequestMapping(value="getFunctionalIngredientList", method=RequestMethod.GET)
@@ -263,7 +263,7 @@ public class UserController {
 		logger.info("미백 리스트 "+ whiteningVO);
 		logger.info("주름 리스트 "+ wrinkleVO);
 		
-		return "user/getFunctionalIngredientList";
+		return "userCosmetic/getFunctionalIngredientList";
 	}
 	
 	@RequestMapping(value="getSkinTypeIngredientList", method=RequestMethod.GET)
@@ -283,7 +283,7 @@ public class UserController {
 		logger.info("건성 리스트 "+dryVO);
 		logger.info("민감 리스트 "+sensitiveVO);
 		
-		return "user/getSkinTypeIngredientList"; 
+		return "userCosmetic/getSkinTypeIngredientList"; 
 	}
 	
 	
