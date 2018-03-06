@@ -1,24 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-	<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>화장품 하나 상세히 보기</title>
 <%@include file="../include/header.jsp"%>
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script type="text/javascript">
 
-function deleteCosmetic(no){
+/* function deleteCosmetic(no){
 	if(confirm("게시글을 삭제하시겠습니까?")==true){
 	alert("삭제되었습니다");
 	location.href="/user/deleteCosmetic?cosmeticNo="+no;
 	}
-}
+} */
 
-function createCmt(nick,no){
+/* function createCmt(nick,no){
 	var content = $("#comment").val();
 	var data= {
 			'nickName' = nick,
@@ -43,9 +43,8 @@ function createCmt(nick,no){
 	};
 	
 	$.ajax(setting);
-}
+} */
 	
-}
 
 </script>
 </head>
@@ -89,12 +88,6 @@ function createCmt(nick,no){
 					readonly="readonly" />원</td>
 			</tr>
 		
-			<%-- <tr>
-				<td>성분구성
-				<input type="text" name="ingredient"
-					value="${cinfo.ingredient}" readonly="readonly" /> <!-- 	<input type="button" name="addButton" style="cursor:hand" value="추가" onclick="insRow()" />
-			<font color="blue">더 추가하려면 추가 버튼을 클릭해보세요!</font> --></td>
-			</tr> --%>
 		
 		</table>
 
@@ -112,12 +105,7 @@ function createCmt(nick,no){
 		<br />
 		<hr>
 		
-		<%-- 	<input type="submit" value="글수정" style="float:left" /> 
-			<input type="button" value="글삭제" style="float:left" onclick="deleteCosmetic('${cinfo.cosmetic_no}')" /> --%>
 
-
-		<%-- 	<input type="submit" value="글수정" style="float:left" /> 
-			<input type="button" value="글삭제" style="float:left" onclick="deleteCosmetic('${cinfo.cosmeticNo}')" /> --%>
 		</form>
 		<br />
 		<hr>

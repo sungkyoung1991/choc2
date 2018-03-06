@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>회원가입페이지</title>
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script type="text/javascript">
 
@@ -13,7 +13,7 @@ var regExp1 = /^.*(?=.{6,20})(?=.*[0-9])(?=.*[a-zA-Z]).*$/; //아이디,비밀�
 
 //아이디 중복확인
 $(document).ready(function(){
-	$("#idCheck").click(function(){
+	$("#idCheck").on("click",function(){
 		if(document.sform.id.value==""){
 			alert("아이디를 입력하세요");
 			document.sform.id.focus();
@@ -53,7 +53,7 @@ $(document).ready(function(){
 	});
 	
 	//닉네임 중복확인
-	$("#nickCheck").click(function(){
+	$("#nickCheck").on("click",function(){
 		if(document.sform.nick.value==""){
 			alert("닉네임을 입력하세요");
 			document.sform.nick.focus();
@@ -86,7 +86,9 @@ $(document).ready(function(){
 
 }); 
  
- function confirm(){
+/* $("#Create").on("click",function(){`	 */
+	
+ function confirm(){ 
 	 
 	 var regex = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/; //이메일 유효성 검사
 		
@@ -172,15 +174,19 @@ $(document).ready(function(){
  		}else{
  			document.sform.jumin.value=document.sform.jumin1.value+document.sform.jumin2.value;
  			return true;
+	 	/* 	$("form").attr("method","POST").attr("action","/user/createUser").submit(); */
  		}
+	 
+	 	
  }
- 
+/* }); */ 
 </script>
 </head>
 
 <h2>&nbsp;회원가입 페이지</h2>
-<form action="/user/createUser" method="post" name="sform">
+<!-- <form action="/user/createUser" method="post" name="sform"> -->
 	<!-- <input type="hidden" name="userNo"> -->
+<form name="sform">
 	<table>
 		
 		<tr>
@@ -258,7 +264,8 @@ $(document).ready(function(){
 		<input type="checkbox" name="check_info value="check2""/>체크2
 		<input type="checkbox" name="check_info value="check3""/>체크3  -->
 	</table>
-	<button type="submit" onclick="return confirm();">확인</button>
+	 <button type="submit" onclick="return confirm();">확인</button> 
+		<!-- <button type="button" id="Create">확인</button> -->
 </form>
 </body>
 </html>

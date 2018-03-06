@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <%-- <c:if test="${ mainList eq null }">
@@ -45,6 +44,8 @@
 					$("form").attr("method", "POST").attr("action",
 							"/user/login").submit();
 				});
+		
+		
 	});
 
 	$(function() {
@@ -63,14 +64,23 @@
 		$("#currentPage").val(currentPage)
 		$("form").attr("method" , "GET").attr("action" , "/main/mainModule").submit();
 	}
+	
+	
+	$(function(){
+		
+	$("#Create").on("click",function(){
+		self.location="/user/createUserPage";	
+	})
+	})
+	
 </script>
 
 </head>
 
 <body>
-<a herf="/admin/board/list"><h3>admin board manage</h3></a>
+<!-- <a herf="/admin/board/list"><h3>admin board manage</h3></a>
 <a herf="/admin/cosmetic/list"><h3>admin cosmetic manage</h3></a>
-<a herf="/super/userManage/list"><h3>super user manage</h3></a>
+<a herf="/super/userManage/list"><h3>super user manage</h3></a> -->
 
 <a href="/user/getCosmeticList">user cosmetic manage</a><br /><br />
 
@@ -190,7 +200,7 @@
             <!--  <input type="hidden" name="birthday" id="birthday">
               <input type="hidden" name="id" id="id">  -->
              </form> 
-<script>
+<!-- <script>
 function getUserData() {
     /* FB.api('/me', function(response) {
         document.getElementById('response').innerHTML = 'Hello ' + response.name;
@@ -259,7 +269,7 @@ document.getElementById('loginBtn').addEventListener('click', function() {
         return_scopes: true});
 }, false);
 
-</script>
+</script> -->
  
 
 <br/><br/><br/><br/>
@@ -270,7 +280,7 @@ document.getElementById('loginBtn').addEventListener('click', function() {
 	PW<input type="password" name="password" id="password" />
 	<input type="button" id="Login" value="로그인"/>
 	<!-- <a href="/user/createUserp">회원가입</a>  -->
-	<input type="button" value="회원가입" onclick="location.href='user/createUserP'">
+	<input type="button" value="회원가입" id="Create" /> 
 	<br/><br/><br/><br/>
 	
 		
