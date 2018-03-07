@@ -21,9 +21,9 @@
 
 
 
-	<select id="getProduct" parameterType="String" resultMap="productSelectMap" >
+	<select id="getProduct" parameterType="int" resultMap="productSelectMap" >
 		SELECT * FROM TBL_PRODUCT
-		WHERE PRODUCT_MODEL=#{productModel}
+		WHERE PRODUCT_NO=#{prodNo}
 	</select>
 
 	<update id="updateProduct" parameterType="product">
