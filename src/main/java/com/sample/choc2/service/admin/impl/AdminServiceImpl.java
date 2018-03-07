@@ -1,12 +1,15 @@
 package com.sample.choc2.service.admin.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.sample.choc2.common.Criteria;
+import com.sample.choc2.common.Search;
 import com.sample.choc2.common.SearchCriteria;
 import com.sample.choc2.service.admin.AdminDao;
 import com.sample.choc2.service.admin.AdminService;
@@ -54,15 +57,17 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
-	public List<BoardVO> listBoard(SearchCriteria cri) throws Exception {
+	public Map<String,Object> getBoardList(Search search) throws Exception {
 		// TODO Auto-generated method stub
-		return adminDao.listBoard(cri);
-	}
-
-	@Override
-	public int countBoard(SearchCriteria cri) throws Exception {
-		// TODO Auto-generated method stub
-		return adminDao.countBoard(cri);
+		List<BoardVO> list = adminDao.getBoardList(search);
+		int totalCountBoard= adminDao.totalCountBoard(search);
+		
+		Map<String, Object> map = new HashMap<String,Object>();
+		map.put("list", list);
+		map.put("totalCountBoard", new Integer(totalCountBoard));
+				System.out.println("service map ..... "+map);
+		
+		return map;
 	}
 
 	@Override
@@ -71,44 +76,5 @@ public class AdminServiceImpl implements AdminService{
 		adminDao.updateViewCnt(boardNo);
 		
 	}
-
-/*
-	@Override
-	public void createCosmetic(CosmeticVO cosmeticVO) throws Exception {
-		// TODO Auto-generated method stub
-		adminDao.createCosmetic(cosmeticVO);
-	}
-
-	@Override
-	public CosmeticVO getCosmetic(Integer cosmeticNo) throws Exception {
-		// TODO Auto-generated method stub
-		return adminDao.getCosmetic(cosmeticNo);
-	}
-
-	@Override
-	public void updateCosmetic(CosmeticVO cosmeticVO) throws Exception {
-		// TODO Auto-generated method stub
-		adminDao.updateCosmetic(cosmeticVO);
-	}
-
-	@Override
-	public void deleteCosmetic(Integer cosmeticNo) throws Exception {
-		// TODO Auto-generated method stub
-		adminDao.deleteCosmetic(cosmeticNo);
-	}
-
-	@Override
-	public List<CosmeticVO> listCosmetic(SearchCriteria cri) throws Exception {
-		// TODO Auto-generated method stub
-		return adminDao.listCosmetic(cri);
-	}
-
-	@Override
-	public int countCosmetic(SearchCriteria cri) throws Exception {
-		// TODO Auto-generated method stub
-		return adminDao.countCosmetic(cri);
-	}
-	
-	*/
 
 }

@@ -45,13 +45,11 @@
 
 				<form role="form" action="update" method="post">
 
-					<input type='hidden' name='page' value="${cri.page}"> 
-					<input type='hidden' name='perPageNum' value="${cri.perPageNum}">
-					<input type='hidden' name='searchType' value="${cri.searchType}">
-					<input type='hidden' name='keyword' value="${cri.keyword}">
+					<input type='hidden' id='currentPage'name='currentPage' value="${search.currentPage}"> 
+					<input type='hidden' id='searchCondition'name='searchCondition' value="${search.searchCondition}">
+					<input type='hidden' id='searchKeyword'name='searchKeyword' value="${search.searchKeyword}">
 
 					<div class="box-body">
-
 						<div class="form-group">
 							<label for="exampleInputEmail1">BNO</label> <input type="text"
 								name='boardNo' class="form-control" value="${boardVO.boardNo}"

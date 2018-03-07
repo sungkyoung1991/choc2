@@ -5,11 +5,21 @@ package com.sample.choc2.common;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
 public class PageMaker {
+	// ==> classpath:config/common.properties ,
+	@Value("#{commonProperties['pageUnit']}")
+	// @Value("#{commonProperties['pageUnit'] ?: 3}")
+	int pageUnit;
 
+	@Value("#{commonProperties['pageSize']}")
+	// @Value("#{commonProperties['pageSize'] ?: 2}")
+	int pageSize;
+	
+	
 	/*
 	 * 외부에서 입력되는 데이터
 	 * page > 현재 조회하는 페이지의 번호
@@ -34,8 +44,22 @@ public class PageMaker {
 	  private boolean next;
 
 	  private int displayPageNum = 10;
+	  private Search search;
+	  @Override
+	public String toString() {
+		return "PageMaker [pageUnit=" + pageUnit + ", pageSize=" + pageSize + ", search=" + search + "]";
+	}
 
-	  private Criteria cri;
+	public Search getSearch() {
+		return search;
+	}
+
+	public void setSearch(Search search) {
+		this.search = search;
+	}
+
+
+	private Criteria cri;
 
 	  public void setCri(Criteria cri) {
 	    this.cri = cri;
@@ -110,12 +134,11 @@ public class PageMaker {
 	   *  필요한 데이터를 생성하는데 사용한다.	
 	   * 
 	   * */
-	  public String makeQuery(int page) {
-		  
+	  public String makeQuery(int currentPage) {
 		  UriComponents uriComponents=
 				  UriComponentsBuilder.newInstance()
-				  .queryParam("page", page)
-				  .queryParam("perPageNum", cri.getPerPageNum())
+				  .queryParam("currentPage", currentPage)
+				  .queryParam("pageSize",search.getPageSize())
 				  .build();
 		  
 		  return uriComponents.toString();
@@ -125,7 +148,7 @@ public class PageMaker {
 		  UriComponents uriComponents = 
 				  UriComponentsBuilder.newInstance()
 				  .queryParam("page", page)
-				  .queryParam("perPageNum", cri.getPerPageNum())
+				  .queryParam("pageSize", cri.getPerPageNum())
 		  			.queryParam("searchType", ((SearchCriteria) cri).getSearchType())
 		  			.queryParam("keyword",encoding(((SearchCriteria)cri).getKeyword())).build();
 		  
