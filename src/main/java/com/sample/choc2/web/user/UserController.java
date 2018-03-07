@@ -155,7 +155,7 @@ public class UserController {
 		
 		rttr.addFlashAttribute("msg","success"); 
 		return "redirect:/user/getCosmeticList";
-		
+		 
 	}//화장품 정보입력 처리
 	
 //	@RequestMapping(value="getCosmeticList", method=RequestMethod.GET)
