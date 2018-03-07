@@ -44,12 +44,13 @@
 			<div class="box box-primary">
 				<!-- /.box header -->
 
-				<form role="form" action="/admin/cosmetic/update" method="post">
-					<input type='hidden' name='cosmeticNo' value="${cosmeticVO.cosmeticNo}"> 
-					<input type='hidden' name='page' value="${cri.page}"> 
-					<input type='hidden' name='perPageNum' value="${cri.perPageNum}">
-					<input type='hidden' name='searchType' value="${cri.searchType}">
-					<input type='hidden' name='keyword' value="${cri.keyword}">
+				<form role="form" action="/admin/board/update" method="post">
+
+					<input type='hidden' id='boardNo' name='boardNo' value="${cosmeticVO.cosmeticNo}">
+					<input type='hidden' id='currentPage'name='currentPage' value="${search.currentPage}"> 
+					<input type='hidden' id='searchCondition'name='searchCondition' value="${search.searchCondition}">
+					<input type='hidden' id='searchKeyword'name='searchKeyword' value="${search.searchKeyword}">
+
 				</form>
 				<div class="box-header">
 					<h3 class="box-title">READ COSMETIC</h3>
