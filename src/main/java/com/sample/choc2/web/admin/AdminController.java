@@ -202,9 +202,9 @@ public class AdminController {
 		}//처음 접속시 현재 페이지 초기화
 		
 		search.setPageSize(pageSize);
-		Map<String,Object> map = adminService.getBoardList(search);
+		Map<String,Object> map = cosmeticService.getCosmeticList(search);
 		
-		Page resultPage = new Page(search.getCurrentPage(),((Integer)map.get("totalCountBoard")).intValue(), pageUnit, pageSize);
+		Page resultPage = new Page(search.getCurrentPage(),((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
 		
 		
 		System.out.println("resultpage: "+resultPage);

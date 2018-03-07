@@ -15,18 +15,26 @@
 			alter("처리가 완료되었습니다.");
 		}
 		</script>
-		
 		<script>
-		$(document).ready(function(){
-			$('#searchBtn').on('click',function(){
-				self.location ="list"
-								+ "${pageMaker.makeQuery(1)}"
-								+ "&searchType="
-								+$("select option:selected").val()
-								+"&keyword="
-								+$("#keywordInput").val();
+			var result = '${msg}';
+			if (result == 'SUCCESS') {
+				alter("처리가 완료되었습니다.");
+			}
+		
+			function fncGetList(currentPage) {
+				$("#currentPage").val(currentPage)
+				$("form").attr("method", "POST").attr("action", "/admin/cosmetic/list")
+						.submit();
+			}
+			$(function() {
+				$("button:contains('검색')").on("click", function() {
+					fncGetList(1);
+				});
 			});
-			
+		</script>	
+		<script>
+		$(document).ready(
+				function() {
 			$('#newBtn').on("click",function(){
 				self.location = "create";
 			});
@@ -46,30 +54,29 @@
 					<h3 class="box-title">Cosmetic List</h3>
 				</div>
 				<div class="box-body">
-			<select name="searchType">
-				<option value="brand"
-					<c:out value="${cri.searchType eq 'brand'?'selected':''}"/>>
-					brand</option>
-				<option value="model"
-					<c:out value="${cri.searchType eq 'model'?'selected':''}"/>>
-					model</option>
-				<option value="product"
-					<c:out value="${cri.searchType eq 'product'?'selected':''}"/>>
-					product</option>
-				<option value="amount"
-					<c:out value="${cri.searchType eq 'amount'?'selected':''}"/>>
-					amount</option>
-				<option value="price"
-					<c:out value="${cri.searchType eq 'price'?'selected':''}"/>>
-					price</option>
-				<option value="ingredient"
-					<c:out value="${cri.searchType eq 'ingredient'?'selected':''}"/>>
-					ingredient</option>
-			</select>
-					<input type='text' name='keyword' id='keywordInput'
-					value="${cri.keyword}">
-					<button id ='searchBtn'>Search</button>
-					<button id ='newBtn'>New Cosmetic</button>
+			<form class="form-inline" name="detailForm">
+							<input type="hidden" id = "currentPage" name="currentPage" value="" /> 
+							<div class="form-group">
+								<select class="form-control" name="searchCondition">
+									<option value="0"
+										${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>>Brand</option>
+									<option value="1"
+										${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>>Product</option>
+								</select>
+							</div>
+
+
+							<div class="form-group">
+								<label class="sr-only" for="searchKeyword">검색어</label> 
+								<input type="text" class="form-control" id="searchKeyword"
+									name="searchKeyword" placeholder="검색어"
+									value="${! empty search.searchKeyword ? search.searchKeyword : '' }">
+							</div>
+							<button type="button" class="btn btn-default">검색</button>
+
+
+						</form>
+						<button id='newBtn'>New Board</button>
 				</div>
 			</div>
 			
@@ -93,7 +100,7 @@
 							<td>${cosmeticVO.cosmeticNo}</td>
 							<td>${cosmeticVO.brand}</td>
 							<td>${cosmeticVO.model}</td>		
-							<td><a href='/admin/cosmetic/get${pageMaker.makeSearch(pageMaker.cri.page) }
+							<td><a href='/admin/cosmetic/get?currentPage=${search.currentPage}&searchKeyword=${search.searchKeyword}&searchCondition=${search.searchCondition}
 							&cosmeticNo=${cosmeticVO.cosmeticNo}'>${cosmeticVO.product}</a></td>
 							<td>${cosmeticVO.amount}</td>
 							<td>${cosmeticVO.price}</td>
@@ -104,30 +111,8 @@
 				</div>
 				
 				<div class="box-footer">
-					<div class="text-center">
-						<ul class="pagination">
-						
-						<c:if test="${pageMaker.prev }">
-							<li>
-								<a href="list${pageMaker.makeSearch(pageMaker.startPage - 1) }">&laquo;</a>
-							</li>
-						</c:if>
-						<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" 
-						var=	"idx">
-						<li
-							<c:out value="${pageMaker.cri.page==idx?'class =active':'' }"/>>
-							<a href ="list${pageMaker.makeSearch(idx)}">${idx}</a> 
-							
-						</li>
-						</c:forEach>
-						
-						<c:if test="${pageMaker.next && pageMaker.endPage>0 }">
-							<li>
-							<a href="list${pageMaker.makesearch(pageMaker.endPage + 1)}">&raquo;</a>
-							</li>
-						</c:if>
-						</ul>
-					</div>
+					<!-- PageNavigation Start... -->
+					<jsp:include page="../common/pageNavigator_new.jsp" />
 				</div>
 			</div>
 		</div>
