@@ -2,6 +2,7 @@ package com.sample.choc2.service.cosmetic;
 
 import java.util.List;
 
+import com.sample.choc2.common.Search;
 import com.sample.choc2.common.SearchCriteria;
 import com.sample.choc2.service.domain.CosmeticVO;
 import com.sample.choc2.service.domain.DryVO;
@@ -14,7 +15,7 @@ import com.sample.choc2.service.domain.WrinkleVO;
 
 public interface CosmeticDao {
 
-	public List<CosmeticVO> getCosmeticList(SearchCriteria cri) throws Exception;
+//	public List<CosmeticVO> getCosmeticList(SearchCriteria cri) throws Exception;
 
 	public void createCosmetic(CosmeticVO cosmeticVO)throws Exception;
 	
@@ -41,5 +42,9 @@ public interface CosmeticDao {
 	public List<DryVO> getDryIngredient() throws Exception;
 
 	public List<SensitiveVO> getSensitiveIngredient() throws Exception;
+
+	public List<CosmeticVO> getCosmeticList(Search search) throws Exception;
+
+	public int getTotalCount(Search search)throws Exception;
 	
 }

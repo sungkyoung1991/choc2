@@ -17,117 +17,72 @@ a:hover {text-decoration: underline; color: red;}
 <script type="text/javascript">
 
 $(document).ready(function(){
-	$('#Search').click(function(){
+	/* $('#Search').click(function(){
 		self.location = "/user/getCosmeticList"
 						+'${pageMaker.makeQuery(1)}'
 						+"&searchType="
 						+$("select option:selected").val()
 						+"&keyword="
 						+$('#keywordInput').val();
-			});
+			}); */
 	$('#Create').click(function(){
-		self.location = "/user/createCosmeticP";
+		self.location = "/user/createCosmeticPage";
 	});
 })
+
+ 
+function fncGetList(currentPage) {
+	$("#currentPage").val(currentPage)
+	$("form").attr("method" , "POST").attr("action" , "/user/getCosmeticList").submit();
+}
+	$(function(){
+		 $( "button:contains('검색')" ).on("click" , function() {
+			fncGetList(1);
+		});
+ });
+
 </script>
 
 <%@include file="../include/header.jsp"%>
 </head>
 <body>
 
-	<select name="searchType">
-		<option value="brand"
-			<c:out value="${cri.searchType eq 'brand'?'selected':''}"/>>
-			brand</option>
-		<%-- <option value="model"
-			<c:out value="${cri.searchType eq 'model'?'selected':''}"/>>
-			model</option> --%>
-		<option value="product"
-			<c:out value="${cri.searchType eq 'product'?'selected':''}"/>>
-			product</option>
-		<%-- <option value="amount"
-			<c:out value="${cri.searchType eq 'amount'?'selected':''}"/>>
-			amount</option>
-		<option value="price"
-			<c:out value="${cri.searchType eq 'price'?'selected':''}"/>>
-			price</option> --%>
-		<option value="ingredient"
-			<c:out value="${cri.searchType eq 'ingredient'?'selected':''}"/>>
-			ingredient</option>
+	
+	전체  ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage}  페이지
+		<form name="detailForm">
+	
+	<select name="searchCondition">
+		<option value="brand" ${ ! empty search.searchCondition && search.searchCondition=="brand"?"selected" : ""}>브랜드</option>
+		<option value="product" ${ ! empty search.searchCondition && search.searchCondition=="product"?"selected" : ""}>모델</option>
 
 	</select>
-	<input type="text" name='keyword' id="keywordInput" value='${cri.keyword }'>
 	
-	<button id='Search'>Search</button>
-	<button id='Create'>New Board</button>
+	<input type="text" id="searchKeyword" name="searchKeyword"  placeholder="검색어"
+				    			 value="${! empty search.searchKeyword ? search.searchKeyword : '' }"  >
+	
+	<button type="button">검색</button>
+	
+	 <button type="button" id='Create'>화장품 정보입력</button> 
 	<br/><br/>
-	<table>
-		<!-- <tr>
-			<th>&nbsp;PICTURE &nbsp;</th>
-			<th>CNO</th>
-			<th>&nbsp;BRAND &nbsp;</th>
-			<th>&nbsp;MODEL &nbsp;</th>
-			<th>&nbsp;PRODUCT</th>
-		 	<th>PRICE</th>
-			<th>INGREDIENT</th> 
-		</tr> -->
-		<c:forEach items="${clist}" var="cosmetic">
+		
+		<c:set var="i" value="0" />
+		<c:forEach var="cosmetic" items="${list}" >
+			<c:set var="i" value="{i+1}" />
 			
-			<tr>
-
-				<%-- <td>${cosmetic.image}</td>
-				<td><a href='/user/getCosmetic?${pageMaker.makeSearch(pageMaker.cri.page) }&cosmeticNo=${cosmetic.cosmeticNo}'><img alt="picture" src="${cosmetic.image}" height="100px" width="100px"></a></td>
-			<td>${cosmetic.cosmeticNo}</td>
-				<td>${cosmetic.brand}</td>
-				<td><a href='/user/getCosmetic?${pageMaker.makeSearch(pageMaker.cri.page) }&cosmeticNo=${cosmetic.cosmeticNo}'>
-						${cosmetic.model}</a></td>
-				 <td>${cosmetic.product}</td> --%>
-
-				<td><a href='/user/getCosmetic?${pageMaker.makeSearch(pageMaker.cri.page) }&cosmeticNo=${cosmetic.cosmeticNo}'><img alt="picture" src="${cosmetic.image}" height="100px" width="100px"></a></td>
-			<%-- <td>${cosmetic.cosmeticNo}</td> --%>
-				<td><a href='/user/getCosmetic?${pageMaker.makeSearch(pageMaker.cri.page) }&cosmeticNo=${cosmetic.cosmeticNo}'><font color="gray">${cosmetic.brand}</font></a><br>
-			<%-- <td>${cosmetic.model}</td> --%>
-				 <a href='/user/getCosmetic?${pageMaker.makeSearch(pageMaker.cri.page) }&cosmeticNo=${cosmetic.cosmeticNo}'>${cosmetic.product}</a></td>
-
-<%-- 
-				<td><a href='/user/getCosmetic?${pageMaker.makeSearch(pageMaker.cri.page) }&cosmeticNo=${cosmetic.cosmeticNo}'><font color="gray">${cosmetic.brand}</font></a><br> --%>
-			<%-- <td>${cosmetic.model}</td> --%>
-		<%-- 		 <a href='/user/getCosmetic?${pageMaker.makeSearch(pageMaker.cri.page) }&cosmeticNo=${cosmetic.cosmeticNo}'>${cosmetic.product}</a></td> --%>
-				<%-- <td>${cosmetic.image}</td> --%>
-			<%-- <td>${cosmetic.cosmeticNo}</td> --%>
-				<%-- <td>${cosmetic.brand}</td> --%>
-			<%-- 	<td><a href='/user/getCosmetic${pageMaker.makeSearch(pageMaker.cri.page) }&cosmeticNo=${cosmetic.cosmeticNo}'>
-						${cosmetic.model}</a></td> --%>
-				<%--  <td>${cosmetic.product}</td>  --%>
-
-				<%-- <td>${cosmetic.price}</td>
-				<td>${cosmetic.ingredient}</td>  --%>
-			</tr>
+			
+			<a href='/user/getCosmetic?cosmeticNo=${cosmetic.cosmeticNo}'><img alt="picture" src="${cosmetic.image}" height="100px" width="100px"></a>
+			<a href='/user/getCosmetic?cosmeticNo=${cosmetic.cosmeticNo}'><font color="gray">${cosmetic.brand}</font></a>
+			<a href='/user/getCosmetic?cosmeticNo=${cosmetic.cosmeticNo}'>${cosmetic.product}</a>
+			<br>
 			
 		</c:forEach>
 			
-	</table>
+
 			<hr>
+	<input type="hidden" id="currentPage" name="currentPage" value="" />
 
-	<ul class="pagination">
 
-		<c:if test="${pageMaker.prev}">
-			<li><a href="getCosmeticList${pageMaker.makeSearch(pageMaker.startPage - 1)}">&laquo;</a></li>
-		</c:if>
-
-		<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }"
-			var="idx">
-			<li <c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
-				<a href="getCosmeticList${pageMaker.makeSearch(idx)}">${idx}</a>
-			</li>
-		</c:forEach>
-
-		<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-			<li><a href="getCosmeticList${pageMaker.makeSearch(pageMaker.endPage +1)}">&raquo;</a></li>
-		</c:if>
-
-	</ul>
-
+<jsp:include page="../common/pageNavigator_new.jsp"/>
+</form>
 </body>
-<%@include file="../include/footer.jsp"%>
 </html>

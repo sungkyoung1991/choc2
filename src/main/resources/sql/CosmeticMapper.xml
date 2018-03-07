@@ -86,7 +86,7 @@
 	<!-- <select id="getCosmeticList" resultType="cosmeticVO"> -->
 
 
-	<select id="getCosmeticList" resultMap="CosmeticSelectMap">
+	<!-- <select id="getCosmeticList" resultMap="CosmeticSelectMap">
 	  <![CDATA[
 		SELECT * FROM TBL_COSMETIC WHERE COSMETIC_NO>0 
 	  ]]>
@@ -98,7 +98,51 @@
 			LIMIT #{pageStart}, #{perPageNum}
 	   ]]>
 
-	</select>
+	</select> -->
+	
+	
+	<select  id="getCosmeticList" parameterType="search"  resultMap="CosmeticSelectMap">
+	
+	SELECT * FROM TBL_COSMETIC
+		
+		 <if test="searchCondition != null">
+			<where>
+			<if test="searchCondition == 'brand' and searchKeyword !=''">
+			BRAND = #{searchKeyword}
+			</if>
+			<if test="searchCondition == 'product' and searchKeyword !=''">
+			PRODUCT = #{searchsearchKeyword}
+			
+			</if>
+	  		</where> 
+		</if> 
+		<!-- <include refid="search"></include> -->
+		
+		ORDER BY 1 DESC
+		
+			LIMIT #{startRowNum}, #{pageSize}
+			
+	
+	  		
+	 </select>
+	
+	<select  id="getTotalCount"  parameterType="search"	 resultType="int">
+	 	SELECT COUNT(*)
+	  	FROM( SELECT COSMETIC_NO
+						FROM TBL_COSMETIC
+						<!-- <include refid="search"></include> -->
+			<if test="searchCondition != null ">
+			<where>
+			<if test="searchCondition == 'brand' and searchKeyword !='' ">
+			BRAND = #{searchKeyword}
+			</if>
+			<if test="searchCondition == 'product' and searchKeyword !='' ">
+			PRODUCT = #{searchKeyword}
+			
+			</if>
+	  		</where> 
+			</if>    ) countTable					
+	 </select>
 
 	<select id="totalCountCosmetic" resultType="int">
 		<![CDATA[  
@@ -133,25 +177,25 @@
 
 	
 	<sql id="search">
-		<if test="searchType != null">
-			<if test="searchType == 'brand'.toString()">
-				AND BRAND LIKE CONCAT('%', #{keyword}, '%')
+		<if test="searchCondition != null">
+			<if test="searchCondition == 'brand'.toString()">
+				AND BRAND LIKE CONCAT('%', #{searchKeyword}, '%')
 			</if>
-			<if test="searchType == 'model'.toString()">
-				AND MODEL LIKE CONCAT('%', #{keyword}, '%')
+			<if test="searchCondition == 'product'.toString()">
+				AND PRODUCT LIKE CONCAT('%', #{searchKeyword}, '%')
 			</if>
-			<if test="searchType == 'product'.toString()">
-				AND PRODUCT LIKE CONCAT('%', #{keyword}, '%')
+			<!-- <if test="searchCondition == 'product'.toString()">
+				AND PRODUCT LIKE CONCAT('%', #{searchKeyword}, '%')
 			</if>
-			<if test="searchType == 'amount'.toString()">
-				AND AMOUNT LIKE CONCAT('%', #{keyword}, '%')
+			<if test="searchCondition == 'amount'.toString()">
+				AND AMOUNT LIKE CONCAT('%', #{searchKeyword}, '%')
 			</if>
-			<if test="searchType == 'price'.toString()">
-				AND PRICE LIKE CONCAT('%', #{keyword}, '%')
+			<if test="searchCondition == 'price'.toString()">
+				AND PRICE LIKE CONCAT('%', #{searchKeyword}, '%')
 			</if>
-			<if test="searchType == 'ingredient'.toString()">
-				AND INGREDIENT LIKE CONCAT('%', #{keyword}, '%')
-			</if>
+			<if test="searchCondition == 'ingredient'.toString()">
+				AND INGREDIENT LIKE CONCAT('%', #{searchKeyword}, '%')
+			</if> -->
 		</if>
 	</sql>
 

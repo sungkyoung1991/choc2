@@ -1,11 +1,14 @@
 package com.sample.choc2.service.cosmetic.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import com.sample.choc2.common.Search;
 import com.sample.choc2.common.SearchCriteria;
 import com.sample.choc2.service.cosmetic.CosmeticDao;
 import com.sample.choc2.service.cosmetic.CosmeticService;
@@ -39,11 +42,11 @@ public class CosmeticServiceImpl implements CosmeticService {
 		cosmeticDao.createCosmetic(cosmetic);
 	}
 
-	@Override
-	public List<CosmeticVO> getCosmeticList(SearchCriteria cri) throws Exception {
-		// TODO Auto-generated method stub
-		return cosmeticDao.getCosmeticList(cri);
-	}
+//	@Override
+//	public List<CosmeticVO> getCosmeticList(SearchCriteria cri) throws Exception {
+//		// TODO Auto-generated method stub
+//		return cosmeticDao.getCosmeticList(cri);
+//	}
 
 	@Override
 	public int totalCountCosmetic(SearchCriteria cri) throws Exception {
@@ -115,6 +118,19 @@ public class CosmeticServiceImpl implements CosmeticService {
 	public List<SensitiveVO> getSensitiveIngredient() throws Exception {
 		// TODO Auto-generated method stub
 		return cosmeticDao.getSensitiveIngredient();
+	}
+
+	@Override
+	public Map<String, Object> getCosmeticList(Search search) throws Exception {
+		// TODO Auto-generated method stub
+		List<CosmeticVO> list = cosmeticDao.getCosmeticList(search);
+		int totalCount = cosmeticDao.getTotalCount(search);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("list",list);
+		map.put("totalCount",new Integer(totalCount));
+		
+		return map;
 	}
 
 

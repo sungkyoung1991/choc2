@@ -54,6 +54,7 @@ public class ProductController {
 			search.setCurrentPage(1);
 		}
 		search.setPageSize(pageSize);
+	
 
 		Map<String, Object> map = productService.getProductList(search);
 

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
+import com.sample.choc2.common.Search;
 import com.sample.choc2.common.SearchCriteria;
 import com.sample.choc2.service.cosmetic.CosmeticDao;
 import com.sample.choc2.service.domain.CosmeticVO;
@@ -43,11 +44,11 @@ public class CosmeticDaoImpl implements CosmeticDao {
 		sqlSession.insert("CosmeticMapper.createCosmetic", cosmetic);
 	}
 
-	@Override
-	public List<CosmeticVO> getCosmeticList(SearchCriteria cri) throws Exception {
-		// TODO Auto-generated method stub
-		return sqlSession.selectList("CosmeticMapper.getCosmeticList",cri);
-	}
+//	@Override
+//	public List<CosmeticVO> getCosmeticList(SearchCriteria cri) throws Exception {
+//		// TODO Auto-generated method stub
+//		return sqlSession.selectList("CosmeticMapper.getCosmeticList",cri);
+//	}
 
 	@Override
 	public int totalCountCosmetic(SearchCriteria cri) throws Exception {
@@ -121,6 +122,18 @@ public class CosmeticDaoImpl implements CosmeticDao {
 	public List<SensitiveVO> getSensitiveIngredient() throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("CosmeticMapper.getSensitiveIngredient");
+	}
+
+	@Override
+	public List<CosmeticVO> getCosmeticList(Search search) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("CosmeticMapper.getCosmeticList",search);
+	}
+
+	@Override
+	public int getTotalCount(Search search) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("CosmeticMapper.getTotalCount",search);
 	}
 	
 }

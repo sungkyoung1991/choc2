@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -21,7 +22,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.sample.choc2.common.Page;
 import com.sample.choc2.common.PageMaker;
+import com.sample.choc2.common.Search;
 import com.sample.choc2.common.SearchCriteria;
 import com.sample.choc2.service.cosmetic.CosmeticService;
 import com.sample.choc2.service.domain.CosmeticVO;
@@ -137,7 +140,7 @@ public class UserController {
 	
 
 	//-----------------------------Cosmetic----------------------------------
-	@RequestMapping(value="createCosmeticP", method=RequestMethod.GET)
+	@RequestMapping(value="createCosmeticPage", method=RequestMethod.GET)
 	public String createCosmeticP(){
 		
 		return "userCosmetic/createCosmetic";
@@ -155,71 +158,102 @@ public class UserController {
 		
 	}//화장품 정보입력 처리
 	
-	@RequestMapping(value="getCosmeticList", method=RequestMethod.GET)
-	public String getCosmeticList(@ModelAttribute("cri")SearchCriteria cri,Model model) throws Exception{
+//	@RequestMapping(value="getCosmeticList", method=RequestMethod.GET)
+//	public String getCosmeticList(@ModelAttribute("cri")SearchCriteria cri,Model model) throws Exception{
+//		
+//		model.addAttribute("clist",cosmeticService.getCosmeticList(cri));//searchtype,keyword
+//		
+//		logger.info(""+cosmeticService.getCosmeticList(cri));
+//		
+//		PageMaker pageMaker = new PageMaker();
+//		
+//		pageMaker.setCri(cri); //현재페이지, 페이지안 데이터갯수
+//		
+//		pageMaker.setTotalCount(cosmeticService.totalCountCosmetic(cri)); //totalCount로 네비게이션 첫,끝,pre,next 설정
+//		
+//		model.addAttribute("pageMaker",pageMaker);
+//		
+//		return "userCosmetic/getCosmeticList";
+//		
+//	}//리스트 조회(Searchcriteria, pagemaker)
+	
+	@Value("#{commonProperties['pageUnit']}")
+	int pageUnit;//네비게이터에 보여지는 페이지 수 
+	@Value("#{commonProperties['pageSize']}")
+	int pageSize;//하나의 네비게이터에 보여지는 리스트수 
+	
+	
+	@RequestMapping(value="getCosmeticList")
+	public String getCosmeticList(@ModelAttribute("search")Search search,@ModelAttribute("page")Page page,Model model) throws Exception{
 		
-		model.addAttribute("clist",cosmeticService.getCosmeticList(cri));//searchtype,keyword
+		if(search.getCurrentPage()==0) {
+			search.setCurrentPage(1);
+		}
+		search.setPageSize(pageSize);
+		System.out.println(search);
+		Map<String, Object> map = cosmeticService.getCosmeticList(search);
 		
-		logger.info(""+cosmeticService.getCosmeticList(cri));
+		logger.info("검색"+cosmeticService.getCosmeticList(search));
+
+		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit,
+				pageSize);
+		logger.info("페이지"+resultPage);
+			
+		model.addAttribute("search", search);//검색
+		model.addAttribute("list", map.get("list"));//리스트
+		model.addAttribute("resultPage", resultPage);//현제페이지, 전체수, 페이지리스트 갯수, 페이지 네비게이터수
 		
-		PageMaker pageMaker = new PageMaker();
-		
-		pageMaker.setCri(cri); //현재페이지, 페이지안 데이터갯수
-		
-		pageMaker.setTotalCount(cosmeticService.totalCountCosmetic(cri)); //totalCount로 네비게이션 첫,끝,pre,next 설정
-		
-		model.addAttribute("pageMaker",pageMaker);
-		
+
 		return "userCosmetic/getCosmeticList";
 		
-	}//리스트 조회(Searchcriteria, pagemaker)
+	}//리스트 조회
 	
 	
 	@RequestMapping(value="getCosmetic", method=RequestMethod.GET)
-	public String getCosmetic(@ModelAttribute("cri")SearchCriteria cri,@RequestParam("cosmeticNo") int cosmeticNo,Model model) throws Exception{
+	public String getCosmetic(@RequestParam("cosmeticNo") int cosmeticNo,Model model) throws Exception{
 		model.addAttribute("cinfo",cosmeticService.getCosmetic(cosmeticNo));
 			
 		return "userCosmetic/getCosmetic";
 	}//화장품 정보 상세히 보기
 	
-	@RequestMapping(value="updateCosmeticP", method=RequestMethod.GET)
-	public String updateCosmeticP(@RequestParam("cosmeticNo") int cosmeticNo,@ModelAttribute("cri")SearchCriteria cri,Model model) throws Exception{
-		
-		model.addAttribute("cinfo",cosmeticService.getCosmetic(cosmeticNo));	
-		
-		logger.info("gg",cosmeticService.getCosmetic(cosmeticNo));
-		return "userCosmetic/updateCosmetic";
-	}//화장품 글수정 폼으로 이동
-	
-	@RequestMapping(value="updateCosmetic", method=RequestMethod.POST)
-	public String updateCosmetic(@ModelAttribute("cosmetic") CosmeticVO cosmetic, RedirectAttributes rttr,SearchCriteria cri ) throws Exception {
-		
-		
-		cosmeticService.updateCosmetic(cosmetic);
-		rttr.addAttribute("page", cri.getPage());
-		rttr.addAttribute("perPageNum", cri.getPerPageNum());
-		rttr.addAttribute("searchType", cri.getSearchType());
-		rttr.addAttribute("keyword", cri.getKeyword());
-		rttr.addFlashAttribute("msg", "SUCCESS");
-		
-		return "redirect:/user/getCosmeticList";
-	}//화장품 글 수정 처리
-	
-	@RequestMapping(value="deleteCosmetic", method=RequestMethod.GET)
-	public String deleteCosmetic(@RequestParam("cosmeticNo") int cosmeticNo, RedirectAttributes rttr,SearchCriteria cri ) throws Exception {
-		
-		
-		cosmeticService.deleteCosmetic(cosmeticNo);
-		rttr.addAttribute("page", cri.getPage());
-		rttr.addAttribute("perPageNum", cri.getPerPageNum());
-		rttr.addAttribute("searchType", cri.getSearchType());
-		rttr.addAttribute("keyword", cri.getKeyword());
-		rttr.addFlashAttribute("msg", "SUCCESS");
-		
-		return "redirect:/user/getCosmeticList";
-	}//화장품 글 삭제
-	
-	
+//	@RequestMapping(value="updateCosmeticP", method=RequestMethod.GET)
+//	public String updateCosmeticP(@RequestParam("cosmeticNo") int cosmeticNo,@ModelAttribute("cri")SearchCriteria cri,Model model) throws Exception{
+//		
+//		model.addAttribute("cinfo",cosmeticService.getCosmetic(cosmeticNo));	
+//		
+//		logger.info("gg",cosmeticService.getCosmetic(cosmeticNo));
+//		return "userCosmetic/updateCosmetic";
+//	}//화장품 글수정 폼으로 이동
+//	
+//	@RequestMapping(value="updateCosmetic", method=RequestMethod.POST)
+//	public String updateCosmetic(@ModelAttribute("cosmetic") CosmeticVO cosmetic, RedirectAttributes rttr,SearchCriteria cri ) throws Exception {
+//		
+//		
+//		cosmeticService.updateCosmetic(cosmetic);
+//		rttr.addAttribute("page", cri.getPage());
+//		rttr.addAttribute("perPageNum", cri.getPerPageNum());
+//		rttr.addAttribute("searchType", cri.getSearchType());
+//		rttr.addAttribute("keyword", cri.getKeyword());
+//		rttr.addFlashAttribute("msg", "SUCCESS");
+//		
+//		return "redirect:/user/getCosmeticList";
+//	}//화장품 글 수정 처리
+//	
+//	@RequestMapping(value="deleteCosmetic", method=RequestMethod.GET)
+//	public String deleteCosmetic(@RequestParam("cosmeticNo") int cosmeticNo, RedirectAttributes rttr,SearchCriteria cri ) throws Exception {
+//		
+//		
+//		cosmeticService.deleteCosmetic(cosmeticNo);
+//		rttr.addAttribute("page", cri.getPage());
+//		rttr.addAttribute("perPageNum", cri.getPerPageNum());
+//		rttr.addAttribute("searchType", cri.getSearchType());
+//		rttr.addAttribute("keyword", cri.getKeyword());
+//		rttr.addFlashAttribute("msg", "SUCCESS");
+//		
+//		return "redirect:/user/getCosmeticList";
+//	}//화장품 글 삭제
+//	
+//	
 	@RequestMapping(value="getIngredientList", method=RequestMethod.GET)
 	 public String getIngredientList(@RequestParam("cosmeticNo") int cosmeticNo,Model model) throws Exception {
 		
