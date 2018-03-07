@@ -41,7 +41,7 @@
 
 				<form role="form" action="update" method="post">
 
-					<input type='hidden' id='boardNo' name='boardNo' value="${cosmeticVO.cosmeticNo}">
+					<input type='hidden' id='cosmeticNo' name='cosmeticNo' value="${cosmeticVO.cosmeticNo}">
 					<input type='hidden' id='currentPage'name='currentPage' value="${search.currentPage}"> 
 					<input type='hidden' id='searchCondition'name='searchCondition' value="${search.searchCondition}">
 					<input type='hidden' id='searchKeyword'name='searchKeyword' value="${search.searchKeyword}">

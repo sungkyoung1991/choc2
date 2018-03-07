@@ -58,10 +58,10 @@
 							<input type="hidden" id = "currentPage" name="currentPage" value="" /> 
 							<div class="form-group">
 								<select class="form-control" name="searchCondition">
-									<option value="0"
-										${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>>Brand</option>
-									<option value="1"
-										${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>>Product</option>
+									<option value="brand"
+										${ ! empty search.searchCondition && search.searchCondition==brand ? "selected" : "" }>>Brand</option>
+									<option value="product"
+										${ ! empty search.searchCondition && search.searchCondition==product ? "selected" : "" }>>Product</option>
 								</select>
 							</div>
 
