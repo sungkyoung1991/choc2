@@ -1,8 +1,10 @@
 package com.sample.choc2.service.admin;
 
 import java.util.List;
+import java.util.Map;
 
 import com.sample.choc2.common.Criteria;
+import com.sample.choc2.common.Search;
 import com.sample.choc2.common.SearchCriteria;
 import com.sample.choc2.service.domain.BoardVO;
 import com.sample.choc2.service.domain.CosmeticVO;
@@ -20,9 +22,7 @@ public interface AdminService {
 	
 	public void deleteBoard(Integer boardNo)throws Exception;
 	
-	public List<BoardVO> listBoard(SearchCriteria cri)throws Exception;
-	
-	public int countBoard(SearchCriteria cri)throws Exception;
+	public Map<String,Object> getBoardList(Search search)throws Exception;
 	
 	public void updateViewCnt(Integer boardNo) throws Exception;
 

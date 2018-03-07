@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import com.sample.choc2.common.Criteria;
+import com.sample.choc2.common.Search;
 import com.sample.choc2.common.SearchCriteria;
 import com.sample.choc2.service.admin.AdminDao;
 import com.sample.choc2.service.domain.BoardVO;
@@ -54,15 +55,16 @@ public class AdminDaoImpl implements AdminDao {
 	}
 
 	@Override
-	public List<BoardVO> listBoard(SearchCriteria cri) throws Exception {
+	public List<BoardVO> getBoardList(Search search) throws Exception {
 		// TODO Auto-generated method stub
-		return session.selectList(NAMESPACE + ".listBoard", cri);
+		return session.selectList(NAMESPACE + ".getBoardList", search);
 	}
 
 	@Override
-	public int countBoard(SearchCriteria cri) throws Exception {
+	public int totalCountBoard(Search search) throws Exception {
 		// TODO Auto-generated method stub
-		return session.selectOne(NAMESPACE + ".countBoard", cri);
+		System.out.println("searchDao..."+search);
+		return session.selectOne(NAMESPACE + ".totalCountBoard", search);
 	}
 
 	

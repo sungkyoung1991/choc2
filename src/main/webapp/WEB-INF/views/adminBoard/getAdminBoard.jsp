@@ -226,11 +226,10 @@ $(document).ready(function(){
 
 				<form role="form" action="/admin/board/update" method="post">
 
-					<input type='hidden' name='boardNo' value="${boardVO.boardNo}"> <input
-						type='hidden' name='page' value="${cri.page}"> <input
-						type='hidden' name='perPageNum' value="${cri.perPageNum}">
-					<input type='hidden' name='searchType' value="${cri.searchType}">
-					<input type='hidden' name='keyword' value="${cri.keyword}">
+					<input type='hidden' id='boardNo' name='boardNo' value="${boardVO.boardNo}">
+					<input type='hidden' id='currentPage'name='currentPage' value="${search.currentPage}"> 
+					<input type='hidden' id='searchCondition'name='searchCondition' value="${search.searchCondition}">
+					<input type='hidden' id='searchKeyword'name='searchKeyword' value="${search.searchKeyword}">
 
 				</form>
 

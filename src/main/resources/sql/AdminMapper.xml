@@ -48,32 +48,31 @@
 	</delete>
 
 
-	<select id="listBoard" resultMap="boardSelectMap" >
+	<select id="getBoardList" parameterType="search" resultMap="boardSelectMap" >
 	<![CDATA[  
 		SELECT B.TITLE, U.USERID, B.CONTENT, B.VIEWCNT,B.REGDATE,B.BOARD_NO
 		FROM TBL_USER AS U INNER JOIN TBL_BOARD AS B
 		ON U.USERID=B.USERID
 		AND BOARD_NO > 0
-
-	]]>
-
-		<include refid="search"></include>
-	  
-	<![CDATA[    
-	  ORDER BY BOARD_NO DESC
-	  LIMIT #{pageStart}, #{perPageNum}
+		]]>
+		<include refid="searchAdmin"></include>
+		<![CDATA[ 
+		ORDER BY BOARD_NO DESC
+		LIMIT #{startRowNum}, #{pageSize}
 	]]>
 	</select>
 
 
-	<select id="countBoard" resultType="int">
+	<select id="totalCountBoard" parameterType="search" resultType="int">
+	
 	<![CDATA[  
-	  SELECT COUNT(BOARD_NO) 
-	  FROM TBL_USER AS U INNER JOIN TBL_BOARD AS B
-		ON U.USERID=B.USERID 
+	  SELECT COUNT(*) 
+	  FROM( SELECT B.BOARD_NO , B.TITLE, B.USERID
+	  		FROM TBL_BOARD AS B
+			]]>
+	  	<include refid="searchAdmin"></include>
+	  ) countTable
 
-	]]>
-		<include refid="search"></include>
 	</select>
 
 	<update id="updateViewCnt">
@@ -83,6 +82,21 @@
 	</update>
 	
 	<!-- common -->
+		<sql id="searchAdmin">
+		<if test="searchCondition != null">
+		<where>
+			<if test="searchCondition == '0'.toString()">
+				AND B.TITLE LIKE CONCAT('%', #{searchKeyword}, '%')
+			</if>
+			<if test="searchCondition == '1'.toString()">
+				AND B.USERID LIKE CONCAT('%', #{searchKeyword}, '%')
+			</if>
+			<if test="searchCondition == '2'.toString()">
+				AND B.BOARD_NO LIKE CONCAT('%', #{searchKeyword}, '%')
+			</if>
+		</where>
+		</if>
+	</sql>
 	
 	<sql id="search">
 		<if test="searchType != null">
