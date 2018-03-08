@@ -99,21 +99,20 @@ public String getProduct( @RequestParam("prodNo") int prodNo, Model model, HttpS
 	System.out.println("/getProduct");
 	// Business Logic
 	
-	UserVO user = this.getUser(session);
+	UserVO user = new UserVO();
+	user.setEmail("sungkyoung@gmail.com");
+	user.setNickname("ksk");
+	
+	Product product = new Product();
+	
+	product.setProductNo(prodNo);
 
-	System.out.println("user..." + user);
+	 product = productService.getProduct(user,product);
 	
-//	System.out.println("prodNo" + product.getProductNo());
-	
-
-	Product product = productService.getProduct(user,prodNo);
-	
-	product.setWriter(user);
 	
 	System.out.println("Controller Product Check : " + product);
 	
 	model.addAttribute("product", product);
-//	model.addAttribute("user", user);
 	
 	return "product/getProduct";
 }
@@ -125,7 +124,7 @@ public String updateProductView(@RequestParam("prodNo") int prodNo, HttpSession 
 	
 	UserVO user = this.getUser(session);
 
-	Product product = productService.getProduct(user, prodNo);
+//	Product product = productService.getProduct(user, prodNo);
 
 //	ModelAndView modelAndView = new ModelAndView();
 //	modelAndView.setViewName("forward:/product/updateProductView.jsp");

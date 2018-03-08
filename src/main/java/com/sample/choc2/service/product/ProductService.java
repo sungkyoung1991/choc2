@@ -10,9 +10,9 @@ public interface ProductService {
 	
 	public void addProduct(Product product) throws Exception;
 	
-	public Product getProduct(UserVO user, int prodNo) throws Exception;
+//	public Product getProduct(UserVO user, int prodNo) throws Exception;
 	
-//	public Product getProduct(UserVO user, Product product) throws Exception;
+	public Product getProduct(UserVO user, Product product) throws Exception;
 	
 	public Map<String,Object> getProductList(UserVO user, Search search) throws Exception;
 	

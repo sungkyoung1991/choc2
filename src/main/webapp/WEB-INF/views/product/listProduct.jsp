@@ -63,10 +63,6 @@
 		<div class="getDB">	
 			<p>${ product.productNo}</p>
 		</div>
-			<%-- <br />
-			${ product.productImage}
-			<br />
-			${ product.productModel} --%>
 			
 	
 		</c:forEach>
