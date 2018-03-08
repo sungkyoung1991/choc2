@@ -91,21 +91,24 @@ public class ProductController {
 
 
 @RequestMapping("getProduct")
-public String getProduct( @RequestParam("prodNo") int prodNo, Model model, HttpServletRequest request)
+public String getProduct( @RequestParam("prodNo") int prodNo, Model model, HttpSession session)
+
+//public String getProduct( @ModelAttribute("product") Product product, Model model, HttpSession session)
 		throws Exception {
 
 	System.out.println("/getProduct");
 	// Business Logic
 	
-	HttpSession session = request.getSession();
-	UserVO user = (UserVO) session.getAttribute("user");
-	
+	UserVO user = this.getUser(session);
+
 	System.out.println("user..." + user);
 	
-	System.out.println("prodNo" + prodNo);
+//	System.out.println("prodNo" + product.getProductNo());
 	
 
 	Product product = productService.getProduct(user,prodNo);
+	
+	product.setWriter(user);
 	
 	System.out.println("Controller Product Check : " + product);
 	
@@ -113,5 +116,31 @@ public String getProduct( @RequestParam("prodNo") int prodNo, Model model, HttpS
 //	model.addAttribute("user", user);
 	
 	return "product/getProduct";
+}
+
+@RequestMapping("updateProductView")
+public String updateProductView(@RequestParam("prodNo") int prodNo, HttpSession session) throws Exception {
+	
+	System.out.println("/updateProductView");
+	
+	UserVO user = this.getUser(session);
+
+	Product product = productService.getProduct(user, prodNo);
+
+//	ModelAndView modelAndView = new ModelAndView();
+//	modelAndView.setViewName("forward:/product/updateProductView.jsp");
+//	modelAndView.addObject("product", product);
+
+	return null;
+}
+
+
+
+public UserVO getUser(HttpSession session) {
+	UserVO user = new UserVO();
+	if( (UserVO)session.getAttribute("user") != null ) {
+		user = (UserVO)session.getAttribute("user");
+	}
+	return user;
 }
 }

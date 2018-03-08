@@ -45,6 +45,8 @@ public class ProductServiceImpl implements ProductService {
 //		return productDao.findProduct(prodNo);
 //	}
 	public Product getProduct(UserVO user, int prodNo) throws Exception {
+	
+//	public Product getProduct(UserVO user, Product product) throws Exception {
 		// TODO Auto-generated method stub
 		return productDao.findProduct(prodNo);
 	}

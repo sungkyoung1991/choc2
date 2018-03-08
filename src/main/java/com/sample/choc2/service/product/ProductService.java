@@ -12,6 +12,8 @@ public interface ProductService {
 	
 	public Product getProduct(UserVO user, int prodNo) throws Exception;
 	
+//	public Product getProduct(UserVO user, Product product) throws Exception;
+	
 	public Map<String,Object> getProductList(UserVO user, Search search) throws Exception;
 	
 	public void updateProduct(Product product) throws Exception;

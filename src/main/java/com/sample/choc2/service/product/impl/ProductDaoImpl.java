@@ -39,7 +39,12 @@ public class ProductDaoImpl implements ProductDao {
 
 	@Override
 	public Product findProduct(int prodNo) throws Exception {
+	
+//	public Product findProduct(Product product) throws Exception {
+		
+		
 		// TODO Auto-generated method stub
+		
 		return sqlSession.selectOne("ProductMapper.getProduct", prodNo);
 	}
 

@@ -100,11 +100,8 @@
 <a herf="/admin/board/list"><h3>admin board manage</h3></a>
 <a herf="/admin/cosmetic/list"><h3>admin cosmetic manage</h3></a>
 <a herf="/super/userManage/list"><h3>super user manage</h3></a>
-<<<<<<< HEAD
-=======
 
 <a href="/user/getCosmeticList">user cosmetic manage</a><br /><br />
->>>>>>> branch 'sk' of git@gitlab.com:nainfox/server/choc2_server.git
 
 <%-- <jsp:include page="/WEB-INF/views/user/index.jsp"></jsp:include> --%>
 

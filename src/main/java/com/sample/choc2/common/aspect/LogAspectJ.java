@@ -71,14 +71,10 @@ class LogAspectJ {
 
 					System.out.println("Log :: 자신이 작성한 게시물 조회는 로그를 남기지 않음");
 					return obj;
-
 				}
 			}
 
 			System.out.println("Log :: 로그를 남기는 method");
-			
-			System.out.println("obj..................." + obj);
-			
 			
 			Object targetNo = getTargetNo(joinPoint.getArgs()[1], obj);
 			
@@ -86,6 +82,13 @@ class LogAspectJ {
 			if (user == null) {
 				user = (UserVO) joinPoint.getArgs()[0];
 			}
+			
+			
+			System.out.println("user.." + user+"\n");
+			System.out.println("categoryNo.." +categoryNo +"\n");
+			System.out.println("behavior.." + behavior+"\n");
+			System.out.println("addBehavior.." + addBehavior+"\n");
+			System.out.println("targetNo.." + targetNo+"\n");
 
 			this.addLogModule(user, categoryNo, behavior, addBehavior, targetNo);
 
@@ -93,6 +96,65 @@ class LogAspectJ {
 
 		return obj;
 	}
+	
+	public boolean checkAuthorUser(int categoryNo, Object returnObject, ProceedingJoinPoint joinPoint) {
+		
+		System.out.println("체크 권한 유저 ........");
+		System.out.println("catNo : " + categoryNo +"\n"); // 3
+		System.out.println("returnObject : " + returnObject +"\n"); // Product
+		System.out.println("joinPoint : " + joinPoint +"\n"); //  getProduct(UserVO , int )
+		
+		
+		UserVO author = new UserVO();
+		
+		
+		
+		switch (categoryNo) {
+		case Const.Category.PRODUCT:
+			
+			author = ((Product) returnObject).getWriter();
+			
+			System.out.println("author .... " + author);
+			
+			break;
+		default:
+			author.setEmail("");
+		}
+		
+		
+		return author.getEmail().equals(((UserVO) joinPoint.getArgs()[0]).getEmail());
+	}
+	
+	
+	
+	public boolean checkUserLogin(ProceedingJoinPoint joinPoint) throws Throwable {
+		
+		System.out.println();
+		System.out.println("joinPoint.........: " +  joinPoint);
+		System.out.println("joinPoint.........toLongString: " +  joinPoint.toLongString());
+		System.out.println("checkUser login Aspect start getArgs() : " + joinPoint.getArgs());
+		System.out.println("checkUser login Aspect start getArgs()[0]: " + joinPoint.getArgs()[0]);
+		
+		
+		if (joinPoint.getArgs() == null) {
+			return false;
+		} else if (joinPoint.getArgs()[0] instanceof UserVO) {
+			if (((UserVO) joinPoint.getArgs()[0]).getEmail() != null) {
+				
+				System.out.println("get이메일.."+((UserVO) joinPoint.getArgs()[0]).getEmail());
+				
+				return true;
+				
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
+	}
+	
+	
+	
 
 	public Object invoke(ProceedingJoinPoint joinPoint) throws Throwable {
 
@@ -162,60 +224,17 @@ class LogAspectJ {
 			targetNo = ((Product) target).getProductNo();
 		}
 		
-		if (target instanceof List) {
-			targetNo = ((Product) target).getProductNo();
-		}
-		
 		
 		System.out.println("Log :: 로그를 남길 targetNo = " + targetNo);
 		return targetNo;
 	}
 
-	public boolean checkUserLogin(ProceedingJoinPoint joinPoint) throws Throwable {
-		
-		System.out.println();
-		System.out.println();
-		System.out.println();
-		
-		
-		System.out.println("joinPoint.........: " +  joinPoint);
-		System.out.println("joinPoint.........toLongString: " +  joinPoint.toLongString());
-		
-		
-		System.out.println("checkUser login Aspect start getArgs() : " + joinPoint.getArgs());
-		
-		System.out.println("checkUser login Aspect start getArgs()[0]: " + joinPoint.getArgs()[0]);
-		
-//		System.out.println("checkUser login Aspect start getArgs()[1]: " + joinPoint.getArgs()[1]);
-		
-		
-		
-		if (joinPoint.getArgs() == null) {
-			return false;
-		} else if (joinPoint.getArgs()[0] instanceof UserVO) {
-			if (((UserVO) joinPoint.getArgs()[0]).getEmail() != null) {
-				return true;
-			} else {
-				return false;
-			}
-		} else {
-			return false;
-		}
-	}
-
-	public boolean checkAuthorUser(int categoryNo, Object returnObject, ProceedingJoinPoint joinPoint) {
-		UserVO author = new UserVO();
-		switch (categoryNo) {
-		case Const.Category.PRODUCT:
-			author = ((Product) returnObject).getWriter();
-			break;
-		default:
-			author.setEmail("");
-		}
-		return author.getEmail().equals(((UserVO) joinPoint.getArgs()[0]).getEmail());
-	}
 
 	public void addLogModule(UserVO user, int categoryNo, int behavior, int addBehavior, Object targetNo) {
+		
+		System.out.println("addLogModule 실행중..");
+		
+		
 		Log log = new Log();
 		log.setUser(user);
 		log.setCategoryNo(categoryNo);
@@ -227,6 +246,7 @@ class LogAspectJ {
 	}
 
 	public void addLogModule(UserVO user, int categoryNo, int behavior, Object targetNo) {
+		
 		Log log = new Log();
 		log.setUser(user);
 		log.setCategoryNo(categoryNo);

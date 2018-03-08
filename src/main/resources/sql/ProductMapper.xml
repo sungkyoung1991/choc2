@@ -11,6 +11,14 @@
 		<result property="productNo" column="PRODUCT_NO" jdbcType="VARCHAR" />
 		<result property="productImage" column="PRODUCT_IMAGE" jdbcType="VARCHAR" />
 		<result property="productModel" column="PRODUCT_MODEL" jdbcType="VARCHAR" />
+			
+		<association property="writer" javaType="userVO">
+			<result property="email" column="EMAIL" jdbcType="VARCHAR"/>
+			<result property="nickname" column="NICKNAME" jdbcType="VARCHAR"/>
+		</association>
+			
+			<!-- <association property="writer" 			javaType="userVO" 					resultMap="UserMapper.userSelectMap"/> -->
+			
 	</resultMap>
 
 	<insert id="addProduct" parameterType="product">
@@ -21,9 +29,43 @@
 
 
 
-	<select id="getProduct" parameterType="int" resultMap="productSelectMap" >
-		SELECT * FROM TBL_PRODUCT
-		WHERE PRODUCT_NO=#{prodNo}
+	<select id="getProduct" parameterType="product" resultMap="productSelectMap" >
+		
+<!-- 		select * 
+from TBL_PRODUCT p
+LEFT JOIN TBL_USER u
+ON u.EMAIL = p.writer
+WHERE p.PRODUCT_NO = #{prodNo} -->
+
+SELECT
+		p.PRODUCT_NO, 
+		p.writer EMAIL,
+        p.PRODUCT_MODEL,
+        p.PRODUCT_IMAGE,
+		u.nickname
+		
+		From
+			TBL_USER u
+			LEFT JOIN TBL_PRODUCT p ON u.EMAIL = p.writer
+		where
+			PRODUCT_NO = #{prodNo};
+			
+			
+			<!-- SELECT
+			u.EMAIL, u.NICKNAME, 
+			p.PRODUCT_NO, p.PRODUCT_MODEL, p.PRODUCT_IMAGE
+		FROM
+			TBL_USER u
+			LEFT OUTER JOIN TBL_PRODUCT p ON u.EMAIL = p.writer
+		<where>
+			<if test="writer != null">
+				u.email = #{writer.email}
+			</if>
+			<if test="productNo != 0">
+				AND p.PRODUCT_NO = #{productNo}
+			</if>
+		</where> -->
+
 	</select>
 
 	<update id="updateProduct" parameterType="product">
