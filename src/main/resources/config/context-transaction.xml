@@ -30,7 +30,8 @@
     
     <tx:advice id="txAdvice"	transaction-manager="transactionManager">
 	    	<tx:attributes>
-	    		<tx:method name="get*"	propagation="REQUIRED"	read-only="true"/>
+	    		<!-- <tx:method name="get*"	propagation="REQUIRED"	read-only="true"/> -->
+	    		<tx:method name="get*"	propagation="REQUIRED"/>
 	    		<tx:method name="add*"	propagation="REQUIRED"/>
 	    		<tx:method name="update*"	propagation="REQUIRED"/>
 	    	</tx:attributes>
@@ -38,6 +39,7 @@
     
     <aop:config>
     		<aop:pointcut expression="execution(* com.sample.choc2.service..*ServiceImpl.*(..) )" id="requiredTx"/>
+    		<aop:pointcut id="commonRequiredTx" expression="execution(* com.sample.choc2.common.service..*ServiceImpl.*(..))"/>
 		<aop:advisor		advice-ref="txAdvice"	pointcut-ref="requiredTx"/>
     </aop:config>
     

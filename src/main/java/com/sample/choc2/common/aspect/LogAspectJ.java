@@ -22,15 +22,11 @@ class LogAspectJ {
 
 	public LogAspectJ() {
 		System.out.println("Constructor :: " + getClass().getName());
-
-		System.out.println("로그 AspectJ 생성자 확인중.........");
-
 	}
 
 	public Object logWrite(ProceedingJoinPoint joinPoint) throws Throwable {
 
 		String methodName = joinPoint.getSignature().getName();
-		System.out.println("LogAspect_logWrite_methodName : " + methodName);
 
 		int categoryNo = parseCategoryToInt(methodName);
 		int behavior = parseBehaviorToInt(methodName);
@@ -51,19 +47,15 @@ class LogAspectJ {
 			UserVO user = null;
 			
 			if (behavior == Const.Behavior.GET) {
-				System.out.println(1);
 				
 				if (!this.checkUserLogin(joinPoint)) {
-					System.out.println(2);
 					
 					if (joinPoint.getArgs()[0] instanceof UserVO || joinPoint.getArgs()[0] == null) {
-						System.out.println(3);
 						user = new UserVO();
 						user.setEmail("anonymous");
 						System.out.println("Log :: 비회원 게시물 조회");
 
 					} else {
-						System.out.println(4);
 						System.out.println("Log :: 비회원 로그는 남기지 않음2");
 						return obj;
 					}
@@ -84,7 +76,7 @@ class LogAspectJ {
 			}
 			
 			
-			System.out.println("user.." + user+"\n");
+			System.out.println("\n"+"user.." + user+"\n");
 			System.out.println("categoryNo.." +categoryNo +"\n");
 			System.out.println("behavior.." + behavior+"\n");
 			System.out.println("addBehavior.." + addBehavior+"\n");
@@ -99,7 +91,6 @@ class LogAspectJ {
 	
 	public boolean checkAuthorUser(int categoryNo, Object returnObject, ProceedingJoinPoint joinPoint) {
 		
-		System.out.println("체크 권한 유저 ........");
 		System.out.println("catNo : " + categoryNo +"\n"); // 3
 		System.out.println("returnObject : " + returnObject +"\n"); // Product
 		System.out.println("joinPoint : " + joinPoint +"\n"); //  getProduct(UserVO , int )
@@ -110,13 +101,12 @@ class LogAspectJ {
 		
 		
 		switch (categoryNo) {
+		
 		case Const.Category.PRODUCT:
 			
 			author = ((Product) returnObject).getWriter();
-			
-			System.out.println("author .... " + author);
-			
 			break;
+			
 		default:
 			author.setEmail("");
 		}
@@ -129,19 +119,10 @@ class LogAspectJ {
 	
 	public boolean checkUserLogin(ProceedingJoinPoint joinPoint) throws Throwable {
 		
-		System.out.println();
-		System.out.println("joinPoint.........: " +  joinPoint);
-		System.out.println("joinPoint.........toLongString: " +  joinPoint.toLongString());
-		System.out.println("checkUser login Aspect start getArgs() : " + joinPoint.getArgs());
-		System.out.println("checkUser login Aspect start getArgs()[0]: " + joinPoint.getArgs()[0]);
-		
-		
 		if (joinPoint.getArgs() == null) {
 			return false;
 		} else if (joinPoint.getArgs()[0] instanceof UserVO) {
 			if (((UserVO) joinPoint.getArgs()[0]).getEmail() != null) {
-				
-				System.out.println("get이메일.."+((UserVO) joinPoint.getArgs()[0]).getEmail());
 				
 				return true;
 				
@@ -186,9 +167,6 @@ class LogAspectJ {
 
 		String lowerCaseMethodName = methodName.toLowerCase();
 
-//		if (lowerCaseMethodName.contains("get") && lowerCaseMethodName.contains("list"))
-//			lowerCaseMethodName = "list";
-
 		for (int i = 0; i <= 6; i++) {
 			if (lowerCaseMethodName.contains(CommonUtil.getConstProp().getProperty("S_B" + i))) {
 
@@ -231,9 +209,6 @@ class LogAspectJ {
 
 
 	public void addLogModule(UserVO user, int categoryNo, int behavior, int addBehavior, Object targetNo) {
-		
-		System.out.println("addLogModule 실행중..");
-		
 		
 		Log log = new Log();
 		log.setUser(user);

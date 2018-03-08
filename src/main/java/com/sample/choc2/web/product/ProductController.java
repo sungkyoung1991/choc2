@@ -92,16 +92,12 @@ public class ProductController {
 
 @RequestMapping("getProduct")
 public String getProduct( @RequestParam("prodNo") int prodNo, Model model, HttpSession session)
-
-//public String getProduct( @ModelAttribute("product") Product product, Model model, HttpSession session)
 		throws Exception {
 
 	System.out.println("/getProduct");
 	// Business Logic
 	
-	UserVO user = new UserVO();
-	user.setEmail("sungkyoung@gmail.com");
-	user.setNickname("ksk");
+	UserVO user = this.getUser(session);
 	
 	Product product = new Product();
 	
