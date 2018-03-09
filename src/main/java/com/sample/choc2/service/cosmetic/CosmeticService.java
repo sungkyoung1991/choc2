@@ -10,6 +10,7 @@ import com.sample.choc2.service.domain.DryVO;
 import com.sample.choc2.service.domain.OilyVO;
 import com.sample.choc2.service.domain.SensitiveVO;
 import com.sample.choc2.service.domain.ToxicVO;
+import com.sample.choc2.service.domain.UserVO;
 import com.sample.choc2.service.domain.UvraysVO;
 import com.sample.choc2.service.domain.WhiteningVO;
 import com.sample.choc2.service.domain.WrinkleVO;
@@ -45,4 +46,5 @@ public interface CosmeticService {
 	public List<SensitiveVO> getSensitiveIngredient() throws Exception;
 
 	public Map<String, Object> getCosmeticList(Search search) throws Exception;
+	
 }

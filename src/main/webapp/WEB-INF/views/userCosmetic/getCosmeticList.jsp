@@ -25,7 +25,7 @@ $(document).ready(function(){
 						+"&keyword="
 						+$('#keywordInput').val();
 			}); */
-	$('#Create').click(function(){
+	$('#Create').on("click",function(){
 		self.location = "/user/createCosmeticPage";
 	});
 })

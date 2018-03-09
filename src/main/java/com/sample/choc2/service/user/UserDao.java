@@ -25,4 +25,5 @@ public interface UserDao {
 	public void deleteUser(Integer userNo)throws Exception;
 	
 	public int totalCountUser(SearchCriteria cri)throws Exception;
+
 }
