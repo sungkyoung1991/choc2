@@ -108,11 +108,12 @@
 		 <if test="searchCondition != null">
 			<where>
 			<if test="searchCondition == 'brand' and searchKeyword !=''">
-			BRAND = #{searchKeyword}
+			<!-- BRAND = #{searchKeyword} -->
+			BRAND LIKE CONCAT('%', #{searchKeyword}, '%')
 			</if>
 			<if test="searchCondition == 'product' and searchKeyword !=''">
-			PRODUCT = #{searchKeyword}
-			
+			<!-- PRODUCT = #{searchKeyword} -->
+			PRODUCT LIKE CONCAT('%', #{searchKeyword}, '%')
 			</if>
 	  		</where> 
 		</if> 
@@ -122,7 +123,7 @@
 		
 			LIMIT #{startRowNum}, #{pageSize}
 			
-	
+	 
 	  		
 	 </select>
 	
@@ -132,7 +133,7 @@
 						FROM TBL_COSMETIC
 						<!-- <include refid="search"></include> -->
 			<if test="searchCondition != null ">
-			<where>
+			<where> 
 			<if test="searchCondition == 'brand' and searchKeyword !='' ">
 			<!-- BRAND = #{searchKeyword} -->
 			BRAND LIKE CONCAT('%', #{searchKeyword}, '%')
