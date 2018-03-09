@@ -133,7 +133,7 @@
 						FROM TBL_COSMETIC
 						<!-- <include refid="search"></include> -->
 			<if test="searchCondition != null ">
-			<where>
+			<where> 
 			<if test="searchCondition == 'brand' and searchKeyword !='' ">
 			<!-- BRAND = #{searchKeyword} -->
 			BRAND LIKE CONCAT('%', #{searchKeyword}, '%')
