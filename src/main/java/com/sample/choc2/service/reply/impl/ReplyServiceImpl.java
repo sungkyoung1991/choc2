@@ -1,12 +1,15 @@
 package com.sample.choc2.service.reply.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.sample.choc2.common.Criteria;
+import com.sample.choc2.common.Search;
 import com.sample.choc2.service.domain.ReplyVO;
 import com.sample.choc2.service.reply.ReplyDao;
 import com.sample.choc2.service.reply.ReplyService;
@@ -45,16 +48,25 @@ public class ReplyServiceImpl implements ReplyService{
 	}
 
 	@Override
-	public List<ReplyVO> listReplyPage(Integer boardNo, Criteria cri) throws Exception {
+	public Map<String,Object> listReplyPage(Integer boardNo, Search search) throws Exception {
 		// TODO Auto-generated method stub
-		return replyDao.listPageReply(boardNo, cri);
+		List<ReplyVO> list = replyDao.listPageReply(boardNo, search);
+		int totalCount = replyDao.countReply(boardNo);
+		System.out.println("replyDaoCount1 : "+totalCount);
+		Map<String,Object> map = new HashMap<String, Object>();
+		
+		map.put("list", list);
+		map.put("totalCountReply", new Integer(totalCount));
+		System.out.println("replyDaoCount2 : "+map.get("totalCountReply"));
+		System.out.println("service map ..."+ map);
+		return map;
 	}
 
-	@Override
-	public int countReply(Integer boardNo) throws Exception {
-		// TODO Auto-generated method stub
-		return replyDao.countReply(boardNo);
-	}
+//	@Override
+//	public int countReply(Integer boardNo) throws Exception {
+//		// TODO Auto-generated method stub
+//		return replyDao.countReply(boardNo);
+//	}
 
 
 	@Override

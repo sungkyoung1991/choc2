@@ -20,10 +20,11 @@ import com.sample.choc2.common.Page;
 import com.sample.choc2.common.PageMaker;
 import com.sample.choc2.common.Search;
 import com.sample.choc2.common.SearchCriteria;
-import com.sample.choc2.service.admin.AdminService;
+import com.sample.choc2.service.board.BoardService;
 import com.sample.choc2.service.cosmetic.CosmeticService;
 import com.sample.choc2.service.domain.BoardVO;
 import com.sample.choc2.service.domain.CosmeticVO;
+import com.sample.choc2.service.qunboard.QnaBoardServie;
 import com.sample.choc2.service.user.UserService;
 
 @Controller
@@ -31,22 +32,28 @@ import com.sample.choc2.service.user.UserService;
 public class AdminController {
 
 	private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
+	
+	@Autowired
+	@Qualifier("qnaBoardServiceImpl")
+	private QnaBoardServie qnaBoardService;
+	
 	@Autowired
 	@Qualifier("cosmeticServiceImpl")
 	private CosmeticService cosmeticService;
 	
+	@Autowired
+	@Qualifier("boardServiceImpl")
+	private BoardService boardService;
+
+	public void setBoardService(BoardService boardService) {
+		this.boardService = boardService;
+	}
 	public void setCosmeticService(CosmeticService cosmeticService) {
 		this.cosmeticService = cosmeticService;
 	}
-	
-	@Autowired
-	@Qualifier("adminServiceImpl")
-	private AdminService adminService;
-
-	public void setAdminService(AdminService adminService) {
-		this.adminService = adminService;
+	public void setQnaBoardService(QnaBoardServie qnaBoardService) {
+		this.qnaBoardService = qnaBoardService;
 	}
-	
 	// ==> classpath:config/common.properties ,
 	@Value("#{commonProperties['pageUnit']}")
 	//@Value("#{commonProperties['pageUnit'] ?: 10}")
@@ -63,7 +70,36 @@ public class AdminController {
 //	public void setUserService(UserService userService) {
 //		this.userService = userService;
 //	}
-
+	// ===========================================QnaBoard Controller=====================================================
+	
+	@RequestMapping("/qnaBoard/list")
+	public String getQnaBoardList(Model model,@ModelAttribute("search")Search search,
+			@ModelAttribute("page")Page page)throws Exception{
+		
+		if(search.getCurrentPage() == 0) {
+			search.setCurrentPage(1);
+		}//처음 접속시 현재 페이지 초기화
+		
+		search.setPageSize(pageSize);
+		Map<String,Object> map = qnaBoardService.getQnaBoardList(search);
+		
+		Page resultPage = new Page(search.getCurrentPage(),((Integer)map.get("totalCountQnaBoard")).intValue(), pageUnit, pageSize);
+		
+		
+		
+		model.addAttribute("search",search);
+		model.addAttribute("list",map.get("list"));
+		model.addAttribute("resultPage",resultPage);
+		
+		return "adminQnaBoard/getQnaBoardList";
+	}
+	
+	
+	
+	
+	
+	
+	
 	// ===========================================Board Controller=====================================================
 	// 게시판 등록 화면
 	@RequestMapping(value = "/board/create", method = RequestMethod.GET)
@@ -79,7 +115,7 @@ public class AdminController {
 		logger.info("regist post ........");
 		logger.info(boardVO.toString());
 
-		adminService.createBoard(boardVO);
+		boardService.createBoard(boardVO);
 
 		rttr.addFlashAttribute("msg", "success");
 		return "redirect:/admin/board/list";
@@ -98,31 +134,32 @@ public class AdminController {
 		 * UnitSize 네비 사이즈 
 		 * 
 		 * */
-		System.out.println("search : "+search);
-		System.out.println("page : "+page);
-		PageMaker pageMaker = new PageMaker();
+//		System.out.println("search : "+search);
+//		System.out.println("page : "+page);
+		//PageMaker pageMaker = new PageMaker();
 		
 		if(search.getCurrentPage() == 0) {
 			search.setCurrentPage(1);
 		}//처음 접속시 현재 페이지 초기화
 		
 		search.setPageSize(pageSize);
-		pageMaker.setSearch(search);
-		Map<String,Object> map = adminService.getBoardList(search);
-		
+		//pageMaker.setSearch(search);
+		Map<String,Object> map = boardService.getBoardList(search);
+//		System.out.println("adminService map : "+map.get("totalCountBoard"));
+//		System.out.println("adminService map : "+map.get("list"));
 		Page resultPage = new Page(search.getCurrentPage(),((Integer)map.get("totalCountBoard")).intValue(), pageUnit, pageSize);
 		
 		
-		System.out.println("resultpage: "+resultPage);
+//		System.out.println("resultpage: "+resultPage);
 		model.addAttribute("search",search);
 		model.addAttribute("list",map.get("list"));
 		model.addAttribute("resultPage",resultPage);
-		model.addAttribute("pageMaker",pageMaker);
+	//	model.addAttribute("pageMaker",pageMaker);
 		
 		
 		
-		System.out.println("search : "+search);
-		System.out.println("page : "+page);
+//		System.out.println("search : "+search);
+//		System.out.println("page : "+page);
 		return "adminBoard/getAdminBoardList";
 	}
 
@@ -131,17 +168,17 @@ public class AdminController {
 	public String getBaord(@RequestParam("boardNo") int boardNo,@ModelAttribute("search")Search search,
 			@ModelAttribute("page")Page page, Model model)
 			throws Exception {
-		adminService.updateViewCnt(boardNo);
-		model.addAttribute(adminService.getBoard(boardNo));
+		boardService.updateViewCnt(boardNo);
+		model.addAttribute(boardService.getBoard(boardNo));
 		return "adminBoard/getAdminBoard";
 	}
-
+	
 	// 게시판 수정 화면
 	@RequestMapping(value = "/board/update", method = RequestMethod.GET)
 	public String updateBoard(@RequestParam("boardNo") int boardNo, @ModelAttribute("search")Search search,
 			@ModelAttribute("page")Page page, Model model)
 			throws Exception {
-		model.addAttribute(adminService.getBoard(boardNo));
+		model.addAttribute(boardService.getBoard(boardNo));
 		return "adminBoard/updateAdminBoard";
 	}
 
@@ -149,7 +186,7 @@ public class AdminController {
 	@RequestMapping(value = "/board/update", method = RequestMethod.POST)
 	public String updateBoard(BoardVO boardVO, Search search,Page page, RedirectAttributes rttr) throws Exception {
 		logger.info(rttr.toString());
-		adminService.updateBoard(boardVO);
+		boardService.updateBoard(boardVO);
 
 		rttr.addAttribute("currentPage", search.getCurrentPage());
 		rttr.addAttribute("searchKeyword", search.getSearchKeyword());
@@ -165,7 +202,7 @@ public class AdminController {
 	public String deleteBoard(@RequestParam("boardNo") int boardNo, Search search,Page page, RedirectAttributes rttr)
 			throws Exception {
 
-		adminService.deleteBoard(boardNo);
+		boardService.deleteBoard(boardNo);
 
 		rttr.addAttribute("currentPage", search.getCurrentPage());
 		rttr.addAttribute("searchKeyword", search.getSearchKeyword());

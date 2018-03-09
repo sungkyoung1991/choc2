@@ -1,4 +1,4 @@
-package com.sample.choc2.service.admin;
+package com.sample.choc2.service.board;
 
 import java.util.List;
 import java.util.Map;
@@ -10,7 +10,7 @@ import com.sample.choc2.service.domain.BoardVO;
 import com.sample.choc2.service.domain.CosmeticVO;
 import com.sample.choc2.service.domain.ReplyVO;
 
-public interface AdminService {
+public interface BoardService {
 	
 	// =========================BoardService=========================	
 	

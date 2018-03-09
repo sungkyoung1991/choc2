@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import com.sample.choc2.common.Criteria;
+import com.sample.choc2.common.Search;
 import com.sample.choc2.service.domain.ReplyVO;
 import com.sample.choc2.service.reply.ReplyDao;
 
@@ -51,13 +52,13 @@ public class ReplyDaoImpl implements ReplyDao {
 	}
 
 	@Override
-	public List<ReplyVO> listPageReply(Integer boardNo, Criteria cri) throws Exception {
+	public List<ReplyVO> listPageReply(Integer boardNo, Search search) throws Exception {
 		// TODO Auto-generated method stub
 		Map<String, Object> paramMap = new HashMap<String, Object>();
-
+		
 		paramMap.put("boardNo", boardNo);
-		paramMap.put("cri", cri);
-
+		paramMap.put("search", search);
+		System.out.println("replydao"+paramMap);
 		return session.selectList(NAMESPACE + ".listReplyPage", paramMap);
 	}
 

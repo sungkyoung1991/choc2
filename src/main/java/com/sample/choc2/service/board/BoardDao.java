@@ -1,4 +1,4 @@
-package com.sample.choc2.service.admin;
+package com.sample.choc2.service.board;
 
 import java.util.List;
 import java.util.Map;
@@ -6,7 +6,7 @@ import java.util.Map;
 import com.sample.choc2.common.Search;
 import com.sample.choc2.service.domain.BoardVO;
 
-public interface AdminDao {
+public interface BoardDao {
 	
 	// =========================BoardDao=========================
 	

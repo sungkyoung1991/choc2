@@ -14,32 +14,6 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 
-	<script>
-$(document).ready(function(){
-	
-	var formObj = $("form[role='form']");
-	
-	console.log(formObj);
-	
-	$("#modifyBtn").on("click", function(){
-		formObj.attr("action", "/admin/board/update");
-		formObj.attr("method", "get");		
-		formObj.submit();
-	});
-	
-	$("#removeBtn").on("click", function(){
-		formObj.attr("action", "/admin/board/delete");
-		formObj.submit();
-	});
-	
-	$("#goListBtn ").on("click", function(){
-		formObj.attr("method", "get");
-		formObj.attr("action", "/admin/board/list");
-		formObj.submit();
-	});
-	
-});
-</script>
 
 
 <script type="text/javascript">
@@ -62,33 +36,34 @@ $(document).ready(function(){
 	function getPage(pageInfo) {
 		$.getJSON(pageInfo, function(data) {
 			printData(data.list, $("#repliesDiv"), $('#template'));
-			printPaging(data.pageMaker, $(".pagination"));
+			printPaging(data.resultPage, $(".pagination"));
 			$("#modifyModal").modal('hide');
 		});
 	}
-	var printPaging = function(pageMaker, target) {
+	var printPaging = function(resultPage, target) {
 		var str = "";
-		if (pageMaker.prev) {
-			str += "<li><a href='" + (pageMaker.startPage - 1)
+		/* if (resultPage.prev) { */
+			str += "<li><a href='" + (resultPage.beginUnitPage-1)
 					+ "'> << </a></li>";
-		}
-		for (var i = pageMaker.startPage, len = pageMaker.endPage; i <= len; i++) {
-			var strClass = pageMaker.cri.page == i ? 'class=active' : '';
+		/* } */
+		for (var i = resultPage.beginUnitPage, len = resultPage.endUnitPage; i <= len; i++) {
+			var strClass = resultPage.currentPage == i ? 'class=active' : '';
 			str += "<li "+strClass+"><a href='"+i+"'>" + i + "</a></li>";
 		}
-		if (pageMaker.next) {
-			str += "<li><a href='" + (pageMaker.endPage + 1)
+		/* if (resultPage.next) { */
+			str += "<li><a href='" + (resultPage.endUnitPage + 1)
 					+ "'> >> </a></li>";
-		}
+		/* } */
 		target.html(str);
 	};
-	$("#repliesDiv").on("click", function() {
-		if ($(".timeline li").size() > 1) {
-			return;
-		}
-		getPage("/replyRest/" + boardNo + "/1");
-	});
-	
+	(function($){
+		$("span:contains('Replies List')").on("click", function() {
+			if ($(".timeline li").size() > 1) {
+				return;
+			}
+			getPage("/replyRest/" + boardNo + "/1");
+		});
+	})(jQuery);
 	$(".pagination").on("click", "li a", function(event){
 		
 		event.preventDefault();
@@ -136,7 +111,7 @@ $(document).ready(function(){
 		var reply = $(this);
 		
 		$("#replytext").val(reply.find('.timeline-body').text());
-		$(".modal-title").html(reply.attr("data-replyNo"));
+		$("h4[class=modal-title]").html(reply.attr("data-replyNo"));
 		
 	});
 	
@@ -144,7 +119,7 @@ $(document).ready(function(){
 		$("button:contains('ReplyModify')")
 		.on("click",function(){
 		  
-		  var replyNo = $(".modal-title").html();
+		  var replyNo = $("h4[class=modal-title]").html();
 		  var replytext = $("#replytext").val();
 		  
 		  $.ajax({
@@ -162,15 +137,15 @@ $(document).ready(function(){
 						getPage("/replyRest/"+boardNo+"/"+replyPage );
 					}
 			}});
-	});
+		});
 	});
 
 
 	$(function(){
-		$("button:contains('ReplyModify')")
+		$("button:contains('DELETE')")
 		.on("click",function(){
 
-		  var replyNo = $(".modal-title").html();
+		  var replyNo = $("h4[class=modal-title]").html();
 		  var replytext = $("#replytext").val();
 		  
 		  $.ajax({
@@ -192,6 +167,32 @@ $(document).ready(function(){
 	 
 </script>
 
+	<script>
+$(document).ready(function(){
+	
+	var formObj = $("form[role='form']");
+	
+	console.log(formObj);
+	
+	$("#modifyBtn").on("click", function(){
+		formObj.attr("action", "/admin/board/update");
+		formObj.attr("method", "get");		
+		formObj.submit();
+	});
+	
+	$("#removeBtn").on("click", function(){
+		formObj.attr("action", "/admin/board/delete");
+		formObj.submit();
+	});
+	
+	$("#goListBtn ").on("click", function(){
+		formObj.attr("method", "get");
+		formObj.attr("action", "/admin/board/list");
+		formObj.submit();
+	});
+	
+});
+</script>
 <script id="template" type="text/x-handlebars-template">
 {{#each .}}
 <li class="replyLi" data-replyNo={{replyNo}}>
@@ -204,7 +205,7 @@ $(document).ready(function(){
   <div class="timeline-body">{{replytext}} </div>
     <div class="timeline-footer">
      <a class="btn btn-primary btn-xs" 
-	    data-toggle="modal" data-target="#modifyModal">Modify</a>
+	    data-toggle="modal" data-target="div[id=modifyModal]">Modify</a>
     </div>
   </div>			
 </li>
@@ -267,7 +268,7 @@ $(document).ready(function(){
 
 
 
-	<%-- <div class="row">
+	 <div class="row">
 		<div class="col-md-12">
 
 			<div class="box box-success">
@@ -320,7 +321,7 @@ $(document).ready(function(){
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title"></h4>
+					<h4 class="modal-title" id="modal-title"></h4>
 				</div>
 				<div class="modal-body" data-replyNo>
 					<p>
@@ -334,8 +335,8 @@ $(document).ready(function(){
 				</div>
 			</div>
 		</div>
-	</div>
- --%>
+	</div> 
+ 
 
 	</section>
 	<!-- /.content -->

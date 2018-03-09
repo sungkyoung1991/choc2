@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="QnaBoardMapper">
+
+	<resultMap type="qnaBoardVO" id="qnaBoardSelectMap">
+		<result property="qnaBoardNo" 		column="QNA_BOARD_NO" 		jdbcType="INTEGER" />
+		<result property="qnaBoardCategory"	column="QNA_BOARD_CATEGORY" 	jdbcType="VARCHAR" />
+		<result property="qnaboardContent" 	column="QNA_BOARD_CONTENT" 	jdbcType="VARCHAR" />
+		<result property="userId" 			column="USERID" 				jdbcType="VARCHAR" />
+		<result property="email" 			column="EMAIL" 				jdbcType="VARCHAR" />
+		<result property="regdate" 			column="QNA_BOARD_REGDATE" 	jdbcType="DATE" />
+	</resultMap>
+	<insert id="createQnaBoard" parameterType="qnaBoardVO">
+	INSERT INTO TBL_QNA_BOARD (USERID,QNA_BOARD_CATEGORY,QNA_BOARD_CONTENT,EMAIL)
+	VALUES(#{userId},#{qnaBoardCategory},#{qnaboardContent},#{email});
+	</insert>
+	
+	<select id="getQnaBoardList" parameterType ="search" resultMap="qnaBoardSelectMap">
+	<![CDATA[  
+	SELECT * 
+	FROM TBL_QNA_BOARD AS Q INNER JOIN TBL_USER AS U
+	ON U.USERID = Q.USERID
+	AND QNA_BOARD_NO > 0
+	]]>
+	
+	<include refid="searchQna"></include>
+	
+	<![CDATA[ 
+	ORDER BY Q.QNA_BOARD_NO DESC
+	LIMIT #{startRowNum}, #{pageSize}
+	]]>	
+	</select>
+	<select id="totalCountQnaBoard" parameterType="search" resultType="int">
+	
+	<![CDATA[  
+	  SELECT COUNT(*) 
+	  FROM( SELECT Q.QNA_BOARD_NO , Q.QNA_BOARD_CATEGORY, Q.USERID
+	  		FROM TBL_QNA_BOARD AS Q
+			]]>
+	  	<include refid="searchQna"></include>
+	  ) countTable
+
+	</select>
+	
+	
+	
+	
+	<!-- common -->
+		<sql id="searchQna">
+			<if test="searchCondition != null">
+			<where>
+				<if test="searchCondition == '0'.toString()">
+					AND Q.QNA_BOARD_NO LIKE CONCAT('%', #{searchKeyword}, '%')
+				</if>
+				<if test="searchCondition == '1'.toString()">
+					AND Q.QNA_BOARD_CATEGORY LIKE CONCAT('%', #{searchKeyword}, '%')
+				</if>
+				<if test="searchCondition == '2'.toString()">
+					AND Q.USERID LIKE CONCAT('%', #{searchKeyword}, '%')
+				</if>
+			</where>
+			</if>
+		</sql>
+</mapper>
+

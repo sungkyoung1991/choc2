@@ -34,7 +34,7 @@
 		ON U.USERID=R.USERID
 		AND BOARD_NO = #{boardNo}
 		ORDER BY REPLY_NO DESC
-		LIMIT #{cri.pageStart}, #{cri.perPageNum}
+		LIMIT #{search.startRowNum}, #{search.pageSize}
 	</select>
 
 	<select id="countReply" resultType="int">

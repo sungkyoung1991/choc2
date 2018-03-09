@@ -10,7 +10,7 @@ public class Search {
 	private int pageSize;
 	private int endRowNum;
 	private int startRowNum;
-	
+
 	///Constructor
 	public Search() {
 	}
@@ -57,6 +57,7 @@ public class Search {
 		return "Search [currentPage=" + currentPage + ", searchCondition=" + searchCondition + ", searchKeyword="
 				+ searchKeyword + ", pageSize=" + pageSize + ", endRowNum=" + endRowNum + ", startRowNum=" + startRowNum+ "]";
 	}
+
 
 }
 

@@ -1,4 +1,4 @@
-package com.sample.choc2.service.admin.impl;
+package com.sample.choc2.service.board.impl;
 
 import java.util.HashMap;
 import java.util.List;
@@ -12,15 +12,15 @@ import org.springframework.stereotype.Repository;
 import com.sample.choc2.common.Criteria;
 import com.sample.choc2.common.Search;
 import com.sample.choc2.common.SearchCriteria;
-import com.sample.choc2.service.admin.AdminDao;
+import com.sample.choc2.service.board.BoardDao;
 import com.sample.choc2.service.domain.BoardVO;
 import com.sample.choc2.service.domain.CosmeticVO;
 import com.sample.choc2.service.domain.ReplyVO;
 
-@Repository("adminDaoImpl")
-public class AdminDaoImpl implements AdminDao {
+@Repository("boardDaoImpl")
+public class BoardDaoImpl implements BoardDao {
 
-	private static String NAMESPACE = "AdminMapper";
+	private static String NAMESPACE = "BoardMapper";
 
 	@Autowired
 	@Qualifier("sqlSessionTemplate")
