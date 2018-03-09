@@ -8,9 +8,17 @@
 <mapper namespace="ProductMapper">
 
 	<resultMap id="productSelectMap" type="product">
-		<result property="productNo" column="PRODUCT_NO" jdbcType="VARCHAR" />
+		<id property="productNo" column="PRODUCT_NO" jdbcType="VARCHAR" />
 		<result property="productImage" column="PRODUCT_IMAGE" jdbcType="VARCHAR" />
 		<result property="productModel" column="PRODUCT_MODEL" jdbcType="VARCHAR" />
+			
+		<association property="writer" javaType="userVO" >
+			<id property="email" column="EMAIL" jdbcType="VARCHAR"/>
+			<result property="nickname" column="NICKNAME" jdbcType="VARCHAR"/>
+		</association>
+			
+			<!-- <association property="writer" 			javaType="userVO" 					resultMap="UserMapper.userSelectMap"/> -->
+			
 	</resultMap>
 
 	<insert id="addProduct" parameterType="product">
@@ -21,9 +29,21 @@
 
 
 
-	<select id="getProduct" parameterType="String" resultMap="productSelectMap" >
-		SELECT * FROM TBL_PRODUCT
-		WHERE PRODUCT_MODEL=#{productModel}
+	<select id="getProduct" parameterType="map" resultMap="productSelectMap" >
+		
+<!-- 		select * 
+from TBL_PRODUCT p
+LEFT JOIN TBL_USER u
+ON u.EMAIL = p.writer
+WHERE p.PRODUCT_NO = #{prodNo} -->
+
+		select * 
+from TBL_PRODUCT p
+inner JOIN TBL_USER u
+WHERE p.PRODUCT_NO = #{product.productNo}
+
+
+
 	</select>
 
 	<update id="updateProduct" parameterType="product">

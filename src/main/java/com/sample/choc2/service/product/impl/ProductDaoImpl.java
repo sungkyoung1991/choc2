@@ -1,6 +1,8 @@
 package com.sample.choc2.service.product.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.sample.choc2.common.Search;
 import com.sample.choc2.service.domain.Product;
+import com.sample.choc2.service.domain.UserVO;
 import com.sample.choc2.service.product.ProductDao;
 
 
@@ -38,9 +41,15 @@ public class ProductDaoImpl implements ProductDao {
 	}
 
 	@Override
-	public Product findProduct(int prodNo) throws Exception {
-		// TODO Auto-generated method stub
-		return sqlSession.selectOne("ProductMapper.getProduct", prodNo);
+//	public Product findProduct(UserVO user,int prodNo) throws Exception {
+	public Product findProduct(UserVO user,Product product) throws Exception {
+		
+		Map<String,Object> map = new HashMap<String,Object>();
+		
+		map.put("user", user);
+		map.put("product", product);
+	
+		return sqlSession.selectOne("ProductMapper.getProduct", map);
 	}
 
 	@Override

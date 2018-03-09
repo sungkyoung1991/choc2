@@ -11,13 +11,6 @@
 				 http://www.springframework.org/schema/aop 
 				 http://www.springframework.org/schema/aop/spring-aop.xsd">
 	
-	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="locations">
-            <list>
-                <value>classpath:/common/connection.properties</value>
-            </list>
-        </property>
-    </bean>
 	
     <bean id="dataSource-mysql" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
         <property name="driverClassName" value="${MYSQL.DRIVERCLASS}"/>
@@ -37,14 +30,16 @@
     
     <tx:advice id="txAdvice"	transaction-manager="transactionManager">
 	    	<tx:attributes>
-	    		<tx:method name="get*"	propagation="REQUIRED"	read-only="true"/>
-	    		<tx:method name="create*"	propagation="REQUIRED"/>
+	    		<!-- <tx:method name="get*"	propagation="REQUIRED"	read-only="true"/> -->
+	    		<tx:method name="get*"	propagation="REQUIRED"/>
+	    		<tx:method name="add*"	propagation="REQUIRED"/>
 	    		<tx:method name="update*"	propagation="REQUIRED"/>
 	    	</tx:attributes>
     </tx:advice>
     
     <aop:config>
     		<aop:pointcut expression="execution(* com.sample.choc2.service..*ServiceImpl.*(..) )" id="requiredTx"/>
+    		<aop:pointcut id="commonRequiredTx" expression="execution(* com.sample.choc2.common.service..*ServiceImpl.*(..))"/>
 		<aop:advisor		advice-ref="txAdvice"	pointcut-ref="requiredTx"/>
     </aop:config>
     

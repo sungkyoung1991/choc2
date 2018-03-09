@@ -24,7 +24,7 @@ public class CommonUtil {
 			CommonUtil commonUtil = new CommonUtil();
 			try {
 				constProp = new Properties();
-				constProp.load(new InputStreamReader(commonUtil.getClass().getClassLoader().getResourceAsStream("config/const.properties"),"UTF-8"));
+				constProp.load(new InputStreamReader(commonUtil.getClass().getClassLoader().getResourceAsStream("common/const.properties"),"UTF-8"));
 			}catch(FileNotFoundException fnfe) {
 				fnfe.printStackTrace();
 			}catch(IOException ie) {

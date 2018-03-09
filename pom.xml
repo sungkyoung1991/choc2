@@ -35,10 +35,24 @@
 
 		<!-- AspectJ -->
 		<dependency>
-			<groupId>org.aspectj</groupId>
-			<artifactId>aspectjrt</artifactId>
-			<version>${org.aspectj-version}</version>
+  	 	 <groupId>org.aspectj</groupId>
+		    <artifactId>aspectjrt</artifactId>
+		    <version>${org.aspectj-version}</version>
 		</dependency>
+		 
+	<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>1.6.8</version>
+		</dependency>
+		 
+		<dependency>
+		    <groupId>org.aspectj</groupId>
+		    <artifactId>aspectjtools</artifactId>
+		    <version>${org.aspectj-version}</version>
+		</dependency>
+
+
 		<!-- sujin 18/02/20 추가 Crawling을 위한 Jsoup, json-simple, webClient -->
 		<dependency>
 			<groupId>org.jsoup</groupId>
