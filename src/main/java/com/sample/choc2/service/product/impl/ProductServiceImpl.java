@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.sample.choc2.common.Search;
 import com.sample.choc2.service.domain.Product;
+import com.sample.choc2.service.domain.UserVO;
 import com.sample.choc2.service.product.ProductDao;
 import com.sample.choc2.service.product.ProductService;
 
@@ -43,13 +44,15 @@ public class ProductServiceImpl implements ProductService {
 //		// TODO Auto-generated method stub
 //		return productDao.findProduct(prodNo);
 //	}
-	public Product getProduct(int tranNo) throws Exception {
+//	public Product getProduct(UserVO user, int prodNo) throws Exception {
+	
+	public Product getProduct(UserVO user, Product product) throws Exception {
 		// TODO Auto-generated method stub
-		return productDao.findProduct(tranNo);
+		return productDao.findProduct(user,product);
 	}
 
 	@Override
-	public Map<String, Object> getProductList(Search search) throws Exception {
+	public Map<String, Object> getProductList(UserVO user, Search search) throws Exception {
 		// TODO Auto-generated method stub
 		List<Product> list = productDao.getProductList(search);
 		int totalCount = productDao.getTotalCount(search);

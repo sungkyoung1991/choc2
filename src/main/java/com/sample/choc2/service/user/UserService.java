@@ -4,6 +4,7 @@ package com.sample.choc2.service.user;
 import java.util.List;
 
 import com.sample.choc2.common.SearchCriteria;
+import com.sample.choc2.service.domain.ReviewVO;
 import com.sample.choc2.service.domain.UserVO;
 
 
@@ -27,5 +28,6 @@ public interface UserService {
 	
 	public void deleteUser(Integer userNo)throws Exception;
 	
-	public int totalCountUser(SearchCriteria cri)throws Exception;
+	public int totalCountUser(SearchCriteria cri)throws Exception;	
+
 }    

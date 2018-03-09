@@ -1,6 +1,7 @@
 package com.sample.choc2.web.user;
 
 import java.util.ArrayList;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.condition.RequestMethodsRequestCondition;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sample.choc2.common.Page;
@@ -30,12 +32,14 @@ import com.sample.choc2.service.cosmetic.CosmeticService;
 import com.sample.choc2.service.domain.CosmeticVO;
 import com.sample.choc2.service.domain.DryVO;
 import com.sample.choc2.service.domain.OilyVO;
+import com.sample.choc2.service.domain.ReviewVO;
 import com.sample.choc2.service.domain.SensitiveVO;
 import com.sample.choc2.service.domain.ToxicVO;
 import com.sample.choc2.service.domain.UserVO;
 import com.sample.choc2.service.domain.UvraysVO;
 import com.sample.choc2.service.domain.WhiteningVO;
 import com.sample.choc2.service.domain.WrinkleVO;
+import com.sample.choc2.service.review.ReviewService;
 import com.sample.choc2.service.user.UserService;
 
 
@@ -59,6 +63,11 @@ public class UserController {
 	public UserController(){
 		System.out.println(this.getClass());
 	}
+	
+	@Autowired
+	@Qualifier("reviewServiceImpl")
+	private ReviewService reviewService;
+		
 	
 	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 	
@@ -138,7 +147,37 @@ public class UserController {
 		return "user/getMyPage";
 	}//마이페이지 이동
 	
-
+	@RequestMapping(value="updateUserInformationPage")
+	public String updateUserInformationPage(UserVO user,Model model) {
+		
+		
+		model.addAttribute("User",user);
+		return "user/updateUserInformation";
+	}//개인정보 수정으로 이동
+	
+	@RequestMapping(value="updateUserInformation", method=RequestMethod.POST)
+	public String updateUserInformation(UserVO user,Model model) throws Exception {
+		
+		logger.info("유저"+user);
+		userService.updateUser(user);
+		//logger.info("업데이트"+userService.updateUser(user));
+		model.addAttribute("User",user);//업데이트된 개인정보를 가지고 다시이동
+		return "user/updateUserInformation";
+	}//개인정보 수정 처리
+	
+	@RequestMapping(value="createReviewPage",method=RequestMethod.GET)
+	public String createReviewPage(@RequestParam("cosmeticNo") int cosmeticNo,Model model) throws Exception {
+		model.addAttribute("cosmetic",cosmeticService.getCosmetic(cosmeticNo));
+		return "user/createReview";
+	}//리뷰작성 페이지로 이동
+	
+	@RequestMapping(value="createReview",method= RequestMethod.POST)
+	public String createReview(ReviewVO review) throws Exception{
+		
+		reviewService.createReview(review);
+		return "user/getReview";
+	}
+	
 	//-----------------------------Cosmetic----------------------------------
 	@RequestMapping(value="createCosmeticPage", method=RequestMethod.GET)
 	public String createCosmeticP(){
@@ -146,14 +185,13 @@ public class UserController {
 		return "userCosmetic/createCosmetic";
 		
 	}//화장품 정보입력 폼으로 이동
-
+	
 	
 	@RequestMapping(value="createCosmetic", method=RequestMethod.POST)
-	public String createCosmetic(@ModelAttribute("cosmetic") CosmeticVO cosmetic,RedirectAttributes rttr) throws Exception{
+	public String createCosmetic(@ModelAttribute("cosmetic") CosmeticVO cosmetic) throws Exception{
 		
 		cosmeticService.createCosmetic(cosmetic);
-		
-		rttr.addFlashAttribute("msg","success"); 
+		 
 		return "redirect:/user/getCosmeticList";
 		 
 	}//화장품 정보입력 처리

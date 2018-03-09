@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+		
+<mapper namespace="ReviewMapper">
+	<resultMap type="reviewVO" id="reviewSelectMap">
+	<result property="reviewNo" column="REVIEW_NO" jdbcType="INTEGER"></result>
+	<result property="rating" column="RATING" jdbcType="VARCHAR"></result>
+	<result property="period" column="PERIOD" jdbcType="VARCHAR"></result>
+	<result property="repurchase" column="REPURCHASE" jdbcType="VARCHAR"></result>
+	<result property="strength" column="STRENGTH" jdbcType="VARCHAR"></result>
+	<result property="weakness" column="WEAKNESS" jdbcType="VARCHAR"></result>
+	<result property="tip" column="TIP" jdbcType="VARCHAR"></result>
+	<result property="image" column="IMAGE" jdbcType="VARCHAR"></result>
+	<result property="cosmeticNo" column="COSMETIC_NO" jdbcType="VARCHAR"></result>
+	
+	</resultMap>
+
+	<insert id="createReview" parameterType="reviewVO">
+		INSERT INTO
+		TBL_REVIEW(REVIEW_NO,RATING,PERIOD,REPURCHASE,STRENGTH,WEAKNESS,TIP,IMAGE,COSMETIC_NO)
+		VALUES(#{reviewNo},#{rating},#{period},#{repurchase},#{strength},#{weakness},#{tip},#{cosmeticNo})
+	</insert>
+
+
+
+
+
+
+
+
+
+
+
+</mapper>

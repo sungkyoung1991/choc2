@@ -29,6 +29,7 @@
 		<typeAlias alias="log" type="com.sample.choc2.common.domain.Log" />
 		<typeAlias alias="product" type="com.sample.choc2.service.domain.Product" />
 		<typeAlias alias="qnaBoardVO" type="com.sample.choc2.service.domain.QnaBoardVO" />
+		<typeAlias alias="reviewVO" type="com.sample.choc2.service.domain.ReviewVO"/>
 	</typeAliases>
 	
 	<mappers>

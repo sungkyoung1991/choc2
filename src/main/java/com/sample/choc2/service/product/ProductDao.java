@@ -4,12 +4,15 @@ import java.util.List;
 
 import com.sample.choc2.common.Search;
 import com.sample.choc2.service.domain.Product;
+import com.sample.choc2.service.domain.UserVO;
 
 public interface ProductDao {
 
 	public void insertProduct(Product product) throws Exception;
 
-	public Product findProduct(int prodNo) throws Exception;
+//	public Product findProduct(int prodNo) throws Exception;
+	
+	public Product findProduct(UserVO user, Product product) throws Exception;
 
 	public List<Product> getProductList(Search search) throws Exception;
 	

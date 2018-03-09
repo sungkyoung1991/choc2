@@ -146,13 +146,13 @@ div#container {
 </head>
 
 <body>
-
+12
 	<img class="bg" src="/images/uploadFiles/17.jpg" />
 
 
 
 	<form name="detailForm" class="form-horizontal">
-
+123
 			<!-- <div class="container"> -->
 
 			<div class="form-group">

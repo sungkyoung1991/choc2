@@ -110,7 +110,7 @@
 		<br />
 		<hr>
 
-<%-- <table>
+<%-- <%-- <table>
 		
 		<tr>
 			<td>${user.nickName}</td>
@@ -129,13 +129,13 @@
 	</tr>
 	</c:forEach>
 	</table> 
-		 --%>
+	
 		<div><!--댓글  -->
 		<hr>
-		<%-- <c:if test="${user!=null }"> --%>
-<%-- 		<span style="color: black; font-weight: bold;">${user.nick }</span> : <input type="text" id="comment" /><button type="button" onclick="comment('${user.nick }','${cinfo.cosmeticNo}');">댓글쓰기</button> --%>
+		<c:if test="${user!=null }">
+		<span style="color: black; font-weight: bold;">${user.nick }</span> : <input type="text" id="comment" /><button type="button" onclick="comment('${user.nick }','${cinfo.cosmeticNo}');">댓글쓰기</button>
 		<hr>
-		<%-- </c:if> --%>
+		</c:if>
 		<div id="commentArea">
 		<c:forEach items="${comment}" var="data">
 		<div id='${data.comment_no}'>
@@ -147,8 +147,9 @@
 		</div>
 		</c:forEach>		
 		</div>
-		</div>
-
+		</div> --%>
+	
+	<a href="/user/createReviewPage?cosmeticNo=${cinfo.cosmeticNo}">리뷰작성</a>
 </body>
 
 

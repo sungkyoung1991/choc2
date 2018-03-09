@@ -24,7 +24,7 @@
 	<!-- SQL : INSERT -->
 	<insert id="addLog" parameterType="log">
 	 	INSERT
-		INTO log( email, category_no, behavior, add_behavior, target_no ) 
+		INTO TBL_LOG( email, category_no, behavior, add_behavior, target_no ) 
 		VALUES ( 
 			#{user.email}, #{categoryNo}, #{behavior},
 			<if test="addBehavior != -1"> #{addBehavior}, </if>
