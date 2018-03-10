@@ -1,7 +1,5 @@
 package com.sample.choc2.common.aspect;
 
-import java.util.List;
-
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -10,6 +8,7 @@ import com.sample.choc2.common.domain.CommonUtil;
 import com.sample.choc2.common.domain.Const;
 import com.sample.choc2.common.domain.Log;
 import com.sample.choc2.common.service.LogService;
+import com.sample.choc2.service.domain.Board;
 import com.sample.choc2.service.domain.CosmeticVO;
 import com.sample.choc2.service.domain.Product;
 import com.sample.choc2.service.domain.UserVO;
@@ -51,6 +50,11 @@ class LogAspectJ {
 				if (!this.checkUserLogin(joinPoint)) {
 					
 					if (joinPoint.getArgs()[0] instanceof UserVO || joinPoint.getArgs()[0] == null) {
+						
+						System.out.println("joinpoint........." + joinPoint.getArgs()[0]);
+						
+						System.out.println(1);
+						
 						user = new UserVO();
 						user.setEmail("anonymous");
 						System.out.println("Log :: 비회원 게시물 조회");
@@ -105,6 +109,12 @@ class LogAspectJ {
 		case Const.Category.PRODUCT:
 			
 			author = ((Product) returnObject).getWriter();
+			break;
+			
+		
+		case Const.Category.BOARD:
+			
+			author = ((Board) returnObject).getWriter();
 			break;
 			
 		default:
